@@ -1,6 +1,6 @@
 <template>
- <layout>
- </layout>
+ <lt-main>
+ </lt-main>
 </template>
 
 <script>

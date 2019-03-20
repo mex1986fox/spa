@@ -1,85 +1,44 @@
+.fa-times-thin:before {
+  content: '\D7'; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+select::-ms-expand {
+  display: none; }
+
+*:active,
+*:focus {
+  outline: none;
+  outline-style: none; }
+
+*::-moz-focus-inner {
+  outline: none;
+  border: 0; }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset; }
 
 html {
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
+
 body {
   position: relative;
   font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #333;
-  background-color: #fff;
+  color: #111111;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
-  height: 100%;
-}
-.layout {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(to top left, #6e203a 20%, #303f92 50%, #520c72 80%);
-}
-.ui-content {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: rgba(48, 48, 48, 0.719);
-  height: 100%;
-  width: 100%;
-}
+  height: 100%; }
 
 @font-face {
   font-family: "Open Sans";
   src: url(/public/src/fonts/open-sans/OpenSans-Regular.ttf); }
-
-.ui-menu {
-  height: 100%;
-  width: 240px;
-  background-color: #2b3340;
-  box-shadow: 0px 2px 22px rgba(0, 0, 0, 0.49); }
-
-.ui-menu-profile {
-  height: auto;
-  width: 100%;
-  border-bottom: 3px solid #ffffff;
-  text-align: center;
-  margin-top: 25px; }
-  .ui-menu-profile__avatar {
-    color: #fff;
-    font-size: 42px; }
-  .ui-menu-profile__nickname {
-    color: #fff;
-    font-size: 19px;
-    margin-top: 18px;
-    font-weight: bold; }
-  .ui-menu-profile__buttons {
-    margin: 20px 0 20px;
-    overflow: hidden;
-    display: inline-block; }
-
-.ui-menu__list {
-  list-style: none;
-  margin: 20px 0 19px;
-  padding-left: 0;
-  color: #ffffff; }
-
-.ui-menu__item {
-  padding: 8px 20px; }
-  .ui-menu__item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
-    cursor: pointer; }
-  .ui-menu__item:active {
-    background-color: rgba(255, 255, 255, 0.4);
-    box-shadow: none;
-    cursor: pointer; }
 
 .ui-button {
   width: auto;
@@ -91,7 +50,7 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  color: #000000;
+  color: #111111;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   background-color: #ffffff;
@@ -111,8 +70,32 @@ body {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49);
     text-decoration: none; }
 
+.ui-button_circle_s1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0; }
+
+.ui-button_circle_s2 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 18px;
+  line-height: 41px;
+  border-width: 2px !important; }
+
+.ui-button_circle_s3 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 23px;
+  line-height: 48px;
+  border-width: 2px !important; }
+
 .ui-button_white {
-  color: #000000;
+  color: #111111;
   border: 1px solid #ffffff;
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.49); }
@@ -122,13 +105,13 @@ body {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49); }
   .ui-button_white:active {
     cursor: pointer;
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.49);
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
     text-decoration: none; }
 
 .ui-button_black {
   color: #ffffff;
-  border: 1px solid #000000;
-  background-color: #000000;
+  border: 1px solid #111111;
+  background-color: #111111;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.49); }
   .ui-button_black:hover {
     cursor: pointer;
@@ -136,13 +119,13 @@ body {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49); }
   .ui-button_black:active {
     cursor: pointer;
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.49);
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
     text-decoration: none; }
 
 .ui-button_float_white {
   color: #ffffff;
   border: 1px solid #ffffff;
-  background-color: #ffffff00;
+  background-color: #00000000;
   box-shadow: none; }
   .ui-button_float_white:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -152,17 +135,276 @@ body {
     box-shadow: none; }
 
 .ui-button_float_black {
-  color: #000000;
-  border: 1px solid #000000;
+  color: #111111;
+  border: 1px solid #111111;
   background-color: #00000000;
   box-shadow: none; }
   .ui-button_float_black:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(17, 17, 17, 0.2);
     box-shadow: none; }
   .ui-button_float_black:active {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(17, 17, 17, 0.4);
     box-shadow: none; }
 
+.ui-button_noborder {
+  border: none; }
+
+.fa-times-thin:before {
+  content: '\D7'; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+select::-ms-expand {
+  display: none; }
+
+*:active,
+*:focus {
+  outline: none;
+  outline-style: none; }
+
+*::-moz-focus-inner {
+  outline: none;
+  border: 0; }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset; }
+
+html {
+  height: 100%;
+  width: 100%; }
+
+body {
+  position: relative;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #111111;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+.lt-main {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top left, #6e203a 20%, #303f92 50%, #520c72 80%); }
+
+.lt-main__menu {
+  height: 100%;
+  width: 240px;
+  background-color: #2b3340;
+  box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.49); }
+  .lt-main__menu-profile {
+    height: auto;
+    width: 100%;
+    border-bottom: 3px solid #ffffff;
+    text-align: center;
+    margin-top: 25px; }
+  .lt-main__menu-avatar {
+    color: #ffffff;
+    font-size: 42px; }
+  .lt-main__menu-nickname {
+    color: #ffffff;
+    font-size: 19px;
+    margin-top: 18px;
+    font-weight: bold; }
+  .lt-main__menu-buttons {
+    margin: 20px 0 20px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center; }
+  .lt-main__menu-list {
+    list-style: none;
+    margin: 20px 0 19px;
+    padding-left: 0;
+    color: #ffffff; }
+  .lt-main__menu-item {
+    padding: 8px 20px; }
+    .lt-main__menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+      cursor: pointer; }
+    .lt-main__menu-item:active {
+      background-color: rgba(255, 255, 255, 0.4);
+      box-shadow: none;
+      cursor: pointer; }
+
+.lt-main__content {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(48, 48, 48, 0.719);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative; }
+
+.lt-main-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #00000000;
+  height: 84px;
+  width: 100%;
+  z-index: 100; }
+  .lt-main-menu__margin {
+    height: 84px;
+    width: 100%;
+    position: relative; }
+  .lt-main-menu__header {
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 400;
+    margin: 25px 0px 0px 65px; }
+  .lt-main-menu__buttons {
+    position: absolute;
+    right: 58px;
+    margin-top: -35px; }
+
+.fa-times-thin:before {
+  content: '\D7'; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+select::-ms-expand {
+  display: none; }
+
+*:active,
+*:focus {
+  outline: none;
+  outline-style: none; }
+
+*::-moz-focus-inner {
+  outline: none;
+  border: 0; }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset; }
+
+html {
+  height: 100%;
+  width: 100%; }
+
+body {
+  position: relative;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #111111;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+.wg-card-user {
+  position: relative;
+  width: 264px;
+  height: 278px;
+  background: #ffffff;
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
+  margin: 15px; }
+  .wg-card-user__button-close {
+    position: absolute;
+    right: 0; }
+  .wg-card-user__button-menu {
+    position: absolute;
+    right: 0; }
+  .wg-card-user__photo {
+    height: 210px;
+    width: 100%;
+    background-color: #00000061;
+    overflow: hidden; }
+  .wg-card-user__img {
+    height: 100%;
+    width: auto; }
+  .wg-card-user__nickname {
+    color: #111111;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 22px 0px 22px;
+    display: block; }
+  .wg-card-user__name {
+    color: #111111;
+    font-size: 14px;
+    padding: 6px 22px 0px 22px;
+    display: block; }
+
+.wg-form-registration {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  background: #1111116e;
+  z-index: 200;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end; }
+  .wg-form-registration__container {
+    width: 100%;
+    height: auto;
+    display: block; }
+  .wg-form-registration__card {
+    position: relative;
+    max-width: 900px;
+    min-width: 500px;
+    height: auto;
+    background: #ffffff;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
+    margin-bottom: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding-bottom: 35px; }
+  .wg-form-registration__card-header {
+    color: #111111;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 35px 45px; }
+  .wg-form-registration__card-buttons {
+    color: #111111;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 35px 40px; }
+
+.wg-form-registration__menu {
+  position: relative;
+  top: 0;
+  right: 0;
+  background: #00000000;
+  height: 66px;
+  max-width: 900px;
+  min-width: 500px;
+  z-index: 100;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+  .wg-form-registration__menu-header {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 50px 0px 0px 0px; }
+  .wg-form-registration__menu-buttons {
+    position: absolute;
+    right: 0;
+    margin-top: -35px; }
 
 
 /*# sourceMappingURL=main.css.map*/
