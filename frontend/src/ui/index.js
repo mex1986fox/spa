@@ -1,4 +1,13 @@
 import Vue from "vue/dist/vue.js";
 
-// import UiMenu from "./ui-menu/ui-menu.vue";
-// Vue.component("ui-menu", UiMenu);
+import UiAnimateDisplay from "./ui-animations/ui-animation-display.vue";
+Vue.component("ui-animation-display", UiAnimateDisplay);
+
+
+//элементы формы
+import UiEfText from "./ui-element-form/ui-ef-text.vue";
+Vue.component("ui-ef-text", UiEfText);
+import UiEfPhone from "./ui-element-form/ui-ef-phone.vue";
+Vue.component("ui-ef-phone", UiEfPhone);
+import UiEfPassword from "./ui-element-form/ui-ef-password.vue";
+Vue.component("ui-ef-password", UiEfPassword);
