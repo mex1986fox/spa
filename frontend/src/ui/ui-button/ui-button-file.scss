@@ -1,0 +1,122 @@
+.ui-button-file {
+  width: 80px;
+  height: 80px;
+  margin: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+  float: left;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: $color-black;
+  border: 1px solid $color-white;
+  background-color: $color-white;
+  box-shadow: $shadow-1;
+  line-height: 77px;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: $shadow-2;
+  }
+  &:active {
+    cursor: pointer;
+    box-shadow: $shadow-3;
+    text-decoration: none;
+  }
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+  }
+  &__images {
+    position: absolute;
+    bottom: 26px;
+    right: 19px;
+    font-size: 47px;
+    color: #0006;
+  }
+  &__plus {
+    position: absolute;
+    bottom: -20px;
+    right: 7px;
+    font-size: 35px;
+    display: block;
+  }
+}
+
+.ui-button-file_white {
+  color: $color-black;
+  border: 1px solid $color-white;
+  background-color: $color-white;
+  box-shadow: $shadow-1;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: $shadow-2;
+  }
+  &:active {
+    cursor: pointer;
+    box-shadow: $shadow-3;
+    text-decoration: none;
+  }
+}
+
+.ui-button-file_black {
+  color: $color-white;
+  border: 1px solid $color-black;
+  background-color: $color-black;
+  box-shadow: $shadow-1;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: $shadow-2;
+  }
+  &:active {
+    cursor: pointer;
+    box-shadow: $shadow-3;
+    text-decoration: none;
+  }
+}
+
+.ui-button-file_float_white {
+  color: $color-white;
+  border: 1px solid $color-white;
+  background-color: #00000000;
+  box-shadow: none;
+  &:hover {
+    background-color: rgba($color-white, 0.2);
+    box-shadow: none;
+  }
+  &:active {
+    background-color: rgba($color-white, 0.4);
+    box-shadow: none;
+  }
+}
+
+.ui-button-file_float_black {
+  color: $color-black;
+  border: 1px solid $color-black;
+  background-color: #00000000;
+  box-shadow: none;
+  &:hover {
+    background-color: rgba($color-black, 0.2);
+    box-shadow: none;
+  }
+  &:active {
+    background-color: rgba($color-black, 0.4);
+    box-shadow: none;
+  }
+}
+
+.ui-button-file_noborder {
+  border: none;
+}

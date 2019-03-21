@@ -8,7 +8,8 @@
         <!-- <div class="lt-main__menu-nickname">Nick Name</div> -->
         <div class="lt-main__menu-buttons">
           <div class="ui-button ui-button_float_white">вход</div>
-          <div class="ui-button ui-button_float_white ui-button_noborder">регистрация</div>
+          <div class="ui-button ui-button_float_white ui-button_noborder"
+               @click="showRegistration=true"> регистрация</div>
         </div>
       </div>
       <ul class="lt-main__menu-list">
@@ -25,24 +26,24 @@
           Люди
         </div>
         <div class="lt-main-menu__buttons">
-         <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="fas fa-sliders-h"></i>
           </div>
         </div>
       </lt-main-menu>
 
-      <div v-for="val in 20" :key="val" class="wg-card-user">
+      <div v-for="val in 20"
+           :key="val"
+           class="wg-card-user">
         <!-- <div class="wg-card-user__button-close">
           <div class="ui-button ui-button_float_white ui-button_circle_s1">
             <i class="fas fa-times"></i>
           </div>
         </div>-->
         <div class="wg-card-user__photo">
-          <img
-            class="wg-card-user__img"
-            src="http://www.fotoprizer.ru/img/111116-112740-ft.jpg"
-            alt
-          >
+          <img class="wg-card-user__img"
+               src="http://www.fotoprizer.ru/img/111116-112740-ft.jpg"
+               alt>
         </div>
         <div class="wg-card-user__button-menu">
           <div class="ui-button ui-button_float_black ui-button_noborder ui-button_circle_s1">
@@ -52,8 +53,9 @@
         <span class="wg-card-user__nickname">Anjeles</span>
         <span class="wg-card-user__name">Анжелика Варумина</span>
       </div>
-      <wg-form-registration>
-        
+      <wg-form-registration :show="showRegistration"
+                            @onHide="isHideRegistration()">
+
       </wg-form-registration>
     </div>
   </div>
@@ -62,7 +64,14 @@
 export default {
   name: "lt-main",
   data() {
-    return {};
+    return {
+      showRegistration: true
+    };
+  },
+  methods: {
+    isHideRegistration() {
+      this.showRegistration = false;
+    }
   }
 };
 </script>

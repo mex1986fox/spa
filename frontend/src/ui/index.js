@@ -3,6 +3,8 @@ import Vue from "vue/dist/vue.js";
 import UiAnimateDisplay from "./ui-animations/ui-animation-display.vue";
 Vue.component("ui-animation-display", UiAnimateDisplay);
 
+import UiButtonFile from "./ui-button/ui-button-file.vue";
+Vue.component("ui-button-file", UiButtonFile);
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";
