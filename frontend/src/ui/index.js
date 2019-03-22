@@ -13,3 +13,5 @@ import UiEfPhone from "./ui-element-form/ui-ef-phone.vue";
 Vue.component("ui-ef-phone", UiEfPhone);
 import UiEfPassword from "./ui-element-form/ui-ef-password.vue";
 Vue.component("ui-ef-password", UiEfPassword);
+import UiEfDatepicker from "./ui-element-form/ui-ef-datepicker.vue";
+Vue.component("ui-ef-datepicker", UiEfDatepicker);

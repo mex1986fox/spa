@@ -149,108 +149,17 @@ body {
 .ui-button_noborder {
   border: none; }
 
-.ui-button-file {
-  width: 80px;
-  height: 80px;
-  margin: 6px;
-  border-radius: 4px;
-  overflow: hidden;
-  float: left;
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  color: #111111;
-  border: 1px solid #ffffff;
-  background-color: #ffffff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.49);
-  line-height: 77px;
-  position: relative; }
-  .ui-button-file:hover {
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49); }
-  .ui-button-file:active {
-    cursor: pointer;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
-    text-decoration: none; }
-  .ui-button-file__input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none; }
-  .ui-button-file__images {
-    position: absolute;
-    bottom: 26px;
-    right: 19px;
-    font-size: 47px;
-    color: #0006; }
-  .ui-button-file__plus {
-    position: absolute;
-    bottom: -20px;
-    right: 7px;
-    font-size: 35px;
-    display: block; }
-
-.ui-button-file_white {
-  color: #111111;
-  border: 1px solid #ffffff;
-  background-color: #ffffff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.49); }
-  .ui-button-file_white:hover {
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49); }
-  .ui-button-file_white:active {
-    cursor: pointer;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
-    text-decoration: none; }
-
-.ui-button-file_black {
-  color: #ffffff;
-  border: 1px solid #111111;
-  background-color: #111111;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.49); }
-  .ui-button-file_black:hover {
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49); }
-  .ui-button-file_black:active {
-    cursor: pointer;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
-    text-decoration: none; }
-
-.ui-button-file_float_white {
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  background-color: #00000000;
-  box-shadow: none; }
-  .ui-button-file_float_white:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none; }
-  .ui-button-file_float_white:active {
-    background-color: rgba(255, 255, 255, 0.4);
-    box-shadow: none; }
-
-.ui-button-file_float_black {
-  color: #111111;
-  border: 1px solid #111111;
-  background-color: #00000000;
-  box-shadow: none; }
-  .ui-button-file_float_black:hover {
-    background-color: rgba(17, 17, 17, 0.2);
-    box-shadow: none; }
-  .ui-button-file_float_black:active {
-    background-color: rgba(17, 17, 17, 0.4);
-    box-shadow: none; }
-
-.ui-button-file_noborder {
+.ui-button-file__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
   border: none; }
 
 .ui-animation-display_enter_left, .ui-animation-display_leave-to_left {
@@ -486,6 +395,215 @@ body {
 
 .ui-ef-text_white > .ui-ef-text__border_disabled {
   background-color: rgba(255, 255, 255, 0.4); }
+
+.ui-ef-datepicker {
+  position: relative;
+  width: 100%;
+  float: left; }
+  .ui-ef-datepicker__menu {
+    top: 63px;
+    margin: 0;
+    border: 0;
+    padding: 30px;
+    padding-bottom: 0px;
+    height: auto;
+    width: 294px;
+    color: #111111;
+    font-size: 14px;
+    position: absolute;
+    background-color: #ffffff;
+    display: block;
+    float: right;
+    z-index: 100;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.49);
+    left: 1px;
+    overflow: hidden; }
+  .ui-ef-datepicker__menu-yaer {
+    margin: 0;
+    border: 0;
+    height: 100%;
+    width: 100%;
+    color: #2b2b2b;
+    font-size: 14px;
+    position: absolute;
+    background-color: rgba(85, 85, 85, 0.3);
+    display: block;
+    float: left;
+    z-index: 100;
+    overflow: hidden;
+    top: 0px;
+    left: 0px; }
+    .ui-ef-datepicker__menu-yaer-enter, .ui-ef-datepicker__menu-yaer-leave-to {
+      opacity: 0; }
+    .ui-ef-datepicker__menu-yaer-enter-active, .ui-ef-datepicker__menu-yaer-leave-active {
+      transition: opacity 0.5s; }
+    .ui-ef-datepicker__menu-yaer-enter-to, .ui-ef-datepicker__menu-yaer-leave {
+      opacity: 1; }
+    .ui-ef-datepicker__menu-yaer__select {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      height: 100%;
+      width: 150px;
+      color: #2b2b2b;
+      font-size: 14px;
+      position: relative;
+      background-color: white;
+      display: block;
+      float: right;
+      z-index: 100;
+      left: 1px;
+      overflow: hidden;
+      overflow-y: auto; }
+    .ui-ef-datepicker__menu-yaer__option {
+      position: relative;
+      border: 0;
+      padding: 0px 30px;
+      margin: 0;
+      list-style-type: none;
+      cursor: pointer;
+      height: 40px;
+      width: auto;
+      font-size: 14px;
+      line-height: 38px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #202020;
+      text-align: center; }
+      .ui-ef-datepicker__menu-yaer__option:hover {
+        background-color: #f3f3f3; }
+  .ui-ef-datepicker__header {
+    height: 50px;
+    text-align: center;
+    line-height: 46px;
+    font-size: 16px;
+    overflow: hidden;
+    margin-bottom: 12px; }
+  .ui-ef-datepicker__button_left {
+    float: left;
+    left: 5px; }
+  .ui-ef-datepicker__button_right {
+    float: right;
+    left: 5px; }
+  .ui-ef-datepicker__button {
+    float: left;
+    padding: 0 6px; }
+  .ui-ef-datepicker__day {
+    height: 32px;
+    width: 32px;
+    font-size: 13px;
+    line-height: 29px;
+    float: left;
+    border-radius: 12%;
+    margin: 5px;
+    text-align: center; }
+  .ui-ef-datepicker__number-day {
+    height: 32px;
+    width: 32px;
+    font-size: 16px;
+    line-height: 32px;
+    float: left;
+    margin: 5px;
+    text-align: center;
+    color: #111111; }
+    .ui-ef-datepicker__number-day:hover {
+      height: 30px;
+      width: 30px;
+      border: 1px solid #111111;
+      color: #111111;
+      cursor: pointer;
+      line-height: 30px; }
+    .ui-ef-datepicker__number-day_flat {
+      height: 32px;
+      width: 32px;
+      border: 0; }
+      .ui-ef-datepicker__number-day_flat:hover {
+        height: 32px;
+        width: 32px;
+        border: 0;
+        background-color: #ffffff;
+        color: #ffffff;
+        cursor: auto; }
+    .ui-ef-datepicker__number-day_checked {
+      background-color: #111111;
+      color: #ffffff;
+      cursor: pointer;
+      transition: 300ms; }
+      .ui-ef-datepicker__number-day_checked:hover {
+        height: 32px;
+        width: 32px;
+        border: 0;
+        background-color: #111111;
+        color: #ffffff;
+        cursor: pointer;
+        transition: 300ms;
+        line-height: 31px; }
+  .ui-ef-datepicker__arrow {
+    position: absolute;
+    background-color: #ffffff;
+    float: right;
+    right: 0px;
+    top: 35px;
+    font-size: 22px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 22px;
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); }
+    .ui-ef-datepicker__arrow_disabled {
+      color: rbg(#111111, 0.4); }
+  .ui-ef-datepicker__footer {
+    height: 50px;
+    width: 100%;
+    position: relative;
+    float: left;
+    padding: 16px 0; }
+  .ui-ef-datepicker__blind {
+    background-color: rgba(32, 32, 32, 0) !important; }
+
+@media (max-width: 770px) {
+  .ui-datepicker__menu {
+    width: 220px;
+    padding: 15px; }
+  .ui-datepicker__menu-yaer__select {
+    width: 150px; }
+  .ui-datepicker__header {
+    margin-bottom: 15px; }
+  .ui-datepicker__day {
+    height: 27px;
+    width: 27px;
+    font-size: 14px;
+    margin: 2px; }
+  .ui-datepicker__number-day {
+    height: 27px;
+    width: 27px;
+    font-size: 13px;
+    margin: 2px;
+    line-height: 27px;
+    margin: 2px 0; }
+    .ui-datepicker__number-day:hover {
+      height: 25px;
+      width: 25px;
+      line-height: 26px; }
+    .ui-datepicker__number-day_flat {
+      height: 27px;
+      width: 27px; }
+      .ui-datepicker__number-day_flat:hover {
+        height: 27px;
+        width: 27px; }
+    .ui-datepicker__number-day_checked {
+      height: 27px;
+      width: 27px; }
+      .ui-datepicker__number-day_checked:hover {
+        height: 27px;
+        width: 27px;
+        line-height: 27px; }
+  .ui-datepicker__footer {
+    height: 30px; } }
 
 .fa-times-thin:before {
   content: '\D7'; }
@@ -726,6 +844,19 @@ body {
     font-size: 24px;
     font-weight: 400;
     margin: 35px 40px; }
+  .wg-form-registration__card-files {
+    color: #111111;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 35px 40px; }
+  .wg-form-registration__card-file {
+    display: block;
+    margin: 22px 35px;
+    font-size: 14px; }
+  .wg-form-registration__card-file-icon {
+    margin: -3px -29px;
+    font-size: 26px;
+    position: absolute; }
 
 .wg-form-registration__menu {
   position: relative;

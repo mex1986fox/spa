@@ -17,11 +17,14 @@
       @focus="isFocus()"
       @blur="isBlur()"
       @input="isInputText()"
+      @paste="isInputText()"
+      @change="isInputText()"
       :name="dName"
       :value="dValue"
       :readonly="dReadonly"
       :disabled="dDisabled"
       :maxlength="maxlength"
+      :autocomplete="autocomplete"
     >
     <hr
       class="ui-ef-text__border"
@@ -110,6 +113,10 @@ export default {
     focus: {
       type: Boolean,
       default: false
+    },
+    autocomplete: {
+      type: String,
+      default: "off"
     }
   },
   methods: {
@@ -196,7 +203,7 @@ export default {
       this.dType = newQ;
     }
   },
-  moundet() {
+  mounted() {
     if (this.focus == true) {
       this.modFocus == true;
       let ctrl = this.$refs.input;
