@@ -1,86 +1,83 @@
 <template>
-	<div class="ui-ef-datepicker">
-		<ui-ef-text :name="dName"
-		         :caption="dCaption"
-		         :readonly="true"
-		         :disabled="dDisabled"
-		         :value="dSelectDate"
-		         @onFocus="isFocus"
-		         @onBlur="isBlur">
-		</ui-ef-text>
-		<div class="ui-ef-datepicker__arrow"
-		     :class="{'ui-ef-datepicker__arrow_disabled':dDisabled}"
-		     @click="isFocus">
-			<i class="fa fa-calendar"
-			   aria-hidden="true"></i>
-		</div>
-		<ui-blind :show="dFocus"
-		          @onHide="dFocus=false"
-		          animate="opacity"
-		          class="ui-ef-datepicker__blind">
+  <div class="ui-ef-datepicker">
+    <ui-ef-text :name="dName"
+                :caption="dCaption"
+                :readonly="true"
+                :disabled="dDisabled"
+                :value="dSelectDate"
+                @onFocus="isFocus"
+                @onBlur="isBlur">
+      <i slot="icon"
+         class="fa fa-calendar-alt"></i>
+    </ui-ef-text>
+    <ui-blind :show="dFocus"
+              @onClick="dFocus=false"
+              animate="opacity"
+              position="fixed"
+              class="ui-ef-datepicker__blind">
 
-			<div ref="menu"
-			     class="ui-ef-datepicker__menu"
-			     v-if="dFocus">
-				<div class="ui-ef-datepicker__header">
-					<div @click="clickLeft()"
-					     class="ui-button ui-button_circle_s1 ui-button_flat ui-ef-datepicker__button_left">
-						<i class="fa fa-angle-left"
-						   aria-hidden="true"></i>
-					</div>
-					<div @click="clickRight()"
-					     class="ui-button ui-button_circle_s1 ui-button_flat ui-ef-datepicker__button_right">
-						<i class="fa fa-angle-right"
-						   aria-hidden="true"></i>
-					</div>
-					{{compMonth.name +" "+compYear}}
-				</div>
+      <div ref="menu"
+           class="ui-ef-datepicker__menu"
+           v-if="dFocus">
+        <div class="ui-ef-datepicker__header">
+          <div @click="clickLeft()"
+               class="ui-button ui-button_circle_s1 ui-button_float_black ui-ef-datepicker__button_left">
+            <i class="fa fa-angle-left"
+               aria-hidden="true"></i>
+          </div>
+          <div @click="clickRight()"
+               class="ui-button ui-button_circle_s1 ui-button_float_black ui-ef-datepicker__button_right">
+            <i class="fa fa-angle-right"
+               aria-hidden="true"></i>
+          </div>
+          {{compMonth.name +" "+compYear}}
+        </div>
 
-				<div class="ui-ef-datepicker__day">Пн</div>
-				<div class="ui-ef-datepicker__day">Вт</div>
-				<div class="ui-ef-datepicker__day">Ср</div>
-				<div class="ui-ef-datepicker__day">Чт</div>
-				<div class="ui-ef-datepicker__day">Пт</div>
-				<div class="ui-ef-datepicker__day">Сб</div>
-				<div class="ui-ef-datepicker__day">Вс</div>
+        <div class="ui-ef-datepicker__day">Пн</div>
+        <div class="ui-ef-datepicker__day">Вт</div>
+        <div class="ui-ef-datepicker__day">Ср</div>
+        <div class="ui-ef-datepicker__day">Чт</div>
+        <div class="ui-ef-datepicker__day">Пт</div>
+        <div class="ui-ef-datepicker__day">Сб</div>
+        <div class="ui-ef-datepicker__day">Вс</div>
 
-				<div class="ui-ef-datepicker__number-day ui-ef-datepicker__number-day_flat"
-				     v-for="keyn in compNumberDay"
-				     :key="'n'+keyn"></div>
+        <div class="ui-ef-datepicker__number-day ui-ef-datepicker__number-day_flat"
+             v-for="keyn in compNumberDay"
+             :key="'n'+keyn"></div>
 
-				<div @click="clickNumber(key)"
-				     class="ui-ef-datepicker__number-day"
-				     :class="{'ui-ef-datepicker__number-day_checked':dDate.getFullYear()==dBuferDate.getFullYear() && dDate.getMonth()==dBuferDate.getMonth() && dBuferDate.getDate()==key}"
-				     v-for="key in compSumDays"
-				     :key="key">
-					{{key}}
-				</div>
+        <div @click="clickNumber(key)"
+             class="ui-ef-datepicker__number-day"
+             :class="{'ui-ef-datepicker__number-day_checked':dDate.getFullYear()==dBuferDate.getFullYear() && dDate.getMonth()==dBuferDate.getMonth() && dBuferDate.getDate()==key}"
+             v-for="key in compSumDays"
+             :key="key">
+          {{key}}
+        </div>
 
-				<div class="ui-ef-datepicker__footer">
-					<button class="ui-button ui-button_flat ui-ef-datepicker__button"
-					        @click="dActiveMenyYear=true">
-						Выбрать год
-					</button>
-				</div>
+        <div class="ui-ef-datepicker__footer">
+          <button class="ui-button ui-button_float_black ui-ef-datepicker__button"
+                  @click="dActiveMenyYear=true">
+            Выбрать год
+          </button>
+        </div>
 
-				<transition name="ui-ef-datepicker__menu-yaer">
-					<div class="ui-ef-datepicker__menu-yaer"
-					     v-if="dActiveMenyYear">
-						<ul class="ui-ef-datepicker__menu-yaer__select">
-							<li class="ui-ef-datepicker__menu-yaer__option"
-							    v-for="key in 400"
-							    :key="key"
-							    @click="clickYear(dPresentYear-key+1)">
-								{{dPresentYear-key+1}}
-							</li>
-						</ul>
-					</div>
-				</transition>
+        <transition name="ui-ef-datepicker__menu-yaer">
+          <div class="ui-ef-datepicker__menu-yaer"
+               v-if="dActiveMenyYear">
+            <ul class="ui-ef-datepicker__menu-yaer__select">
+              <li class="ui-ef-datepicker__menu-yaer__option"
+                  v-for="key in 400"
+                  :key="key"
+                  @click="clickYear(dPresentYear-key+1)">
+                {{dPresentYear-key+1}}
+              </li>
+            </ul>
+          </div>
+        </transition>
 
-			</div>
+      </div>
 
-		</ui-blind>
-	</div>
+    </ui-blind>
+  </div>
 </template>
 <script>
 export default {

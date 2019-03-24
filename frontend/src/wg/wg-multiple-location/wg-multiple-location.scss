@@ -1,0 +1,39 @@
+.wg-multiple-location {
+  &__blinde {
+    background-color: rgba($color-black, 0);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  &__menu {
+    height: 380px;
+    width: 650px;
+    background-color: $color-white;
+    box-shadow: $shadow-2;
+    position: relative;
+    overflow: hidden;
+    &-header {
+      color: $color-black;
+      font-size: 18px;
+      font-weight: 400;
+      margin: 25px 35px;
+    }
+    &-close {
+      position: absolute;
+      right: 34px;
+      margin-top: -55px;
+    }
+    &-ef {
+      margin: 25px 35px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+    &-chipsies {
+      margin: 25px 35px;
+      overflow: hidden;
+      overflow-y: auto;
+      max-height: 205px;
+    }
+  }
+}

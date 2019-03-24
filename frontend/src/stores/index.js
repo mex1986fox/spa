@@ -1,5 +1,8 @@
 import Vue from "vue/dist/vue.js";
 import Vuex from "vuex";
+
+import Locations from "./dependencies/locations.js";
+import Transports from "./dependencies/transports.js";
 Vue.use(Vuex);
 
 //импорт хранилищь vuex
@@ -10,6 +13,8 @@ const store = new Vuex.Store({
   strict: true,
   modules: {
     //user: User,
+    locations: Locations,
+    transports: Transports
   },
   state: {},
   getters: {},

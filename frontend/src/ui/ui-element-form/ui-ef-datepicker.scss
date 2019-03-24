@@ -4,7 +4,7 @@
   float: left;
   &__menu {
     top: 63px;
-    margin: 0;
+    margin: 15px;
     border: 0;
     padding: 30px;
     padding-bottom: 0px;
@@ -105,7 +105,7 @@
   }
   &__button {
     float: left;
-    padding: 0 6px;
+    height: 31px;
   }
   &__day {
     height: 32px;
@@ -160,7 +160,7 @@
         color: $color-white;
         cursor: pointer;
         transition: 300ms;
-        line-height: 31px;
+        line-height: 32px;
       }
     }
   }
@@ -212,7 +212,7 @@
     &__day {
       height: 27px;
       width: 27px;
-      font-size: 14px;;
+      font-size: 14px;
       margin: 2px;
     }
     &__number-day {
