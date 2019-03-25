@@ -68,7 +68,7 @@
             <div class="wg-form-registration__card-ef">
               <ui-ef-text caption="Логин *"></ui-ef-text>
               <ui-ef-password caption="Пароль *"></ui-ef-password>
-              <ui-ef-text caption="Каптчу *"></ui-ef-text>
+              <wg-captcha></wg-captcha>
             </div>
             <div class="wg-form-registration__card-buttons">
               <div class="ui-button ui-button_float_black"

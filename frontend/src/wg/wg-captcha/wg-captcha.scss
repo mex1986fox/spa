@@ -1,4 +1,4 @@
-.wg-multiple-location {
+.wg-captcha {
     &__blinde {
         background-color: rgba($color-black, 0);
         display: flex;
@@ -7,8 +7,8 @@
         align-content: center;
     }
     &__menu {
-        height: 430px;
-        width: 650px;
+        height: auto;
+        width: 440px;
         background-color: $color-white;
         box-shadow: $shadow-2;
         position: relative;
@@ -19,27 +19,27 @@
             font-weight: 400;
             margin: 25px 35px;
         }
-        &-chipheader {
-            color: $color-black;
-            font-size: 15px;
-            font-weight: 400;
-            margin: 30px 35px 0px 35px;
-        }
         &-close {
             position: absolute;
             right: 34px;
             margin-top: -55px;
         }
         &-ef {
-            margin: 25px 35px;
+            margin: 0px 35px 33px 35px;
             overflow: hidden;
-            overflow-y: auto;
         }
-        &-chipsies {
-            margin: 25px 35px;
+        &-buttons {
+            margin: 25px 31px;
             overflow: hidden;
-            overflow-y: auto;
-            max-height: 205px;
+        }
+        &-captcha {
+            margin: 60px 35px 0 35px;
+            overflow: hidden;
+            position: relative;
+            height: 50px;
+            &>img {
+                height: 100%;
+            }
         }
     }
 }

@@ -1,45 +1,48 @@
 <template>
-
   <div class="wg-multiple-location">
-    <ui-ef-text @onClick="isClickText"
-                :readonly="true"
-                :disabled="disabled"
-                :value="dTextValue"
-                :caption="caption"></ui-ef-text>
+    <ui-ef-text
+      @onClick="isClickText"
+      :readonly="true"
+      :disabled="disabled"
+      :value="dTextValue"
+      :caption="caption"
+    ></ui-ef-text>
 
-    <input type="hidden"
-           :name="name"
-           :value="dValue">
-    <ui-blind :show="dShowMenu"
-              class="wg-multiple-location__blinde"
-              @onClick="isHideMenu"
-              position="fixed">
+    <input type="hidden" :name="name" :value="dValue">
+    <ui-blind
+      :show="dShowMenu"
+      class="wg-multiple-location__blinde"
+      @onClick="isHideMenu"
+      position="fixed"
+    >
       <div class="wg-multiple-location__menu">
         <div class="wg-multiple-location__menu-header">Укажите свой город</div>
         <div class="wg-multiple-location__menu-close">
-          <div @click="isHideMenu"
-               class="ui-button ui-button_float_black ui-button_circle_s1 ">
+          <div @click="isHideMenu" class="ui-button ui-button_float_black ui-button_circle_s1">
             <i class="fas fa-times"></i>
           </div>
-
         </div>
+
         <div class="wg-multiple-location__menu-ef">
-          <ui-ef-search placeholder="Город"
-                        @onInput="isSearch"
-                        :value="dTextValue">
-
-          </ui-ef-search>
+          <ui-ef-search
+            placeholder="Введите название города"
+            @onInput="isSearch"
+            :value="dTextValue"
+          ></ui-ef-search>
         </div>
+        <div
+          class="wg-multiple-location__menu-chipheader"
+          v-if="citiesFilters.length>0"
+        >Нажмите на свой город</div>
         <div class="wg-multiple-location__menu-chipsies">
-          <ui-ef-chips v-for="(city, key) in citiesFilters"
-                       :key="key"
-                       :value="city.citi_id"
-                       :caption="city.option"
-                       @onClick="isClickChips">
-
-          </ui-ef-chips>
+          <ui-ef-chips
+            v-for="(city, key) in citiesFilters"
+            :key="key"
+            :value="city.citi_id"
+            :caption="city.option"
+            @onClick="isClickChips"
+          ></ui-ef-chips>
         </div>
-
       </div>
     </ui-blind>
   </div>
