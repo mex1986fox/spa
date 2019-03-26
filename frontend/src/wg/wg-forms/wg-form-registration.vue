@@ -72,7 +72,7 @@
             </div>
             <div class="wg-form-registration__card-buttons">
               <div class="ui-button ui-button_float_black"
-                   @click="autoheight()">Отправить</div>
+                   @click="isCreateUser">Отправить</div>
               <div class="ui-button ui-button_float_black">Отменить</div>
             </div>
           </div>
@@ -89,8 +89,7 @@ export default {
     return {
       dShow: this.show,
       dShowAnimation: false,
-      show1: true,
-      show2: false,
+      show1: false,
       clientHeigthContainer: undefined,
       changeFiles: [],
       clearFiles: false,
@@ -133,11 +132,8 @@ export default {
     }
   },
   methods: {
-    autoheight() {
+    isCreateUser() {
       this.show1 = true;
-    },
-    autoheight2() {
-      this.show2 = true;
     },
     isHide() {
       this.dShowAnimation = false;

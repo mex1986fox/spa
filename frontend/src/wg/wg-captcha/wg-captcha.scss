@@ -1,4 +1,7 @@
 .wg-captcha {
+    margin: 14px 0 0 0;
+    position: relative;
+    float: left;
     &__blinde {
         background-color: rgba($color-black, 0);
         display: flex;
@@ -21,7 +24,7 @@
         }
         &-close {
             position: absolute;
-            right: 34px;
+            right: 28px;
             margin-top: -55px;
         }
         &-ef {
@@ -36,7 +39,7 @@
             margin: 60px 35px 0 35px;
             overflow: hidden;
             position: relative;
-            height: 50px;
+            height: 75px;
             &>img {
                 height: 100%;
             }
