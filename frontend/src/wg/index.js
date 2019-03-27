@@ -1,6 +1,6 @@
 import Vue from "vue/dist/vue.js";
 
-import WgFormRegistration from "./wg-forms/wg-form-registration.vue";
+import WgFormRegistration from "./wg-forms/registration/wg-form-registration.vue";
 Vue.component("wg-form-registration", WgFormRegistration);
 
 

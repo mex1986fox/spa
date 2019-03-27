@@ -1,11 +1,13 @@
 <template>
   <div class="wg-captcha">
     <ui-ef-checkbox :checked="checkedCheckbox" @onClick="isShowMenu">{{dCaption}}</ui-ef-checkbox>
+    <div v-if="dTime!=undefined">{{dTime}}</div>
+    <span class="wg-captcha__help" :class="{'wg-captcha__help_active':dHelp}">{{help}}</span>
 
-    <!-- <input type="hidden" :name="name" :value="dValue"> -->
+    <input type="hidden" name="captcha_token" :value="token">
     <ui-blind :show="dShowMenu" class="wg-captcha__blinde" @onClick="isHideMenu" position="fixed">
       <div class="wg-captcha__menu">
-        <div class="wg-captcha__menu-header">Пройдите каптчу</div>
+        <div class="wg-captcha__menu-header">Пройдите каптчу {{dTime!=undefined?dTime:""}}</div>
         <div class="wg-captcha__menu-close">
           <div @click="isHideMenu" class="ui-button ui-button_float_black ui-button_circle_s1">
             <i class="fas fa-times"></i>
@@ -16,7 +18,7 @@
         </div>
 
         <div class="wg-captcha__menu-ef">
-          <ui-ef-text caption="Вветиде символы с картинки" @onInput="isInputText" :help="help"></ui-ef-text>
+          <ui-ef-text caption="Вветиде символы с картинки" @onInput="isInputText" :help="helpmenu"></ui-ef-text>
         </div>
         <div class="wg-captcha__menu-buttons">
           <div class="ui-button ui-button_float_black" @click="isConfirmCaptcha">Отправить</div>
@@ -38,8 +40,23 @@ export default {
       answer: "",
       check: false,
       checkedCheckbox: false,
-      help: ""
+      dTimer: undefined,
+      dPayload: undefined,
+      dTime: undefined,
+      helpmenu: "",
+      dHelp: this.help
     };
+  },
+  props: {
+    help: {
+      type: String,
+      default: ""
+    }
+  },
+  watch: {
+    help(newQ) {
+      this.dHelp = newQ;
+    }
   },
   methods: {
     isShowMenu() {
@@ -61,12 +78,51 @@ export default {
         }, 4);
       }
     },
+    isStartTimer() {
+      let count = 5;
+      this.dTimer = setInterval(() => {
+        let minutes = parseInt(
+          (this.dPayload.exp - this.dPayload.iat - count) / 60,
+          10
+        );
+        let seconds = parseInt(
+          (this.dPayload.exp - this.dPayload.iat - count) % 60,
+          10
+        );
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        this.dTime = minutes + ":" + seconds;
+        count = count + 1;
+        if (this.dPayload.exp - this.dPayload.iat - count == 0) {
+          this.dCaption = "Я не робот";
+          this.dShowMenu = false;
+          this.check = false;
+          this.checkedCheckbox = false;
+          this.token = undefined;
+          this.src = undefined;
+          this.answer = "";
+          this.dPayload = undefined;
+          this.dTime = undefined;
+          clearInterval(this.dTimer);
+          this.dTimer = undefined;
+        }
+      }, 1000);
+    },
     isHideMenu() {
       this.dShowMenu = false;
       if (this.check == true) {
         this.checkedCheckbox = true;
+        this.dHelp = "";
       } else {
         this.checkedCheckbox = false;
+        this.token = undefined;
+        this.src = undefined;
+        this.answer = "";
+        clearInterval(this.dTimer);
+        this.dTimer = undefined;
+        this.dPayload = undefined;
+        this.dTime = undefined;
       }
     },
     isInputText(text) {
@@ -81,7 +137,11 @@ export default {
         response => {
           if (response.body.status == "ok") {
             this.token = response.body.data.token;
+            let tokenPayloadHex = this.token.split(".")[1];
+            let tokenPayload = atob(tokenPayloadHex);
+            this.dPayload = JSON.parse(tokenPayload);
             this.isShowCaptcha();
+            this.isStartTimer();
           }
         },
         error => {
@@ -104,14 +164,14 @@ export default {
       );
     },
     isConfirmCaptcha() {
-      this.help = "";
+      this.helpmenu = "";
       if (this.answer == "") {
-        this.help = "Пустой ответ";
+        this.helpmenu = "Пустой ответ";
         return;
       }
       var Reg61 = new RegExp("^.*[^a-z0-9].*$");
       if (Reg61.test(this.answer)) {
-        this.help = "Только латиница прописью и цифры";
+        this.helpmenu = "Только латиница прописью и цифры";
         return;
       }
       let body = new FormData();
@@ -120,6 +180,7 @@ export default {
       this.$http.post(this.$hosts.services + "/api/captcha/confirm", body).then(
         response => {
           if (response.body.status == "ok") {
+            this.token = response.body.data.token;
             this.check = true;
             this.dCaption = "Действительно! Вы не робот.";
             this.isHideMenu();
@@ -127,7 +188,7 @@ export default {
         },
         error => {
           if (error.body.data.answer == "Не верный.") {
-            this.help = "Не верный ответ";
+            this.helpmenu = "Не верный ответ";
             this.isShowCaptcha();
           }
         }

@@ -90,8 +90,8 @@ export default {
       dName: this.name,
       dDisabled: this.disabled,
       dSelectDate: this.value,
-      dDate: new Date(this.value),
-      dBuferDate: new Date(this.value),
+      dDate: this.value!=""?new Date(this.value): new Date(),
+      dBuferDate: this.value!=""?new Date(this.value): new Date(),
       dMonth: [
         { id: "01", name: "Январь", leapDays: 31, days: 31 },
         { id: "02", name: "Февраль", leapDays: 29, days: 28 },
