@@ -4,7 +4,7 @@
     <div v-if="dTime!=undefined">{{dTime}}</div>
     <span class="wg-captcha__help" :class="{'wg-captcha__help_active':dHelp}">{{help}}</span>
 
-    <input type="hidden" name="captcha_token" :value="token">
+    <input type="hidden" name="captcha_token" :value="sendToken">
     <ui-blind :show="dShowMenu" class="wg-captcha__blinde" @onClick="isHideMenu" position="fixed">
       <div class="wg-captcha__menu">
         <div class="wg-captcha__menu-header">Пройдите каптчу {{dTime!=undefined?dTime:""}}</div>
@@ -36,6 +36,7 @@ export default {
       dCaption: "Я не робот",
       dShowMenu: false,
       token: undefined,
+      sendToken: undefined, //токен для оотправки
       src: undefined,
       answer: "",
       check: false,
@@ -56,6 +57,13 @@ export default {
   watch: {
     help(newQ) {
       this.dHelp = newQ;
+    },
+    sendToken(newQ) {
+      if (newQ != undefined) {
+        this.$emit("onChecked");
+      } else {
+        this.$emit("onNotChecked");
+      }
     }
   },
   methods: {
@@ -100,7 +108,7 @@ export default {
           this.check = false;
           this.checkedCheckbox = false;
           this.token = undefined;
-          this.src = undefined;
+          (this.sendToken = undefined), (this.src = undefined);
           this.answer = "";
           this.dPayload = undefined;
           this.dTime = undefined;
@@ -180,7 +188,7 @@ export default {
       this.$http.post(this.$hosts.services + "/api/captcha/confirm", body).then(
         response => {
           if (response.body.status == "ok") {
-            this.token = response.body.data.token;
+            this.sendToken = response.body.data.token;
             this.check = true;
             this.dCaption = "Действительно! Вы не робот.";
             this.isHideMenu();

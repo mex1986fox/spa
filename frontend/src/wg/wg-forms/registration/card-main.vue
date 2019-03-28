@@ -2,18 +2,13 @@
   <form ref="formCreateUser">
     <div class="wg-form-registration__card-header">Укажите регистрационные данные</div>
     <div class="wg-form-registration__card-ef">
-      <ui-ef-text @onInput="isInputLogin" name="login" caption="Логин *" :help="excLogin"></ui-ef-text>
-      <ui-ef-password
-        @onInput="isInputPassword"
-        name="password"
-        caption="Пароль *"
-        :help="excPassword"
-      ></ui-ef-password>
+      <ui-ef-text name="login" caption="Логин *" :help="excLogin"></ui-ef-text>
+      <ui-ef-password name="password" caption="Пароль *" :help="excPassword"></ui-ef-password>
       <wg-captcha :help="excCaptcha"></wg-captcha>
     </div>
     <div class="wg-form-registration__card-buttons">
       <div class="ui-button ui-button_float_black" @click="isCreateUser">Отправить</div>
-      <div class="ui-button ui-button_float_black">Отменить</div>
+      <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
   </form>
 </template>
@@ -21,16 +16,15 @@
 export default {
   data() {
     return {
-      dLogin: undefined,
-      dLogin: undefined,
       excLogin: "",
       excPassword: "",
-      excCaptcha: ""
+      excCaptcha: "",
+      dSpinn: false
     };
   },
   computed: {
     token() {
-      return this.$store.getters["access_token/getToken"];
+      return this.$store.getters["tokens/getAccessToken"];
     }
   },
   watch: {
@@ -48,12 +42,37 @@ export default {
       this.dPassword = password;
     },
     isCreateUser() {
+      //проверить поля перед отправкой
+
       let form = this.$refs.formCreateUser;
       let body = new FormData(form);
+      let login = body.get("login");
+      let password = body.get("password");
+      let captcha_token = body.get("captcha_token");
+      let fExc = false;
+      if (login == undefined || login == "") {
+        this.excLogin = "Заполните логин.";
+        fExc = true;
+      }
+      if (password == undefined || password == "") {
+        this.excPassword = "Заполните пароль.";
+        fExc = true;
+      }
+      if (captcha_token == undefined || captcha_token == "") {
+        this.excCaptcha = "Подтвердите что вы не робот.";
+        fExc = true;
+      }
+      if (fExc == true) {
+        return;
+      }
+      this.dSpinn = true;
       this.$http.post(this.$hosts.services + "/api/user/create", body).then(
         response => {
           if (response.body.status == "ok") {
             this.isCreateToken();
+            if (this.token != undefined) {
+              this.dSpinn = false;
+            }
           }
         },
         error => {
@@ -62,6 +81,7 @@ export default {
             this.excLogin = exc["login"] ? exc["login"] : "";
             this.excPassword = exc["password"] ? exc["password"] : "";
             this.excCaptcha = exc["captcha_token"] ? exc["captcha_token"] : "";
+            this.dSpinn = false;
           }
           //   console.dir(error);
         }
@@ -74,7 +94,7 @@ export default {
         password: body.get("password"),
         login: body.get("login")
       };
-      this.$store.dispatch("access_token/creteTokens", mbody);
+      this.$store.dispatch("tokens/creteTokens", mbody);
     }
   }
 };

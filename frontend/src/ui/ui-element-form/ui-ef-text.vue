@@ -209,6 +209,11 @@ export default {
       let ctrl = this.$refs.input;
       ctrl.focus();
     }
+    setTimeout(() => {
+      if (this.$el.querySelectorAll("input:-webkit-autofill").length > 0) {
+        this.modFocus=true;
+      }
+    }, 1000);
   },
   updated() {
     if (this.modFocus == true) {

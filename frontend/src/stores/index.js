@@ -3,7 +3,7 @@ import Vuex from "vuex";
 
 import Locations from "./dependencies/locations.js";
 import Transports from "./dependencies/transports.js";
-import Token from "./token/access_token.js";
+import Tokens from "./tokens/tokens.js";
 Vue.use(Vuex);
 
 //импорт хранилищь vuex
@@ -14,7 +14,7 @@ const store = new Vuex.Store({
   strict: true,
   modules: {
     //user: User,
-    access_token: Token, 
+    tokens: Tokens, 
     locations: Locations,
     transports: Transports
   },
