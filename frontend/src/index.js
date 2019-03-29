@@ -6,6 +6,7 @@ import Vue from "vue/dist/vue.js";
 import router from "./router/index.js";
 import store from "./stores/index.js";
 
+
 //имена хостов которые будем использовать в проекте
 import Hosts from "./plugins/hosts.js";
 Vue.use(Hosts);

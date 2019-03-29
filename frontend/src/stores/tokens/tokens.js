@@ -4,7 +4,7 @@ const tokens = {
   state: {
     access_token: undefined,
     refresh_token: undefined,
-    token_update_timer: undefined
+    timer_update: undefined
   },
   getters: {
     getAccessToken: (state, getters, rootState, rootGetters) => {
@@ -13,6 +13,18 @@ const tokens = {
     getRefreshToken: (state, getters, rootState, rootGetters) => {
       return state.refresh_token;
     },
+    getAccessTokenPayload(state, getters, rootState, rootGetters) {
+      let token = state.access_token;
+      let tokenPayloadHex = token.split(".")[1];
+      let tokenPayload = atob(tokenPayloadHex);
+      return JSON.parse(tokenPayload);
+    },
+    getRefreshTokenPayload(state, getters, rootState, rootGetters) {
+      let token = state.refresh_token;
+      let tokenPayloadHex = token.split(".")[1];
+      let tokenPayload = atob(tokenPayloadHex);
+      return JSON.parse(tokenPayload);
+    }
   },
   mutations: {
     updateAccessToken(state, access_token) {
@@ -20,6 +32,14 @@ const tokens = {
     },
     updateRefreshToken(state, refresh_token) {
       state.refresh_token = refresh_token;
+    },
+    updateTimerUpdate(state, timer) {
+      state.timer_update = timer;
+
+    },
+    deleteTimerUpdate(state, timer) {
+      clearInterval(state.timer_update);
+      state.timer_update = undefined;
     }
   },
   actions: {
@@ -34,8 +54,16 @@ const tokens = {
             if (response.body.data.access_token != undefined) {
               context.commit("updateAccessToken", response.body.data.access_token);
               context.commit("updateRefreshToken", response.body.data.refresh_token);
+              // запускаем обновление токинов
+              // за минуту до его смерти
+              let pload = context.getters.getAccessTokenPayload;
+              let uptime = (pload.exp - pload.iat - 60) * 1000;
+              if (context.state.timer_update == undefined) {
+                context.commit("updateTimerUpdate", setInterval(() => {
+                  context.dispatch("updateTokens");
+                }, uptime));
+              }
             }
-
           },
           error => {
             console.log(error)
@@ -50,6 +78,7 @@ const tokens = {
             if (response.body.status == "ok") {
               context.commit("updateAccessToken", undefined);
               context.commit("updateRefreshToken", undefined);
+              context.commit("deleteTimerUpdate");
             }
           },
           error => {
@@ -65,7 +94,7 @@ const tokens = {
             if (response.body.data.access_token != undefined) {
               context.commit("updateAccessToken", response.body.data.access_token);
               context.commit("updateRefreshToken", response.body.data.refresh_token);
-              console.dir(response.body.data);
+              // console.dir(response.body.data);
             }
           },
           error => {

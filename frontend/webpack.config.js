@@ -23,7 +23,8 @@ module.exports = {
         // обработчик файлов
         loader: "babel-loader",
         query: {
-          presets: ["es2015"]
+          presets: ["es2015"],
+          plugins:[ 'transform-object-rest-spread' ]
         }
       },
       {

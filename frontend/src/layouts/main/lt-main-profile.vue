@@ -36,27 +36,11 @@ export default {
       return this.$store.getters["tokens/getAccessToken"];
     }
   },
-  watch: {
-    token(newQ) {
-      if (newQ != undefined) {
-        //запускаем таймер на обновление токенов
-        this.token_update_timer = setInterval(() => {
-          this.$store.dispatch("tokens/updateTokens");
-        }, 5000);
-      } else {
-        clearInterval(this.token_update_timer);
-        this.token_update_timer = undefined;
-      }
-    }
-  },
   methods: {
     isShowRegistration() {
       this.$emit("onShowRegistration");
     },
     isDeleteToken() {
-      clearInterval(this.token_update_timer);
-      this.token_update_timer = undefined;
-      console.log(this.token_update_timer);
       this.$store.dispatch("tokens/deleteTokens");
     }
   }
