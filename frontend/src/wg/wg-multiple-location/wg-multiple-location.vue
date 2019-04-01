@@ -38,7 +38,7 @@
           <ui-ef-chips
             v-for="(city, key) in citiesFilters"
             :key="key"
-            :value="city.citi_id"
+            :value="city.value"
             :caption="city.option"
             @onClick="isClickChips"
           ></ui-ef-chips>
@@ -124,7 +124,6 @@ export default {
           return {
             value: city.city_id,
             option: city.extended_name,
-            group: city.name[0]
           };
         });
         return menu;

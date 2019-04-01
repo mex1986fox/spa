@@ -24,16 +24,22 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "lt-main-profile",
   data() {
-    return {
-      token_update_timer: undefined
-    };
+    return {};
   },
   computed: {
-    token() {
-      return this.$store.getters["tokens/getAccessToken"];
+    ...mapGetters({
+      token: "tokens/getAccessToken"
+    })
+  },
+  watch: {
+    token(newQ, oldQ) {
+      if (oldQ == undefined && newQ != undefined) {
+        this.$store.dispatch("profile/updateProfile");
+      }
     }
   },
   methods: {

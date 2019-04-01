@@ -7,12 +7,19 @@
       <wg-captcha :help="excCaptcha"></wg-captcha>
     </div>
     <div class="wg-form-registration__card-buttons">
-      <div class="ui-button ui-button_float_black" @click="isCreateUser">Отправить</div>
+      <input
+        type="button"
+        class="ui-button ui-button_float_black"
+        @click="isCreateUser"
+        :disabled="dSpinn"
+        value="Отправить"
+      >
       <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
   </form>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -23,9 +30,9 @@ export default {
     };
   },
   computed: {
-    token() {
-      return this.$store.getters["tokens/getAccessToken"];
-    }
+    ...mapGetters({
+      token: "tokens/getAccessToken"
+    })
   },
   watch: {
     token(newQ) {
