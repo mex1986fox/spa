@@ -19,7 +19,7 @@
           </ui-animation-display>
           <ui-animation-display v-if="showCardNotMain==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-registration-card-notmain></wg-form-registration-card-notmain>
+              <wg-form-registration-card-notmain @onUserUpdated="isShowCardPhoto"></wg-form-registration-card-notmain>
             </div>
           </ui-animation-display>
           <ui-animation-display v-if="showCardMain==true" :animate="'right'">
@@ -50,9 +50,9 @@ export default {
       dShow: this.show,
       dShowAnimation: false,
       showCardMain: true,
-      showCardNotMain: true,
-      showCardPhoto: true,
-      clientHeigthContainer: undefined,
+      showCardNotMain: false,
+      showCardPhoto: false,
+      clientHeigthContainer: undefined
     };
   },
   props: {
@@ -84,6 +84,12 @@ export default {
       this.showCardMain = false;
       setTimeout(() => {
         this.showCardNotMain = true;
+      }, 600);
+    },
+    isShowCardPhoto() {
+      this.showCardNotMain = false;
+      setTimeout(() => {
+        this.showCardPhoto = true;
       }, 600);
     }
   },

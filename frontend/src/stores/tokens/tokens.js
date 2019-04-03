@@ -15,14 +15,14 @@ const tokens = {
     },
     getAccessTokenPayload(state, getters, rootState, rootGetters) {
       let token = state.access_token;
-      let tokenPayloadHex = token.split(".")[1];
-      let tokenPayload = atob(tokenPayloadHex);
+      let tokenPayloadHex = token.split(".");
+      let tokenPayload = atob(tokenPayloadHex[1]);
       return JSON.parse(tokenPayload);
     },
     getRefreshTokenPayload(state, getters, rootState, rootGetters) {
       let token = state.refresh_token;
-      let tokenPayloadHex = token.split(".")[1];
-      let tokenPayload = atob(tokenPayloadHex);
+      let tokenPayloadHex = token.split(".");
+      let tokenPayload = atob(tokenPayloadHex[1]);
       return JSON.parse(tokenPayload);
     }
   },

@@ -71,7 +71,13 @@ export default {
       this.$http.post(this.$hosts.services + "/api/user/update", body).then(
         response => {
           if (response.body.status == "ok") {
-            console.log(response.body);
+            // console.log(response.body.data.user);
+            // обновляем профайл пользователя
+            this.$store.commit(
+              "profile/updateProfile",
+              response.body.data.user
+            );
+            this.$emit("onUserUpdated");
           }
         },
         error => {

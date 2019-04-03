@@ -1452,13 +1452,19 @@ body {
     color: #111111;
     font-size: 24px;
     font-weight: 400;
-    margin: 35px 40px;
+    margin: 10px 40px;
     overflow: hidden; }
   .wg-form-registration__card-files {
     color: #111111;
     font-size: 24px;
     font-weight: 400;
-    margin: 35px 45px; }
+    margin: 10px 45px 10px 45px;
+    overflow: hidden;
+    max-height: 250px;
+    overflow-y: auto;
+    position: relative; }
+    .wg-form-registration__card-files-header {
+      margin: 0 45px; }
   .wg-form-registration__card-file {
     display: block;
     margin: 22px 55px;
@@ -1469,27 +1475,31 @@ body {
     position: absolute; }
   .wg-form-registration__card-img {
     height: 133px;
-    width: 197px;
+    width: 190px;
     overflow: hidden;
     margin: 10px;
     float: left;
     display: flex;
     justify-content: center;
-    position: relative; }
-    .wg-form-registration__card-img-delete {
+    position: relative;
+    border: 1px solid rgba(17, 17, 17, 0.2); }
+    .wg-form-registration__card-img-buttons {
+      background: rgba(17, 17, 17, 0.2);
       position: absolute;
-      right: 0;
-      bottom: 0;
-      background: rgba(17, 17, 17, 0.3);
-      border-radius: 50%;
-      margin: 5px; }
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end; }
     .wg-form-registration__card-img > img {
       height: 100%;
       left: auto 0; }
   .wg-form-registration__card-imgs {
     overflow: hidden;
     margin: 35px;
-    display: block; }
+    display: block;
+    overflow-y: auto;
+    max-height: 350px; }
 
 .wg-form-registration__menu {
   position: relative;

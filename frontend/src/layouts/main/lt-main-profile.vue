@@ -32,13 +32,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      token: "tokens/getAccessToken"
+      token: "tokens/getAccessToken",
+      tokenPayload:"tokens/getAccessTokenPayload"
     })
   },
   watch: {
     token(newQ, oldQ) {
-      if (oldQ == undefined && newQ != undefined) {
-        this.$store.dispatch("profile/updateProfile");
+       if (oldQ == undefined && newQ != undefined) {
+        this.$store.dispatch("profile/updateProfile", this.tokenPayload.userID);
       }
     }
   },
