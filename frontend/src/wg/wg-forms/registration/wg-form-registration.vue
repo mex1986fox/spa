@@ -14,7 +14,7 @@
 
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-registration-card-photo></wg-form-registration-card-photo>
+              <wg-form-registration-card-photo @onHide="isHide"></wg-form-registration-card-photo>
             </div>
           </ui-animation-display>
           <ui-animation-display v-if="showCardNotMain==true" :animate="'right'">
@@ -69,7 +69,7 @@ export default {
           let scrollTop = this.$el.parentNode.scrollTop;
           this.$el.style.marginTop = scrollTop + "px";
           this.dShowAnimation = true;
-        }, 4);
+        }, 100);
       }
     }
   },

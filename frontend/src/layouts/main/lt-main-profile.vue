@@ -14,9 +14,10 @@
     </template>
     <template v-else>
       <div class="lt-main__menu-avatar">
-        <i class="far fa-user"></i>
+        <i class="far fa-user" v-if="avatar==undefined"></i>
+        <img v-if="avatar!=undefined" :src="avatar">
       </div>
-      <!-- <div class="lt-main__menu-nickname">Nick Name</div> -->
+      <div class="lt-main__menu-nickname">{{login}}</div>
       <div class="lt-main__menu-buttons">
         <div class="ui-button ui-button_float_white" @click="isDeleteToken">выход</div>
       </div>
@@ -33,12 +34,14 @@ export default {
   computed: {
     ...mapGetters({
       token: "tokens/getAccessToken",
-      tokenPayload:"tokens/getAccessTokenPayload"
+      tokenPayload: "tokens/getAccessTokenPayload",
+      avatar: "profile/getAvatar",
+      login:"profile/getLogin"
     })
   },
   watch: {
     token(newQ, oldQ) {
-       if (oldQ == undefined && newQ != undefined) {
+      if (oldQ == undefined && newQ != undefined) {
         this.$store.dispatch("profile/updateProfile", this.tokenPayload.userID);
       }
     }

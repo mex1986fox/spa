@@ -1,0 +1,58 @@
+.ui-menu {
+    position: absolute;
+    z-index: 200;
+    width: auto;
+    margin-top: 4px;
+    height: auto;
+
+    &__ul {
+        margin: 0;
+        border: 0;
+        padding: 0;
+        max-height: 250px;
+        width: 220px;
+        color: $color-black;
+        font-size: 14px;
+        background-color: $color-white;
+        display: block;
+        float: left;
+        overflow: hidden;
+        overflow-y: auto;
+        box-shadow: $shadow-1;
+    }
+
+    &__li {
+        position: relative;
+        border: 0;
+        padding: 0px 30px;
+        margin: 0;
+        list-style-type: none;
+        cursor: pointer;
+        height: 40px;
+        width: auto;
+        font-size: 14px;
+        line-height: 38px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #202020;
+
+        &:hover {
+            background-color: rgba($color-black, 0.05);
+        }
+
+        &:active {
+            background-color: rgba($color-black, 0.1);
+        }
+
+        &_disabled {
+            color: rgba($color-black, 0.6);
+            cursor: auto;
+
+            &:hover {
+                background-color: $color-white;
+            }
+        }
+    }
+
+}

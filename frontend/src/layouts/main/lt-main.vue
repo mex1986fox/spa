@@ -1,7 +1,7 @@
 <template>
   <div class="lt-main">
     <div class="lt-main__menu">
-      <lt-main-profile @onShowRegistration="showRegistration = true"></lt-main-profile>
+      <lt-main-profile @onShowRegistration="isShowRegistration"></lt-main-profile>
       <ul class="lt-main__menu-list">
         <li class="lt-main__menu-item">Люди</li>
         <li class="lt-main__menu-item">Люди</li>
@@ -41,7 +41,11 @@
         <span class="wg-card-user__nickname">Anjeles</span>
         <span class="wg-card-user__name">Анжелика Варумина</span>
       </div>
-      <wg-form-registration :show="showRegistration" @onHide="showRegistration = false"></wg-form-registration>
+      <wg-form-registration
+        :key="keyRegistration()"
+        :show="showRegistration"
+        @onHide="showRegistration = false"
+      ></wg-form-registration>
     </div>
   </div>
 </template>
@@ -50,9 +54,17 @@ export default {
   name: "lt-main",
   data() {
     return {
-      showRegistration: true
+      showRegistration: false,
+      
     };
   },
-  methods: {}
+  methods: {
+    isShowRegistration() {
+      this.showRegistration = true;
+    },
+    keyRegistration() {
+      return Math.floor(Math.random() * (1 - 999999)) + 1;
+    }
+  }
 };
 </script>

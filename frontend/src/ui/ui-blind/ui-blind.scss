@@ -1,13 +1,17 @@
 .ui-blind {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-  background: #111111cc;
-  z-index: 100;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: rgba($color-black, 0.3);
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+
+    &_flat {
+        background-color: rgba($color-black, 0)
+    }
 }

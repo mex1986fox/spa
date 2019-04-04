@@ -8,6 +8,9 @@ import UiButtonFile from "./ui-button/ui-button-file.vue";
 Vue.component("ui-button-file", UiButtonFile);
 import UiSpinner from "./ui-spinner/ui-spinner.vue";
 Vue.component("ui-spinner", UiSpinner);
+import UiMenu from "./ui-menu/ui-menu.vue";
+Vue.component("ui-menu", UiMenu);
+
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";

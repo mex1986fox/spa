@@ -2,8 +2,8 @@
   <div>
     <form ref="formUploadPhoto">
       <div class="wg-form-registration__card-header">Выберите и загрузите фотографии</div>
-      <div class="wg-form-registration__card-files-header">
-        <div class="ui-header ui-header_3" v-if="changeFiles.length>0">Выбранные фотографии:</div>
+      <div class="wg-form-registration__card-files-header" v-if="changeFiles.length>0">
+        <div class="ui-header ui-header_3">Выбранные фотографии:</div>
       </div>
       <div class="wg-form-registration__card-files">
         <div class="wg-form-registration__card-file" v-for="(file, key) in changeFiles" :key="key">
@@ -39,38 +39,45 @@
         ></ui-button-file>
       </div>
     </form>
+    <div class="wg-form-registration__card-files-header" v-if="lincksPhoto!=undefined">
+      <div class="ui-header ui-header_3">Выберите из фотографий свой аватар:</div>
+    </div>
     <div class="wg-form-registration__card-imgs" v-if="lincksPhoto!=undefined">
-      <div class="wg-form-registration__card-img" v-for="(linck, key) in lincksPhoto" :key="key">
-        <img :src="userPhotoHost+'/'+linck">
-        <div class="wg-form-registration__card-img-buttons">
-          <div
-            class="ui-button ui-button_float_white ui-button_circle_s1 ui-button_noborder"
-            @click="isDeletePhoto(key)"
-            title="Удалить"
-          >
-            <i class="far fa-trash-alt"></i>
-          </div>
-          <div
-            class="ui-button ui-button_float_white ui-button_circle_s1 ui-button_noborder"
-            title="Меню"
-          >
-            <i class="fas fa-ellipsis-v"></i>
-          </div>
-        </div>
-      </div>
+      <wg-form-registration-card-photo-img
+        v-for="(val, key) in lincksPhoto"
+        :key="key"
+        :keyPhoto="key"
+        :linck="val"
+        @onDeletePhoto="isDeletePhoto"
+      />
+    </div>
+    <div class="wg-form-registration__card-buttons">
+      <input
+        type="button"
+        v-if="lincksPhoto!=undefined"
+        class="ui-button ui-button_float_black"
+        @click="isHide"
+        value="Готово"
+      >
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import WgFormRegistrationCardPhotoImg from "./card-photo-img.vue";
 export default {
+  components: {
+    WgFormRegistrationCardPhotoImg
+  },
   data() {
     return {
       changeFiles: [],
       clearFiles: false,
       dLoading: false,
       lincksPhoto: undefined,
-      userPhotoHost: this.$hosts.userPhoto
+      userPhotoHost: this.$hosts.userPhoto,
+      showMenuKey: undefined,
+      imgSpinner: false
     };
   },
   computed: {
@@ -111,7 +118,6 @@ export default {
       this.$http.post(this.$hosts.services + "/api/userphoto/show", body).then(
         response => {
           if (response.body.status == "ok") {
-            console.dir(response.body.data[0]);
             this.lincksPhoto = response.body.data[0].files.mini;
           }
         },
@@ -122,30 +128,16 @@ export default {
         }
       );
     },
-    isDeletePhoto(key) {
-      let body = {
-        name_files: [key],
-        access_token: this.token
-      };
-      this.$http
-        .post(this.$hosts.services + "/api/userphoto/delete", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              delete this.lincksPhoto[key];
-              let lPhoto = this.lincksPhoto;
-              this.lincksPhoto = undefined;
-              setTimeout(() => {
-                this.lincksPhoto = lPhoto;
-              }, 100);
-            }
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-            }
-          }
-        );
+    isDeletePhoto(keyPhoto) {
+      delete this.lincksPhoto[keyPhoto];
+      let lPhoto = this.lincksPhoto;
+      this.lincksPhoto = undefined;
+      setTimeout(() => {
+        this.lincksPhoto = lPhoto;
+      }, 100);
+    },
+    isHide() {
+      this.$emit("onHide");
     }
   }
 };

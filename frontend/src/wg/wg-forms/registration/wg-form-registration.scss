@@ -93,6 +93,16 @@
             justify-content: flex-end;
         }
 
+        &-spinner {
+            position: absolute;
+            background-color: rgba($color-black, 0.2);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         &>img {
             height: 100%;
             left: auto 0;
@@ -101,7 +111,7 @@
 
     &__card-imgs {
         overflow: hidden;
-        margin: 35px;
+        margin: 34px;
         display: block;
         overflow-y: auto;
         max-height: 350px;
