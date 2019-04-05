@@ -15,14 +15,28 @@
         </div>
         <div class="wg-captcha__menu-captcha">
           <img v-if="src!=undefined" :src="src">
+          <ui-spinner v-if="src==undefined" class="ui-spinner_s1"/>
         </div>
 
         <div class="wg-captcha__menu-ef">
           <ui-ef-text caption="Вветиде символы с картинки" @onInput="isInputText" :help="helpmenu"></ui-ef-text>
         </div>
         <div class="wg-captcha__menu-buttons">
-          <div class="ui-button ui-button_float_black" @click="isConfirmCaptcha">Отправить</div>
-          <div class="ui-button ui-button_float_black" @click="isShowCaptcha">Обновить</div>
+          <input
+            type="button"
+            class="ui-button ui-button_float_black"
+            @click="isConfirmCaptcha"
+            :disabled="flConfirmreCapcha==true || src==undefined"
+            value="Отправить"
+          >
+          <input
+            type="button"
+            class="ui-button ui-button_float_black"
+            @click="isShowCaptcha"
+            :disabled="flConfirmreCapcha==true || src==undefined"
+            value="Обновить"
+          >
+          <ui-spinner v-if="flConfirmreCapcha==true" class="ui-spinner_s1"/>
         </div>
       </div>
     </ui-blind>
@@ -45,7 +59,8 @@ export default {
       dPayload: undefined,
       dTime: undefined,
       helpmenu: "",
-      dHelp: this.help
+      dHelp: this.help,
+      flConfirmreCapcha: false
     };
   },
   props: {
@@ -68,6 +83,8 @@ export default {
   },
   methods: {
     isShowMenu() {
+      this.helpmenu = "";
+      this.flConfirmreCapcha = false;
       if (this.check == false) {
         setTimeout(() => {
           this.checkedCheckbox = true;
@@ -172,14 +189,17 @@ export default {
       );
     },
     isConfirmCaptcha() {
+      this.flConfirmreCapcha = true;
       this.helpmenu = "";
       if (this.answer == "") {
         this.helpmenu = "Пустой ответ";
+        this.flConfirmreCapcha = false;
         return;
       }
       var Reg61 = new RegExp("^.*[^a-z0-9].*$");
       if (Reg61.test(this.answer)) {
         this.helpmenu = "Только латиница прописью и цифры";
+        this.flConfirmreCapcha = false;
         return;
       }
       let body = new FormData();
@@ -188,6 +208,7 @@ export default {
       this.$http.post(this.$hosts.services + "/api/captcha/confirm", body).then(
         response => {
           if (response.body.status == "ok") {
+            this.flConfirmreCapcha = false;
             this.sendToken = response.body.data.token;
             this.check = true;
             this.dCaption = "Действительно! Вы не робот.";
@@ -196,6 +217,7 @@ export default {
         },
         error => {
           if (error.body.data.answer == "Не верный.") {
+            this.flConfirmreCapcha = false;
             this.helpmenu = "Не верный ответ";
             this.isShowCaptcha();
           }

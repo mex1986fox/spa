@@ -11,6 +11,7 @@
     </div>
     <div class="wg-form-registration__card-buttons">
       <div class="ui-button ui-button_float_black" @click="isUpdateUser">Отправить</div>
+      <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
   </form>
 </template>
@@ -22,7 +23,8 @@ export default {
       excName: undefined,
       excSurname: undefined,
       excPhone: undefined,
-      excEmail: undefined
+      excEmail: undefined,
+      dSpinn: false
     };
   },
   computed: {
@@ -33,6 +35,7 @@ export default {
   },
   methods: {
     isUpdateUser() {
+      this.dSpinn = true;
       this.excName = undefined;
       this.excSurname = undefined;
       this.excPhone = undefined;
@@ -65,6 +68,7 @@ export default {
       }
       // если есть ошибки запрос не отправляем
       if (flExc == true) {
+        this.dSpinn = false;
         return;
       }
 
@@ -78,10 +82,12 @@ export default {
               response.body.data.user
             );
             this.$emit("onUserUpdated");
+            this.dSpinn = false;
           }
         },
         error => {
           if (error.body.status == "except") {
+            this.dSpinn = false;
             let exc = error.body.data;
             this.excName = exc["name"] ? exc["name"] : "";
             this.excSurname = exc["surname"] ? exc["surname"] : "";

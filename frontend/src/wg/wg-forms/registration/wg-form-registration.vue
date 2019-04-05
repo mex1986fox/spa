@@ -38,7 +38,7 @@ import WgFormRegistrationCardMain from "./card-main.vue";
 import WgFormRegistrationCardNotmain from "./card-notmain.vue";
 import WgFormRegistrationCardPhoto from "./card-photo.vue";
 export default {
-  option: "wg-form-registration",
+  name: "wg-form-registration",
   components: {
     WgFormRegistrationCardMain,
     WgFormRegistrationCardNotmain,
@@ -78,19 +78,19 @@ export default {
       this.dShowAnimation = false;
       setTimeout(() => {
         this.$emit("onHide");
-      }, 300);
+      }, 800);
     },
     isShowCardNotMain() {
       this.showCardMain = false;
       setTimeout(() => {
         this.showCardNotMain = true;
-      }, 600);
+      }, 800);
     },
     isShowCardPhoto() {
       this.showCardNotMain = false;
       setTimeout(() => {
         this.showCardPhoto = true;
-      }, 600);
+      }, 800);
     }
   },
   mounted() {
