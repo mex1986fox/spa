@@ -1,35 +1,89 @@
 .wg-select-location {
-    margin: 23px 0 10px 0;
-    &__container {
-        overflow: hidden;
-        border-bottom: 1px solid $color-disabled;
-        min-height: 40px;
-        padding-top: 10px;
-    }
-    &__button {
-        position: absolute;
-        font-size: 20px;
-        float: right;
-        right: 0px;
-        top: auto;
-        padding: 8px;
-        cursor: pointer;
-        bottom: 10px;
-    }
-    &__caption {
-        top: 11px;
-        &_active {
-            font-size: 16px;
-            line-height: 90px;
-        }
-        &_completed {
-            font-size: 13px !important;
-            line-height: 25px;
-        }
-    }
-    &__border {
-        position: relative;
-        top: -1px;
+    &__blinde {
+        background-color: rgba($color-black, 0);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
     }
 
+    &__menu {
+        height: 430px;
+        width: 650px;
+        background-color: $color-white;
+        box-shadow: $shadow-2;
+        position: relative;
+        overflow: hidden;
+
+        &-header {
+            color: $color-black;
+            font-size: 18px;
+            font-weight: 400;
+            margin: 25px 35px;
+        }
+
+        &-chipheader {
+            color: $color-black;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 30px 35px 0px 35px;
+        }
+
+        &-close {
+            position: absolute;
+            right: 34px;
+            margin-top: -55px;
+        }
+
+        &-ef {
+            margin: 25px 35px;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        &-chipsies {
+            margin: 25px 35px;
+            overflow: hidden;
+            overflow-y: auto;
+            max-height: 205px;
+        }
+    }
+}
+
+.wg-select-location_white {
+    &>.ui-ef-text {
+        &>.ui-ef-text__caption {
+            color: rgba($color-white, 0.9);
+        }
+
+        &>.ui-ef-text__caption_active {
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__caption_disabled {
+            color: rgba($color-white, 0.4);
+        }
+
+        &>.ui-ef-text__input {
+            border-bottom: 1px solid rgba($color-white, 0.9);
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__input_disabled {
+            border-bottom: 1px solid rgba($color-white, 0.4);
+            color: rgba($color-white, 0.4);
+        }
+
+        &>.ui-ef-text__border {
+            background-color: rgba($color-white, 0.9);
+        }
+
+        &>.ui-ef-text__border_active {
+            background-color: $color-white;
+        }
+
+        &>.ui-ef-text__border_disabled {
+            background-color: rgba($color-white, 0.4);
+        }
+    }
 }

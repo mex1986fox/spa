@@ -33,13 +33,10 @@ const locations = {
       }
       return undefined;
     },
-    getcities: (state, getters, rootState, rootGetters) => idSubj => {
-      for (let settlement of state.cities) {
-        if (idSubj == settlement.subject_id) {
-          return settlement;
-        }
-      }
-      return undefined;
+    getCities: (state, getters, rootState, rootGetters) => idSubj => {
+      return state.cities.filter(city => {
+        return city.subject_id == idSubj;
+      });
     },
     getSubjects: (state, getters, rootState, rootGetters) => idCont => {
       return state.subjects.filter(subj => {
@@ -89,7 +86,7 @@ const locations = {
             response => {
               context.commit("updateLocations", response.body.data);
             },
-            error => {}
+            error => { }
           );
       }
     }

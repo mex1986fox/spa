@@ -1,0 +1,172 @@
+// элементы
+.ui-ef-content {
+    width: 100%;
+    height: auto;
+    transition-duration: 300ms;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    margin: 22px auto 18px auto;
+
+    & .wg-smiles__smile {
+        padding: 0 5px;
+    }
+
+    &__caption {
+        width: 100%;
+        height: 30px;
+        font-size: 16px;
+        color: rgba($color-black, 0.9);
+        position: absolute;
+        transition-duration: 300ms;
+        line-height: 90px;
+        display: inline-block;
+        white-space: nowrap;
+
+        &_active {
+            font-size: 13px;
+            line-height: 45px;
+            color: $color-black;
+            transition-duration: 300ms;
+        }
+
+        &_completed {
+            font-size: 13px;
+            line-height: 45px;
+            transition-duration: 300ms;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        &_disabled {
+            color: rgba($color-black, 0.4);
+        }
+    }
+
+    &__input {
+        width: 100%;
+        height: 30px;
+        border: 0;
+        border-radius: 0px;
+        border-bottom: 1px solid rgba($color-black, 0.9);
+        color: $color-black;
+        font-size: 16px;
+        padding: 0;
+        margin-top: 30px;
+        transition-duration: 300ms;
+        overflow: hidden;
+        overflow-y: auto;
+        font-family: "Open Sans";
+        min-height: 28px;
+        line-height: 26px;
+        background-color: transparent;
+
+        &:invalid {
+            box-shadow: none;
+        }
+
+        &:-moz-submit-invalid {
+            box-shadow: none;
+        }
+
+        &:-moz-ui-invalid {
+            box-shadow: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &_active {
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+            //   transition-duration: 300ms;
+        }
+
+        &_disabled {
+            background-color: rgba(255, 255, 255, 0);
+            border-bottom: 1px solid rgba($color-black, 0.4);
+            color: rgba($color-black, 0.4);
+        }
+    }
+
+    &__border {
+        content: "";
+        top: -2px;
+        left: 0;
+        position: relative;
+        width: 0px;
+        height: 3px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background-color: rgba($color-black, 0.9);
+        transition-duration: 300ms;
+
+        &_active {
+            background-color: $color-black;
+            width: 100%;
+            transition-duration: 300ms;
+        }
+
+        &_disabled {
+            background-color: rgba($color-black, 0.4);
+        }
+    }
+
+    &__help {
+        width: 100%;
+        height: 18px;
+        font-size: 12px;
+        color: rgba($color-reade, 0);
+        line-height: 14px;
+        display: none;
+        transition-duration: 300ms;
+        padding-top: 3px;
+
+        &_active {
+            color: rgba($color-reade, 0.9);
+            transition-duration: 300ms;
+            display: block;
+        }
+
+        &_disabled {
+            color: rgba($color-reade, 0.4);
+        }
+    }
+}
+
+.ui-ef-content_white {
+    &>.ui-ef-content__caption {
+        color: rgba($color-white, 0.9);
+    }
+
+    &>.ui-ef-content__caption_active {
+        color: $color-white;
+    }
+
+    &>.ui-ef-content__caption_disabled {
+        color: rgba($color-white, 0.4);
+    }
+
+    &>.ui-ef-content__input {
+        border-bottom: 1px solid rgba($color-white, 0.9);
+        color: $color-white;
+    }
+
+    &>.ui-ef-content__input_disabled {
+        border-bottom: 1px solid rgba($color-white, 0.4);
+        color: rgba($color-white, 0.4);
+    }
+
+    &>.ui-ef-content__border {
+        background-color: rgba($color-white, 0.9);
+    }
+
+    &>.ui-ef-content__border_active {
+        background-color: $color-white;
+    }
+
+    &>.ui-ef-content__border_disabled {
+        background-color: rgba($color-white, 0.4);
+    }
+}

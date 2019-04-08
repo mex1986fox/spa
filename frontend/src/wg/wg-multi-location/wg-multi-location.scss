@@ -1,4 +1,4 @@
-.wg-multiple-location {
+.wg-multi-location {
     &__blinde {
         background-color: rgba($color-black, 0);
         display: flex;
@@ -6,6 +6,7 @@
         justify-content: center;
         align-content: center;
     }
+
     &__menu {
         height: 430px;
         width: 650px;
@@ -13,33 +14,78 @@
         box-shadow: $shadow-2;
         position: relative;
         overflow: hidden;
+
         &-header {
             color: $color-black;
             font-size: 18px;
             font-weight: 400;
             margin: 25px 35px;
         }
+
         &-chipheader {
             color: $color-black;
             font-size: 15px;
             font-weight: 400;
             margin: 30px 35px 0px 35px;
         }
+
         &-close {
             position: absolute;
             right: 34px;
             margin-top: -55px;
         }
+
         &-ef {
             margin: 25px 35px;
-            overflow: hidden;
-            overflow-y: auto;
         }
+
         &-chipsies {
             margin: 25px 35px;
             overflow: hidden;
             overflow-y: auto;
             max-height: 205px;
+        }
+    }
+
+    &__search-menu {
+        margin: 10px 25px;
+    }
+}
+
+.wg-multi-location_white {
+    &>.ui-ef-text {
+        &>.ui-ef-text__caption {
+            color: rgba($color-white, 0.9);
+        }
+
+        &>.ui-ef-text__caption_active {
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__caption_disabled {
+            color: rgba($color-white, 0.4);
+        }
+
+        &>.ui-ef-text__input {
+            border-bottom: 1px solid rgba($color-white, 0.9);
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__input_disabled {
+            border-bottom: 1px solid rgba($color-white, 0.4);
+            color: rgba($color-white, 0.4);
+        }
+
+        &>.ui-ef-text__border {
+            background-color: rgba($color-white, 0.9);
+        }
+
+        &>.ui-ef-text__border_active {
+            background-color: $color-white;
+        }
+
+        &>.ui-ef-text__border_disabled {
+            background-color: rgba($color-white, 0.4);
         }
     }
 }

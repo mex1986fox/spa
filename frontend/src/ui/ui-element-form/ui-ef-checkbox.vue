@@ -1,21 +1,22 @@
 <template>
-  <div class="ui-ef-checkbox"
-       @click="isClick()">
-    <span class="ui-ef-checkbox__check"
-          :class="{'ui-ef-checkbox__check_disabled': dDisabled,
+  <div class="ui-ef-checkbox" @click="isClick()">
+    <span
+      class="ui-ef-checkbox__check"
+      :class="{'ui-ef-checkbox__check_disabled': dDisabled,
                     'ui-ef-checkbox__check_disabled_checked': dChecked && dDisabled,
-                    'ui-ef-checkbox__check_checked': dChecked && !dDisabled}">
-      <i class="fa fa-check"
-         aria-hidden="true"></i>
+                    'ui-ef-checkbox__check_checked': dChecked && !dDisabled}"
+    >
+      <i class="fa fa-check" aria-hidden="true"></i>
     </span>
-    <input class="ui-ef-checkbox__input"
-           type="checkbox"
-           :name="dName"
-           :disabled="dDisabled"
-           :checked="dChecked"
-           :value="dValue" />
-    <span class="ui-ef-checkbox__caption"
-          :class="{'ui-ef-checkbox__caption_disabled': dDisabled}">
+    <input
+      class="ui-ef-checkbox__input"
+      type="checkbox"
+      :name="dName"
+      :disabled="dDisabled"
+      :checked="dChecked"
+      :value="dValue"
+    >
+    <span class="ui-ef-checkbox__caption" :class="{'ui-ef-checkbox__caption_disabled': dDisabled}">
       <slot></slot>
     </span>
   </div>
@@ -28,7 +29,8 @@ export default {
       dChecked: this.checked,
       dName: this.name,
       dValue: this.value,
-      dDisabled: this.disabled
+      dDisabled: this.disabled,
+      dCaption: this.caption
     };
   },
   methods: {
@@ -39,7 +41,8 @@ export default {
       let chekBox = {
         name: this.dName,
         value: this.dValue,
-        checked: this.dChecked
+        checked: this.dChecked,
+        caption: this.dCaption
       };
       this.$emit("onClick", chekBox);
     }
@@ -57,6 +60,10 @@ export default {
     checked: {
       type: Boolean,
       default: false
+    },
+    caption: {
+      type: String,
+      default: ""
     },
     disabled: {
       type: Boolean,

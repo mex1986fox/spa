@@ -1,14 +1,7 @@
 <template>
-
-  <ui-animation-display v-if="dShow==true"
-                        :animate="animate">
-    <div ref="blind"
-         v-if="dShow==true"
-         class="ui-blind"
-         @click="isClick">
-      <slot>
-
-      </slot>
+  <ui-animation-display v-if="dShow==true" :animate="animate">
+    <div ref="blind" v-if="dShow==true" class="ui-blind" @click="isClick">
+      <slot></slot>
     </div>
   </ui-animation-display>
 </template>
@@ -44,6 +37,16 @@ export default {
           if (this.position == "fixed") {
             style.top = "0";
             style.left = "0";
+          }
+
+          let parent = this.$el.parentNode;
+          if (this.position == "absolute") {
+            let scrollTop = parent.scrollTop;
+            this.$el.style.marginTop = scrollTop + "px";
+          }
+          if (this.position == "fixed") {
+            let scrollTop = parent.scrollTop;
+            this.$el.style.marginTop = scrollTop + "px";
           }
         }, 4);
       }

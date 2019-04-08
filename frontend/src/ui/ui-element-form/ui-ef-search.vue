@@ -1,27 +1,25 @@
 <template>
-  <div class="ui-ef-search"
-       @click="isClick">
-    <input :placeholder="placeholder"
-           ref="input"
-           type="text"
-           class="ui-ef-search__input"
-           :value="dValue"
-           @blur="isBlur"
-           @input="isInput">
-    <div v-if="!dActive && !dShowMenu"
-         class="ui-ef-search__icon">
-      <i class="fa fa-search"
-         aria-hidden="true"></i>
+  <div class="ui-ef-search" @click="isClick">
+    <input
+      :placeholder="placeholder"
+      ref="input"
+      type="text"
+      class="ui-ef-search__input"
+      :value="dValue"
+      @blur="isBlur"
+      @input="isInput"
+    >
+    <div v-if="!dActive && !dShowMenu" class="ui-ef-search__icon">
+      <i class="fa fa-search" aria-hidden="true"></i>
     </div>
-    <div v-if="dActive || dShowMenu"
-         @click="isClean"
-         class="ui-ef-search__icon ui-ef-search__icon_active">
-      <i aria-hidden="true"
-         class="fa fa-times"></i>
+    <div
+      v-if="dActive || dShowMenu"
+      @click="isClean"
+      class="ui-ef-search__icon ui-ef-search__icon_active"
+    >
+      <i aria-hidden="true" class="fa fa-times"></i>
     </div>
-    <div ref="menu"
-         v-show="dShowMenu"
-         class="ui-ef-search__menu">
+    <div ref="menu" v-show="dShowMenu" class="ui-ef-search__menu">
       <slot></slot>
     </div>
   </div>
@@ -68,10 +66,10 @@ export default {
   methods: {
     isClean() {
       this.dActive = false;
-      // if (this.$refs.input != undefined) {
-      //   this.$refs.input.value = "";
-      // }
-      // this.dValue = "";
+      if (this.$refs.input != undefined) {
+        this.$refs.input.value = "";
+      }
+      this.dValue = "";
       this.$emit("onInput", this.dValue);
     },
     isClick() {

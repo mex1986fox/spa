@@ -29,3 +29,5 @@ import UiEfSearch from "./ui-element-form/ui-ef-search.vue";
 Vue.component("ui-ef-search", UiEfSearch);
 import UiEfChips from "./ui-element-form/ui-ef-chips.vue";
 Vue.component("ui-ef-chips", UiEfChips);
+import UiEfContent from "./ui-element-form/ui-ef-content.vue";
+Vue.component("ui-ef-content", UiEfContent);
