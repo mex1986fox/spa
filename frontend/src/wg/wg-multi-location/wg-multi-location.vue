@@ -1,12 +1,19 @@
 <template>
   <div class="wg-multi-location">
-    <ui-ef-text
-      @onClick="isClickText"
-      :readonly="true"
-      :disabled="disabled"
-      :value="dTextValue"
-      :caption="caption"
-    ></ui-ef-text>
+    <ui-ef-container :caption="caption">
+       <ui-ef-chips
+            :value="12"
+            caption="Описание"
+            deleted
+          ></ui-ef-chips>
+    </ui-ef-container>
+     <ui-ef-container :caption="caption">
+       <ui-ef-chips
+            :value="12"
+            caption="Описание"
+            deleted
+          ></ui-ef-chips>
+    </ui-ef-container>
 
     <input type="hidden" name="cities_id" :value="citiesId">
     <input type="hidden" name="subjects_id" :value="subjectsId">
@@ -33,17 +40,29 @@
           >
             <div class="wg-multi-location__search-menu">
               <ui-ef-checkbox
+                v-for="(country, key) in countriesFilter"
+                :key="'count_'+modCountry+'_'+key"
+                :value="country.value"
+                :caption="country.option"
+                :checked="country.checked"
+                @onClick="isClickCheckboxCountry"
+              >{{country.option}}</ui-ef-checkbox>
+
+              <ui-ef-checkbox
                 v-for="(subject, key) in subjectsFilter"
-                :key="'sub_'+key"
+                :key="'sub_'+modSubject+'_'+key"
                 :value="subject.value"
                 :caption="subject.option"
+                :checked="subject.checked"
                 @onClick="isClickCheckboxSubject"
               >{{subject.option}}</ui-ef-checkbox>
+
               <ui-ef-checkbox
                 v-for="(city, key) in citiesFilter"
-                :key="'cit_'+key"
+                :key="'cit_'+modCity+'_'+key"
                 :value="city.value"
                 :caption="city.option"
+                :checked="city.checked"
                 @onClick="isClickCheckboxCity"
               >{{city.option}}</ui-ef-checkbox>
             </div>
@@ -54,6 +73,14 @@
           v-if="citiesFilter.length>0"
         >Выбранные пункты</div>
         <div class="wg-multi-location__menu-chipsies">
+          <ui-ef-chips
+            v-for="(country, key) in dCheckCountries"
+            :key="'count_'+key"
+            :value="country.value"
+            :caption="country.caption"
+            deleted
+            @onDeleted="isClickCheckboxCountry"
+          ></ui-ef-chips>
           <ui-ef-chips
             v-for="(subject, key) in dCheckSubjects"
             :key="'subj_'+key"
@@ -81,12 +108,15 @@ export default {
   data() {
     return {
       dShowMenu: false,
-      dCities: undefined,
       dTextValue: "",
       dSearth: "",
       dValue: "",
       dCheckCities: [],
-      dCheckSubjects: []
+      dCheckSubjects: [],
+      dCheckCountries: [],
+      modCity: 1,
+      modSubject: 1,
+      modCountry: 1
     };
   },
   props: {
@@ -103,9 +133,6 @@ export default {
     isClickText() {
       this.dSearth = this.dTextValue;
       this.dShowMenu = true;
-      if (this.dCities == undefined) {
-        this.dCities = this.cities;
-      }
     },
     isHideMenu() {
       this.dShowMenu = false;
@@ -113,34 +140,70 @@ export default {
     isSearch(strSearch) {
       this.dSearth = strSearch;
     },
-    isClickCheckboxCity(chb) {
+    isClickCheckboxCountry(chb) {
       if (chb.checked == true) {
-        this.dCheckSubjects.forEach((elem, key) => {
+        let fBreake = false;
+        this.dCheckCountries.forEach((elem, key) => {
           if (elem.value == chb.value) {
-            return;
+            fBreake = true;
           }
         });
-        this.dCheckCities.push(chb);
+        if (fBreake != true) this.dCheckCountries.push(chb);
+        //убрать у субъектов отметки
+        let gSubjects = this.$store.getters["locations/getSubjects"](chb.value);
+        gSubjects.forEach(gSubject => {
+          this.dCheckSubjects.forEach((checkSubj, key) => {
+            if (gSubject.subject_id == checkSubj.value) {
+              this.dCheckSubjects.splice(key, 1);
+            }
+          });
+          //убрать у городов отметки
+          let gCities = this.$store.getters["locations/getCities"](
+            gSubject.subject_id
+          );
+          gCities.forEach(gCity => {
+            this.dCheckCities.forEach((checkCity, key) => {
+              if (gCity.city_id == checkCity.value) {
+                this.dCheckCities.splice(key, 1);
+              }
+            });
+          });
+        });
       }
       if (chb.checked == false) {
-        this.dCheckCities.forEach((elem, key) => {
+        this.dCheckCountries.forEach((elem, key) => {
           if (elem.value == chb.value) {
-            this.dCheckCities.splice(key, 1);
+            this.dCheckCountries.splice(key, 1);
           }
         });
       }
+      this.modCountry++;
     },
     isClickCheckboxSubject(chb) {
       if (chb.checked == true) {
+        let fBreake = false;
         this.dCheckSubjects.forEach((elem, key) => {
           if (elem.value == chb.value) {
-            return;
+            fBreake = true;
           }
         });
-        this.dCheckSubjects.push(chb);
-        //убрать у городов
+        if (fBreake != true) this.dCheckSubjects.push(chb);
+        //убрать у городов отметки
         let gCities = this.$store.getters["locations/getCities"](chb.value);
-        console.dir(gCities);
+        gCities.forEach(gCity => {
+          this.dCheckCities.forEach((checkCity, key) => {
+            if (gCity.city_id == checkCity.value) {
+              this.dCheckCities.splice(key, 1);
+            }
+          });
+        });
+        // убрать у стран отметки
+        let countryId = gCities[0].country_id;
+        this.dCheckCountries.forEach((checkCountry, key) => {
+          if (countryId == checkCountry.value) {
+            this.dCheckCountries.splice(key, 1);
+          }
+        });
       }
       if (chb.checked == false) {
         this.dCheckSubjects.forEach((elem, key) => {
@@ -149,9 +212,49 @@ export default {
           }
         });
       }
+      this.modSubject++;
+    },
+    isClickCheckboxCity(chb) {
+      if (chb.checked == true) {
+        let fBreake = false;
+        this.dCheckSubjects.forEach((elem, key) => {
+          if (elem.value == chb.value) {
+            fBreake = true;
+          }
+        });
+        if (fBreake != true) this.dCheckCities.push(chb);
+        //убрать у субъектов отметки
+        let gCity = this.$store.getters["locations/getCity"](chb.value);
+        this.dCheckSubjects.forEach((checkSubj, key) => {
+          if (gCity.subject_id == checkSubj.value) {
+            this.dCheckSubjects.splice(key, 1);
+          }
+        });
+        // убрать у стран отметки
+        this.dCheckCountries.forEach((checkCountry, key) => {
+          if (gCity.subject_id == checkCountry.value) {
+            this.dCheckCountries.splice(key, 1);
+          }
+        });
+      }
+      if (chb.checked == false) {
+        this.dCheckCities.forEach((elem, key) => {
+          if (elem.value == chb.value) {
+            this.dCheckCities.splice(key, 1);
+          }
+        });
+      }
+      this.modCity++;
     }
   },
   computed: {
+    countriesId() {
+      let countriesId = [];
+      this.dCheckCountries.forEach(country => {
+        countriesId.push(country.value);
+      });
+      return countriesId;
+    },
     citiesId() {
       let citiesId = [];
       this.dCheckCities.forEach(city => {
@@ -165,6 +268,31 @@ export default {
         subjectId.push(subject.value);
       });
       return subjectId;
+    },
+    countries() {
+      let countries = JSON.parse(
+        JSON.stringify(this.$store.state.locations.countries)
+      );
+      if (countries != undefined) {
+        countries = countries.sort(function(a, b) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        });
+        let menu = countries.map(country => {
+          return {
+            value: country.country_id,
+            option: country.name,
+            checked: false
+          };
+        });
+        return menu;
+      }
+      return undefined;
     },
     subjects() {
       let subjects = JSON.parse(
@@ -189,7 +317,8 @@ export default {
         let menu = subjects.map(subject => {
           return {
             value: subject.subject_id,
-            option: subject.extended_name
+            option: subject.extended_name,
+            checked: false
           };
         });
         return menu;
@@ -225,14 +354,43 @@ export default {
         let menu = cities.map(city => {
           return {
             value: city.city_id,
-            option: city.extended_name
+            option: city.extended_name,
+            checked: false
           };
         });
         return menu;
       }
       return undefined;
     },
+    countriesFilter() {
+      let countriesId = this.countriesId;
+
+      if (this.dSearth != "" && this.countries != undefined) {
+        var invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
+        var repl = this.dSearth.replace(invalid, match => {
+          return "\\" + match;
+        });
+        let regexp = new RegExp("^" + repl, "i");
+        let countries = this.countries.filter(country => {
+          return -1 != country.option.search(regexp);
+        });
+
+        countries = countries.map(country => {
+          country.checked = false;
+          countriesId.forEach(checkCountry => {
+            if (checkCountry == country.value) {
+              country.checked = true;
+            }
+          });
+          return country;
+        });
+
+        return countries;
+      }
+      return [];
+    },
     citiesFilter() {
+      let citiesId = this.citiesId;
       if (this.dSearth != "" && this.cities != undefined) {
         var invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
         var repl = this.dSearth.replace(invalid, match => {
@@ -242,11 +400,21 @@ export default {
         let cities = this.cities.filter(city => {
           return -1 != city.option.search(regexp);
         });
+        cities = cities.map(city => {
+          city.checked = false;
+          citiesId.forEach(checkCity => {
+            if (checkCity == city.value) {
+              city.checked = true;
+            }
+          });
+          return city;
+        });
         return cities;
       }
       return [];
     },
     subjectsFilter() {
+      let subjectsId = this.subjectsId;
       if (this.dSearth != "" && this.subjects != undefined) {
         var invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
         var repl = this.dSearth.replace(invalid, match => {
@@ -255,6 +423,15 @@ export default {
         let regexp = new RegExp("^" + repl, "i");
         let subjects = this.subjects.filter(subject => {
           return -1 != subject.option.search(regexp);
+        });
+        subjects = subjects.map(subject => {
+          subject.checked = false;
+          subjectsId.forEach(checkSubject => {
+            if (checkSubject == subject.value) {
+              subject.checked = true;
+            }
+          });
+          return subject;
         });
         return subjects;
       }

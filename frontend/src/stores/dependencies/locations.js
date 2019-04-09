@@ -15,10 +15,10 @@ const locations = {
       }
       return undefined;
     },
-    getSettlement: (state, getters, rootState, rootGetters) => id => {
-      for (let settlement of state.cities) {
-        if (id == settlement.id) {
-          return settlement;
+    getCity: (state, getters, rootState, rootGetters) => id => {
+      for (let city of state.cities) {
+        if (id == city.city_id) {
+          return city;
         }
       }
       return undefined;

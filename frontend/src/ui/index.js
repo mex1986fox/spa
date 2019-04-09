@@ -31,3 +31,5 @@ import UiEfChips from "./ui-element-form/ui-ef-chips.vue";
 Vue.component("ui-ef-chips", UiEfChips);
 import UiEfContent from "./ui-element-form/ui-ef-content.vue";
 Vue.component("ui-ef-content", UiEfContent);
+import UiEfContainer from "./ui-element-form/ui-ef-container.vue";
+Vue.component("ui-ef-container", UiEfContainer);
