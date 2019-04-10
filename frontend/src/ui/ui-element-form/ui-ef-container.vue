@@ -1,41 +1,40 @@
 <template>
-  <div class="ui-ef-text" @click="isClick()">
+  <div class="ui-ef-container" @click="isClick">
     <span
-      class="ui-ef-text__caption"
-      :class="{'ui-ef-text__caption_completed':modCompleted,
-        'ui-ef-text__caption_active':modFocus, 
-               'ui-ef-text__caption_disabled':dDisabled}"
-      @click="isClick()"
+      class="ui-ef-container__caption"
+      :class="{'ui-ef-container__caption_completed':modCompleted,
+        'ui-ef-container__caption_active':modFocus, 
+               'ui-ef-container__caption_disabled':dDisabled}"
+      @click="isClick"
     >{{dCaption}}</span>
     <div
-      class="ui-ef-text__input"
-      :class="{'ui-ef-text__input_active':modFocus,
-                   'ui-ef-text__input_disabled':dDisabled}"
+      class="ui-ef-container__input"
+      :class="{'ui-ef-container__input_active':modFocus,
+                   'ui-ef-container__input_disabled':dDisabled}"
       ref="input"
       @focus="isFocus()"
       @blur="isBlur()"
       :disabled="dDisabled"
-      :maxlength="maxlength"
       tabindex="0"
     >
       <slot></slot>
     </div>
     <hr
-      class="ui-ef-text__border"
-      :class="{'ui-ef-text__border_active':modFocus,
-                  'ui-ef-text__border_disabled':dDisabled}"
+      class="ui-ef-container__border"
+      :class="{'ui-ef-container__border_active':modFocus,
+                  'ui-ef-container__border_disabled':dDisabled}"
     >
     <span
-      class="ui-ef-text__help"
-      :class="{'ui-ef-text__help_active':help,
-                    'ui-ef-text__help_disabled':dDisabled}"
-      @click="isClick()"
+      class="ui-ef-container__help"
+      :class="{'ui-ef-container__help_active':help,
+                    'ui-ef-container__help_disabled':dDisabled}"
+      @click="isClick"
     >{{help}}</span>
     <div
       name="icon"
-      class="ui-ef-text__icon"
-      :class="{'ui-ef-text__icon_active':modFocus, 
-               'ui-ef-text__icon_disabled':dDisabled}"
+      class="ui-ef-container__icon"
+      :class="{'ui-ef-container__icon_active':modFocus, 
+               'ui-ef-container__icon_disabled':dDisabled}"
     >
       <slot name="icon"></slot>
     </div>
@@ -73,7 +72,6 @@ export default {
   },
   methods: {
     isFocus() {
-      console.dir("focus");
       this.modFocus = true;
       this.$emit("onFocus");
     },
@@ -97,6 +95,9 @@ export default {
       this.modFocus == true;
       this.$refs.input.focus();
     }
+    if (this.maxlength != undefined) {
+      this.$refs.input.style.maxHeight = this.maxlength + "px";
+    }
     setTimeout(() => {
       if (this.$refs.input.childNodes.length > 0) {
         this.modCompleted = true;
@@ -104,6 +105,13 @@ export default {
         this.modCompleted = false;
       }
     }, 40);
+  },
+  updated() {
+    if (this.$refs.input.childNodes.length > 0) {
+      this.modCompleted = true;
+    } else {
+      this.modCompleted = false;
+    }
   }
 };
 </script>

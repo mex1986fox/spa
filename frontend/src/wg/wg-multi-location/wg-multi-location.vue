@@ -1,20 +1,39 @@
 <template>
   <div class="wg-multi-location">
-    <ui-ef-container :caption="caption">
-       <ui-ef-chips
-            :value="12"
-            caption="Описание"
-            deleted
-          ></ui-ef-chips>
+    <ui-ef-container :maxlength="180" :caption="caption" @onClick="isClickText">
+      <template v-if="dCheckCountries.length>0 || dCheckSubjects.length>0 || dCheckCities.length>0">
+        <ui-ef-chips
+          class="ui-ef-chips_white"
+          v-for="(country, key) in dCheckCountries"
+          :key="'count_'+key"
+          :value="country.value"
+          :caption="country.caption"
+          deleted
+          @onDeleted="isClickCheckboxCountry"
+        ></ui-ef-chips>
+        <ui-ef-chips
+          class="ui-ef-chips_white"
+          v-for="(subject, key) in dCheckSubjects"
+          :key="'subj_'+key"
+          :value="subject.value"
+          :caption="subject.caption"
+          deleted
+          @onDeleted="isClickCheckboxSubject"
+        ></ui-ef-chips>
+        <ui-ef-chips
+          class="ui-ef-chips_white"
+          v-for="(city, key) in dCheckCities"
+          :key="'cit_'+key"
+          :value="city.value"
+          :caption="city.caption"
+          deleted
+          @onDeleted="isClickCheckboxCity"
+        ></ui-ef-chips>
+      </template>
+      <template slot="icon">
+        <i class="fas fa-map-marker-alt"></i>
+      </template>
     </ui-ef-container>
-     <ui-ef-container :caption="caption">
-       <ui-ef-chips
-            :value="12"
-            caption="Описание"
-            deleted
-          ></ui-ef-chips>
-    </ui-ef-container>
-
     <input type="hidden" name="cities_id" :value="citiesId">
     <input type="hidden" name="subjects_id" :value="subjectsId">
     <ui-blind
@@ -33,10 +52,10 @@
 
         <div class="wg-multi-location__menu-ef">
           <ui-ef-search
-            placeholder="Введите название города"
+            placeholder="Введите название страны, области, города..."
             @onInput="isSearch"
             :value="dTextValue"
-            :showMenu="subjectsFilter.length>1 || citiesFilter.length>1"
+            :showMenu="countriesFilter.length>0 || subjectsFilter.length>0 || citiesFilter.length>0"
           >
             <div class="wg-multi-location__search-menu">
               <ui-ef-checkbox
@@ -70,7 +89,7 @@
         </div>
         <div
           class="wg-multi-location__menu-chipheader"
-          v-if="citiesFilter.length>0"
+          v-if="dCheckCountries.length>0 || dCheckSubjects.length>0 || dCheckCities.length>0"
         >Выбранные пункты</div>
         <div class="wg-multi-location__menu-chipsies">
           <ui-ef-chips
@@ -97,6 +116,23 @@
             deleted
             @onDeleted="isClickCheckboxCity"
           ></ui-ef-chips>
+        </div>
+        <div
+          class="wg-multi-location__menu-chipbuttons"
+          v-if="dCheckCountries.length>0 || dCheckSubjects.length>0 || dCheckCities.length>0"
+        >
+          <input
+            class="ui-button ui-button_float_black"
+            type="button"
+            value="Готово"
+            @click="isHideMenu"
+          >
+          <input
+            class="ui-button ui-button_float_black"
+            type="button"
+            value="Очистить"
+            @click="isClear"
+          >
         </div>
       </div>
     </ui-blind>
@@ -130,9 +166,22 @@ export default {
     }
   },
   methods: {
+    isClear() {
+      this.dCheckCities = [];
+      this.dCheckSubjects = [];
+      this.dCheckCountries = [];
+      this.isHideMenu();
+    },
     isClickText() {
       this.dSearth = this.dTextValue;
-      this.dShowMenu = true;
+      //показывать меню если не удаляем чипсы
+      let fShowMenu = true;
+      event.target.classList.forEach(className => {
+        if (className == "ui-ef-chips__button" || className == "fa-times") {
+          fShowMenu = false;
+        }
+      });
+      this.dShowMenu = fShowMenu;
     },
     isHideMenu() {
       this.dShowMenu = false;
@@ -217,7 +266,7 @@ export default {
     isClickCheckboxCity(chb) {
       if (chb.checked == true) {
         let fBreake = false;
-        this.dCheckSubjects.forEach((elem, key) => {
+        this.dCheckCities.forEach((elem, key) => {
           if (elem.value == chb.value) {
             fBreake = true;
           }

@@ -53,10 +53,12 @@ export default {
     }
   },
   methods: {
-    isClick(el) {
-      el.target.classList.forEach(className => {
+    isClick() {
+      event.target.classList.forEach(className => {
         if (className == "ui-blind") {
           this.$emit("onClick");
+          event.stopPropagation();
+          event.preventDefault();
         }
       });
     }

@@ -1,5 +1,5 @@
 // элементы
-.ui-ef-text {
+.ui-ef-container {
     width: 100%;
     height: auto;
     transition-duration: 300ms;
@@ -41,17 +41,19 @@
 
     &__input {
         width: 100%;
-        height: 30px;
+        min-height: 30px;
+        height: auto;
         border: 0;
         border-radius: 0px;
         border-bottom: 1px solid rgba($color-black, 0.9);
         color: $color-black;
         font-size: 16px;
         padding: 0;
-        margin-top: 20px; //30
+        margin-top: 22px; //30
         transition-duration: 300ms;
         white-space: nowrap;
         overflow: hidden;
+        overflow-y: auto;
         text-overflow: ellipsis;
         background-color: transparent;
 
@@ -85,9 +87,9 @@
 
     &__border {
         content: "";
-        top: 50px; //60px;
+        top: -1px; //60px;
         left: 0;
-        position: absolute;
+        position: relative;
         width: 0px;
         height: 3px;
         margin: 0;
@@ -132,7 +134,7 @@
     &__icon {
         position: absolute;
         right: 0px;
-        top: 24px;
+        bottom: 6px;
         height: 26px;
         width: 26px;
         text-align: center;
@@ -149,50 +151,48 @@
     }
 }
 
-.ui-ef-text_white {
-    &>.ui-ef-text__caption {
+.ui-ef-container_white {
+    &>.ui-ef-container__caption {
         color: rgba($color-white, 0.9);
     }
 
-    &>.ui-ef-text__caption_active {
+    &>.ui-ef-container__caption_active {
         color: $color-white;
     }
 
-    &>.ui-ef-text__caption_disabled {
+    &>.ui-ef-container__caption_disabled {
         color: rgba($color-white, 0.4);
     }
 
-    &>.ui-ef-text__input {
+    &>.ui-ef-container__input {
         border-bottom: 1px solid rgba($color-white, 0.9);
         color: $color-white;
     }
 
-    &>.ui-ef-text__input_disabled {
+    &>.ui-ef-container__input_disabled {
         border-bottom: 1px solid rgba($color-white, 0.4);
         color: rgba($color-white, 0.4);
     }
 
-    &>.ui-ef-text__border {
+    &>.ui-ef-container__border {
         background-color: rgba($color-white, 0.9);
     }
 
-    &>.ui-ef-text__border_active {
+    &>.ui-ef-container__border_active {
         background-color: $color-white;
     }
 
-    &>.ui-ef-text__border_disabled {
+    &>.ui-ef-container__border_disabled {
         background-color: rgba($color-white, 0.4);
     }
-
-    &>.ui-ef-text__icon {
+    &>.ui-ef-container__icon {
+        color: $color-white;
+    }
+    &>.ui-ef-container__icon_active {
         color: $color-white;
     }
 
-    &>.ui-ef-text__icon_active {
-        color: $color-white;
-    }
-
-    &>.ui-ef-text__icon_disabled {
+    &>.ui-ef-container__icon_disabled {
         color: rgba($color-white, 0.4);
     }
 }

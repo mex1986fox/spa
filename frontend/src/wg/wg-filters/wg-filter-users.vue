@@ -5,6 +5,7 @@
       <ui-ef-text value="Текст" caption="Текст" class="ui-ef-text_white"></ui-ef-text>
       <ui-ef-content caption="sdfsdf" class="ui-ef-content_white" :autoresize="150"></ui-ef-content>
       <wg-multi-location class="wg-multi-location_white"/>
+      <wg-select-location class="wg-select-location_white"/>
     </template>
     <template slot="buttons">
       <input class="ui-button ui-button_float_white" type="button" value="Применить">

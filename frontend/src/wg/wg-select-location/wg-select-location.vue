@@ -6,7 +6,11 @@
       :disabled="disabled"
       :value="dTextValue"
       :caption="caption"
-    ></ui-ef-text>
+    >
+      <template slot="icon">
+        <i class="fas fa-map-marker-alt"></i>
+      </template>
+    </ui-ef-text>
 
     <input type="hidden" :name="name" :value="dValue">
     <ui-blind
@@ -24,11 +28,7 @@
         </div>
 
         <div class="wg-select-location__menu-ef">
-          <ui-ef-search
-            placeholder="Введите название города"
-            @onInput="isSearch"
-            :value="dTextValue"
-          ></ui-ef-search>
+          <ui-ef-search placeholder="Введите название города" @onInput="isSearch"></ui-ef-search>
         </div>
         <div
           class="wg-select-location__menu-chipheader"
@@ -42,6 +42,14 @@
             :caption="city.option"
             @onClick="isClickChips"
           ></ui-ef-chips>
+        </div>
+        <div class="wg-select-location__menu-chipbuttons" v-if="citiesFilters.length>0">
+          <input
+            class="ui-button ui-button_float_black"
+            type="button"
+            value="Очистить"
+            @click="isClear"
+          >
         </div>
       </div>
     </ui-blind>
@@ -81,6 +89,12 @@ export default {
         this.dCities = this.cities;
       }
     },
+    isClear() {
+      this.dTextValue = "";
+      this.dSearth = "";
+      this.dValue = "";
+      this.isHideMenu();
+    },
     isHideMenu() {
       this.dShowMenu = false;
     },
@@ -90,7 +104,7 @@ export default {
     isClickChips(chips) {
       this.dValue = chips.value;
       this.dTextValue = chips.caption;
-      this.dShowMenu = false;
+      this.isHideMenu();
     }
   },
   computed: {
@@ -123,7 +137,7 @@ export default {
         let menu = cities.map(city => {
           return {
             value: city.city_id,
-            option: city.extended_name,
+            option: city.extended_name
           };
         });
         return menu;

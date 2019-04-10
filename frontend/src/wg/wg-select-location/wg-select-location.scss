@@ -8,7 +8,7 @@
     }
 
     &__menu {
-        height: 430px;
+        height: 460px;
         width: 650px;
         background-color: $color-white;
         box-shadow: $shadow-2;
@@ -29,6 +29,15 @@
             margin: 30px 35px 0px 35px;
         }
 
+        &-chipbuttons {
+            margin: 25px 29px;
+            overflow: hidden;
+            overflow-y: auto;
+            max-height: 205px;
+            bottom: 0px;
+            position: absolute;
+        }
+
         &-close {
             position: absolute;
             right: 34px;
@@ -36,7 +45,7 @@
         }
 
         &-ef {
-            margin: 25px 35px;
+            margin: 40px 35px;
             overflow: hidden;
             overflow-y: auto;
         }
@@ -45,7 +54,7 @@
             margin: 25px 35px;
             overflow: hidden;
             overflow-y: auto;
-            max-height: 205px;
+            max-height: 152px;
         }
     }
 }
@@ -84,6 +93,18 @@
 
         &>.ui-ef-text__border_disabled {
             background-color: rgba($color-white, 0.4);
+        }
+
+        &>.ui-ef-text__icon {
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__icon_active {
+            color: $color-white;
+        }
+
+        &>.ui-ef-text__icon_disabled {
+            color: rgba($color-white, 0.4);
         }
     }
 }
