@@ -1238,9 +1238,7 @@ body {
   position: relative;
   cursor: pointer;
   float: left;
-  margin: 22px auto 18px auto; }
-  .ui-ef-content .wg-smiles__smile {
-    padding: 0 5px; }
+  margin: 2px auto; }
   .ui-ef-content__caption {
     width: 100%;
     height: 30px;
@@ -1248,22 +1246,24 @@ body {
     color: rgba(17, 17, 17, 0.9);
     position: absolute;
     transition-duration: 300ms;
-    line-height: 90px;
+    line-height: 75px;
     display: inline-block;
     white-space: nowrap; }
     .ui-ef-content__caption_active {
       font-size: 13px;
-      line-height: 45px;
+      line-height: 32px;
       color: #111111;
       transition-duration: 300ms; }
     .ui-ef-content__caption_completed {
       font-size: 13px;
-      line-height: 45px;
+      line-height: 32px;
       transition-duration: 300ms;
       display: inline-block;
       white-space: nowrap; }
     .ui-ef-content__caption_disabled {
       color: rgba(17, 17, 17, 0.4); }
+  .ui-ef-content .wg-smiles__smile {
+    padding: 0 5px; }
   .ui-ef-content__input {
     width: 100%;
     height: 30px;
@@ -1273,14 +1273,13 @@ body {
     color: #111111;
     font-size: 16px;
     padding: 0;
-    margin-top: 30px;
+    margin-top: 20px;
     transition-duration: 300ms;
+    white-space: nowrap;
     overflow: hidden;
-    overflow-y: auto;
-    font-family: "Open Sans";
-    min-height: 28px;
-    line-height: 26px;
-    background-color: transparent; }
+    text-overflow: ellipsis;
+    background-color: transparent;
+    padding-top: 4px; }
     .ui-ef-content__input:invalid {
       box-shadow: none; }
     .ui-ef-content__input:-moz-submit-invalid {
@@ -1290,7 +1289,8 @@ body {
     .ui-ef-content__input:focus {
       outline: none; }
     .ui-ef-content__input_active {
-      border-bottom: 1px solid rgba(255, 255, 255, 0); }
+      border-bottom: 1px solid rgba(255, 255, 255, 0);
+      transition-duration: 300ms; }
     .ui-ef-content__input_disabled {
       background-color: rgba(255, 255, 255, 0);
       border-bottom: 1px solid rgba(17, 17, 17, 0.4);

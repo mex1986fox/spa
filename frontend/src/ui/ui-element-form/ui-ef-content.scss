@@ -6,11 +6,7 @@
     position: relative;
     cursor: pointer;
     float: left;
-    margin: 22px auto 18px auto;
-
-    & .wg-smiles__smile {
-        padding: 0 5px;
-    }
+    margin: 2px auto;
 
     &__caption {
         width: 100%;
@@ -19,20 +15,20 @@
         color: rgba($color-black, 0.9);
         position: absolute;
         transition-duration: 300ms;
-        line-height: 90px;
+        line-height: 75px; //90px;
         display: inline-block;
         white-space: nowrap;
 
         &_active {
             font-size: 13px;
-            line-height: 45px;
+            line-height: 32px; //45px;
             color: $color-black;
             transition-duration: 300ms;
         }
 
         &_completed {
             font-size: 13px;
-            line-height: 45px;
+            line-height: 32px; //45px;
             transition-duration: 300ms;
             display: inline-block;
             white-space: nowrap;
@@ -43,6 +39,11 @@
         }
     }
 
+    & .wg-smiles__smile {
+        padding: 0 5px;
+    }
+
+
     &__input {
         width: 100%;
         height: 30px;
@@ -52,14 +53,13 @@
         color: $color-black;
         font-size: 16px;
         padding: 0;
-        margin-top: 30px;
+        margin-top: 20px; //30
         transition-duration: 300ms;
+        white-space: nowrap;
         overflow: hidden;
-        overflow-y: auto;
-        font-family: "Open Sans";
-        min-height: 28px;
-        line-height: 26px;
+        text-overflow: ellipsis;
         background-color: transparent;
+        padding-top: 4px;
 
         &:invalid {
             box-shadow: none;
@@ -79,7 +79,7 @@
 
         &_active {
             border-bottom: 1px solid rgba(255, 255, 255, 0);
-            //   transition-duration: 300ms;
+            transition-duration: 300ms;
         }
 
         &_disabled {
