@@ -14,16 +14,23 @@ const tokens = {
       return state.refresh_token;
     },
     getAccessTokenPayload(state, getters, rootState, rootGetters) {
-      let token = state.access_token;
-      let tokenPayloadHex = token.split(".");
-      let tokenPayload = atob(tokenPayloadHex[1]);
-      return JSON.parse(tokenPayload);
+      if (state.access_token != undefined) {
+        let token = state.access_token;
+        let tokenPayloadHex = token.split(".");
+        let tokenPayload = atob(tokenPayloadHex[1]);
+        return JSON.parse(tokenPayload);
+      }
+      return undefined;
+
     },
     getRefreshTokenPayload(state, getters, rootState, rootGetters) {
-      let token = state.refresh_token;
-      let tokenPayloadHex = token.split(".");
-      let tokenPayload = atob(tokenPayloadHex[1]);
-      return JSON.parse(tokenPayload);
+      if (state.refresh_token != undefined) {
+        let token = state.refresh_token;
+        let tokenPayloadHex = token.split(".");
+        let tokenPayload = atob(tokenPayloadHex[1]);
+        return JSON.parse(tokenPayload);
+      }
+      return undefined;
     }
   },
   mutations: {

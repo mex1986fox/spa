@@ -1,8 +1,8 @@
 <template>
   <div class="wg-multi-location">
-    <input type="hidden" name="countries_id" :value="countriesId">
-    <input type="hidden" name="subjects_id" :value="subjectsId">
-    <input type="hidden" name="cities_id" :value="citiesId">
+    <input type="hidden" name="countries_id[]" :value="countriesId">
+    <input type="hidden" name="subjects_id[]" :value="subjectsId">
+    <input type="hidden" name="cities_id[]" :value="citiesId">
     <ui-ef-container :maxlength="180" :caption="caption" @onClick="isClickText">
       <template v-if="dCheckCountries.length>0 || dCheckSubjects.length>0 || dCheckCities.length>0">
         <ui-ef-chips
@@ -37,8 +37,6 @@
         <i class="fas fa-map-marker-alt"></i>
       </template>
     </ui-ef-container>
-    <input type="hidden" name="cities_id" :value="citiesId">
-    <input type="hidden" name="subjects_id" :value="subjectsId">
     <ui-blind
       :show="dShowMenu"
       class="wg-multi-location__blinde"

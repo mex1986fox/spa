@@ -75,6 +75,9 @@ export default {
       this.dChecked = newQ;
       // console.log(newQ);
     },
+    caption(newQ) {
+      this.dCaption = newQ;
+    },
     value(newQ) {
       this.dValue = newQ;
     }
