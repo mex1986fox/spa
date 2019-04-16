@@ -5,6 +5,7 @@ import Locations from "./dependencies/locations.js";
 import Transports from "./dependencies/transports.js";
 import Tokens from "./tokens/tokens.js";
 import Profile from "./profile/profile.js";
+import Users from "./users/users.js";
 Vue.use(Vuex);
 
 //импорт хранилищь vuex
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     tokens: Tokens, 
     profile: Profile,
     locations: Locations,
-    transports: Transports
+    transports: Transports,
+    users: Users
   },
   state: {},
   getters: {},

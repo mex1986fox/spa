@@ -19,6 +19,10 @@ import "./wg/index.js";
 import Resourсe from "vue-resource";
 Vue.use(Resourсe);
 
+//подключаем библиотеку для работы с куками
+var VueCookie = require("vue-cookie");
+Vue.use(VueCookie);
+
 const vue = new Vue({
   router,
   store,

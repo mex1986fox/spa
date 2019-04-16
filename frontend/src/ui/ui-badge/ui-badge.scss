@@ -1,0 +1,19 @@
+.ui-badge {
+    height: auto;
+    width: auto;
+    overflow: hidden;
+
+    &__icon {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        color: white;
+        background-color: red;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: 600;
+        font-size: 9px;
+        right: 0;
+    }
+}

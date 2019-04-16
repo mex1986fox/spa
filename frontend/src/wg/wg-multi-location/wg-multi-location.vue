@@ -164,6 +164,18 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    countries_id: {
+      type: Array,
+      default: () => []
+    },
+    subjects_id: {
+      type: Array,
+      default: () => []
+    },
+    cities_id: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
@@ -282,7 +294,7 @@ export default {
         });
         // убрать у стран отметки
         this.dCheckCountries.forEach((checkCountry, key) => {
-          if (gCity.subject_id == checkCountry.value) {
+          if (gCity.country_id == checkCountry.value) {
             this.dCheckCountries.splice(key, 1);
           }
         });
@@ -295,6 +307,42 @@ export default {
         });
       }
       this.modCity++;
+    },
+    setupCountries() {
+      if (this.countries_id.length > 0) {
+        this.countries_id.forEach(id => {
+          let country = this.$store.getters["locations/getCountry"](id);
+          this.isClickCheckboxCountry({
+            value: country.country_id,
+            caption: country.name,
+            checked: true
+          });
+        });
+      }
+    },
+    setupSubjects() {
+      if (this.subjects_id.length > 0) {
+        this.subjects_id.forEach(id => {
+          let subject = this.$store.getters["locations/getSubject"](id);
+          this.isClickCheckboxSubject({
+            value: subject.subject_id,
+            caption: subject.extended_name,
+            checked: true
+          });
+        });
+      }
+    },
+    setupCities() {
+      if (this.cities_id.length > 0) {
+        this.cities_id.forEach(id => {
+          let city = this.$store.getters["locations/getCity"](id);
+          this.isClickCheckboxCity({
+            value: city.city_id,
+            caption: city.extended_name,
+            checked: true
+          });
+        });
+      }
     }
   },
   computed: {
@@ -487,6 +535,12 @@ export default {
       }
       return [];
     }
+  },
+  mounted() {
+    // console.dir("mounted");
+    this.setupCities();
+    this.setupSubjects();
+    this.setupCountries();
   }
 };
 </script>

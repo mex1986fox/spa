@@ -10,7 +10,8 @@ import UiSpinner from "./ui-spinner/ui-spinner.vue";
 Vue.component("ui-spinner", UiSpinner);
 import UiMenu from "./ui-menu/ui-menu.vue";
 Vue.component("ui-menu", UiMenu);
-
+import UiBadge from "./ui-badge/ui-badge.vue";
+Vue.component("ui-badge", UiBadge);
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";

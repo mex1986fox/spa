@@ -9,7 +9,7 @@ const locations = {
   getters: {
     getCountry: (state, getters, rootState, rootGetters) => id => {
       for (let country of state.countries) {
-        if (id == country.id) {
+        if (id == country.country_id) {
           return country;
         }
       }
@@ -26,7 +26,7 @@ const locations = {
     getSubject: (state, getters, rootState, rootGetters) => id => {
       if (state.subjects != undefined) {
         for (let subject of state.subjects) {
-          if (id == subject.id) {
+          if (id == subject.subject_id) {
             return subject;
           }
         }
