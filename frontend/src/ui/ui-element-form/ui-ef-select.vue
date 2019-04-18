@@ -1,78 +1,95 @@
 <template>
-  <div class="ui-ef-select"
-       @click="isClick">
-    <ui-ef-text ref="text"
-                :disabled="this.dDisabled"
-                :value="this.dValue"
-                :caption="this.caption"
-                :help="this.dHelp"
-                :readonly="true"
-                @onFocus="isFocus"></ui-ef-text>
-    <input class="ui-ef-select__checkbox"
-           v-for="(val, key) in dMenu"
-           :key="key"
-           type="checkbox"
-           :name="dName"
-           :value="val.value"
-           checked>
+  <div class="ui-ef-select" @click="isClick">
+    <ui-ef-text
+      ref="text"
+      :disabled="this.dDisabled"
+      :value="this.dValue"
+      :caption="this.caption"
+      :help="this.dHelp"
+      :readonly="true"
+      @onFocus="isFocus"
+    ></ui-ef-text>
+    <template v-for="(val, key) in dMenu">
+      <input
+        class="ui-ef-select__checkbox"
+        :key="key"
+        v-if="val.selected==true"
+        type="checkbox"
+        :name="dName"
+        :value="val.value"
+        checked
+      >
+    </template>
+
     <transition name="ui-ef-select__arrow">
-      <div class="ui-ef-select__arrow"
-           :class="{'ui-ef-select__arrow_disabled':dDisabled}"
-           v-if="!dFocus || dDisabled"
-           @click="dFocus=!dFocus">
+      <div
+        class="ui-ef-select__arrow"
+        :class="{'ui-ef-select__arrow_disabled':dDisabled}"
+        v-if="!dFocus || dDisabled"
+        @click="dFocus=!dFocus"
+      >
         <i class="fa fa-angle-down"></i>
       </div>
     </transition>
     <transition name="ui-ef-select__arrow_transit">
-      <div class="ui-ef-select__arrow_transit"
-           v-if="dFocus && !dDisabled"
-           @click="dFocus=!dFocus">
+      <div class="ui-ef-select__arrow_transit" v-if="dFocus && !dDisabled" @click="dFocus=!dFocus">
         <i class="fa fa-angle-down"></i>
       </div>
     </transition>
-    <ui-blind :show="dFocus"
-              @onClick="dFocus=false"
-              animate="opacity"
-              position="fixed"
-              class="ui-ef-select__blind">
-      <ul ref="menu"
-          class="ui-ef-select__menu"
-          v-show="dFocus">
-        <li v-if="cleaner==true"
-            @click="clickClianer"
-            class="ui-ef-select__option ui-ef-select__cleaner">
-          <i aria-hidden="true"
-             class="fa fa-times-thin"></i>
+    <ui-blind
+      :show="dFocus"
+      @onClick="dFocus=false"
+      animate="opacity"
+      position="fixed"
+      class="ui-ef-select__blind"
+    >
+      <ul ref="menu" class="ui-ef-select__menu" v-show="dFocus">
+        <li
+          v-if="cleaner==true"
+          @click="clickClianer"
+          class="ui-ef-select__option ui-ef-select__cleaner"
+        >
+          <i aria-hidden="true" class="fa fa-times-thin"></i>
           <span class="ui-ef-select__cleaner-option">очистить</span>
         </li>
 
         <template v-for="(val, key) in sortMenu">
           <template v-if="val.group!=undefined">
-            <li v-if=" key==0 || sortMenu[key-1].group!=sortMenu[key].group"
-                class="ui-ef-select__group"
-                :key="key">{{val.group}}</li>
+            <li
+              v-if=" key==0 || sortMenu[key-1].group!=sortMenu[key].group"
+              class="ui-ef-select__group"
+              :key="key"
+            >{{val.group}}</li>
           </template>
-          <li class="ui-ef-select__option ui-ef-select__option_disabled"
-              :key="'option'+key"
-              v-if="val.disabled">
-            <ui-ef-checkbox :key="'cheked'+key"
-                            :name="dName"
-                            :disabled="true"
-                            :checked="val.selected"
-                            :value="val.value"
-                            v-show="multiple">{{val.option}}</ui-ef-checkbox>
+          <li
+            class="ui-ef-select__option ui-ef-select__option_disabled"
+            :key="'option'+key"
+            v-if="val.disabled"
+          >
+            <ui-ef-checkbox
+              :key="'cheked'+key"
+              :name="dName"
+              :disabled="true"
+              :checked="val.selected"
+              :value="val.value"
+              v-show="multiple"
+            >{{val.option}}</ui-ef-checkbox>
             <!-- <span v-if="val.disabled">{{val.option}}</span> -->
           </li>
-          <li class="ui-ef-select__option"
-              :key="'option'+key"
-              @click="isClickOption(key)"
-              v-if="!val.disabled">
-            <ui-ef-checkbox :key="'cheked'+key"
-                            :name="dName"
-                            :disabled="false"
-                            :checked="val.selected"
-                            :value="val.value"
-                            v-if="multiple">{{val.option}}</ui-ef-checkbox>
+          <li
+            class="ui-ef-select__option"
+            :key="'option'+key"
+            @click="isClickOption(key)"
+            v-if="!val.disabled"
+          >
+            <ui-ef-checkbox
+              :key="'cheked'+key"
+              :name="dName"
+              :disabled="false"
+              :checked="val.selected"
+              :value="val.value"
+              v-if="multiple"
+            >{{val.option}}</ui-ef-checkbox>
             <span v-if="!multiple">{{val.option}}</span>
           </li>
         </template>
@@ -186,8 +203,15 @@ export default {
       this.dValue = selValStr.replace(/,\s*$/, "");
     },
     clickClianer() {
-      this.$emit("onSelect", []);
-      this.dFocus = false;
+      if (this.multiple == false) {
+        this.dMenu = this.dMenu.map(val => {
+          val.selected = false;
+          return val;
+        });
+        this.dValue = "";
+        this.dFocus = false;
+        this.$emit("onClianer");
+      }
     }
   },
   computed: {

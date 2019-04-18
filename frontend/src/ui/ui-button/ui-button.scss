@@ -20,15 +20,34 @@
     display: block;
     text-decoration: none;
     text-align: center;
+
     &:hover {
         cursor: pointer;
         text-decoration: none;
     }
+
     &:active {
         cursor: pointer;
         box-shadow: $shadow-2;
         text-decoration: none;
     }
+}
+
+.ui-button_s1 {
+    height: 24px;
+    line-height: 24px;
+    font-size: 11px;
+}
+
+.ui-button_s2 {
+    height: 30px;
+}
+
+
+.ui-button_s3 {
+    height: 40px;
+    line-height: 41px;
+    font-size: 16px;
 }
 
 .ui-button_circle_s1 {
@@ -63,11 +82,13 @@
     border: 1px solid $color-white;
     background-color: $color-white;
     box-shadow: $shadow-1;
+
     &:hover {
         cursor: pointer;
         text-decoration: none;
         box-shadow: $shadow-2;
     }
+
     &:active {
         cursor: pointer;
         box-shadow: $shadow-3;
@@ -80,11 +101,13 @@
     border: 1px solid $color-black;
     background-color: $color-black;
     box-shadow: $shadow-1;
+
     &:hover {
         cursor: pointer;
         text-decoration: none;
         box-shadow: $shadow-2;
     }
+
     &:active {
         cursor: pointer;
         box-shadow: $shadow-3;
@@ -97,12 +120,14 @@
     border: 1px solid $color-white;
     background-color: #00000000;
     box-shadow: none;
+
     &:hover {
-        background-color: rgba( $color-white, 0.2);
+        background-color: rgba($color-white, 0.2);
         box-shadow: none;
     }
+
     &:active {
-        background-color: rgba( $color-white, 0.4);
+        background-color: rgba($color-white, 0.4);
         box-shadow: none;
     }
 }
@@ -112,12 +137,14 @@
     border: 1px solid $color-black;
     background-color: #00000000;
     box-shadow: none;
+
     &:hover {
-        background-color: rgba( $color-black, 0.2);
+        background-color: rgba($color-black, 0.2);
         box-shadow: none;
     }
+
     &:active {
-        background-color: rgba( $color-black, 0.4);
+        background-color: rgba($color-black, 0.4);
         box-shadow: none;
     }
 }

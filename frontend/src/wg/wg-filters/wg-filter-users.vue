@@ -3,6 +3,13 @@
     <template slot="header">Фильтр пользователей</template>
     <template slot="content">
       <form ref="formFilterUsers">
+        <ui-ef-select
+          class="ui-ef-select_white"
+          name="sort_id"
+          caption="Сортировать по"
+          cleaner
+          :menu="sortMenu"
+        />
         <ui-ef-text
           :value="filterUsers.login"
           name="login"
@@ -32,7 +39,7 @@
         value="Применить"
         @click="isShowUsers"
       >
-      <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide">
+      <!-- <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide"> -->
     </template>
   </wg-filter>
 </template>
@@ -43,7 +50,12 @@ export default {
       filterUsers: {},
       countries_id: [],
       subjects_id: [],
-      cities_id: []
+      cities_id: [],
+      sortMenu: [
+        { value: 8, option: "по логину", selected: false },
+        { value: 4, option: "по имени", selected: false },
+        { value: 6, option: "по фамилии", selected: false }
+      ]
     };
   },
   props: {
@@ -55,16 +67,28 @@ export default {
   watch: {
     show(newQ) {
       if (newQ == true) {
-        this.filterUsers = JSON.parse(this.$cookie.get("filter_users"));
-        this.countries_id = this.filterUsers["countries_id[]"]
-          ? this.filterUsers["countries_id[]"].split(",")
-          : [];
-        this.subjects_id = this.filterUsers["subjects_id[]"]
-          ? this.filterUsers["subjects_id[]"].split(",")
-          : [];
-        this.cities_id = this.filterUsers["cities_id[]"]
-          ? this.filterUsers["cities_id[]"].split(",")
-          : [];
+        let fUsers = JSON.parse(this.$cookie.get("filter_users"));
+        if (fUsers != null) {
+          this.filterUsers = fUsers;
+          this.countries_id = this.filterUsers["countries_id[]"]
+            ? this.filterUsers["countries_id[]"].split(",")
+            : [];
+          this.subjects_id = this.filterUsers["subjects_id[]"]
+            ? this.filterUsers["subjects_id[]"].split(",")
+            : [];
+          this.cities_id = this.filterUsers["cities_id[]"]
+            ? this.filterUsers["cities_id[]"].split(",")
+            : [];
+          if (this.filterUsers["sort_id"] != undefined) {
+            this.sortMenu = this.sortMenu.map(val => {
+              val.selected = false;
+              if (val.value == this.filterUsers["sort_id"]) {
+                val.selected = true;
+              }
+              return val;
+            });
+          }
+        }
       }
     }
   },

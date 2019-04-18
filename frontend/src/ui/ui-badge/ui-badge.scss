@@ -5,15 +5,17 @@
 
     &__icon {
         position: absolute;
-        height: 20px;
-        width: 20px;
-        color: white;
-        background-color: red;
+        height: 18px;
+        width: auto;
+        color: $color-white;
+        background-color: $color-orange;
         overflow: hidden;
         text-align: center;
-        border-radius: 50%;
+        border-radius: 10px;
         font-weight: 600;
         font-size: 9px;
         right: 0;
+        padding: 0px 7px;
+        line-height: 18px;
     }
 }
