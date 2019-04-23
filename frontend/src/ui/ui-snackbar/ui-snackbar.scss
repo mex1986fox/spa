@@ -1,0 +1,70 @@
+.ui-snackbar {
+    display: block;
+    padding: 15px 25px;
+    background-color: $color-white;
+    margin: 10px 10px 0px 0px;
+    position: fixed;
+    bottom: 15px;
+    border-radius: 3px;
+    transition: bottom 0.6s;
+    line-height: 25px;
+    z-index: 3500;
+
+    box-shadow: $shadow-3;
+    left: 11px;
+
+    &__icon {
+        font-size: 30px;
+        margin: 11px 20px 11px 0px;
+        float: left;
+
+        &_err {
+            color: $color-reade;
+        }
+    }
+
+    &__buttons {
+        float: right;
+        margin: 16px -5px 7px 0;
+        overflow: hidden;
+
+    }
+
+    &__descripton {
+        color: $color-black;
+        margin: 5px 0 10px 0px;
+    }
+
+    &_active {
+        bottom: 15px;
+        transition: bottom 0.6s;
+    }
+
+    &__button-close {
+        float: right;
+        margin-left: 25px;
+        left: auto;
+        margin-bottom: 5px;
+        margin-right: 0px;
+    }
+
+    &-enter-active {
+        bottom: 15px;
+        transition: bottom 0.6s;
+    }
+
+    &-leave-active {
+        bottom: -100%;
+        transition: bottom 0.6s;
+    }
+
+    &-enter {
+        bottom: -100%;
+        transition: bottom 0.6s;
+    }
+
+    &-leave {
+        bottom: 15px;
+        transition: bottom 0.6s;
+    }
+}

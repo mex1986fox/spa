@@ -18,6 +18,8 @@
     <span
       class="wg-card-user__name"
     >{{(user.name!=null?user.name:'')+" "+(user.surname!=null?user.surname:'')}}</span>
+    <span class="wg-card-user__location">{{user.subject!=null?user.subject:""}}</span>
+    <span class="wg-card-user__location">{{user.city!=null?user.city:""}}</span>
   </div>
 </template>
 <script>

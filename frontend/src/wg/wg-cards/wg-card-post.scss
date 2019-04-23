@@ -1,6 +1,6 @@
-.wg-card-user {
+.wg-card-post {
     position: relative;
-    width: 240px;
+    width: 360px;
     height: 330px;
     background: $color-white;
     box-shadow: $shadow-3;
@@ -20,15 +20,10 @@
     &__photo {
         color: rgba($color-black, 0.3);
         font-size: 94px;
-        border-radius: 50%;
         overflow: hidden;
-        height: 160px;
-        width: 160px;
-        margin: 0 auto;
+        height: 200px;
         display: flex;
         justify-content: center;
-        border: 2px solid rgba($color-black, 0.3);
-        margin-top: 25px;
 
         &>i {
             line-height: 152px;
@@ -36,11 +31,11 @@
     }
 
     &__img {
-        height: 100%;
-        width: auto;
+        height: auto;
+        width: 100%;
     }
 
-    &__nickname {
+    &__title {
         color: $color-black;
         font-size: 16px;
         font-weight: bold;
@@ -48,14 +43,8 @@
         display: block;
     }
 
-    &__name {
-        color: $color-black;
-        font-size: 14px;
-        padding: 6px 22px 14px 22px;
-        display: block;
-    }
 
-    &__location {
+    &__description {
         color: $color-black;
         font-size: 13px;
         padding: 0px 22px 0px 22px;

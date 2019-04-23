@@ -2,7 +2,8 @@ import Vue from "vue/dist/vue.js";
 
 import WgFormRegistration from "./wg-forms/registration/wg-form-registration.vue";
 Vue.component("wg-form-registration", WgFormRegistration);
-
+import WgFormLogin from "./wg-forms/login/wg-form-login.vue";
+Vue.component("wg-form-login", WgFormLogin);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);
@@ -13,9 +14,13 @@ Vue.component("wg-multi-location", WgMultiLocation);
 
 import WgCardUser from "./wg-cards/wg-card-user.vue";
 Vue.component("wg-card-user", WgCardUser);
+import WgCardPost from "./wg-cards/wg-card-post.vue";
+Vue.component("wg-card-post", WgCardPost);
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);
 import WgFilterUsers from "./wg-filters/wg-filter-users.vue";
 Vue.component("wg-filter-users", WgFilterUsers);
+import WgFilterBlogs from "./wg-filters/wg-filter-blogs.vue";
+Vue.component("wg-filter-blogs", WgFilterBlogs);
 

@@ -65,6 +65,7 @@ const tokens = {
               // за минуту до его смерти
               let pload = context.getters.getAccessTokenPayload;
               let uptime = (pload.exp - pload.iat - 60) * 1000;
+
               if (context.state.timer_update == undefined) {
                 context.commit("updateTimerUpdate", setInterval(() => {
                   context.dispatch("updateTokens");
@@ -93,22 +94,37 @@ const tokens = {
           }
         );
     },
-    updateTokens(context) {
-      let body = { "refresh_token": context.getters.getRefreshToken }
-      Vue.http.post(Vue.prototype.$hosts.services + "/api/token/update", body)
-        .then(
-          response => {
-            if (response.body.data.access_token != undefined) {
-              context.commit("updateAccessToken", response.body.data.access_token);
-              context.commit("updateRefreshToken", response.body.data.refresh_token);
-              // console.dir(response.body.data);
+    updateTokens(context, tokens = undefined) {
+      if (tokens == undefined) {
+        let body = { "refresh_token": context.getters.getRefreshToken }
+        Vue.http.post(Vue.prototype.$hosts.services + "/api/token/update", body)
+          .then(
+            response => {
+              if (response.body.data.access_token != undefined) {
+                context.commit("updateAccessToken", response.body.data.access_token);
+                context.commit("updateRefreshToken", response.body.data.refresh_token);
+                // console.dir(response.body.data);
+              }
+            },
+            error => {
+              console.log(error)
             }
-          },
-          error => {
-            console.log(error)
-          }
-        );
-    }
+          );
+      } else {
+        context.commit("updateAccessToken", tokens.access_token);
+        context.commit("updateRefreshToken", tokens.refresh_token);
+        // запускаем обновление токинов
+        // за минуту до его смерти
+        let pload = context.getters.getAccessTokenPayload;
+        let uptime = (pload.exp - pload.iat - 60) * 1000;
+
+        if (context.state.timer_update == undefined) {
+          context.commit("updateTimerUpdate", setInterval(() => {
+            context.dispatch("updateTokens");
+          }, uptime));
+        }
+      }
+    },
   }
 };
 export default tokens;

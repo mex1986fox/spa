@@ -1,5 +1,5 @@
 <template>
-  <lt-main @onShowRegistration="isShowRegistration">
+  <lt-main>
     <div class="lt-main__content">
       <div class="lt-main-menu__margin"></div>
       <lt-main-menu>
@@ -21,11 +21,6 @@
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddUsers">Показать еще ...</div>
       </div>
 
-      <wg-form-registration
-        :key="keyRegistration()"
-        :show="showRegistration"
-        @onHide="showRegistration = false"
-      />
       <wg-filter-users :show="showFilter" @onHide="showFilter=false"/>
     </div>
   </lt-main>
@@ -37,7 +32,6 @@ export default {
   name: "pg-users",
   data() {
     return {
-      showRegistration: false,
       showFilter: false,
       countFilterUsers: 0
     };
@@ -55,15 +49,10 @@ export default {
     }
   },
   methods: {
-    isShowRegistration() {
-      this.showRegistration = true;
-    },
     isShowFilter() {
       this.showFilter = true;
     },
-    keyRegistration() {
-      return Math.floor(Math.random() * (1 - 999999)) + 1;
-    },
+
     isShowUsers() {
       let filterUsers = JSON.parse(this.$cookie.get("filter_users"));
       let body = new FormData();

@@ -5,7 +5,7 @@
         <i class="far fa-user"></i>
       </div>
       <div class="lt-main__menu-buttons">
-        <div class="ui-button ui-button_float_white">вход</div>
+        <div class="ui-button ui-button_float_white" @click="isShowLogin">вход</div>
         <div
           class="ui-button ui-button_float_white ui-button_noborder"
           @click="isShowRegistration"
@@ -36,7 +36,7 @@ export default {
       token: "tokens/getAccessToken",
       tokenPayload: "tokens/getAccessTokenPayload",
       avatar: "profile/getAvatar",
-      login:"profile/getLogin"
+      login: "profile/getLogin"
     })
   },
   watch: {
@@ -49,6 +49,9 @@ export default {
   methods: {
     isShowRegistration() {
       this.$emit("onShowRegistration");
+    },
+    isShowLogin() {
+      this.$emit("onShowLogin");
     },
     isDeleteToken() {
       this.$store.dispatch("tokens/deleteTokens");

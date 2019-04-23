@@ -73,17 +73,39 @@
 
     &-item {
         padding: 8px 20px;
+        display: block;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: $color-white;
+
+        &:first-letter {
+            text-transform: uppercase;
+        }
 
         &:hover {
-            background-color: rgba($color-white, 0.2);
-            box-shadow: none;
             cursor: pointer;
+            background-color: rgba($color-white, 0.2);
+            color: $color-white;
+            text-decoration: none;
         }
 
         &:active {
             background-color: rgba($color-white, 0.4);
-            box-shadow: none;
-            cursor: pointer;
+            color: $color-white;
+            text-decoration: none;
+        }
+
+        &:visited {
+
+            text-decoration: none;
+        }
+
+        &.router-link-active {
+            background-color: rgba($color-white, 0.2);
+            color: $color-white;
+            text-decoration: none;
         }
     }
 }
