@@ -4,6 +4,8 @@ import WgFormRegistration from "./wg-forms/registration/wg-form-registration.vue
 Vue.component("wg-form-registration", WgFormRegistration);
 import WgFormLogin from "./wg-forms/login/wg-form-login.vue";
 Vue.component("wg-form-login", WgFormLogin);
+import WgFormCreatPost from "./wg-forms/creatPost/wg-form-creat-post.vue";
+Vue.component("wg-form-creat-post", WgFormCreatPost);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);

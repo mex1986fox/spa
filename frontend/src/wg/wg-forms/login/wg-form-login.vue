@@ -60,7 +60,7 @@ export default {
       this.dShowAnimation = false;
       setTimeout(() => {
         this.$emit("onHide");
-      }, 800);
+      }, 200);
     }
   },
   mounted() {

@@ -47,7 +47,12 @@
     &__description {
         color: $color-black;
         font-size: 13px;
-        padding: 0px 22px 0px 22px;
+        padding: 12px 22px 0px 22px;
         display: block;
+        height: 65px;
+        overflow: hidden;
     }
+
+
+
 }

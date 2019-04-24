@@ -17,7 +17,7 @@
       </div>
     </div>
     <span class="wg-card-post__title">{{post.title!=null?post.title:""}}</span>
-    <span class="wg-card-post__description">{{post.description!=null?post.description:''}}</span>
+    <span class="wg-card-post__description wg-card-post__description_ellips">{{post.description!=null?post.description:''}}</span>
   </div>
 </template>
 <script>

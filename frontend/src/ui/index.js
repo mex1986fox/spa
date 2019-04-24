@@ -18,6 +18,8 @@ Vue.component("ui-snackbar", UiSnackbar);
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";
 Vue.component("ui-ef-text", UiEfText);
+import UiEfTextarea from "./ui-element-form/ui-ef-textarea.vue";
+Vue.component("ui-ef-textarea", UiEfTextarea);
 import UiEfPhone from "./ui-element-form/ui-ef-phone.vue";
 Vue.component("ui-ef-phone", UiEfPhone);
 import UiEfPassword from "./ui-element-form/ui-ef-password.vue";
