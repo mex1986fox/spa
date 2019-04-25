@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     isCreatePost() {
+      this.dSpinn = true;
       this.excTitle = "";
       this.excDescr = "";
       let form = this.$refs.formCreatePost;
@@ -71,15 +72,24 @@ export default {
         this.excDescr = "Заполните описание.";
         fExc = true;
       }
-      console.dir(this.excDescr);
-      if (fExc == true) {
-        return;
+      if (fExc == true) return;
+      if (title.length > 70) {
+        this.excTitle = "Не более 70 символов.";
+        fExc = true;
       }
+      if (description.length > 1600) {
+        this.excDescr = "Не более 1600 символов.";
+        fExc = true;
+      }
+      if (fExc == true) return;
+
       this.$http.post(this.$hosts.services + "/api/post/create", body).then(
         response => {
-          console.dir(response.body.data);
+          this.dSpinn = false;
+          this.$emit("onCreatedPost");
         },
         error => {
+          this.dSpinn = false;
           this.showSnackbar = true;
           let exc = error.body.data;
           this.masSnackbar = exc.massege;

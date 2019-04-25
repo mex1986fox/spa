@@ -151,7 +151,6 @@ export default {
       this.dHelp=newQ;
     },
     dValue() {
-      console.log(this.dValue);
       this.isAutoresize();
     }
   },

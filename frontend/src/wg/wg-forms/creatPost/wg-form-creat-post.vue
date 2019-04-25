@@ -11,10 +11,14 @@
               </div>
             </div>
           </div>
-
+          <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
+            <div class="wg-form-registration__card">
+              <wg-form-creat-post-card-photo/>
+            </div>
+          </ui-animation-display>
           <ui-animation-display v-if="showCard==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-main @onLogin="isHide"/>
+              <wg-form-creat-post-card-main @onCreatedPost="isShowCardPhoto"/>
             </div>
           </ui-animation-display>
         </div>
@@ -37,16 +41,18 @@
 
 <script>
 import WgFormCreatPostCardMain from "./card-main.vue";
+import WgFormCreatPostCardPhoto from "../registration/card-photo.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-login",
-  components: { WgFormCreatPostCardMain },
+  components: { WgFormCreatPostCardMain, WgFormCreatPostCardPhoto },
   data() {
     return {
       dHeader: "Создать пост",
       dShow: this.show,
       dShowAnimation: false,
       showCard: true,
+      showCardPhoto: false,
       clientHeigthContainer: undefined
     };
   },
@@ -78,6 +84,12 @@ export default {
       this.dShowAnimation = false;
       setTimeout(() => {
         this.$emit("onHide");
+      }, 200);
+    },
+    isShowCardPhoto() {
+      this.showCard = false;
+      setTimeout(() => {
+        this.showCardPhoto = true;
       }, 200);
     }
   },

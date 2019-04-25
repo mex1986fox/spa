@@ -87,6 +87,12 @@ export default {
       tokenPayload: "tokens/getAccessTokenPayload"
     })
   },
+  props: {
+    nameService: {
+      type: String,
+      default: "userphoto"
+    }
+  },
   methods: {
     isChangeFiles(files) {
       this.changeFiles = files;
@@ -97,7 +103,7 @@ export default {
       body.set("access_token", this.token);
       this.dLoading = true;
       this.$http
-        .post(this.$hosts.services + "/api/userphoto/upload", body)
+        .post(this.$hosts.services + "/api/"+this.nameService+"/upload", body)
         .then(
           response => {
             if (response.body.status == "ok") {
@@ -115,7 +121,7 @@ export default {
     },
     isShowLincksPhoto() {
       let body = { users_id: [this.tokenPayload.userID] };
-      this.$http.post(this.$hosts.services + "/api/userphoto/show", body).then(
+      this.$http.post(this.$hosts.services + "/api/"+this.nameService+"/show", body).then(
         response => {
           if (response.body.status == "ok") {
             this.lincksPhoto = response.body.data[0].files.mini;
