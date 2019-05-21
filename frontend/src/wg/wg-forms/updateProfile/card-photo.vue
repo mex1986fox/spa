@@ -1,7 +1,7 @@
 <template>
   <div>
     <form ref="formUploadPhoto">
-      <div class="wg-form-registration__card-header">Выберите и загрузите фотографии</div>
+      <div class="wg-form-registration__card-header">Фотографии</div>
       <div class="wg-form-registration__card-files-header" v-if="changeFiles.length>0">
         <div class="ui-header ui-header_3">Выбранные фотографии:</div>
       </div>
@@ -40,7 +40,7 @@
       </div>
     </form>
     <div class="wg-form-registration__card-files-header" v-if="lincksPhoto!=undefined">
-      <div class="ui-header ui-header_3">Выберите из фотографий свой аватар:</div>
+      <div class="ui-header ui-header_3">Загруженные фотографии:</div>
     </div>
     <div class="wg-form-registration__card-imgs" v-if="lincksPhoto!=undefined">
       <wg-form-registration-card-photo-img
@@ -52,7 +52,7 @@
         :checkMain="profileAvater==userPhotoHost+'/'+val?true:false"
       />
     </div>
-    <div class="wg-form-registration__card-buttons">
+    <!-- <div class="wg-form-registration__card-buttons">
       <input
         type="button"
         v-if="lincksPhoto!=undefined"
@@ -60,7 +60,7 @@
         @click="isHide"
         value="Готово"
       >
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
@@ -142,6 +142,7 @@ export default {
         );
     },
     isDeletePhoto(keyPhoto) {
+
       delete this.lincksPhoto[keyPhoto];
       let lPhoto = this.lincksPhoto;
       this.lincksPhoto = undefined;
@@ -152,6 +153,9 @@ export default {
     isHide() {
       this.$emit("onHide");
     }
+  },
+  mounted() {
+    this.isShowLincksPhoto();
   }
 };
 </script>

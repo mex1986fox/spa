@@ -44,7 +44,7 @@
       position="fixed"
     >
       <div class="wg-multi-location__menu">
-        <div class="wg-multi-location__menu-header">Укажите свой город</div>
+        <div class="wg-multi-location__menu-header">{{caption}}</div>
         <div class="wg-multi-location__menu-close">
           <div @click="isHideMenu" class="ui-button ui-button_float_black ui-button_circle_s1">
             <i class="fas fa-times"></i>
@@ -59,6 +59,7 @@
             :showMenu="countriesFilter.length>0 || subjectsFilter.length>0 || citiesFilter.length>0"
           >
             <div class="wg-multi-location__search-menu">
+              <div v-if="countriesFilter.length>0" class="ui-ef-search__menu-group">Страны</div>
               <ui-ef-checkbox
                 v-for="(country, key) in countriesFilter"
                 :key="'count_'+modCountry+'_'+key"
@@ -67,7 +68,7 @@
                 :checked="country.checked"
                 @onClick="isClickCheckboxCountry"
               >{{country.option}}</ui-ef-checkbox>
-
+              <div v-if="subjectsFilter.length>0" class="ui-ef-search__menu-group">Субъекты</div>
               <ui-ef-checkbox
                 v-for="(subject, key) in subjectsFilter"
                 :key="'sub_'+modSubject+'_'+key"
@@ -76,7 +77,7 @@
                 :checked="subject.checked"
                 @onClick="isClickCheckboxSubject"
               >{{subject.option}}</ui-ef-checkbox>
-
+              <div v-if="citiesFilter.length>0" class="ui-ef-search__menu-group">Города</div>
               <ui-ef-checkbox
                 v-for="(city, key) in citiesFilter"
                 :key="'cit_'+modCity+'_'+key"

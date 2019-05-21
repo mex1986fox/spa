@@ -1,0 +1,46 @@
+.wg-slider-zoom {
+    height: 100%;
+    width: 100%;
+
+    &__slider {
+        height: 100%;
+    }
+
+    &__slider-navig {
+        height: 60px;
+        background-color: black;
+        opacity: 0.3;
+        z-index: 6;
+        position: absolute;
+        overflow: hidden;
+        margin-top: -62px;
+        width: 100%;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__blind {
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    &__button-exit {
+        position: absolute;
+        z-index: 1000;
+        top: 10px;
+        right: 5px;
+        float: none;
+        left: auto;
+    }
+
+    & .wg-slider__menu {
+        display: none;
+        height: 0;
+        opacity: 0;
+    }
+
+    & .wg-slider__button_flat {
+        color: #fff !important;
+    }
+}

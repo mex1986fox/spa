@@ -29,7 +29,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "lt-main-profile",
   data() {
-    return {};
+    return { errLoadAvatar: false };
   },
   computed: {
     ...mapGetters({
@@ -39,11 +39,15 @@ export default {
       login: "profile/getLogin"
     })
   },
+
   watch: {
     token(newQ, oldQ) {
       if (oldQ == undefined && newQ != undefined) {
         this.$store.dispatch("profile/updateProfile", this.tokenPayload.userID);
       }
+    },
+    avatar(newQ) {
+      this.dAvatar = newQ;
     }
   },
   methods: {

@@ -1,0 +1,41 @@
+.ui-img {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    &__pict {
+        z-index: 1;
+
+        &_horizon {
+            //горизонтальное центрирование
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+        }
+
+        &_vertical {
+            //вертикальное
+            height: 100%;
+        }
+    }
+
+    &__fon {
+        z-index: 0;
+        filter: blur(5px);
+        position: absolute;
+        width: 104%;
+        height: 104%;
+        top: -2%;
+        opacity: 0.3;
+        left: -2%;
+    }
+}

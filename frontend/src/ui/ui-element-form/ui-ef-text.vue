@@ -204,6 +204,9 @@ export default {
     }
   },
   mounted() {
+    if (this.value == undefined) {
+      this.dValue = "";
+    }
     if (this.focus == true) {
       this.modFocus == true;
       let ctrl = this.$refs.input;
@@ -211,7 +214,7 @@ export default {
     }
     setTimeout(() => {
       if (this.$el.querySelectorAll("input:-webkit-autofill").length > 0) {
-        this.modFocus=true;
+        this.modFocus = true;
       }
     }, 1000);
   },

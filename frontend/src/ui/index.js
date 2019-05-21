@@ -14,6 +14,8 @@ import UiBadge from "./ui-badge/ui-badge.vue";
 Vue.component("ui-badge", UiBadge);
 import UiSnackbar from "./ui-snackbar/ui-snackbar.vue";
 Vue.component("ui-snackbar", UiSnackbar);
+import UiImg from "./ui-img/ui-img.vue";
+Vue.component("ui-img", UiImg);
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";

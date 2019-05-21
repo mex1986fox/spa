@@ -66,4 +66,20 @@
         top: 54px;
         z-index: 100;
     }
+
+    &__menu-group {
+        position: relative;
+        border: 0;
+        margin: 0;
+        list-style-type: none;
+        height: 40px;
+        width: 100%;
+        font-size: 15px;
+        line-height: 41px;
+        color: rgba($color-black, 0.4);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+    }
 }

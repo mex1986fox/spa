@@ -16,6 +16,24 @@ const profile = {
     getID: (state, getters, rootState, rootGetters) => {
       return state.user_id;
     },
+    getSurname: (state, getters, rootState, rootGetters) => {
+      return state.surname;
+    },
+    getPhone: (state, getters, rootState, rootGetters) => {
+      return state.phone;
+    },
+    getName: (state, getters, rootState, rootGetters) => {
+      return state.name;
+    },
+    getEmail: (state, getters, rootState, rootGetters) => {
+      return state.email;
+    },
+    getCityID: (state, getters, rootState, rootGetters) => {
+      return state.city_id;
+    },
+    getBirthdate: (state, getters, rootState, rootGetters) => {
+      return state.birthdate;
+    },
     getAvatar: (state, getters, rootState, rootGetters) => {
       return state.avatar;
     },

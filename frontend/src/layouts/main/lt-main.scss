@@ -116,10 +116,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: rgba(48, 48, 48, 0.719);
+    // background-color: rgba(48, 48, 48, 0.719);
     height: 100%;
     width: 100%;
     overflow: hidden;
     overflow-y: auto;
     position: relative;
+}
+
+.lt-main__cards {
+    height: auto;
+    max-width: 420px;
 }

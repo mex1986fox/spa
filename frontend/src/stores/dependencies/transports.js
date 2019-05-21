@@ -12,39 +12,43 @@ const transports = {
     transmissions: undefined
   },
   getters: {
-    getTransport: (state, getters, rootState, rootGetters) => id => {
-      if (state.types != undefined) {
-        for (let transport of state.types) {
-          if (id == transport.id) {
-            return transport;
-          }
+    getType: (state, getters, rootState, rootGetters) => id => {
+      for (let type of state.types) {
+        if (id == type.type_id) {
+          return type;
         }
-      } else {
-        return undefined;
       }
+      return undefined;
     },
     getBrand: (state, getters, rootState, rootGetters) => id => {
-      if (state.brands != undefined) {
-        for (let brand of state.brands) {
-          if (id == brand.id) {
-            return brand;
-          }
+      for (let brand of state.brands) {
+        if (id == brand.brand_id) {
+          return brand;
         }
-      } else {
-        return undefined;
       }
+      return undefined;
     },
     getModel: (state, getters, rootState, rootGetters) => id => {
-      if (state.models != undefined) {
-        for (let model of state.models) {
-          if (id == model.id) {
-            return model;
-          }
+      for (let model of state.models) {
+        if (id == model.model_id) {
+          return model;
         }
-      } else {
-        return undefined;
       }
+      return undefined;
     },
+    // city-model
+    // subject -brand
+    getModels: (state, getters, rootState, rootGetters) => idBrand => {
+      return state.models.filter(model => {
+        return model.brand_id == idBrand;
+      });
+    },
+    getBrands: (state, getters, rootState, rootGetters) => idType => {
+      return state.brands.filter(brand => {
+        return brand.type_id == idType;
+      });
+    },
+
     getFuel: (state, getters, rootState, rootGetters) => id => {
       if (state.fuels != undefined) {
         for (let fuel of state.fuels) {
@@ -132,7 +136,7 @@ const transports = {
             response => {
               context.commit("updateTransports", response.body.data);
             },
-            error => {}
+            error => { }
           );
       }
     }

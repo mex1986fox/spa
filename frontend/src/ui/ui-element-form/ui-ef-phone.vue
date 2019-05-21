@@ -1,18 +1,19 @@
 <template>
-	<div class="ui-ef-phone">
-		<ui-ef-text ref="text"
-		         :name="name"
-		         :value="dValue"
-		         :caption="caption"
-		         :readonly="readonly"
-		         :disabled="disabled"
-		         :help="help"
-		         @onInput="isInputPhone"
-		         :caretStart="dCarret"
-		         :caretEnd="dCarret"
-		         :maxlength="17">
-		</ui-ef-text>
-	</div>
+  <div class="ui-ef-phone">
+    <ui-ef-text
+      ref="text"
+      :name="name"
+      :value="dValue"
+      :caption="caption"
+      :readonly="readonly"
+      :disabled="disabled"
+      :help="help"
+      @onInput="isInputPhone"
+      :caretStart="dCarret"
+      :caretEnd="dCarret"
+      :maxlength="17"
+    ></ui-ef-text>
+  </div>
 </template>
 
 <script>
@@ -20,7 +21,7 @@ export default {
   name: "ui-ef-phone",
   data() {
     return {
-      dValue: this.value,
+      dValue: String(this.value),
       dCarret: 3
     };
   },
@@ -46,13 +47,14 @@ export default {
       default: false
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: "+8(___)___-__-__"
     }
   },
   methods: {
     isInputPhone(phone) {
-      let arrPhone = phone.match(/[0-9]/g);
+      let arrPhone = String(phone).match(/[0-9]/g);
+      // console.dir(arrPhone);
       if (arrPhone != null) {
         let arrP = [];
         for (let k = 1; k <= 10; k++) {
@@ -87,12 +89,15 @@ export default {
             break;
           }
         }
-        //   console.log(newPhone);
+        // console.log(newPhone);
         this.$refs.text.dValue = newPhone;
       } else {
         this.$refs.text.dValue = "+8(___)___-__-__";
       }
     }
+  },
+  mounted() {
+    this.isInputPhone(this.value);
   }
 };
 </script>

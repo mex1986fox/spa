@@ -4,10 +4,12 @@
     <div class="wg-form-create-post__card-ef">
       <ui-ef-text name="title" caption="Заголовок *" :help="excTitle"></ui-ef-text>
       <ui-ef-textarea name="description" caption="Описание *" :help="excDescr" :autoresize="200"></ui-ef-textarea>
+      <wg-select-location caption="Город проживания *" name="city_id" :help="excCity"/>
+      <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
     </div>
     <div class="wg-form-registration__card-buttons">
       <input
-        type="button"
+        model="button"
         class="ui-button ui-button_float_black"
         @click="isCreatePost"
         :disabled="dSpinn"
@@ -15,11 +17,11 @@
       >
       <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
-    <ui-snackbar :show="showSnackbar" type="err" :time="5000" @onHide="showSnackbar=false">
+    <ui-snackbar :show="showSnackbar" model="err" :time="5000" @onHide="showSnackbar=false">
       <div>{{masSnackbar}}</div>
       <div class="ui-snackbar__buttons">
         <input
-          type="button"
+          model="button"
           class="ui-button ui-button_float_black ui-button_s1"
           @click="showSnackbar=false"
           value="Закрыть"
@@ -35,6 +37,8 @@ export default {
     return {
       excTitle: "",
       excDescr: "",
+      excModel: "",
+      excCity: "",
       showSnackbar: false,
       masSnackbar: "",
       dSpinn: false
@@ -57,11 +61,15 @@ export default {
       this.dSpinn = true;
       this.excTitle = "";
       this.excDescr = "";
+      this.excCity = "";
+      this.excModel = "";
       let form = this.$refs.formCreatePost;
       let body = new FormData(form);
       body.set("access_token", this.token);
       let title = body.get("title");
       let description = body.get("description");
+      let city_id = body.get("city_id");
+      let model_id = body.get("model_id");
 
       let fExc = false;
       if (title == undefined || title == "") {
@@ -72,7 +80,18 @@ export default {
         this.excDescr = "Заполните описание.";
         fExc = true;
       }
-      if (fExc == true) return;
+      if (city_id == undefined || city_id == "") {
+        this.excCity = "Выберите город.";
+        fExc = true;
+      }
+      if (model_id == undefined || model_id == "") {
+        this.excModel = "Выберите модель автомобиля.";
+        fExc = true;
+      }
+      if (fExc == true) {
+        this.dSpinn = false;
+        return;
+      }
       if (title.length > 70) {
         this.excTitle = "Не более 70 символов.";
         fExc = true;
@@ -81,12 +100,15 @@ export default {
         this.excDescr = "Не более 1600 символов.";
         fExc = true;
       }
-      if (fExc == true) return;
+      if (fExc == true) {
+        this.dSpinn = false;
+        return;
+      }
 
       this.$http.post(this.$hosts.services + "/api/post/create", body).then(
         response => {
           this.dSpinn = false;
-          this.$emit("onCreatedPost");
+          this.$emit("onCreatedPost", response.body.data);
         },
         error => {
           this.dSpinn = false;
@@ -95,6 +117,8 @@ export default {
           this.masSnackbar = exc.massege;
           this.excTitle = exc["title"] ? exc["title"] : "";
           this.excDescr = exc["description"] ? exc["description"] : "";
+          this.excCity = exc["city_id"] ? exc["city_id"] : "";
+          this.excModel = exc["model_id"] ? exc["model_id"] : "";
         }
       );
     }

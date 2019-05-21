@@ -9,7 +9,7 @@
       :help="help"
     >
       <template slot="icon">
-        <i class="fas fa-map-marker-alt"></i>
+        <i class="fas fa-car"></i>
       </template>
     </ui-ef-text>
 
@@ -29,22 +29,22 @@
         </div>
 
         <div class="wg-select-location__menu-ef">
-          <ui-ef-search placeholder="Введите название города" @onInput="isSearch"></ui-ef-search>
+          <ui-ef-search placeholder="Введите модель автомобиля" @onInput="isSearch"></ui-ef-search>
         </div>
         <div
           class="wg-select-location__menu-chipheader"
-          v-if="citiesFilters.length>0"
-        >Нажмите на свой город</div>
+          v-if="modelsFilters.length>0"
+        >Нажмите на модель автомобиля</div>
         <div class="wg-select-location__menu-chipsies">
           <ui-ef-chips
-            v-for="(city, key) in citiesFilters"
+            v-for="(model, key) in modelsFilters"
             :key="key"
-            :value="city.value"
-            :caption="city.option"
+            :value="model.value"
+            :caption="model.option"
             @onClick="isClickChips"
           ></ui-ef-chips>
         </div>
-        <div class="wg-select-location__menu-chipbuttons" v-if="citiesFilters.length>0">
+        <div class="wg-select-location__menu-chipbuttons" v-if="modelsFilters.length>0">
           <input
             class="ui-button ui-button_float_black"
             type="button"
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       dShowMenu: false,
-      dCities: undefined,
+      dModels: undefined,
       dTextValue: "",
       dSearth: "",
       dValue: ""
@@ -75,7 +75,7 @@ export default {
     },
     caption: {
       type: String,
-      default: "Город проживания"
+      default: "Модель автомобиля"
     },
     disabled: {
       type: Boolean,
@@ -84,23 +84,14 @@ export default {
     help: {
       type: String,
       default: ""
-    },
-    cityID: {
-      type: Number,
-      default: undefined
-    }
-  },
-  watch: {
-    cityID(newQ) {
-      this.isCheckCity(newQ);
     }
   },
   methods: {
     isClickText() {
       this.dSearth = this.dTextValue;
       this.dShowMenu = true;
-      if (this.dCities == undefined) {
-        this.dCities = this.cities;
+      if (this.dModels == undefined) {
+        this.dModels = this.models;
       }
     },
     isClear() {
@@ -119,30 +110,25 @@ export default {
       this.dValue = chips.value;
       this.dTextValue = chips.caption;
       this.isHideMenu();
-    },
-    isCheckCity(cityID) {
-      let city = this.$store.getters["locations/getCity"](cityID);
-      this.dValue = city.city_id;
-      this.dTextValue = city.extended_name;
     }
   },
   computed: {
-    cities() {
-      let cities = JSON.parse(
-        JSON.stringify(this.$store.state.locations.cities)
+    models() {
+      let models = JSON.parse(
+        JSON.stringify(this.$store.state.transports.models)
       );
-      if (cities != undefined) {
-        cities = cities.sort(function(a, b) {
-          if (a.country_id > b.country_id) {
+      if (models != undefined) {
+        models = models.sort(function(a, b) {
+          if (a.type_id > b.type_id) {
             return 1;
           }
-          if (a.country_id < b.country_id) {
+          if (a.type_id < b.type_id) {
             return -1;
           }
-          if (a.subject_id > b.subject_id) {
+          if (a.brand_id > b.brand_id) {
             return 1;
           }
-          if (a.subject_id < b.subject_id) {
+          if (a.brand_id < b.brand_id) {
             return -1;
           }
           if (a.name > b.name) {
@@ -153,34 +139,29 @@ export default {
           }
           return 0;
         });
-        let menu = cities.map(city => {
+        let menu = models.map(model => {
           return {
-            value: city.city_id,
-            option: city.extended_name
+            value: model.model_id,
+            option: model.extended_name
           };
         });
         return menu;
       }
       return undefined;
     },
-    citiesFilters() {
-      if (this.dSearth != "" && this.cities != undefined) {
+    modelsFilters() {
+      if (this.dSearth != "" && this.models != undefined) {
         var invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
         var repl = this.dSearth.replace(invalid, match => {
           return "\\" + match;
         });
-        let regexp = new RegExp("^" + repl, "i");
-        let cities = this.cities.filter(city => {
-          return -1 != city.option.search(regexp);
+        let regexp = new RegExp(repl, "i");
+        let models = this.models.filter(model => {
+          return -1 != model.option.search(regexp);
         });
-        return cities;
+        return models;
       }
       return [];
-    }
-  },
-  mounted() {
-    if (this.cityID != undefined && this.cityID != "") {
-      this.isCheckCity(this.cityID);
     }
   }
 };

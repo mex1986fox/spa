@@ -1,6 +1,6 @@
 <template>
-  <ui-blind :show="dShow">
-    <div class="wg-form-registration" v-if="dShow && token!=undefined">
+  <ui-blind :show="dShow" position="fixed">
+    <div class="wg-form-registration">
       <ui-animation-display v-if="dShowAnimation==true" :animate="'margin-right'">
         <div class="wg-form-registration__container">
           <div class="wg-form-registration__menu">
@@ -11,50 +11,39 @@
               </div>
             </div>
           </div>
-          <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
+          <ui-animation-display v-if="showCardNotMain==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-photo :post="dPost" @onHide="isHide"/>
+              <wg-form-registration-card-notmain @onUserUpdated="isShowCardPhoto"></wg-form-registration-card-notmain>
             </div>
           </ui-animation-display>
-          <ui-animation-display v-if="showCard==true" :animate="'right'">
+          <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-main @onCreatedPost="isShowCardPhoto"/>
+              <wg-form-registration-card-photo @onHide="isHide"></wg-form-registration-card-photo>
             </div>
           </ui-animation-display>
         </div>
       </ui-animation-display>
     </div>
-    <ui-snackbar :show="dShow && token==undefined" type="err" :time="5000" @onHide="isHide">
-      <b>Добавить пост могут только авторизованные пользователи.</b>
-      <p>Авторизуйтесь или зарегистрируйтесь.</p>
-      <div class="ui-snackbar__buttons">
-        <input
-          type="button"
-          class="ui-button ui-button_float_black ui-button_s1"
-          @click="isHide"
-          value="Закрыть"
-        >
-      </div>
-    </ui-snackbar>
   </ui-blind>
 </template>
 
 <script>
-import WgFormCreatPostCardMain from "./card-main.vue";
-import WgFormCreatPostCardPhoto from "./card-photo.vue";
-import { mapGetters } from "vuex";
+import WgFormRegistrationCardNotmain from "./card-notmain.vue";
+import WgFormRegistrationCardPhoto from "./card-photo.vue";
 export default {
-  name: "wg-form-create-post",
-  components: { WgFormCreatPostCardMain, WgFormCreatPostCardPhoto },
+  name: "wg-form-update-profile",
+  components: {
+    WgFormRegistrationCardNotmain,
+    WgFormRegistrationCardPhoto
+  },
   data() {
     return {
-      dHeader: "Создать пост",
+      dHeader: "Редактирование профайла",
       dShow: this.show,
       dShowAnimation: false,
-      showCard: true,
-      showCardPhoto: false,
-      clientHeigthContainer: undefined,
-      dPost: undefined
+      showCardNotMain: true,
+      showCardPhoto: true,
+      clientHeigthContainer: undefined
     };
   },
   props: {
@@ -62,11 +51,6 @@ export default {
       default: false,
       type: Boolean
     }
-  },
-  computed: {
-    ...mapGetters({
-      token: "tokens/getAccessToken"
-    })
   },
   watch: {
     show(newQ) {
@@ -87,9 +71,12 @@ export default {
         this.$emit("onHide");
       }, 200);
     },
-    isShowCardPhoto(post) {
-      this.dPost = post;
-      this.showCard = false;
+    isShowCardNotMain() {
+      setTimeout(() => {
+        this.showCardNotMain = true;
+      }, 200);
+    },
+    isShowCardPhoto() {
       setTimeout(() => {
         this.showCardPhoto = true;
       }, 200);

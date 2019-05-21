@@ -5,6 +5,11 @@ $color-reade: #e20000;
 $color-blue: #0077ff;
 $color-filter:#2b3340;
 $color-orange: #ff6c00;
+
+//прозрачные
+$color-white-opacity: rgba(0, 0, 0, 0.1);
+$color-black-opacity: rgba(255, 255, 255, 0.1);
+
 //тени
 $shadow-1: 0px 2px 4px rgba(0, 0, 0, 0.49);
 $shadow-2: 0px 2px 8px rgba(0, 0, 0, 0.49);

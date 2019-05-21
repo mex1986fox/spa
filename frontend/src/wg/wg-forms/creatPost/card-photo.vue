@@ -40,7 +40,7 @@
       </div>
     </form>
     <div class="wg-form-registration__card-files-header" v-if="lincksPhoto!=undefined">
-      <div class="ui-header ui-header_3">Выберите из фотографий свой аватар:</div>
+      <div class="ui-header ui-header_3">Выберите из фотографий главное фото:</div>
     </div>
     <div class="wg-form-registration__card-imgs" v-if="lincksPhoto!=undefined">
       <wg-form-registration-card-photo-img
@@ -48,8 +48,10 @@
         :key="key"
         :keyPhoto="key"
         :linck="val"
+        :post="dPost"
+        :checkMain="dPost.main_photo==postPhotoHost+'/'+val?true:false"
         @onDeletePhoto="isDeletePhoto"
-        :checkMain="profileAvater==userPhotoHost+'/'+val?true:false"
+        @onUpdatePost="isUpdatePost"
       />
     </div>
     <div class="wg-form-registration__card-buttons">
@@ -72,27 +74,27 @@ export default {
   },
   data() {
     return {
+      dPost: this.post,
       changeFiles: [],
       clearFiles: false,
       dLoading: false,
       lincksPhoto: undefined,
       userPhotoHost: this.$hosts.userPhoto,
       showMenuKey: undefined,
-      imgSpinner: false
+      imgSpinner: false,
+      postPhotoHost: this.$hosts.postPhoto
     };
   },
   computed: {
     // подключает гетеры из хранилишь
     ...mapGetters({
       token: "tokens/getAccessToken",
-      tokenPayload: "tokens/getAccessTokenPayload",
-      profileAvater: "profile/getAvatar"
+      tokenPayload: "tokens/getAccessTokenPayload"
     })
   },
   props: {
-    nameService: {
-      type: String,
-      default: "userphoto"
+    post: {
+      default: undefined
     }
   },
   methods: {
@@ -103,12 +105,10 @@ export default {
       let form = this.$refs.formUploadPhoto;
       let body = new FormData(form);
       body.set("access_token", this.token);
+      body.set("post_id", this.post.post_id);
       this.dLoading = true;
       this.$http
-        .post(
-          this.$hosts.services + "/api/" + this.nameService + "/upload",
-          body
-        )
+        .post(this.$hosts.services + "/api/postphoto/upload", body)
         .then(
           response => {
             if (response.body.status == "ok") {
@@ -125,24 +125,33 @@ export default {
         );
     },
     isShowLincksPhoto() {
-      let body = { users_id: [this.tokenPayload.userID] };
-      this.$http
-        .post(this.$hosts.services + "/api/" + this.nameService + "/show", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.lincksPhoto = response.body.data[0].files.mini;
-            }
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-            }
+      let body = {
+        users_id: [this.tokenPayload.userID],
+        posts_id: [this.post.post_id]
+      };
+      this.$http.post(this.$hosts.services + "/api/postphoto/show", body).then(
+        response => {
+          if (response.body.status == "ok") {
+            this.lincksPhoto = response.body.data[0].files.mini;
           }
-        );
+        },
+        error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        }
+      );
     },
     isDeletePhoto(keyPhoto) {
       delete this.lincksPhoto[keyPhoto];
+      let lPhoto = this.lincksPhoto;
+      this.lincksPhoto = undefined;
+      setTimeout(() => {
+        this.lincksPhoto = lPhoto;
+      }, 100);
+    },
+    isUpdatePost(post) {
+      this.dPost = post;
       let lPhoto = this.lincksPhoto;
       this.lincksPhoto = undefined;
       setTimeout(() => {

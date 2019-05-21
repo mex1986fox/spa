@@ -528,7 +528,7 @@ body {
     height: 40px;
     width: auto;
     font-size: 14px;
-    line-height: 38px;
+    line-height: 39px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -610,6 +610,37 @@ body {
   .ui-snackbar-leave {
     bottom: 15px;
     transition: bottom 0.6s; }
+
+.ui-img {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%; }
+  .ui-img__pict {
+    z-index: 1; }
+    .ui-img__pict_horizon {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 100%; }
+    .ui-img__pict_vertical {
+      height: 100%; }
+  .ui-img__fon {
+    z-index: 0;
+    filter: blur(5px);
+    position: absolute;
+    width: 104%;
+    height: 104%;
+    top: -2%;
+    opacity: 0.3;
+    left: -2%; }
 
 .ui-ef-text {
   width: 100%;
@@ -797,7 +828,7 @@ body {
     padding: 0;
     margin-top: 20px;
     transition-duration: 300ms;
-    white-space: nowrap;
+    white-space: normal;
     overflow: auto;
     text-overflow: ellipsis;
     background-color: transparent;
@@ -1411,6 +1442,20 @@ body {
     width: 100%;
     top: 54px;
     z-index: 100; }
+  .ui-ef-search__menu-group {
+    position: relative;
+    border: 0;
+    margin: 0;
+    list-style-type: none;
+    height: 40px;
+    width: 100%;
+    font-size: 15px;
+    line-height: 41px;
+    color: rgba(17, 17, 17, 0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase; }
 
 .ui-ef-chips {
   background-color: rgba(214, 214, 214, 0.4);
@@ -1893,12 +1938,15 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: rgba(48, 48, 48, 0.719);
   height: 100%;
   width: 100%;
   overflow: hidden;
   overflow-y: auto;
   position: relative; }
+
+.lt-main__cards {
+  height: auto;
+  max-width: 420px; }
 
 .lt-main-menu {
   position: absolute;
@@ -1962,10 +2010,8 @@ body {
 
 .wg-card-user {
   position: relative;
-  width: 240px;
-  height: 330px;
-  background: #ffffff;
-  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
+  width: 300px;
+  height: auto;
   margin: 15px; }
   .wg-card-user__button-close {
     position: absolute;
@@ -1973,47 +2019,80 @@ body {
   .wg-card-user__button-menu {
     position: absolute;
     right: 14px;
-    margin-top: 8px; }
+    margin-top: -5px; }
+  .wg-card-user__avatar {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    padding: 20px;
+    display: block;
+    overflow: hidden;
+    position: relative; }
   .wg-card-user__photo {
     color: rgba(17, 17, 17, 0.3);
-    font-size: 94px;
     border-radius: 50%;
     overflow: hidden;
-    height: 160px;
-    width: 160px;
-    margin: 0 auto;
+    height: 86px;
+    width: 86px;
     display: flex;
     justify-content: center;
-    border: 2px solid rgba(17, 17, 17, 0.3);
-    margin-top: 25px; }
+    margin-right: 10px;
+    float: left; }
+    .wg-card-user__photo-fon {
+      margin: -20px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.2; }
+      .wg-card-user__photo-fon-img {
+        z-index: 0;
+        filter: blur(5px);
+        position: relative;
+        width: 104%;
+        height: 104%;
+        top: -2%;
+        left: -2%; }
     .wg-card-user__photo > i {
-      line-height: 152px; }
+      font-size: 70px;
+      color: rgba(255, 255, 255, 0.5); }
   .wg-card-user__img {
     height: 100%;
-    width: auto; }
+    width: auto;
+    z-index: 1; }
   .wg-card-user__nickname {
-    color: #111111;
+    color: #ffffff;
     font-size: 16px;
+    padding-top: 16px;
     font-weight: bold;
-    padding: 20px 22px 0px 22px;
-    display: block; }
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 1; }
   .wg-card-user__name {
-    color: #111111;
+    color: #ffffff;
     font-size: 14px;
-    padding: 6px 22px 14px 22px;
-    display: block; }
-  .wg-card-user__location {
-    color: #111111;
-    font-size: 13px;
-    padding: 0px 22px 0px 22px;
-    display: block; }
+    padding-top: 6px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 1; }
+  .wg-card-user__info {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    padding: 20px;
+    display: block;
+    min-height: 40px; }
+    .wg-card-user__info-text {
+      padding-right: 41px;
+      overflow: hidden; }
 
 .wg-card-post {
   position: relative;
-  width: 360px;
-  height: 330px;
-  background: #ffffff;
-  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.49);
+  width: 500px;
+  height: auto;
   margin: 15px; }
   .wg-card-post__button-close {
     position: absolute;
@@ -2021,32 +2100,46 @@ body {
   .wg-card-post__button-menu {
     position: absolute;
     right: 14px;
-    margin-top: 8px; }
+    margin-top: 4px; }
+  .wg-card-post__button-menu-bot {
+    background: rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 12px 20px;
+    overflow: hidden; }
+  .wg-card-post__button-showdesc {
+    float: right; }
   .wg-card-post__photo {
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.1);
     font-size: 94px;
     overflow: hidden;
-    height: 200px;
+    height: 235px;
     display: flex;
     justify-content: center; }
     .wg-card-post__photo > i {
       line-height: 152px; }
-  .wg-card-post__img {
-    height: auto;
-    width: 100%; }
+  .wg-card-post__info {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    padding: 20px;
+    display: block; }
   .wg-card-post__title {
-    color: #111111;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.1);
     font-size: 16px;
     font-weight: bold;
     padding: 20px 22px 0px 22px;
     display: block; }
   .wg-card-post__description {
-    color: #111111;
-    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
     padding: 12px 22px 0px 22px;
     display: block;
-    height: 65px;
-    overflow: hidden; }
+    height: 58px;
+    overflow: hidden;
+    white-space: pre-line; }
 
 .wg-select-location__blinde {
   background-color: rgba(17, 17, 17, 0);
@@ -2281,7 +2374,8 @@ body {
       left: 0;
       width: 100%;
       display: flex;
-      justify-content: flex-end; }
+      justify-content: flex-end;
+      z-index: 2; }
     .wg-form-registration__card-img-spinner {
       position: absolute;
       background-color: rgba(17, 17, 17, 0.2);
@@ -2418,6 +2512,168 @@ body {
       color: rgba(226, 0, 0, 0.9); }
     .wg-captcha__help_disabled {
       color: rgba(226, 0, 0, 0.4); }
+
+.wg-slider {
+  width: 100%;
+  height: 250px;
+  display: block;
+  position: relative;
+  overflow: hidden; }
+  .wg-slider__img {
+    position: relative;
+    z-index: 1; }
+    .wg-slider__img_horizon {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 100%; }
+    .wg-slider__img_vertical {
+      height: 100%; }
+  .wg-slider__frame {
+    height: 100%;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    text-align: center; }
+  .wg-slider__fon {
+    filter: blur(5px);
+    position: absolute;
+    width: 104%;
+    height: 104%;
+    top: -2%;
+    opacity: 0.05;
+    left: -2%; }
+  .wg-slider__buttons {
+    width: 100%;
+    position: absolute; }
+  .wg-slider__left-button {
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+    margin-top: -33px; }
+  .wg-slider__right-button {
+    z-index: 2;
+    position: absolute;
+    right: 0px;
+    margin-top: -33px; }
+  .wg-slider__button_flat {
+    background-color: rgba(255, 255, 255, 0.4); }
+  .wg-slider__container {
+    height: 100%;
+    width: 300%;
+    float: left;
+    position: relative;
+    opacity: 1; }
+  .wg-slider__menu {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 20px;
+    height: 35px;
+    width: 100%;
+    top: 0px;
+    position: absolute;
+    z-index: 2; }
+  .wg-slider__numeric {
+    height: 100%;
+    width: auto;
+    text-align: center;
+    top: 0px;
+    position: absolute;
+    line-height: 36px;
+    padding: 0 25px;
+    right: 0; }
+  .wg-slider-enter-active {
+    opacity: 1;
+    transition: opacity 4s; }
+  .wg-slider-enter {
+    opacity: 0; }
+
+.wg-slider-navig {
+  position: relative;
+  display: block;
+  height: 60px;
+  overflow: hidden;
+  width: auto; }
+  .wg-slider-navig__container {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; }
+  .wg-slider-navig__slide {
+    height: 100%;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    margin: 0px 1px;
+    overflow: hidden;
+    transition: margin-left .5s;
+    text-align: center;
+    cursor: pointer; }
+    .wg-slider-navig__slide:after {
+      background-color: #ffffff;
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      width: 0%;
+      height: 3px;
+      left: 0;
+      transition: width 0.5s ease; }
+    .wg-slider-navig__slide_active:after {
+      background-color: #ffffff;
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      height: 3px;
+      left: 0;
+      transition: width 0.5s ease; }
+  .wg-slider-navig__img_horizon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%; }
+  .wg-slider-navig__img_vertical {
+    height: 100%; }
+
+.wg-slider-zoom {
+  height: 100%;
+  width: 100%; }
+  .wg-slider-zoom__slider {
+    height: 100%; }
+  .wg-slider-zoom__slider-navig {
+    height: 60px;
+    background-color: black;
+    opacity: 0.3;
+    z-index: 6;
+    position: absolute;
+    overflow: hidden;
+    margin-top: -62px;
+    width: 100%; }
+    .wg-slider-zoom__slider-navig:hover {
+      opacity: 1; }
+  .wg-slider-zoom__blind {
+    background-color: black; }
+  .wg-slider-zoom__button-exit {
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    right: 5px;
+    float: none;
+    left: auto; }
+  .wg-slider-zoom .wg-slider__menu {
+    display: none;
+    height: 0;
+    opacity: 0; }
+  .wg-slider-zoom .wg-slider__button_flat {
+    color: #fff !important; }
 
 
 /*# sourceMappingURL=main.css.map*/

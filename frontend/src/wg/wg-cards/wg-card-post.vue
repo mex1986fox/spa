@@ -1,35 +1,94 @@
 <template>
   <div class="wg-card-post">
-    <!-- <div class="wg-card-post__button-close">
-          <div class="ui-button ui-button_float_white ui-button_circle_s1">
-            <i class="fas fa-times"></i>
-          </div>
-    </div>-->
-    <div class="wg-card-post__photo">
-      <img
-        class="wg-card-post__img"
-        src="https://lh3.googleusercontent.com/-ws-0Jr9LVRg/VpL2DTul1aI/AAAAAAAAAVY/cfMovPqQZgc/w1602-h1044/%25D0%25BA.jpg"
-      >
+    <div class="wg-card-post__info">
+      <div class="wg-card-post__button-menu">
+        <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s2">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </div>
+      <div class="wg-card-post__info-date">{{post.date_create}}</div>
+      <div class="wg-card-post__info-text">{{post.city +" ("+post.subject+")"}}</div>
+      <div class="wg-card-post__info-text">{{post.brand +" "+post.model}}</div>
     </div>
-    <div class="wg-card-post__button-menu">
-      <div class="ui-button ui-button_float_black ui-button_noborder ui-button_circle_s1">
-        <i class="fas fa-ellipsis-v"></i>
+    <div class="wg-card-post__photo" @click="isLoadImgLincks">
+      <ui-img
+        class="wg-card-post__img"
+        :src="post.main_photo"
+        :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
+      />
+    </div>
+    <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
+    <span class="wg-card-post__title">{{post.title!=null?post.title:""}}</span>
+    <span
+      ref="descr"
+      class="wg-card-post__description wg-card-post__description_ellips"
+    >{{post.description!=null?post.description:''}}</span>
+    <div class="wg-card-post__button-menu-bot">
+      <div
+        class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
+        @click="isShowDescription"
+      >
+        <i v-if="showDescription==false" class="fas fa-angle-down"></i>
+        <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
-    <span class="wg-card-post__title">{{post.title!=null?post.title:""}}</span>
-    <span class="wg-card-post__description wg-card-post__description_ellips">{{post.description!=null?post.description:''}}</span>
   </div>
 </template>
 <script>
 export default {
   name: "wg-card-post",
   data() {
-    return {};
+    return {
+      showDescription: false,
+      slides: [],
+      showSlides: false
+    };
   },
   props: {
     post: {
       type: Object,
       default: {}
+    }
+  },
+  methods: {
+    isShowDescription() {
+      let height = this.$refs.descr.style.height;
+      if (height == "auto") {
+        this.showDescription = false;
+        this.$refs.descr.style.height = "58px";
+      } else {
+        this.showDescription = true;
+        this.$refs.descr.style.height = "auto";
+      }
+    },
+    isLoadImgLincks() {
+      if (this.slides.length > 0) {
+        this.showSlides = true;
+      } else {
+        let body = new FormData();
+        //добавляем фильтр в куки
+        body.set("users_id[]", this.post.user_id);
+        body.set("posts_id[]", this.post.post_id);
+        //отправляем запрос
+        this.$http
+          .post(this.$hosts.postPhoto + "/api/postphoto/show", body)
+          .then(
+            response => {
+              if (response.body.status == "ok") {
+                let imgs = response.body.data[0].files.origin;
+                for (let key in imgs) {
+                  this.slides.push({ src: this.$hosts.postPhoto + imgs[key] });
+                }
+                this.showSlides = true;
+              }
+            },
+            error => {
+              if (error.body.status == "except") {
+                console.dir(error);
+              }
+            }
+          );
+      }
     }
   }
 };
