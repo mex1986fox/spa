@@ -43,11 +43,11 @@ export default {
   watch: {
     token(newQ, oldQ) {
       if (oldQ == undefined && newQ != undefined) {
-        this.$store.dispatch("profile/updateProfile", this.tokenPayload.userID);
+        this.$store.dispatch(
+          "profile/updateProfile",
+          this.token
+        );
       }
-    },
-    avatar(newQ) {
-      this.dAvatar = newQ;
     }
   },
   methods: {

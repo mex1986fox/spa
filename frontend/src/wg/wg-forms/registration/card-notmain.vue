@@ -10,7 +10,7 @@
       <ui-ef-text caption="Email" name="email" :help="excEmail"/>
     </div>
     <div class="wg-form-registration__card-buttons">
-      <div class="ui-button ui-button_float_black" @click="isUpdateUser">Отправить</div>
+      <div class="ui-button ui-button_float_black" @click="isUpdateProfile">Отправить</div>
       <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
   </form>
@@ -34,7 +34,7 @@ export default {
     })
   },
   methods: {
-    isUpdateUser() {
+    isUpdateProfile() {
       this.dSpinn = true;
       this.excName = undefined;
       this.excSurname = undefined;
@@ -72,14 +72,14 @@ export default {
         return;
       }
 
-      this.$http.post(this.$hosts.services + "/api/user/update", body).then(
+      this.$http.post(this.$hosts.services + "/api/profile/update", body).then(
         response => {
           if (response.body.status == "ok") {
             // console.log(response.body.data.user);
             // обновляем профайл пользователя
             this.$store.commit(
               "profile/updateProfile",
-              response.body.data.user
+              response.body.data.profile
             );
             this.$emit("onUserUpdated");
             this.dSpinn = false;

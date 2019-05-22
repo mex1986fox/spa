@@ -25,7 +25,7 @@
       </div>
       <ui-menu :show="showMenu" @onHide="showMenu=false" position="left-bottom">
         <ul class="ui-menu__ul">
-          <li class="ui-menu__li" @click="isUpdateUser(userPhotoHost+'/'+linck)">Сделать аватаром</li>
+          <li class="ui-menu__li" @click="isUpdateProfile(userPhotoHost+'/'+linck)">Сделать аватаром</li>
           <li class="ui-menu__li" @click="isDeletePhoto(keyPhoto)">Удалить</li>
         </ul>
       </ui-menu>
@@ -69,7 +69,7 @@ export default {
   methods: {
     isDeletePhoto(key) {
       if (this.checkMain == true) {
-        this.isUpdateUser("null");
+        this.isUpdateProfile("null");
       }
       this.showMenu = false;
       this.showSpinner = true;
@@ -94,19 +94,19 @@ export default {
           }
         );
     },
-    isUpdateUser(url) {
+    isUpdateProfile(url) {
       (this.showMenu = false), (this.showSpinner = true);
       let body = {
         avatar: url,
         access_token: this.token
       };
-      this.$http.post(this.$hosts.services + "/api/user/update", body).then(
+      this.$http.post(this.$hosts.services + "/api/profile/update", body).then(
         response => {
           if (response.body.status == "ok") {
             // обновляем профайл пользователя
             this.$store.commit(
               "profile/updateProfile",
-              response.body.data.user
+              response.body.data.profile
             );
             this.$emit("onUserUpdated");
           }

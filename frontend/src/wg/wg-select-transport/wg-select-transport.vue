@@ -84,6 +84,15 @@ export default {
     help: {
       type: String,
       default: ""
+    },
+    modelID: {
+      type: Number,
+      default: undefined
+    }
+  },
+  watch: {
+    modelID(newQ) {
+      this.isCheckModel(newQ);
     }
   },
   methods: {
@@ -110,6 +119,11 @@ export default {
       this.dValue = chips.value;
       this.dTextValue = chips.caption;
       this.isHideMenu();
+    },
+    isCheckModel(modelID) {
+      let model = this.$store.getters["transports/getModel"](modelID);
+      this.dValue = model.model_id;
+      this.dTextValue = model.extended_name;
     }
   },
   computed: {
@@ -162,6 +176,11 @@ export default {
         return models;
       }
       return [];
+    }
+  },
+  mounted() {
+    if (this.modelID != undefined && this.modelID != "") {
+      this.isCheckModel(this.modelID);
     }
   }
 };

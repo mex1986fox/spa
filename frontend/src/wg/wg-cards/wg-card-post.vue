@@ -2,7 +2,10 @@
   <div class="wg-card-post">
     <div class="wg-card-post__info">
       <div class="wg-card-post__button-menu">
-        <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s2">
+        <div
+          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s2"
+          @click="showMenu=true"
+        >
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
@@ -32,16 +35,30 @@
         <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
+    <wg-form-update-post :show="showUpdatePost" @onHide="isHideUpdatePost" :post="post"/>
+    <ui-menu :show="showMenu" @onHide="isHideMenu">
+      <ul class="ui-menu__ul">
+        <li
+          class="ui-menu__li"
+          v-if="profileUserID==post.user_id"
+          @click="isShowUpdatePost"
+        >Редактировать</li>
+        <li class="ui-menu__li">Пожаловаться</li>
+      </ul>
+    </ui-menu>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "wg-card-post",
   data() {
     return {
       showDescription: false,
       slides: [],
-      showSlides: false
+      showSlides: false,
+      showMenu: false,
+      showUpdatePost: false
     };
   },
   props: {
@@ -50,7 +67,23 @@ export default {
       default: {}
     }
   },
+  computed: {
+    ...mapGetters({
+      profileUserID: "profile/getID"
+    })
+  },
   methods: {
+    isHideMenu() {
+      this.showMenu = false;
+    },
+    isShowUpdatePost() {
+      this.showMenu = false;
+      this.showUpdatePost = true;
+    },
+    isHideUpdatePost() {
+      this.showUpdatePost = false;
+      this.$emit("onUpdatePost");
+    },
     isShowDescription() {
       let height = this.$refs.descr.style.height;
       if (height == "auto") {

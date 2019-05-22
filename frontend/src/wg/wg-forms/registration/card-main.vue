@@ -73,7 +73,7 @@ export default {
         return;
       }
       this.dSpinn = true;
-      this.$http.post(this.$hosts.services + "/api/user/create", body).then(
+      this.$http.post(this.$hosts.services + "/api/profile/create", body).then(
         response => {
           if (response.body.status == "ok") {
             this.isCreateToken();

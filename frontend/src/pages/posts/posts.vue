@@ -25,7 +25,12 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-card-post v-for="(post, key) in posts" :key="key" :post="post"/>
+      <wg-card-post
+        v-for="(post, key) in posts"
+        :key="key"
+        :post="post"
+        @onUpdatePost="isShowPosts"
+      />
       <!-- </div> -->
 
       <div style="width: 100%; display: flex; justify-content: center;">

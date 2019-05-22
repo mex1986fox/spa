@@ -16,7 +16,12 @@
           </ui-badge>
         </div>
       </lt-main-menu>
-      <wg-card-user v-for="(user, key) in users" :key="key" :user="user"/>
+      <wg-card-user
+        v-for="(user, key) in users"
+        :key="key"
+        :user="user"
+        @onUpdateProfile="isShowUsers"
+      />
       <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddUsers">Показать еще ...</div>
       </div>
@@ -59,7 +64,7 @@ export default {
       for (const key in filterUsers) {
         body.set(key, filterUsers[key]);
       }
-      this.$http.post(this.$hosts.services + "/api/user/show", body).then(
+      this.$http.post(this.$hosts.services + "/api/users/show", body).then(
         response => {
           if (response.body.status == "ok") {
             this.$store.commit("users/updateUsers", response.body.data);
@@ -80,7 +85,7 @@ export default {
       for (const key in filterUsers) {
         body.set(key, filterUsers[key]);
       }
-      this.$http.post(this.$hosts.services + "/api/user/show", body).then(
+      this.$http.post(this.$hosts.services + "/api/users/show", body).then(
         response => {
           if (response.body.status == "ok") {
             this.$store.commit("users/updateUsers", [

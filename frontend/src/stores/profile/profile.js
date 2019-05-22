@@ -55,13 +55,13 @@ const profile = {
     },
   },
   actions: {
-    updateProfile(context, user_id) {
-      let body = { "user_id": user_id }
-      Vue.http.post(Vue.prototype.$hosts.services + "/api/user/show", body)
+    updateProfile(context, access_token) {
+      let body = { "access_token": access_token }
+      Vue.http.post(Vue.prototype.$hosts.services + "/api/profile/show", body)
         .then(
           response => {
-            if (response.body.data != undefined) {
-              context.commit("updateProfile", response.body.data[0]);
+            if (response.body.data.profile != undefined) {
+              context.commit("updateProfile", response.body.data.profile);
             }
           },
           error => {

@@ -8,6 +8,9 @@ import WgFormCreatPost from "./wg-forms/creatPost/wg-form-creat-post.vue";
 Vue.component("wg-form-creat-post", WgFormCreatPost);
 import WgFormUpdateProfile from "./wg-forms/updateProfile/wg-form-update-profile.vue";
 Vue.component("wg-form-update-profile", WgFormUpdateProfile);
+import WgFormUpdatePost from "./wg-forms/updatePost/wg-form-update-post.vue";
+Vue.component("wg-form-update-post", WgFormUpdatePost);
+
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);

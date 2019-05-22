@@ -67,6 +67,7 @@ export default {
     },
     isHideUpdateProfile() {
       this.showUpdateProfile = false;
+      this.$emit("onUpdateProfile");
     },
     isShowUpdateProfile() {
       this.showMenu = false;
