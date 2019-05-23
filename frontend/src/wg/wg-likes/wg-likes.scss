@@ -1,0 +1,11 @@
+.wg-likes {
+    &__counter {
+        position: relative;
+        height: 41px;
+        width: auto;
+        float: left;
+        color: rgba($color-white, 0.5);
+        line-height: 44px;
+        font-size: 14px;
+    }
+}

@@ -27,6 +27,12 @@
       class="wg-card-post__description wg-card-post__description_ellips"
     >{{post.description!=null?post.description:''}}</span>
     <div class="wg-card-post__button-menu-bot">
+      <wg-likes-post
+        :likes="post.likes"
+        :dislikes="post.dislikes"
+        :userID="post.user_id"
+        :postID="post.post_id"
+      />
       <div
         class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
         @click="isShowDescription"
@@ -43,6 +49,7 @@
           v-if="profileUserID==post.user_id"
           @click="isShowUpdatePost"
         >Редактировать</li>
+        <li class="ui-menu__li" v-if="profileUserID==post.user_id" @click="isDeletePost">Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
@@ -69,7 +76,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      profileUserID: "profile/getID"
+      profileUserID: "profile/getID",
+      token: "tokens/getAccessToken"
     })
   },
   methods: {
@@ -122,6 +130,47 @@ export default {
             }
           );
       }
+    },
+    isDeletePost() {
+      this.showMenu = false;
+      let body = new FormData();
+      //добавляем фильтр в куки
+      body.set("access_token", this.token);
+      body.set("post_id", this.post.post_id);
+      //отправляем запрос
+      this.$http.post(this.$hosts.services + "/api/post/delete", body).then(
+        response => {
+          if (response.body.status == "ok") {
+            this.isDeleteAlbum();
+          }
+        },
+        error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        }
+      );
+    },
+    isDeleteAlbum() {
+      let body = new FormData();
+      //добавляем фильтр в куки
+      body.set("access_token", this.token);
+      body.set("post_id", this.post.post_id);
+      //отправляем запрос
+      this.$http
+        .post(this.$hosts.services + "/postphoto/api/album/delete", body)
+        .then(
+          response => {
+            if (response.body.status == "ok") {
+              this.$emit("onUpdatePost");
+            }
+          },
+          error => {
+            if (error.body.status == "except") {
+              console.dir(error);
+            }
+          }
+        );
     }
   }
 };
