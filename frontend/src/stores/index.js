@@ -7,6 +7,7 @@ import Tokens from "./tokens/tokens.js";
 import Profile from "./profile/profile.js";
 import Users from "./users/users.js";
 import Posts from "./posts/posts.js";
+import Ads from "./ads/ads.js";
 Vue.use(Vuex);
 
 //импорт хранилищь vuex
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
     locations: Locations,
     transports: Transports,
     users: Users,
-    posts: Posts
+    posts: Posts,
+    ads: Ads
   },
   state: {},
   getters: {},

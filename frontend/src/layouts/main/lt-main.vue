@@ -6,7 +6,7 @@
         <router-link to="/users" class="lt-main__menu-item">Люди</router-link>
         <router-link to="/posts" class="lt-main__menu-item">Посты</router-link>
         <router-link to="/ads" class="lt-main__menu-item">Объявления</router-link>
-        <router-link to="/ads" class="lt-main__menu-item">Витрины</router-link>
+        <router-link to="/wcase" class="lt-main__menu-item">Витрины</router-link>
         <!-- <li class="lt-main__menu-item">События</li>
         <li class="lt-main__menu-item">Фотографии</li>-->
       </ul>
