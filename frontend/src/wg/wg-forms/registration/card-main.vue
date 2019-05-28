@@ -2,19 +2,22 @@
   <form ref="formCreateUser">
     <div class="wg-form-registration__card-header">Укажите регистрационные данные</div>
     <div class="wg-form-registration__card-ef">
-      <ui-ef-text name="login" caption="Логин *" :help="excLogin"></ui-ef-text>
-      <ui-ef-password name="password" caption="Пароль *" :help="excPassword"></ui-ef-password>
+      <ui-ef-text name="login"
+                  caption="Логин *"
+                  :help="excLogin"></ui-ef-text>
+      <ui-ef-password name="password"
+                      caption="Пароль *"
+                      :help="excPassword"></ui-ef-password>
       <wg-captcha :help="excCaptcha"></wg-captcha>
     </div>
     <div class="wg-form-registration__card-buttons">
-      <input
-        type="button"
-        class="ui-button ui-button_float_black"
-        @click="isCreateUser"
-        :disabled="dSpinn"
-        value="Отправить"
-      >
-      <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
+      <input type="button"
+             class="ui-button ui-button_float_black"
+             @click="isCreateUser"
+             :disabled="dSpinn"
+             value="Отправить">
+      <ui-spinner v-if="dSpinn==true"
+                  class="ui-spinner_s1" />
     </div>
   </form>
 </template>
@@ -73,16 +76,17 @@ export default {
         return;
       }
       this.dSpinn = true;
-      this.$http.post(this.$hosts.services + "/api/profile/create", body).then(
-        response => {
+      this.$api("profile")
+        .create(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.isCreateToken();
             if (this.token != undefined) {
               this.dSpinn = false;
             }
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             let exc = error.body.data;
             this.excLogin = exc["login"] ? exc["login"] : "";
@@ -91,8 +95,7 @@ export default {
             this.dSpinn = false;
           }
           //   console.dir(error);
-        }
-      );
+        });
     },
     isCreateToken() {
       let form = this.$refs.formCreateUser;

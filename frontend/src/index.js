@@ -9,6 +9,9 @@ import store from "./stores/index.js";
 //имена хостов которые будем использовать в проекте
 import Hosts from "./plugins/hosts.js";
 Vue.use(Hosts);
+//api запросы к серверам
+import Api from "./api/api.js";
+Vue.use(Api);
 
 // подключаем библиотеки
 import "./ui/index.js";
