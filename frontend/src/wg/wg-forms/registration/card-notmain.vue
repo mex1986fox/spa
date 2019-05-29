@@ -71,9 +71,9 @@ export default {
         this.dSpinn = false;
         return;
       }
-
-      this.$http.post(this.$hosts.services + "/api/profile/update", body).then(
-        response => {
+      this.$api("profile")
+        .update(body)
+        .then(response => {
           if (response.body.status == "ok") {
             // console.log(response.body.data.user);
             // обновляем профайл пользователя
@@ -84,8 +84,8 @@ export default {
             this.$emit("onUserUpdated");
             this.dSpinn = false;
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             this.dSpinn = false;
             let exc = error.body.data;
@@ -94,8 +94,7 @@ export default {
             this.excPhone = exc["phone"] ? exc["phone"] : "";
             this.excEmail = exc["email"] ? exc["email"] : "";
           }
-        }
-      );
+        });
     }
   }
 };

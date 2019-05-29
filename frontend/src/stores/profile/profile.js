@@ -57,17 +57,17 @@ const profile = {
   actions: {
     updateProfile(context, access_token) {
       let body = { "access_token": access_token }
-      Vue.http.post(Vue.prototype.$hosts.services + "/api/profile/show", body)
+      Vue.prototype.$api("profile").show(body)
         .then(
           response => {
             if (response.body.data.profile != undefined) {
               context.commit("updateProfile", response.body.data.profile);
             }
-          },
-          error => {
-            console.log(error)
-          }
-        );
+          }).catch(
+            error => {
+              console.log(error)
+            }
+          );
     }
   }
 };

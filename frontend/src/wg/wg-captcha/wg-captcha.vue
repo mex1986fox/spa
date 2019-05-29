@@ -158,35 +158,39 @@ export default {
       }
     },
     isCreateCaptcha() {
-      this.$http.post(this.$hosts.services + "/api/captcha/create").then(
-        response => {
-          if (response.body.status == "ok") {
-            this.token = response.body.data.token;
-            let tokenPayloadHex = this.token.split(".")[1];
-            let tokenPayload = atob(tokenPayloadHex);
-            this.dPayload = JSON.parse(tokenPayload);
-            this.isShowCaptcha();
-            this.isStartTimer();
+      this.$http
+        .post(this.$hosts.services + "/captcha/api/captcha/create")
+        .then(
+          response => {
+            if (response.body.status == "ok") {
+              this.token = response.body.data.token;
+              let tokenPayloadHex = this.token.split(".")[1];
+              let tokenPayload = atob(tokenPayloadHex);
+              this.dPayload = JSON.parse(tokenPayload);
+              this.isShowCaptcha();
+              this.isStartTimer();
+            }
+          },
+          error => {
+            console.dir(error);
           }
-        },
-        error => {
-          console.dir(error);
-        }
-      );
+        );
     },
     isShowCaptcha() {
       let body = new FormData();
       body.set("token", this.token);
-      this.$http.post(this.$hosts.services + "/api/captcha/show", body).then(
-        response => {
-          if (response.body.status == "ok") {
-            this.src = response.body.data.src;
+      this.$http
+        .post(this.$hosts.services + "/captcha/api/captcha/show", body)
+        .then(
+          response => {
+            if (response.body.status == "ok") {
+              this.src = response.body.data.src;
+            }
+          },
+          error => {
+            console.dir(error);
           }
-        },
-        error => {
-          console.dir(error);
-        }
-      );
+        );
     },
     isConfirmCaptcha() {
       this.flConfirmreCapcha = true;
@@ -205,24 +209,26 @@ export default {
       let body = new FormData();
       body.set("token", this.token);
       body.set("answer", this.answer);
-      this.$http.post(this.$hosts.services + "/api/captcha/confirm", body).then(
-        response => {
-          if (response.body.status == "ok") {
-            this.flConfirmreCapcha = false;
-            this.sendToken = response.body.data.token;
-            this.check = true;
-            this.dCaption = "Действительно! Вы не робот.";
-            this.isHideMenu();
+      this.$http
+        .post(this.$hosts.services + "/captcha/api/captcha/confirm", body)
+        .then(
+          response => {
+            if (response.body.status == "ok") {
+              this.flConfirmreCapcha = false;
+              this.sendToken = response.body.data.token;
+              this.check = true;
+              this.dCaption = "Действительно! Вы не робот.";
+              this.isHideMenu();
+            }
+          },
+          error => {
+            if (error.body.data.answer == "Не верный.") {
+              this.flConfirmreCapcha = false;
+              this.helpmenu = "Не верный ответ";
+              this.isShowCaptcha();
+            }
           }
-        },
-        error => {
-          if (error.body.data.answer == "Не верный.") {
-            this.flConfirmreCapcha = false;
-            this.helpmenu = "Не верный ответ";
-            this.isShowCaptcha();
-          }
-        }
-      );
+        );
     }
   }
 };

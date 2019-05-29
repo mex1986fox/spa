@@ -108,18 +108,18 @@ export default {
       this.$cookie.set("filter_users", JSON.stringify(cookieFilterUsers));
       // console.dir(this.$cookie.get("filter_users"));
       //отправляем запрос
-      this.$http.post(this.$hosts.services + "/api/users/show", body).then(
-        response => {
+      this.$api("user")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit("users/updateUsers", response.body.data);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     }
   }
 };

@@ -76,24 +76,22 @@ export default {
         body.set("user_id", this.userID);
         body.set("post_id", this.postID);
         body.set("vote", vote);
-        this.$http
-          .post(this.$hosts.services + "/post/api/like/create", body)
-          .then(
-            response => {
-              if (response.body.status == "ok") {
-                if (vote == 1) {
-                  this.dLikes += 1;
-                }
-                if (vote == 0) {
-                  this.dDislikes += 1;
-                }
+        this.$api("post")
+          .createLike(body)
+          .then(response => {
+            if (response.body.status == "ok") {
+              if (vote == 1) {
+                this.dLikes += 1;
               }
-            },
-            error => {
-              this.dExc = error.body.data.massege;
-              this.showSnackbar = true;
+              if (vote == 0) {
+                this.dDislikes += 1;
+              }
             }
-          );
+          })
+          .catch(error => {
+            this.dExc = error.body.data.massege;
+            this.showSnackbar = true;
+          });
       } else {
         this.dExc = "Лайкать могут только зарегистрированные пользователи.";
         this.showSnackbar = true;

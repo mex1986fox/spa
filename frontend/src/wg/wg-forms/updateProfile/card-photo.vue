@@ -104,42 +104,35 @@ export default {
       let body = new FormData(form);
       body.set("access_token", this.token);
       this.dLoading = true;
-      this.$http
-        .post(
-          this.$hosts.services + "/api/" + this.nameService + "/upload",
-          body
-        )
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.changeFiles = [];
-              this.dLoading = false;
-              this.isShowLincksPhoto();
-            }
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-            }
+      this.$api("userphoto")
+        .upload(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.changeFiles = [];
+            this.dLoading = false;
+            this.isShowLincksPhoto();
           }
-        );
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        });
     },
     isShowLincksPhoto() {
       let body = { users_id: [this.tokenPayload.userID] };
-      this.$http
-        .post(this.$hosts.services + "/api/" + this.nameService + "/show", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.lincksPhoto = response.body.data[0].files.mini;
-            }
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-            }
+      this.$api("userphoto")
+        .show(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.lincksPhoto = response.body.data[0].files.mini;
           }
-        );
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        });
     },
     isDeletePhoto(keyPhoto) {
       delete this.lincksPhoto[keyPhoto];

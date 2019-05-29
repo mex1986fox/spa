@@ -107,40 +107,38 @@ export default {
       body.set("access_token", this.token);
       body.set("post_id", this.post.post_id);
       this.dLoading = true;
-      this.$http
-        .post(this.$hosts.services + "/api/postphoto/upload", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.changeFiles = [];
-              this.dLoading = false;
-              this.isShowLincksPhoto();
-            }
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-            }
+      this.$api("postphoto")
+        .upload(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.changeFiles = [];
+            this.dLoading = false;
+            this.isShowLincksPhoto();
           }
-        );
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        });
     },
     isShowLincksPhoto() {
       let body = {
         users_id: [this.tokenPayload.userID],
         posts_id: [this.post.post_id]
       };
-      this.$http.post(this.$hosts.services + "/api/postphoto/show", body).then(
-        response => {
+      this.$api("postphoto")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.lincksPhoto = response.body.data[0].files.mini;
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     },
     isDeletePhoto(keyPhoto) {
       delete this.lincksPhoto[keyPhoto];

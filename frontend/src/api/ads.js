@@ -1,29 +1,31 @@
 import Vue from "vue/dist/vue.js";
 
-const profile = {
-  authentificate(body) {
+const ads = {
+  create(body) {
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/user/api/profile/authentificate", body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/create", body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
   update(body) {
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/user/api/profile/update", body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/update", body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
-  create(body) {
+  delete(body) {
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/user/api/profile/create", body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/delete", body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
   show(body) {
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/user/api/profile/show", body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/show", body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
+
+
 };
-export default profile;
+export default ads;

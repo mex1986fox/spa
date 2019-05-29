@@ -31,8 +31,8 @@
       <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddAds">Показать еще ...</div>
       </div>
-      <!-- <wg-form-creat-ad :show="showFormCreatAd" @onHide="showFormCreatAd=false"/> -->
-      <!-- <wg-filter-ad :show="showFilter" @onHide="showFilter=false"/> -->
+      <wg-form-creat-ad :show="showFormCreatAd" @onHide="showFormCreatAd=false"/>
+      <wg-filter-ad :show="showFilter" @onHide="showFilter=false"/>
     </div>
   </lt-main>
 </template>
@@ -73,18 +73,18 @@ export default {
       for (const key in filterAds) {
         body.set(key, filterAds[key]);
       }
-      this.$http.post(this.$hosts.services + "ads/api/ads/show", body).then(
-        response => {
+      this.$api("ads")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit("ads/updateAds", response.body.data.ads);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     },
     isAddAds() {
       let filterAds = JSON.parse(this.$cookie.get("filter_ads"));
@@ -94,21 +94,21 @@ export default {
       for (const key in filterAds) {
         body.set(key, filterAds[key]);
       }
-      this.$http.post(this.$hosts.services + "ads/api/ads/show", body).then(
-        response => {
+      this.$api("ads")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit("ads/updateAds", [
               ...this.ads,
               ...response.body.data.ads
             ]);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     },
     checkFilterAds() {
       this.countFilterAds = 0;

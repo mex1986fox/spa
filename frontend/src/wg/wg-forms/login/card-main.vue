@@ -82,20 +82,20 @@ export default {
       if (fExc == true) {
         return;
       }
-      this.$http.post(this.$hosts.services + "/api/token/create", body).then(
-        response => {
+      this.$api("token")
+        .create(body)
+        .then(response => {
           if (response.body.data.access_token != undefined) {
             this.$store.dispatch("tokens/updateTokens", response.body.data);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           this.showSnackbar = true;
           let exc = error.body.data;
           this.masSnackbar = exc.massege;
           this.excLogin = exc["login"] ? exc["login"] : "";
           this.excPassword = exc["password"] ? exc["password"] : "";
-        }
-      );
+        });
     }
   }
 };

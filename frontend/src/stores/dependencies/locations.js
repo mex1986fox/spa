@@ -80,14 +80,13 @@ const locations = {
         state.cities == undefined ||
         state.subjects == undefined
       ) {
-        Vue.http
-          .post(Vue.prototype.$hosts.services + "/api/locations/show")
+        Vue.prototype.$api("locations").show()
           .then(
             response => {
               context.commit("updateLocations", response.body.data);
-            },
-            error => { }
-          );
+            }).catch(
+              error => { }
+            );
       }
     }
   }

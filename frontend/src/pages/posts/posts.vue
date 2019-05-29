@@ -78,18 +78,18 @@ export default {
       for (const key in filterPosts) {
         body.set(key, filterPosts[key]);
       }
-      this.$http.post(this.$hosts.services + "/api/post/show", body).then(
-        response => {
+      this.$api("post")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit("posts/updatePosts", response.body.data.posts);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     },
     isAddPosts() {
       let filterPosts = JSON.parse(this.$cookie.get("filter_posts"));
@@ -99,21 +99,21 @@ export default {
       for (const key in filterPosts) {
         body.set(key, filterPosts[key]);
       }
-      this.$http.post(this.$hosts.services + "/api/post/show", body).then(
-        response => {
+      this.$api("post")
+        .show(body)
+        .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit("posts/updatePosts", [
               ...this.posts,
               ...response.body.data.posts
             ]);
           }
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
-        }
-      );
+        });
     },
     checkFilterPosts() {
       this.countFilterPosts = 0;

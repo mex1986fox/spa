@@ -55,7 +55,7 @@ const tokens = {
         "login": body.login,
         "password": body.password
       }
-      Vue.http.post(Vue.prototype.$hosts.services + "/api/token/create", mbody)
+      Vue.prototype.$api("token").create(mbody)
         .then(
           response => {
             if (response.body.data.access_token != undefined) {
@@ -72,7 +72,8 @@ const tokens = {
                 }, uptime));
               }
             }
-          },
+          })
+        .catch(
           error => {
             console.log(error)
           }
@@ -80,7 +81,7 @@ const tokens = {
     },
     deleteTokens(context) {
       let body = { "access_token": context.getters.getAccessToken }
-      Vue.http.post(Vue.prototype.$hosts.services + "/api/token/delete", body)
+      Vue.prototype.$api("token").delete(body)
         .then(
           response => {
             if (response.body.status == "ok") {
@@ -88,7 +89,8 @@ const tokens = {
               context.commit("updateRefreshToken", undefined);
               context.commit("deleteTimerUpdate");
             }
-          },
+          })
+        .catch(
           error => {
             console.log(error)
           }
@@ -97,7 +99,7 @@ const tokens = {
     updateTokens(context, tokens = undefined) {
       if (tokens == undefined) {
         let body = { "refresh_token": context.getters.getRefreshToken }
-        Vue.http.post(Vue.prototype.$hosts.services + "/api/token/update", body)
+        Vue.prototype.$api("token").update(body)
           .then(
             response => {
               if (response.body.data.access_token != undefined) {
@@ -105,7 +107,8 @@ const tokens = {
                 context.commit("updateRefreshToken", response.body.data.refresh_token);
                 // console.dir(response.body.data);
               }
-            },
+            })
+          .catch(
             error => {
               console.log(error)
             }

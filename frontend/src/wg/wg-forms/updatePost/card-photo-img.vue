@@ -81,22 +81,20 @@ export default {
         name_files: [key],
         access_token: this.token
       };
-      this.$http
-        .post(this.$hosts.services + "/api/postphoto/delete", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.$emit("onDeletePhoto", key);
-            }
-            this.showSpinner = false;
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-              this.showSpinner = false;
-            }
+      this.$api("postphoto")
+        .delete(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.$emit("onDeletePhoto", key);
           }
-        );
+          this.showSpinner = false;
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+            this.showSpinner = false;
+          }
+        });
     },
     isCheckMain(url) {
       (this.showMenu = false), (this.showSpinner = true);
@@ -105,8 +103,9 @@ export default {
         post_id: this.post.post_id,
         access_token: this.token
       };
-      this.$http.post(this.$hosts.services + "/api/post/update", body).then(
-        response => {
+      this.$api("post")
+        .update(body)
+        .then(response => {
           if (response.body.status == "ok") {
             // обновляем профайл пользователя
             this.$emit("onUpdatePost", response.body.data.post);
@@ -114,13 +113,12 @@ export default {
           setTimeout(() => {
             this.showSpinner = false;
           }, 1500);
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
           }
           this.showSpinner = false;
-        }
-      );
+        });
     }
   }
 };

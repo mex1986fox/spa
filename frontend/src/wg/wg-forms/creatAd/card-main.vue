@@ -2,16 +2,22 @@
   <form ref="formCreatePost">
     <div class="wg-form-registration__card-header">Укажите основные данные</div>
     <div class="wg-form-create-post__card-ef">
-      <ui-ef-text name="title" caption="Заголовок *" :help="excTitle"></ui-ef-text>
-      <ui-ef-textarea name="description" caption="Описание *" :help="excDescr" :autoresize="200"></ui-ef-textarea>
       <wg-select-location caption="Город проживания *" name="city_id" :help="excCity"/>
       <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
+      <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска" :help="excYear"/>
+      <ui-ef-text
+        :help="excPrice"
+        name="price"
+        caption="Цена руб."
+        :masc="{use:mascNumber}"
+        :maxlength="11"
+      />
     </div>
     <div class="wg-form-registration__card-buttons">
       <input
         model="button"
         class="ui-button ui-button_float_black"
-        @click="isCreatePost"
+        @click="isCreateAd"
         :disabled="dSpinn"
         value="Создать"
       >
@@ -35,10 +41,10 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      excTitle: "",
-      excDescr: "",
       excModel: "",
       excCity: "",
+      excYear: "",
+      excPrice: "",
       showSnackbar: false,
       masSnackbar: "",
       dSpinn: false
@@ -47,7 +53,22 @@ export default {
   computed: {
     ...mapGetters({
       token: "tokens/getAccessToken"
-    })
+    }),
+    yearMenu() {
+      let minDate = 1935;
+      let maxDate = 2019;
+      let menu = [];
+      console.dir("asdds");
+      while (minDate != maxDate) {
+        menu.push({
+          value: maxDate,
+          option: maxDate,
+          selected: false
+        });
+        maxDate--;
+      }
+      return menu;
+    }
   },
   watch: {
     token(newQ) {
@@ -57,27 +78,27 @@ export default {
     }
   },
   methods: {
-    isCreatePost() {
+    isCreateAd() {
       this.dSpinn = true;
-      this.excTitle = "";
-      this.excDescr = "";
+      this.excYear = "";
+      this.excPrice = "";
       this.excCity = "";
       this.excModel = "";
       let form = this.$refs.formCreatePost;
       let body = new FormData(form);
       body.set("access_token", this.token);
-      let title = body.get("title");
-      let description = body.get("description");
+      let price = body.get("price");
+      let year = body.get("year");
       let city_id = body.get("city_id");
       let model_id = body.get("model_id");
 
       let fExc = false;
-      if (title == undefined || title == "") {
-        this.excTitle = "Заполните заголовок.";
+      if (price == undefined || price == "") {
+        this.excTitle = "Заполните цену.";
         fExc = true;
       }
-      if (description == undefined || description == "") {
-        this.excDescr = "Заполните описание.";
+      if (year == undefined || year == "") {
+        this.excDescr = "Заполните год.";
         fExc = true;
       }
       if (city_id == undefined || city_id == "") {
@@ -92,35 +113,45 @@ export default {
         this.dSpinn = false;
         return;
       }
-      if (title.length > 70) {
-        this.excTitle = "Не более 70 символов.";
-        fExc = true;
-      }
-      if (description.length > 1600) {
-        this.excDescr = "Не более 1600 символов.";
-        fExc = true;
-      }
-      if (fExc == true) {
-        this.dSpinn = false;
-        return;
-      }
 
-      this.$api("post")
+      this.$api("ads")
         .create(body)
         .then(response => {
           this.dSpinn = false;
-          this.$emit("onCreatedPost", response.body.data);
+          this.$emit("onCreatedAd", response.body.data);
         })
         .catch(error => {
           this.dSpinn = false;
           this.showSnackbar = true;
           let exc = error.body.data;
           this.masSnackbar = exc.massege;
-          this.excTitle = exc["title"] ? exc["title"] : "";
-          this.excDescr = exc["description"] ? exc["description"] : "";
+          this.excTitle = exc["price"] ? exc["price"] : "";
+          this.excDescr = exc["year"] ? exc["year"] : "";
           this.excCity = exc["city_id"] ? exc["city_id"] : "";
           this.excModel = exc["model_id"] ? exc["model_id"] : "";
         });
+    },
+    mascNumber(val) {
+      let newQ = val.replace(/[^0-9]/gim, "");
+      if (newQ[0] == 0) {
+        newQ = newQ.substr(1);
+      }
+      if (newQ.length > 4) {
+        let spl = newQ.split("");
+        spl.splice(-3, 0, " ");
+        newQ = spl.join("");
+      }
+      if (newQ.length > 7) {
+        let spl = newQ.split("");
+        spl.splice(-7, 0, " ");
+        newQ = spl.join("");
+      }
+      if (newQ.length > 11) {
+        let spl = newQ.split("");
+        spl.splice(-11, 0, " ");
+        newQ = spl.join("");
+      }
+      return newQ;
     }
   }
 };

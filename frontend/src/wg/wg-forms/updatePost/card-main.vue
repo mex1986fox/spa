@@ -128,13 +128,14 @@ export default {
         return;
       }
 
-      this.$http.post(this.$hosts.services + "/api/post/update", body).then(
-        response => {
+      this.$api("post")
+        .update(body)
+        .then(response => {
           this.dSpinn = false;
           this.dPost = response.body.data.post;
           this.$emit("onUpdatePost", response.body.data.post);
-        },
-        error => {
+        })
+        .catch(error => {
           this.dSpinn = false;
           this.showSnackbar = true;
           let exc = error.body.data;
@@ -143,8 +144,7 @@ export default {
           this.excDescr = exc["description"] ? exc["description"] : "";
           this.excCity = exc["city_id"] ? exc["city_id"] : "";
           this.excModel = exc["model_id"] ? exc["model_id"] : "";
-        }
-      );
+        });
     }
   }
 };

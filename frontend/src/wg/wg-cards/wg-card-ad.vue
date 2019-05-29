@@ -9,29 +9,29 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div class="wg-card-post__info-date">{{post.date_create}}</div>
-      <div class="wg-card-post__info-text">{{post.city +" ("+post.subject+")"}}</div>
-      <div class="wg-card-post__info-text">{{post.brand +" "+post.model}}</div>
+      <div class="wg-card-post__info-date">{{ad.date_create}}</div>
+      <div class="wg-card-post__info-text">{{ad.city +" ("+ad.subject+")"}}</div>
+      <div class="wg-card-post__info-text">{{ad.brand +" "+ad.model}}</div>
     </div>
     <div class="wg-card-post__photo" @click="isLoadImgLincks">
       <ui-img
         class="wg-card-post__img"
-        :src="post.main_photo"
+        :src="ad.main_photo"
         :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
-    <span class="wg-card-post__title">{{post.title!=null?post.title:""}}</span>
+    <span class="wg-card-post__title">{{ad.title!=null?ad.title:""}}</span>
     <span
       ref="descr"
       class="wg-card-post__description wg-card-post__description_ellips"
-    >{{post.description!=null?post.description:''}}</span>
+    >{{ad.description!=null?ad.description:''}}</span>
     <div class="wg-card-post__button-menu-bot">
       <wg-likes-post
-        :likes="post.likes"
-        :dislikes="post.dislikes"
-        :userID="post.user_id"
-        :postID="post.post_id"
+        :likes="ad.likes"
+        :dislikes="ad.dislikes"
+        :userID="ad.user_id"
+        :postID="ad.post_id"
       />
       <div
         class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
@@ -46,10 +46,10 @@
       <ul class="ui-menu__ul">
         <li
           class="ui-menu__li"
-          v-if="profileUserID==post.user_id"
+          v-if="profileUserID==ad.user_id"
           @click="isShowUpdatePost"
         >Редактировать</li>
-        <li class="ui-menu__li" v-if="profileUserID==post.user_id" @click="isDeletePost">Удалить</li>
+        <li class="ui-menu__li" v-if="profileUserID==ad.user_id" @click="isDeletePost">Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
@@ -69,7 +69,7 @@ export default {
     };
   },
   props: {
-    post: {
+    ad: {
       type: Object,
       default: {}
     }

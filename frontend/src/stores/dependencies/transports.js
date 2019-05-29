@@ -130,14 +130,13 @@ const transports = {
         state.bodies == undefined ||
         state.transmissions == undefined
       ) {
-        Vue.http
-          .post(Vue.prototype.$hosts.services + "/api/transports/show")
+        Vue.prototype.$api("transports").show()
           .then(
             response => {
               context.commit("updateTransports", response.body.data);
-            },
-            error => { }
-          );
+            }).catch(
+              error => { }
+            );
       }
     }
   }

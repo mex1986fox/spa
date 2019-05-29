@@ -10,6 +10,8 @@ import WgFormUpdateProfile from "./wg-forms/updateProfile/wg-form-update-profile
 Vue.component("wg-form-update-profile", WgFormUpdateProfile);
 import WgFormUpdatePost from "./wg-forms/updatePost/wg-form-update-post.vue";
 Vue.component("wg-form-update-post", WgFormUpdatePost);
+import WgFormCreatAd from "./wg-forms/creatAd/wg-form-creat-ad.vue";
+Vue.component("wg-form-creat-ad", WgFormCreatAd);
 
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
@@ -27,6 +29,8 @@ import WgCardUser from "./wg-cards/wg-card-user.vue";
 Vue.component("wg-card-user", WgCardUser);
 import WgCardPost from "./wg-cards/wg-card-post.vue";
 Vue.component("wg-card-post", WgCardPost);
+import WgCardAd from "./wg-cards/wg-card-ad.vue";
+Vue.component("wg-card-ad", WgCardAd);
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);
@@ -34,6 +38,8 @@ import WgFilterUsers from "./wg-filters/wg-filter-users.vue";
 Vue.component("wg-filter-users", WgFilterUsers);
 import WgFilterPost from "./wg-filters/wg-filter-post.vue";
 Vue.component("wg-filter-post", WgFilterPost);
+import WgFilterAd from "./wg-filters/wg-filter-ad.vue";
+Vue.component("wg-filter-ad", WgFilterAd);
 
 import WgSlider from "./wg-slider/wg-slider.vue";
 Vue.component("wg-slider", WgSlider);

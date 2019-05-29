@@ -77,22 +77,20 @@ export default {
         name_files: [key],
         access_token: this.token
       };
-      this.$http
-        .post(this.$hosts.services + "/api/userphoto/delete", body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              this.$emit("onDeletePhoto", key);
-            }
-            this.showSpinner = false;
-          },
-          error => {
-            if (error.body.status == "except") {
-              console.dir(error);
-              this.showSpinner = false;
-            }
+      this.$api("userphoto")
+        .delete(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.$emit("onDeletePhoto", key);
           }
-        );
+          this.showSpinner = false;
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+            this.showSpinner = false;
+          }
+        });
     },
     isUpdateProfile(url) {
       (this.showMenu = false), (this.showSpinner = true);
@@ -100,8 +98,9 @@ export default {
         avatar: url,
         access_token: this.token
       };
-      this.$http.post(this.$hosts.services + "/api/profile/update", body).then(
-        response => {
+      this.$api("profile")
+        .update(body)
+        .then(response => {
           if (response.body.status == "ok") {
             // обновляем профайл пользователя
             this.$store.commit(
@@ -113,13 +112,12 @@ export default {
           setTimeout(() => {
             this.showSpinner = false;
           }, 1500);
-        },
-        error => {
+        })
+        .catch(error => {
           if (error.body.status == "except") {
           }
           this.showSpinner = false;
-        }
-      );
+        });
     }
   }
 };
