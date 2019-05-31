@@ -2,17 +2,34 @@
   <form ref="formCreatePost">
     <div class="wg-form-registration__card-header">Укажите основные данные</div>
     <div class="wg-form-create-post__card-ef">
-      <wg-select-location caption="Город проживания *" name="city_id" :help="excCity"/>
-      <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
-      <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска" :help="excYear"/>
-      <ui-ef-text
-        :help="excPrice"
-        name="price"
-        caption="Цена руб."
-        :masc="{use:mascNumber}"
-        :maxlength="11"
-      />
+      <div class="row">
+        <div class="col_7">
+          <wg-select-location caption="Город продажи *" name="city_id" :help="excCity"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col_7">
+          <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col_3">
+          <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска *" :help="excYear"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col_3">
+          <ui-ef-text
+            :help="excPrice"
+            name="price"
+            caption="Цена руб. *"
+            :masc="{use:mascNumber}"
+            :maxlength="11"
+          />
+        </div>
+      </div>
     </div>
+
     <div class="wg-form-registration__card-buttons">
       <input
         model="button"
@@ -58,7 +75,6 @@ export default {
       let minDate = 1935;
       let maxDate = 2019;
       let menu = [];
-      console.dir("asdds");
       while (minDate != maxDate) {
         menu.push({
           value: maxDate,
@@ -94,11 +110,11 @@ export default {
 
       let fExc = false;
       if (price == undefined || price == "") {
-        this.excTitle = "Заполните цену.";
+        this.excPrice = "Заполните цену.";
         fExc = true;
       }
       if (year == undefined || year == "") {
-        this.excDescr = "Заполните год.";
+        this.excYear = "Заполните год.";
         fExc = true;
       }
       if (city_id == undefined || city_id == "") {
@@ -125,8 +141,8 @@ export default {
           this.showSnackbar = true;
           let exc = error.body.data;
           this.masSnackbar = exc.massege;
-          this.excTitle = exc["price"] ? exc["price"] : "";
-          this.excDescr = exc["year"] ? exc["year"] : "";
+          this.excPrice = exc["price"] ? exc["price"] : "";
+          this.excYear = exc["year"] ? exc["year"] : "";
           this.excCity = exc["city_id"] ? exc["city_id"] : "";
           this.excModel = exc["model_id"] ? exc["model_id"] : "";
         });

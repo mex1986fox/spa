@@ -81,6 +81,57 @@ const transports = {
       } else {
         return undefined;
       }
+    },
+    getMenuDrive: (state, getters, rootState, rootGetters) => {
+      return state.drives.map(drive => {
+        return {
+          value: drive.drive_id,
+          option: drive.name,
+          selected: false
+        }
+      });
+    },
+    getMenuTransmission: (state, getters, rootState, rootGetters) => {
+      return state.transmissions.map(transmission => {
+        return {
+          value: transmission.transmission_id,
+          option: transmission.name,
+          selected: false
+        }
+      });
+    },
+    getMenuBody: (state, getters, rootState, rootGetters) => {
+      return state.bodies.map(body => {
+        return {
+          value: body.body_id,
+          option: body.name,
+          selected: false
+        }
+      });
+    },
+    getMenuFuel: (state, getters, rootState, rootGetters) => {
+      return state.fuels.map(fuel => {
+        return {
+          value: fuel.fuel_id,
+          option: fuel.name,
+          selected: false
+        }
+      });
+    },
+    getMenuVolume: (state, getters, rootState, rootGetters) => {
+      return state.volums.map(volume => {
+        return {
+          value: volume.value,
+          option: volume.value,
+          selected: false
+        }
+      });
+    },
+    getMenuWheel: (state, getters, rootState, rootGetters) => {
+      return [
+        { value: 1, option: "левый", selected: false },
+        { value: 2, option: "правый", selected: false }
+      ]
     }
   },
   mutations: {

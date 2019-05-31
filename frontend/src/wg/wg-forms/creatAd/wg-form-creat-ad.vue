@@ -13,12 +13,17 @@
           </div>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-photo :post="dPost" @onHide="isHide"/>
+              <wg-form-creat-ad-card-photo :ad="dAd" @onHide="isHide"/>
+            </div>
+          </ui-animation-display>
+          <ui-animation-display v-if="showCardNotMain==true" :animate="'right'">
+            <div class="wg-form-registration__card">
+              <wg-form-creat-ad-card-notmain :ad="dAd" @onAdUpdated="isShowCardPhoto"/>
             </div>
           </ui-animation-display>
           <ui-animation-display v-if="showCard==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-main @onCreatedPost="isShowCardPhoto"/>
+              <wg-form-creat-ad-card-main @onCreatedAd="isShowCardNotMain"/>
             </div>
           </ui-animation-display>
         </div>
@@ -40,21 +45,27 @@
 </template>
 
 <script>
-import WgFormCreatPostCardMain from "./card-main.vue";
-import WgFormCreatPostCardPhoto from "./card-photo.vue";
+import WgFormCreatAdCardMain from "./card-main.vue";
+import WgFormCreatAdCardPhoto from "./card-photo.vue";
+import WgFormCreatAdCardNotmain from "./card-notmain.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-create-ad",
-  components: { WgFormCreatPostCardMain, WgFormCreatPostCardPhoto },
+  components: {
+    WgFormCreatAdCardMain,
+    WgFormCreatAdCardPhoto,
+    WgFormCreatAdCardNotmain
+  },
   data() {
     return {
       dHeader: "Создать объявление",
       dShow: this.show,
       dShowAnimation: false,
       showCard: true,
+      showCardNotMain: false,
       showCardPhoto: false,
       clientHeigthContainer: undefined,
-      dPost: undefined
+      dAd: undefined
     };
   },
   props: {
@@ -87,9 +98,17 @@ export default {
         this.$emit("onHide");
       }, 200);
     },
-    isShowCardPhoto(post) {
-      this.dPost = post;
+    isShowCardNotMain(ad) {
+      this.dAd = ad;
       this.showCard = false;
+      setTimeout(() => {
+        this.showCardNotMain = true;
+      }, 200);
+    },
+
+    isShowCardPhoto(ad) {
+      this.dAd = ad;
+      this.showCardNotMain = false;
       setTimeout(() => {
         this.showCardPhoto = true;
       }, 200);

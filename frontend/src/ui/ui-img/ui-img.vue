@@ -1,6 +1,6 @@
 <template>
   <div class="ui-img">
-    <img class="ui-img__fon" :src="dSrc">
+    <img ref="fon" class="ui-img__fon" :src="dSrc">
     <img ref="pict" class="ui-img__pict" :src="dSrc">
   </div>
 </template>
@@ -77,6 +77,8 @@ export default {
     this.$refs.pict.addEventListener("load", () => {
       setTimeout(() => {
         this.setPositionImg(this.$el, this.$refs.pict);
+        this.$refs.pict.style.opacity = "1";
+        this.$refs.fon.style.opacity = "0.2";
       }, 200);
     });
   }

@@ -622,6 +622,8 @@ body {
   height: 100%;
   width: 100%; }
   .ui-img__pict {
+    opacity: 0;
+    transition: opacity 2s;
     z-index: 1; }
     .ui-img__pict_horizon {
       left: 0;
@@ -639,8 +641,313 @@ body {
     width: 104%;
     height: 104%;
     top: -2%;
-    opacity: 0.3;
-    left: -2%; }
+    left: -2%;
+    opacity: 0;
+    transition: opacity 2s; }
+
+.container {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  margin: 0 auto; }
+
+.container_right {
+  margin: auto;
+  padding: 0;
+  right: 0px;
+  position: absolute; }
+
+.container_left {
+  margin: auto;
+  padding: 0;
+  left: 0px;
+  position: absolute; }
+
+.row {
+  height: 100%;
+  width: auto;
+  margin: auto;
+  display: block;
+  position: relative;
+  overflow: visible; }
+  .row::after {
+    content: "";
+    clear: both;
+    float: left; }
+
+.col_1,
+.col-nbook_1,
+.col-tablet_1,
+.col-phone_1,
+.col_2,
+.col-nbook_2,
+.col-tablet_2,
+.col-phone_2,
+.col_3,
+.col-nbook_3,
+.col-tablet_3,
+.col-phone_3,
+.col_4,
+.col-nbook_4,
+.col-tablet_4,
+.col-phone_4,
+.col_5,
+.col-nbook_5,
+.col-tablet_5,
+.col-phone_5,
+.col_6,
+.col-nbook_6,
+.col-tablet_6,
+.col-phone_6,
+.col_7,
+.col-nbook_7,
+.col-tablet_7,
+.col-phone_7,
+.col_8,
+.col-nbook_8,
+.col-tablet_8,
+.col-phone_8,
+.col_9,
+.col-nbook_9,
+.col-tablet_9,
+.col-phone_9,
+.col_10,
+.col-nbook_10,
+.col-tablet_10,
+.col-phone_10,
+.col_11,
+.col-nbook_11,
+.col-tablet_11,
+.col-phone_11,
+.col_12,
+.col-nbook_12,
+.col-tablet_12,
+.col-phone_12 {
+  position: relative;
+  min-height: 1px;
+  float: left; }
+
+.container {
+  min-width: 1170px;
+  max-width: 1170px; }
+
+.col_1 {
+  width: 8.33333%; }
+
+.col_2 {
+  width: 16.66667%; }
+
+.col_3 {
+  width: 25%; }
+
+.col_4 {
+  width: 33.33333%; }
+
+.col_5 {
+  width: 41.66667%; }
+
+.col_6 {
+  width: 50%; }
+
+.col_7 {
+  width: 58.33333%; }
+
+.col_8 {
+  width: 66.66667%; }
+
+.col_9 {
+  width: 75%; }
+
+.col_10 {
+  width: 83.33333%; }
+
+.col_11 {
+  width: 91.66667%; }
+
+.col_12 {
+  width: 100%; }
+
+.col_offset-0 {
+  margin-left: 0; }
+
+.col_offset-1 {
+  margin-left: 8.33333%; }
+
+.col_offset-2 {
+  margin-left: 16.66667%; }
+
+.col_offset-3 {
+  margin-left: 25%; }
+
+.col_offset-4 {
+  margin-left: 33.33333%; }
+
+.col_offset-5 {
+  margin-left: 41.66667%; }
+
+.col_offset-6 {
+  margin-left: 50%; }
+
+.col_offset-7 {
+  margin-left: 58.33333%; }
+
+.col_offset-8 {
+  margin-left: 66.66667%; }
+
+.col_offset-9 {
+  margin-left: 75%; }
+
+.col_offset-10 {
+  margin-left: 83.33333%; }
+
+.col_offset-11 {
+  margin-left: 91.66667%; }
+
+@media (min-width: 1190px) {
+  .col-desktop_clean {
+    display: none; } }
+
+@media (min-width: 990px) and (max-width: 1190px) {
+  .container {
+    min-width: 970px;
+    max-width: 1170px; }
+  .col-nbook_clean {
+    display: none; }
+  .col-nbook_1 {
+    width: 8.33333%; }
+  .col-nbook_2 {
+    width: 16.66667%; }
+  .col-nbook_3 {
+    width: 25%; }
+  .col-nbook_4 {
+    width: 33.33333%; }
+  .col-nbook_5 {
+    width: 41.66667%; }
+  .col-nbook_6 {
+    width: 50%; }
+  .col-nbook_7 {
+    width: 58.33333%; }
+  .col-nbook_8 {
+    width: 66.66667%; }
+  .col-nbook_9 {
+    width: 75%; }
+  .col-nbook_10 {
+    width: 83.33333%; }
+  .col-nbook_11 {
+    width: 91.66667%; }
+  .col-nbook_12 {
+    width: 100%; }
+  .col-nbook_offset-0 {
+    margin-left: 0; }
+  .col-nbook_offset-1 {
+    margin-left: 8.33333%; }
+  .col-nbook_offset-2 {
+    margin-left: 16.66667%; }
+  .col-nbook_offset-3 {
+    margin-left: 25%; }
+  .col-nbook_offset-4 {
+    margin-left: 33.33333%; }
+  .col-nbook_offset-5 {
+    margin-left: 41.66667%; }
+  .col-nbook_offset-6 {
+    margin-left: 50%; }
+  .col-nbook_offset-7 {
+    margin-left: 58.33333%; }
+  .col-nbook_offset-8 {
+    margin-left: 66.66667%; }
+  .col-nbook_offset-9 {
+    margin-left: 75%; }
+  .col-nbook_offset-10 {
+    margin-left: 83.33333%; }
+  .col-nbook_offset-11 {
+    margin-left: 91.66667%; } }
+
+@media (min-width: 770px) and (max-width: 990px) {
+  .container {
+    min-width: 750px;
+    max-width: 970px; }
+  .col-tablet_clean {
+    display: none; }
+  .col-tablet_1 {
+    width: 8.33333%; }
+  .col-tablet_2 {
+    width: 16.66667%; }
+  .col-tablet_3 {
+    width: 25%; }
+  .col-tablet_4 {
+    width: 33.33333%; }
+  .col-tablet_5 {
+    width: 41.66667%; }
+  .col-tablet_6 {
+    width: 50%; }
+  .col-tablet_7 {
+    width: 58.33333%; }
+  .col-tablet_8 {
+    width: 66.66667%; }
+  .col-tablet_9 {
+    width: 75%; }
+  .col-tablet_10 {
+    width: 83.33333%; }
+  .col-tablet_11 {
+    width: 91.66667%; }
+  .col-tablet_12 {
+    width: 100%; }
+  .col-tablet_offset-0 {
+    margin-left: 0; }
+  .col-tablet_offset-1 {
+    margin-left: 8.33333%; }
+  .col-tablet_offset-2 {
+    margin-left: 16.66667%; }
+  .col-tablet_offset-3 {
+    margin-left: 25%; }
+  .col-tablet_offset-4 {
+    margin-left: 33.33333%; }
+  .col-tablet_offset-5 {
+    margin-left: 41.66667%; }
+  .col-tablet_offset-6 {
+    margin-left: 50%; }
+  .col-tablet_offset-7 {
+    margin-left: 58.33333%; }
+  .col-tablet_offset-8 {
+    margin-left: 66.66667%; }
+  .col-tablet_offset-9 {
+    margin-left: 75%; }
+  .col-tablet_offset-10 {
+    margin-left: 83.33333%; }
+  .col-tablet_offset-11 {
+    margin-left: 91.66667%; } }
+
+@media (max-width: 770px) {
+  .container {
+    min-width: 100%;
+    max-width: 770;
+    box-sizing: border-box; }
+  .col-phone_clean {
+    display: none; }
+  .col-phone_1 {
+    width: 16.66667%; }
+  .col-phone_2 {
+    width: 33.33333%; }
+  .col-phone_3 {
+    width: 50%; }
+  .col-phone_4 {
+    width: 66.66667%; }
+  .col-phone_5 {
+    width: 83.33333%; }
+  .col-phone_6 {
+    width: 100%; }
+  .col-phone_offset-0 {
+    margin-left: 0; }
+  .col-phone_offset-1 {
+    margin-left: 16.66667%; }
+  .col-phone_offset-2 {
+    margin-left: 33.33333%; }
+  .col-phone_offset-3 {
+    margin-left: 50%; }
+  .col-phone_offset-4 {
+    margin-left: 66.66667%; }
+  .col-phone_offset-5 {
+    margin-left: 83.33333%; } }
 
 .ui-ef-text {
   width: 100%;
@@ -828,7 +1135,6 @@ body {
     padding: 0;
     margin-top: 20px;
     transition-duration: 300ms;
-    white-space: normal;
     overflow: auto;
     text-overflow: ellipsis;
     background-color: transparent;
@@ -1814,6 +2120,71 @@ body {
 .ui-ef-container_white > .ui-ef-container__icon_disabled {
   color: rgba(255, 255, 255, 0.4); }
 
+.ui-ef-radio {
+  position: relative;
+  overflow: hidden;
+  height: 32px;
+  padding: 5px 0;
+  cursor: pointer;
+  margin: 5px 0;
+  float: left;
+  display: inline-table; }
+  .ui-ef-radio__radio {
+    border: 2px solid rgba(17, 17, 17, 0.9);
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    display: block;
+    margin: 6px;
+    position: absolute; }
+    .ui-ef-radio__radio_active {
+      transition: border 0.6s;
+      border: 2px solid #111111; }
+    .ui-ef-radio__radio_disabled {
+      cursor: auto;
+      border: 2px solid rgba(17, 17, 17, 0.4); }
+  .ui-ef-radio__radio-point {
+    background-color: #111111;
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    display: block;
+    position: absolute;
+    border: 10px solid #fff; }
+    .ui-ef-radio__radio-point-enter, .ui-ef-radio__radio-point-leave-to {
+      opacity: 0; }
+    .ui-ef-radio__radio-point-enter-active, .ui-ef-radio__radio-point-leave-active {
+      transition: opacity 0.5s ease; }
+    .ui-ef-radio__radio-point-enter-to, .ui-ef-radio__radio-point-leave {
+      opacity: 1; }
+    .ui-ef-radio__radio-point_disabled {
+      cursor: auto;
+      background-color: rgba(17, 17, 17, 0.4); }
+  .ui-ef-radio__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none; }
+  .ui-ef-radio__caption {
+    color: rgba(17, 17, 17, 0.9);
+    font-size: 15px;
+    width: 100%;
+    margin: 6px 42px;
+    white-space: nowrap;
+    display: block; }
+    .ui-ef-radio__caption_disabled {
+      cursor: auto;
+      color: rgba(17, 17, 17, 0.4); }
+    .ui-ef-radio__caption:first-letter {
+      text-transform: uppercase; }
+
 .fa-times-thin:before {
   content: '\D7'; }
 
@@ -2418,8 +2789,7 @@ body {
 
 .wg-form-create-post__card-ef {
   margin: 35px 45px;
-  overflow: hidden;
-  max-width: 460px; }
+  overflow: hidden; }
 
 .wg-filter {
   width: auto;
