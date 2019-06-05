@@ -5,16 +5,16 @@
       <div class="row">
         <div class="col_4">
           <div class="ui-header ui-header_3">Прочее</div>
-          <ui-ef-select name="drive_id" :menu="driveMenu" caption="Привод" :help="excDrive"/>
+          <ui-ef-select name="drive_id" :menu="driveMenu" caption="Привод" :help="exc['drive_id']"/>
           <ui-ef-select
             name="transmission_id"
             :menu="transmissionMenu"
             caption="Коробка передач"
-            :help="excTransmission"
+            :help="exc['transmission_id']"
           />
-          <ui-ef-select name="body_id" :menu="bodyMenu" caption="Кузов" :help="excBody"/>
+          <ui-ef-select name="body_id" :menu="bodyMenu" caption="Кузов" :help="exc['body_id']"/>
           <ui-ef-text
-            :help="excMileage"
+            :help="exc['mileage']"
             name="mileage"
             caption="Пробег км."
             :masc="{use:mascNumber}"
@@ -23,14 +23,27 @@
         </div>
         <div class="col_4 col_offset-2">
           <div class="ui-header ui-header_3">Двигатель</div>
-          <ui-ef-select name="fuel_id" :menu="fuelMenu" caption="Топливо" :help="excFuel"/>
-          <ui-ef-select name="volume" :menu="volumeMenu" caption="Объем л." :help="excVolume"/>
+          <ui-ef-select
+            @onSelect="isSelectFuel"
+            name="fuel_id"
+            :menu="fuelMenu"
+            caption="Топливо"
+            :help="exc['fuel_id']"
+          />
           <ui-ef-text
-            :help="excPower"
+            v-if="showSelecPower"
+            :help="exc['power']"
             name="power"
             caption="Мощьность л.с."
             :masc="{use:mascNumber}"
             :maxlength="4"
+          />
+          <ui-ef-select
+            v-if="showSelecWolume"
+            name="volume"
+            :menu="volumeMenu"
+            caption="Объем л."
+            :help="exc['volume']"
           />
         </div>
       </div>
@@ -66,7 +79,12 @@
       <div class="row">
         <div class="col_10">
           <div class="ui-header ui-header_3">Дополнительно</div>
-          <ui-ef-textarea name="description" caption="Описание" :help="excDescr" :autoresize="200"></ui-ef-textarea>
+          <ui-ef-textarea
+            name="description"
+            caption="Описание"
+            :help="exc['description']"
+            :autoresize="200"
+          ></ui-ef-textarea>
         </div>
       </div>
     </div>
@@ -81,15 +99,10 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      excDrive: undefined,
-      excTransmission: undefined,
-      excBody: undefined,
-      excMileage: undefined,
-      excFuel: undefined,
-      excVolume: undefined,
-      excPower: undefined,
-      excDescr: undefined,
-      dSpinn: false
+      exc: [],
+      dSpinn: false,
+      showSelecWolume: false,
+      showSelecPower: false
     };
   },
   props: {
@@ -123,28 +136,30 @@ export default {
     }
   },
   methods: {
+    isSelectFuel(selObg) {
+      if (selObg[0]["value"] == 3) {
+        this.showSelecWolume = false;
+      } else {
+        this.showSelecWolume = true;
+      }
+      this.showSelecPower = true;
+    },
     isUpdateProfile() {
       this.dSpinn = true;
-      this.excDrive = undefined;
-      this.excTransmission = undefined;
-      this.excBody = undefined;
-      this.excMileage = undefined;
-      this.excFuel = undefined;
-      this.excVolume = undefined;
-      this.excPower = undefined;
-      this.excDescr = undefined;
+      this.exc = [];
 
       let form = this.$refs.formUpdateAd;
       let body = new FormData(form);
       body.set("access_token", this.token);
       body.set("ad_id", this.ad.ad_id);
-
+      body.set("mileage", body.get("mileage").replace(/\s/g, ""));
+      body.set("power", body.get("power").replace(/\s/g, ""));
       let flExc = false;
       let description = body.get("description");
 
       // проверяем поля
       if (description.length > 1600) {
-        this.excDescr = "Не более 1600 символов.";
+        this.exc["description"] = "Не более 1600 символов.";
         fExc = true;
       }
       // если есть ошибки запрос не отправляем
@@ -166,17 +181,7 @@ export default {
         .catch(error => {
           if (error.body.status == "except") {
             this.dSpinn = false;
-            let exc = error.body.data;
-            this.excDrive = exc["drive_id"] ? exc["drive_id"] : "";
-            this.excTransmission = exc["transmission_id"]
-              ? exc["transmission_id"]
-              : "";
-            this.excBody = exc["body_id"] ? exc["body_id"] : "";
-            this.excMileage = exc["mileage"] ? exc["mileage"] : "";
-            this.excFuel = exc["fuel"] ? exc["fuel"] : "";
-            this.excVolume = exc["volume"] ? exc["volume"] : "";
-            this.excPower = exc["power"] ? exc["power"] : "";
-            this.excDescr = exc["description"] ? exc["description"] : "";
+            this.exc = error.body.data;
           }
         });
     },

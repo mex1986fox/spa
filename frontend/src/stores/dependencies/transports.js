@@ -44,6 +44,7 @@ const transports = {
       });
     },
     getBrands: (state, getters, rootState, rootGetters) => idType => {
+ 
       return state.brands.filter(brand => {
         return brand.type_id == idType;
       });
