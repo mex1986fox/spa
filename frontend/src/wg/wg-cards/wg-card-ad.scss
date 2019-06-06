@@ -1,0 +1,17 @@
+.wg-card-ad {
+    &__params {
+        white-space: normal;
+    }
+
+    &__param {
+        color: rgba($color-white, 0.5);
+        font-size: 14px;
+        display: block;
+        padding: 3px 0;
+
+        &-info {
+            color: rgba($color-white, 0.8);
+            float: right;
+        }
+    }
+}

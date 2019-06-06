@@ -1,6 +1,6 @@
 <template>
   <div class="wg-form-registration__card-img">
-    <ui-img :src="postPhotoHost+'/'+linck"/>
+    <ui-img :src="adsPhotoHost+'/'+linck"/>
     <div class="wg-form-registration__card-img-buttons">
       <div
         v-if="checkMain==true"
@@ -25,7 +25,7 @@
       </div>
       <ui-menu :show="showMenu" @onHide="showMenu=false" position="left-bottom">
         <ul class="ui-menu__ul">
-          <li class="ui-menu__li" @click="isCheckMain(postPhotoHost+'/'+linck)">Сделать главной</li>
+          <li class="ui-menu__li" @click="isCheckMain(adsPhotoHost+'/'+linck)">Сделать главной</li>
           <li class="ui-menu__li" @click="isDeletePhoto(keyPhoto)">Удалить</li>
         </ul>
       </ui-menu>
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       showMenu: false,
-      postPhotoHost: this.$hosts.postPhoto,
+      adsPhotoHost: this.$hosts.adsPhoto,
       showSpinner: false
     };
   },
@@ -58,7 +58,7 @@ export default {
       default: false,
       type: Boolean
     },
-    post: {
+    ad: {
       default: undefined
     }
   },
@@ -74,11 +74,11 @@ export default {
       this.showMenu = false;
       this.showSpinner = true;
       let body = {
-        post_id: this.post.post_id,
+        ad_id: this.ad.ad_id,
         name_files: [key],
         access_token: this.token
       };
-      this.$api("postphoto")
+      this.$api("adsphoto")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
@@ -97,15 +97,15 @@ export default {
       (this.showMenu = false), (this.showSpinner = true);
       let body = {
         main_photo: url,
-        post_id: this.post.post_id,
+        ad_id: this.ad.ad_id,
         access_token: this.token
       };
-      this.$api("post")
+      this.$api("ads")
         .update(body)
         .then(response => {
           if (response.body.status == "ok") {
             // обновляем профайл пользователя
-            this.$emit("onUpdatePost", response.body.data.post);
+            this.$emit("onUpdateAd", response.body.data.ad);
           }
           setTimeout(() => {
             this.showSpinner = false;

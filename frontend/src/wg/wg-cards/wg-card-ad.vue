@@ -21,11 +21,71 @@
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
-    <span class="wg-card-post__title">{{ad.title!=null?ad.title:""}}</span>
     <span
-      ref="descr"
-      class="wg-card-post__description wg-card-post__description_ellips"
-    >{{ad.description!=null?ad.description:''}}</span>
+      class="wg-card-post__title"
+    >{{ad.brand+" "+ad.model+" "+ad.year+" г.в. "+String(ad.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" руб."}}</span>
+    <span ref="descr" class="wg-card-post__description wg-card-post__description_ellips">
+      <div class="wg-card-ad__params">
+        <span v-if="ad.document_id!=null" class="wg-card-ad__param">
+          {{"Документы: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{ad.document_id=1?"с документавми":"без документов"}}</span>
+        </span>
+        <span v-if="ad.state_id!=null" class="wg-card-ad__param">
+          {{"Состояние: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{ad.state_id=1?"не требует вложений (ОТС)":ad.state_id=2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
+        </span>
+        <span v-if="ad.exchange_id!=null" class="wg-card-ad__param">
+          {{"Обмен: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{ad.exchange_id=1?"готов к обмену":"не готов к обмену"}}</span>
+        </span>
+        <span v-if="ad.mileage!=null" class="wg-card-ad__param">
+          {{"Пробег: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{String(ad.mileage).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" км."}}</span>
+        </span>
+        <span v-if="ad.transmission!=null" class="wg-card-ad__param">
+          {{"Коробка передач: "}}
+          <span class="wg-card-ad__param-info">{{ad.transmission}}</span>
+        </span>
+        <span v-if="ad.wheel_id!=null" class="wg-card-ad__param">
+          {{"Руль: "}}
+          <span class="wg-card-ad__param-info">{{ad.wheel_id=1?"левый":"правый"}}</span>
+        </span>
+        <span v-if="ad.fuel!=null" class="wg-card-ad__param">
+          {{"Топливо: "}}
+          <span class="wg-card-ad__param-info">{{ad.fuel}}</span>
+        </span>
+        <span v-if="ad.power!=null" class="wg-card-ad__param">
+          {{"Мощность: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{String(ad.power).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л.с."}}</span>
+        </span>
+        <span v-if="ad.volume!=null" class="wg-card-ad__param">
+          {{"Объем: "}}
+          <span
+            class="wg-card-ad__param-info"
+          >{{String(ad.volume).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л."}}</span>
+        </span>
+        <span v-if="ad.drive!=null" class="wg-card-ad__param">
+          {{"Привод: "}}
+          <span class="wg-card-ad__param-info">{{ad.drive}}</span>
+        </span>
+
+        <span v-if="ad.body!=null" class="wg-card-ad__param">
+          {{"Кузов: "}}
+          <span class="wg-card-ad__param-info">{{ad.body}}</span>
+        </span>
+      </div>
+      {{ad.description!=null?ad.description:''}}
+    </span>
     <div class="wg-card-post__button-menu-bot">
       <wg-likes-post
         :likes="ad.likes"
@@ -108,16 +168,16 @@ export default {
       } else {
         let body = new FormData();
         //добавляем фильтр в куки
-        body.set("users_id[]", this.post.user_id);
-        body.set("posts_id[]", this.post.post_id);
+        body.set("users_id[]", this.ad.user_id);
+        body.set("ads_id[]", this.ad.ad_id);
         //отправляем запрос
-        this.$api("postphoto")
+        this.$api("adsphoto")
           .show(body)
           .then(response => {
             if (response.body.status == "ok") {
               let imgs = response.body.data[0].files.origin;
               for (let key in imgs) {
-                this.slides.push({ src: this.$hosts.postPhoto + imgs[key] });
+                this.slides.push({ src: this.$hosts.adsPhoto + imgs[key] });
               }
               this.showSlides = true;
             }

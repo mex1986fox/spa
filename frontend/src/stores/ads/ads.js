@@ -20,6 +20,10 @@ const ads = {
     mutations: {
         updateAds(state, ads) {
             state.ads = ads;
+        },
+        // вставляет объявление в начало
+        unshiftAd(state, ad) {
+            state.ads.unshift(ad);
         }
     },
     actions: {

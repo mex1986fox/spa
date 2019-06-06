@@ -89,9 +89,20 @@
       </div>
     </div>
     <div class="wg-form-registration__card-buttons">
-      <div class="ui-button ui-button_float_black" @click="isUpdateProfile">Отправить</div>
+      <div class="ui-button ui-button_float_black" @click="isUpdateAd">Отправить</div>
+      <div class="ui-button ui-button_float_black" @click="isSkip">Пропустить</div>
       <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
+    <ui-snackbar :show="showSnackbar" type="err" :time="5000" @onHide="isHideSnackbar">
+      <p>{{masSnackbar}}</p>
+      <div class="ui-snackbar__buttons">
+        <div
+          type="button"
+          class="ui-button ui-button_float_black ui-button_s1"
+          @click="isHideSnackbar"
+        >Закрыть</div>
+      </div>
+    </ui-snackbar>
   </form>
 </template>
 <script>
@@ -102,7 +113,9 @@ export default {
       exc: [],
       dSpinn: false,
       showSelecWolume: false,
-      showSelecPower: false
+      showSelecPower: false,
+      showSnackbar: false,
+      masSnackbar: ""
     };
   },
   props: {
@@ -136,6 +149,10 @@ export default {
     }
   },
   methods: {
+    isHideSnackbar() {
+      this.showSnackbar = false;
+      this.masSnackbar = "";
+    },
     isSelectFuel(selObg) {
       if (selObg[0]["value"] == 3) {
         this.showSelecWolume = false;
@@ -144,23 +161,31 @@ export default {
       }
       this.showSelecPower = true;
     },
-    isUpdateProfile() {
+    isSkip() {
+      this.$emit("onAdUpdated", this.ad);
+      this.dSpinn = false;
+    },
+    isUpdateAd() {
       this.dSpinn = true;
       this.exc = [];
 
       let form = this.$refs.formUpdateAd;
       let body = new FormData(form);
+
       body.set("access_token", this.token);
       body.set("ad_id", this.ad.ad_id);
-      body.set("mileage", body.get("mileage").replace(/\s/g, ""));
-      body.set("power", body.get("power").replace(/\s/g, ""));
+      if (body.get("mileage") != undefined) {
+        body.set("mileage", body.get("mileage").replace(/\s/g, ""));
+      }
+      if (body.get("power") != undefined) {
+        body.set("power", body.get("power").replace(/\s/g, ""));
+      }
       let flExc = false;
       let description = body.get("description");
 
-      // проверяем поля
       if (description.length > 1600) {
         this.exc["description"] = "Не более 1600 символов.";
-        fExc = true;
+        flExc = true;
       }
       // если есть ошибки запрос не отправляем
       if (flExc == true) {
@@ -171,10 +196,7 @@ export default {
         .update(body)
         .then(response => {
           if (response.body.status == "ok") {
-            console.log(response.body.data);
-            // обновляем профайл пользователя
-
-            this.$emit("onAdUpdated");
+            this.$emit("onAdUpdated", response.body.data.ad);
             this.dSpinn = false;
           }
         })
@@ -182,6 +204,10 @@ export default {
           if (error.body.status == "except") {
             this.dSpinn = false;
             this.exc = error.body.data;
+            if (this.exc.massege == "Запрос пустой не имеет параметров.") {
+              this.showSnackbar = true;
+              this.masSnackbar = "Заполните поля формы.";
+            }
           }
         });
     },

@@ -48,10 +48,10 @@
         :key="key"
         :keyPhoto="key"
         :linck="val"
-        :post="dPost"
-        :checkMain="dPost.main_photo==postPhotoHost+'/'+val?true:false"
+        :ad="dAd"
+        :checkMain="dAd.main_photo==adsPhotoHost+'/'+val?true:false"
         @onDeletePhoto="isDeletePhoto"
-        @onUpdatePost="isUpdatePost"
+        @onUpdateAd="isUpdateAd"
       />
     </div>
     <div class="wg-form-registration__card-buttons">
@@ -74,7 +74,7 @@ export default {
   },
   data() {
     return {
-      dPost: this.post,
+      dAd: this.ad,
       changeFiles: [],
       clearFiles: false,
       dLoading: false,
@@ -82,7 +82,7 @@ export default {
       userPhotoHost: this.$hosts.userPhoto,
       showMenuKey: undefined,
       imgSpinner: false,
-      postPhotoHost: this.$hosts.postPhoto
+      adsPhotoHost: this.$hosts.adsPhoto
     };
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
     })
   },
   props: {
-    post: {
+    ad: {
       default: undefined
     }
   },
@@ -105,9 +105,9 @@ export default {
       let form = this.$refs.formUploadPhoto;
       let body = new FormData(form);
       body.set("access_token", this.token);
-      body.set("post_id", this.post.post_id);
+      body.set("ad_id", this.ad.ad_id);
       this.dLoading = true;
-      this.$api("postphoto")
+      this.$api("adsphoto")
         .upload(body)
         .then(response => {
           if (response.body.status == "ok") {
@@ -125,9 +125,9 @@ export default {
     isShowLincksPhoto() {
       let body = {
         users_id: [this.tokenPayload.userID],
-        posts_id: [this.post.post_id]
+        ads_id: [this.ad.ad_id]
       };
-      this.$api("postphoto")
+      this.$api("adsphoto")
         .show(body)
         .then(
           response => {
@@ -150,8 +150,8 @@ export default {
         this.lincksPhoto = lPhoto;
       }, 100);
     },
-    isUpdatePost(post) {
-      this.dPost = post;
+    isUpdateAd(ad) {
+      this.dAd = ad;
       let lPhoto = this.lincksPhoto;
       this.lincksPhoto = undefined;
       setTimeout(() => {

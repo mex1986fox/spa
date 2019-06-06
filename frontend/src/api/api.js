@@ -7,7 +7,7 @@ import userphoto from "./userphoto";
 import post from "./post";
 import postphoto from "./postphoto";
 import ads from "./ads";
-
+import adsphoto from "./adsphoto";
 const api = Array();
 
 api["token"] = token;
@@ -19,6 +19,7 @@ api["userphoto"] = userphoto;
 api["post"] = post;
 api["postphoto"] = postphoto;
 api["ads"] = ads;
+api["adsphoto"] = adsphoto;
 const Api = {
   install(Vue, options) {
     Vue.prototype.$api = function (nameApi) {
