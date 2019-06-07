@@ -43,4 +43,11 @@
         position: absolute;
         margin: 15px 30px;
     }
+
+    &__section {
+        padding: 18px 0px 0 0;
+        overflow: hidden;
+        float: left;
+        width: 100%;
+    }
 }

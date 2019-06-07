@@ -213,9 +213,11 @@ export default {
       ctrl.focus();
     }
     setTimeout(() => {
-      if (this.$el.querySelectorAll("input:-webkit-autofill").length > 0) {
-        this.modFocus = true;
-      }
+      try {
+        if (this.$el.querySelectorAll("input:-webkit-autofill").length > 0) {
+          this.modFocus = true;
+        }
+      } catch (e) {}
     }, 1000);
   },
   updated() {

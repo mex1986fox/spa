@@ -44,7 +44,7 @@ const transports = {
       });
     },
     getBrands: (state, getters, rootState, rootGetters) => idType => {
- 
+
       return state.brands.filter(brand => {
         return brand.type_id == idType;
       });
@@ -69,7 +69,7 @@ const transports = {
           }
         }
       } else {
-        return undefined;
+        return [];
       }
     },
     getTransmission: (state, getters, rootState, rootGetters) => id => {
@@ -80,53 +80,73 @@ const transports = {
           }
         }
       } else {
-        return undefined;
+        return [];
       }
     },
     getMenuDrive: (state, getters, rootState, rootGetters) => {
-      return state.drives.map(drive => {
-        return {
-          value: drive.drive_id,
-          option: drive.name,
-          selected: false
-        }
-      });
+      if (state.drives != undefined) {
+        return state.drives.map(drive => {
+          return {
+            value: drive.drive_id,
+            option: drive.name,
+            selected: false
+          }
+        });
+      } else {
+        return [];
+      }
     },
     getMenuTransmission: (state, getters, rootState, rootGetters) => {
-      return state.transmissions.map(transmission => {
-        return {
-          value: transmission.transmission_id,
-          option: transmission.name,
-          selected: false
-        }
-      });
+      if (state.transmissions != undefined) {
+        return state.transmissions.map(transmission => {
+          return {
+            value: transmission.transmission_id,
+            option: transmission.name,
+            selected: false
+          }
+        });
+      } else {
+        return [];
+      }
     },
     getMenuBody: (state, getters, rootState, rootGetters) => {
-      return state.bodies.map(body => {
-        return {
-          value: body.body_id,
-          option: body.name,
-          selected: false
-        }
-      });
+      if (state.bodies != undefined) {
+        return state.bodies.map(body => {
+          return {
+            value: body.body_id,
+            option: body.name,
+            selected: false
+          }
+        });
+      } else {
+        return [];
+      }
     },
     getMenuFuel: (state, getters, rootState, rootGetters) => {
-      return state.fuels.map(fuel => {
-        return {
-          value: fuel.fuel_id,
-          option: fuel.name,
-          selected: false
-        }
-      });
+      if (state.fuels != undefined) {
+        return state.fuels.map(fuel => {
+          return {
+            value: fuel.fuel_id,
+            option: fuel.name,
+            selected: false
+          }
+        });
+      } else {
+        return []
+      }
     },
     getMenuVolume: (state, getters, rootState, rootGetters) => {
-      return state.volums.map(volume => {
-        return {
-          value: volume.value,
-          option: volume.value,
-          selected: false
-        }
-      });
+      if (state.volums != undefined) {
+        return state.volums.map(volume => {
+          return {
+            value: volume.value,
+            option: volume.value,
+            selected: false
+          }
+        });
+      } else {
+        return []
+      }
     },
     getMenuWheel: (state, getters, rootState, rootGetters) => {
       return [

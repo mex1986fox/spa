@@ -12,6 +12,9 @@ module.exports = {
     publicPath: "/public/", // устанавливаем публичный путь, по которому файл будет доступен
     filename: "js/build.js" // устанавливаем имя файла сборки
   },
+  optimization: {
+    minimize: false
+  },
   devtool: "#cheap-module-source-map",
   module: {
     rules: [
@@ -24,7 +27,7 @@ module.exports = {
         loader: "babel-loader",
         query: {
           presets: ["es2015"],
-          plugins:[ 'transform-object-rest-spread' ]
+          plugins: ['transform-object-rest-spread']
         }
       },
       {

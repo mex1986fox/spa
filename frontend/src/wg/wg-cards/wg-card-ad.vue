@@ -30,19 +30,19 @@
           {{"Документы: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.document_id=1?"с документавми":"без документов"}}</span>
+          >{{ad.document_id==1?"с документавми":"без документов"}}</span>
         </span>
         <span v-if="ad.state_id!=null" class="wg-card-ad__param">
           {{"Состояние: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.state_id=1?"не требует вложений (ОТС)":ad.state_id=2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
+          >{{ad.state_id==1?"не требует вложений (ОТС)":ad.state_id==2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
         </span>
         <span v-if="ad.exchange_id!=null" class="wg-card-ad__param">
           {{"Обмен: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.exchange_id=1?"готов к обмену":"не готов к обмену"}}</span>
+          >{{ad.exchange_id==1?"готов к обмену":"не готов к обмену"}}</span>
         </span>
         <span v-if="ad.mileage!=null" class="wg-card-ad__param">
           {{"Пробег: "}}
@@ -56,7 +56,7 @@
         </span>
         <span v-if="ad.wheel_id!=null" class="wg-card-ad__param">
           {{"Руль: "}}
-          <span class="wg-card-ad__param-info">{{ad.wheel_id=1?"левый":"правый"}}</span>
+          <span class="wg-card-ad__param-info">{{ad.wheel_id==1?"левый":"правый"}}</span>
         </span>
         <span v-if="ad.fuel!=null" class="wg-card-ad__param">
           {{"Топливо: "}}
@@ -87,11 +87,11 @@
       {{ad.description!=null?ad.description:''}}
     </span>
     <div class="wg-card-post__button-menu-bot">
-      <wg-likes-post
+      <wg-likes-ad
         :likes="ad.likes"
         :dislikes="ad.dislikes"
         :userID="ad.user_id"
-        :postID="ad.post_id"
+        :adID="ad.ad_id"
       />
       <div
         class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
@@ -101,7 +101,7 @@
         <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
-    <wg-form-update-post :show="showUpdatePost" @onHide="isHideUpdatePost" :post="post"/>
+    <!-- <wg-form-update-post :show="showUpdatePost" @onHide="isHideUpdatePost" :post="post"/> -->
     <ui-menu :show="showMenu" @onHide="isHideMenu">
       <ul class="ui-menu__ul">
         <li
@@ -118,7 +118,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "wg-card-post",
+  name: "wg-card-ad",
   data() {
     return {
       showDescription: false,
@@ -194,9 +194,9 @@ export default {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.post.post_id);
+      body.set("ad_id", this.ad.d_id);
       //отправляем запрос
-      this.$api("post")
+      this.$api("ads")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
@@ -213,7 +213,7 @@ export default {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.post.post_id);
+      body.set("ad_id", this.ad.ad_id);
       //отправляем запрос
       this.$api("postphoto")
         .deleteAlbum(body)

@@ -1,72 +1,114 @@
 .ui-ef-checkbox {
-  position: relative;
-  vertical-align: middle;
-  display: block;
-  box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 4px 0;
-  height: 46;
-  width: 100%;
-  float: left;
-  &:hover {
-    cursor: pointer;
-  }
-  &__input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-  }
-  &__check {
-    border: 2px solid $color-black;
-    height: 15px;
-    width: 15px;
+    position: relative;
+    vertical-align: middle;
     display: block;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 4px 0;
+    height: 46;
+    width: 100%;
     float: left;
-    font-size: 15px;
-    color: rgba($color-white, 0);
-    background-color: rgba($color-white, 0);
-    line-height: 0px;
-    transition-duration: 500ms;
-    margin: 7px 14px 7px 0;
-    &_checked {
-      border: 2px solid $color-black;
-      background-color: $color-black;
-      color: $color-white;
-      transition-duration: 1100ms;
+
+    &:hover {
+        cursor: pointer;
     }
-    &_disabled {
-      border: 2px solid rgba($color-black, 0.4);
-      background-color: rgba($color-white, 0);
-      color: rgba($color-white, 0);
-      cursor: auto;
-      &_checked {
-        border: 2px solid rgba($color-black, 0);
-        background-color: rgba($color-black, 0.4);
-        color: rgba($color-white, 0.4);
-        cursor: auto;
-      }
+
+    &__input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        -ms-appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
     }
-  }
-  &__caption {
-    font-size: 15px;
-    color: #2b2b2b;
-    position: absolute;
-    padding: 0px 0px 0px 39px;
-    line-height: 32px;
-    white-space: nowrap;
-    float: left;
-    display: block;
-    &_disabled {
-      cursor: auto;
-      color: rgba($color-black, 0.4);
+
+    &__check {
+        border: 2px solid $color-black;
+        height: 15px;
+        width: 15px;
+        display: block;
+        float: left;
+        font-size: 15px;
+        color: rgba($color-white, 0);
+        background-color: rgba($color-white, 0);
+        line-height: 0px;
+        transition-duration: 500ms;
+        margin: 7px 14px 7px 0;
+
+        &_checked {
+            border: 2px solid $color-black;
+            background-color: $color-black;
+            color: $color-white;
+            transition-duration: 1100ms;
+        }
+
+        &_disabled {
+            border: 2px solid rgba($color-black, 0.4);
+            background-color: rgba($color-white, 0);
+            color: rgba($color-white, 0);
+            cursor: auto;
+
+            &_checked {
+                border: 2px solid rgba($color-black, 0);
+                background-color: rgba($color-black, 0.4);
+                color: rgba($color-white, 0.4);
+                cursor: auto;
+            }
+        }
     }
-  }
+
+    &__caption {
+        font-size: 15px;
+        color: $color-black;
+        position: absolute;
+        padding: 0px 0px 0px 39px;
+        line-height: 32px;
+        white-space: nowrap;
+        float: left;
+        display: block;
+
+        &_disabled {
+            cursor: auto;
+            color: rgba($color-black, 0.4);
+        }
+    }
+}
+
+.ui-ef-checkbox_white {
+    &>.ui-ef-checkbox__check {
+        border: 2px solid $color-white;
+        // color: rgba($color-black, 0);
+        background-color: rgba($color-black, 0);
+
+        &>.ui-ef-checkbox__check_checked {
+            border: 2px solid $color-white;
+            background-color: $color-white;
+            color: $color-black;
+        }
+
+        &>.ui-ef-checkbox__check_disabled {
+            border: 2px solid rgba($color-white, 0.4);
+            background-color: rgba($color-black, 0);
+            color: rgba($color-black, 0);
+
+            &>.ui-ef-checkbox__check_disabled_checked {
+                border: 2px solid rgba($color-white, 0);
+                background-color: rgba($color-white, 0.4);
+                color: rgba($color-black, 0.4);
+            }
+        }
+    }
+
+    &>.ui-ef-checkbox__caption {
+        color: $color-white;
+
+        &>.ui-ef-checkbox__caption_disabled {
+            color: rgba($color-white, 0.4);
+        }
+    }
 }

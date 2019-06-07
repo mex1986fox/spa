@@ -45,10 +45,13 @@ export default {
     }
   },
   methods: {
-    isHide() {
+    isHide(ad) {
       this.dShowAnimation = false;
       setTimeout(() => {
         this.$emit("onHide");
+        if (ad != undefined) {
+          this.$store.commit("ads/unshiftAd", ad);
+        }
       }, 200);
     },
     isShowCardNotMain(ad) {

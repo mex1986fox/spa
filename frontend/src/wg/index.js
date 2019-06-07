@@ -49,3 +49,5 @@ import WgSliderZoom from "./wg-slider/wg-slider-zoom.vue";
 Vue.component("wg-slider-zoom", WgSliderZoom);
 import WgLikesPost from "./wg-likes/wg-likes-post.vue";
 Vue.component("wg-likes-post", WgLikesPost);
+import WgLikesAd from "./wg-likes/wg-likes-ad.vue";
+Vue.component("wg-likes-ad", WgLikesAd);

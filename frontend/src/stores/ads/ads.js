@@ -9,12 +9,15 @@ const ads = {
             return state.ads;
         },
         getAd: (state, getters, rootState, rootGetters) => id => {
-            for (let ad of state.ads) {
-                if (id == ad.ad_id) {
-                    return ad;
+            if (state.ads != undefined) {
+                for (let ad of state.ads) {
+                    if (id == ad.ad_id) {
+                        return ad;
+                    }
                 }
+            } else {
+                return undefined;
             }
-            return undefined;
         }
     },
     mutations: {

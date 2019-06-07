@@ -38,8 +38,7 @@
         width: 12px;
         display: block;
         position: absolute;
-        border: 10px solid #fff;
-
+        margin: 10px;
         &-enter,
         &-leave-to {
             opacity: 0;
@@ -92,6 +91,35 @@
 
         &:first-letter {
             text-transform: uppercase;
+        }
+    }
+}
+
+.ui-ef-radio_white {
+    &>.ui-ef-radio__radio {
+        border: 2px solid rgba($color-white, 0.9);
+
+        &>.ui-ef-radio__radio_active {
+            border: 2px solid $color-white;
+        }
+
+        &>.ui-ef-radio__radio_disabled {
+            border: 2px solid rgba($color-white, 0.4);
+        }
+    }
+
+    &>.ui-ef-radio__radio-point {
+        background-color: $color-white;
+        &>.ui-ef-radio__radio-point_disabled {
+            background-color: rgba($color-white, 0.4);
+        }
+    }
+
+    &>.ui-ef-radio__caption {
+        color: rgba($color-white, 0.9);
+
+        &>.ui-ef-radio__caption_disabled {
+            color: rgba($color-white, 0.4);
         }
     }
 }

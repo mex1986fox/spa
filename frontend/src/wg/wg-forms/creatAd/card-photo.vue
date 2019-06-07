@@ -159,7 +159,7 @@ export default {
       }, 100);
     },
     isHide() {
-      this.$emit("onHide");
+      this.$emit("onHide", this.dAd);
     }
   }
 };

@@ -25,7 +25,13 @@ const ads = {
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
-
+  // лайки
+  createLike(body) {
+    return Vue.http
+      .post(Vue.prototype.$hosts.services + "/ads/api/like/create", body)
+      .then(response => Promise.resolve(response))
+      .catch(error => Promise.reject(error));
+  },
 
 };
 export default ads;

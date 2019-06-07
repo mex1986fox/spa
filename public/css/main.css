@@ -1685,7 +1685,7 @@ body {
         cursor: auto; }
   .ui-ef-checkbox__caption {
     font-size: 15px;
-    color: #2b2b2b;
+    color: #111111;
     position: absolute;
     padding: 0px 0px 0px 39px;
     line-height: 32px;
@@ -1695,6 +1695,27 @@ body {
     .ui-ef-checkbox__caption_disabled {
       cursor: auto;
       color: rgba(17, 17, 17, 0.4); }
+
+.ui-ef-checkbox_white > .ui-ef-checkbox__check {
+  border: 2px solid #ffffff;
+  background-color: rgba(17, 17, 17, 0); }
+  .ui-ef-checkbox_white > .ui-ef-checkbox__check > .ui-ef-checkbox__check_checked {
+    border: 2px solid #ffffff;
+    background-color: #ffffff;
+    color: #111111; }
+  .ui-ef-checkbox_white > .ui-ef-checkbox__check > .ui-ef-checkbox__check_disabled {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(17, 17, 17, 0);
+    color: rgba(17, 17, 17, 0); }
+    .ui-ef-checkbox_white > .ui-ef-checkbox__check > .ui-ef-checkbox__check_disabled > .ui-ef-checkbox__check_disabled_checked {
+      border: 2px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0.4);
+      color: rgba(17, 17, 17, 0.4); }
+
+.ui-ef-checkbox_white > .ui-ef-checkbox__caption {
+  color: #ffffff; }
+  .ui-ef-checkbox_white > .ui-ef-checkbox__caption > .ui-ef-checkbox__caption_disabled {
+    color: rgba(255, 255, 255, 0.4); }
 
 .ui-ef-search {
   background: rgba(255, 255, 255, 0);
@@ -2150,7 +2171,7 @@ body {
     width: 12px;
     display: block;
     position: absolute;
-    border: 10px solid #fff; }
+    margin: 10px; }
     .ui-ef-radio__radio-point-enter, .ui-ef-radio__radio-point-leave-to {
       opacity: 0; }
     .ui-ef-radio__radio-point-enter-active, .ui-ef-radio__radio-point-leave-active {
@@ -2184,6 +2205,23 @@ body {
       color: rgba(17, 17, 17, 0.4); }
     .ui-ef-radio__caption:first-letter {
       text-transform: uppercase; }
+
+.ui-ef-radio_white > .ui-ef-radio__radio {
+  border: 2px solid rgba(255, 255, 255, 0.9); }
+  .ui-ef-radio_white > .ui-ef-radio__radio > .ui-ef-radio__radio_active {
+    border: 2px solid #ffffff; }
+  .ui-ef-radio_white > .ui-ef-radio__radio > .ui-ef-radio__radio_disabled {
+    border: 2px solid rgba(255, 255, 255, 0.4); }
+
+.ui-ef-radio_white > .ui-ef-radio__radio-point {
+  background-color: #ffffff; }
+  .ui-ef-radio_white > .ui-ef-radio__radio-point > .ui-ef-radio__radio-point_disabled {
+    background-color: rgba(255, 255, 255, 0.4); }
+
+.ui-ef-radio_white > .ui-ef-radio__caption {
+  color: rgba(255, 255, 255, 0.9); }
+  .ui-ef-radio_white > .ui-ef-radio__caption > .ui-ef-radio__caption_disabled {
+    color: rgba(255, 255, 255, 0.4); }
 
 .fa-times-thin:before {
   content: '\D7'; }
@@ -2838,6 +2876,11 @@ body {
     bottom: 0;
     position: absolute;
     margin: 15px 30px; }
+  .wg-filter__section {
+    padding: 18px 0px 0 0;
+    overflow: hidden;
+    float: left;
+    width: 100%; }
 
 .wg-captcha {
   margin: 14px 0 0 0;
