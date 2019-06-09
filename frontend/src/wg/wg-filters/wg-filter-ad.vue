@@ -1,64 +1,61 @@
 <template>
-  <wg-filter :show="show" @onHide="isHide">
+  <wg-filter :show="show"
+             @onHide="isHide">
     <template slot="header">Фильтр обявлений</template>
     <template slot="content">
-      <form ref="formFilterPosts">
-        <ui-ef-select
-          class="ui-ef-select_white"
-          name="sort_id"
-          caption="Сортировать по"
-          cleaner
-          :menu="sortMenu"
-        />
-        <wg-multi-location
-          :countries_id="countries_id"
-          :subjects_id="subjects_id"
-          :cities_id="cities_id"
-          caption="Места продажи"
-          class="wg-multi-location_white"
-        />
-        <wg-multi-transport
-          :types_id="types_id"
-          :brands_id="brands_id"
-          :models_id="models_id"
-          caption="Марки, модели"
-          class="wg-multi-location_white"
-        />
+      <form ref="formFilterAds">
+        <ui-ef-select class="ui-ef-select_white"
+                      name="sort_id"
+                      caption="Сортировать по"
+                      cleaner
+                      :menu="sortMenu" />
+        <wg-multi-location :countries_id="countries_id"
+                           :subjects_id="subjects_id"
+                           :cities_id="cities_id"
+                           caption="Места продажи"
+                           class="wg-multi-location_white" />
+        <wg-multi-transport :types_id="types_id"
+                            :brands_id="brands_id"
+                            :models_id="models_id"
+                            caption="Марки, модели"
+                            class="wg-multi-location_white" />
         <div class="wg-filter__section">
           <div class="row">
-            <div class="col_7">
+            <div class="col_9">
               <div class="ui-header ui-header_white ui-header_3">Прочее</div>
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="drive_id"
-                :menu="dDriveMenu"
-                caption="Привод"
-              />
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="transmission_id"
-                caption="Коробка передач"
-                :menu="dTransmissionMenu"
-              />
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="body_id"
-                caption="Кузов"
-                :menu="dBodyMenu"
-              />
+              <ui-ef-select class="ui-ef-select_white"
+                            name="drive_id[]"
+                            :menu="dDriveMenu"
+                            caption="Привод"
+                            multiple />
+              <ui-ef-select class="ui-ef-select_white"
+                            name="transmission_id[]"
+                            caption="Коробка передач"
+                            :menu="dTransmissionMenu"
+                            multiple />
+              <ui-ef-select class="ui-ef-select_white"
+                            name="body_id[]"
+                            caption="Кузов"
+                            :menu="dBodyMenu"
+                            multiple />
             </div>
           </div>
           <div class="row">
-            <div class="col_3">
-              <ui-ef-text
-                class="ui-ef-text_white"
-                name="mileage"
-                caption="Пробег от"
-                :maxlength="10"
-              />
+            <div class="col_4">
+              <ui-ef-text class="ui-ef-text_white"
+                          name="mileage"
+                          caption="Пробег от"
+                          :maxlength="10"
+                          :value="mileage"
+                          masc="mascNumber" />
             </div>
-            <div class="col_3 col_offset-1">
-              <ui-ef-text class="ui-ef-text_white" name="mileage" caption="до" :maxlength="10"/>
+            <div class="col_4 col_offset-1">
+              <ui-ef-text class="ui-ef-text_white"
+                          name="mileage2"
+                          caption="до"
+                          :maxlength="10"
+                          :value="mileage2"
+                          masc="mascNumber" />
             </div>
           </div>
         </div>
@@ -69,39 +66,42 @@
             </div>
           </div>
           <div class="row">
-            <div class="col_7">
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="fuel_id"
-                caption="Топливо"
-                :menu="dFuelMenu"
-              />
+            <div class="col_9">
+              <ui-ef-select class="ui-ef-select_white"
+                            name="fuel_id[]"
+                            caption="Топливо"
+                            :menu="dFuelMenu"
+                            multiple />
             </div>
           </div>
           <div class="row">
-            <div class="col_3">
-              <ui-ef-text class="ui-ef-text_white" name="power" caption="Мощьность от"/>
+            <div class="col_4">
+              <ui-ef-text class="ui-ef-text_white"
+                          name="power"
+                          caption="Мощьность от"
+                          :value="power"
+                          masc="mascNumber" />
             </div>
-            <div class="col_3 col_offset-1">
-              <ui-ef-text class="ui-ef-text_white" name="power" caption="до"/>
+            <div class="col_4 col_offset-1">
+              <ui-ef-text class="ui-ef-text_white"
+                          name="power2"
+                          caption="до"
+                          :value="power2"
+                          masc="mascNumber" />
             </div>
           </div>
           <div class="row">
-            <div class="col_3">
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="volume"
-                caption="Объем от"
-                :menu="dVolumeMenu"
-              />
+            <div class="col_4">
+              <ui-ef-select class="ui-ef-select_white"
+                            name="volume"
+                            caption="Объем от"
+                            :menu="dVolumeMenu" />
             </div>
-            <div class="col_3 col_offset-1">
-              <ui-ef-select
-                class="ui-ef-select_white"
-                name="volume"
-                caption="до"
-                :menu="dVolumeMenu2"
-              />
+            <div class="col_4 col_offset-1">
+              <ui-ef-select class="ui-ef-select_white"
+                            name="volume2"
+                            caption="до"
+                            :menu="dVolumeMenu2" />
             </div>
           </div>
         </div>
@@ -109,39 +109,61 @@
           <div class="row">
             <div class="col_12">
               <div class="ui-header ui-header_white ui-header_3">Расположение руля</div>
-              <ui-ef-radio class="ui-ef-radio_white" name="wheel_id" value="1">Левый</ui-ef-radio>
-              <ui-ef-radio class="ui-ef-radio_white" name="wheel_id" value="2">Правый</ui-ef-radio>
+              <ui-ef-radio class="ui-ef-radio_white"
+                           name="wheel_id"
+                           value="1"
+                           :checked="wheel_id==1">Левый</ui-ef-radio>
+              <ui-ef-radio class="ui-ef-radio_white"
+                           name="wheel_id"
+                           value="2"
+                           :checked="wheel_id==2">Правый</ui-ef-radio>
             </div>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Наличие документов</div>
-            <ui-ef-radio class="ui-ef-radio_white" name="document_id" value="1">С документами</ui-ef-radio>
-            <ui-ef-radio class="ui-ef-radio_white" name="document_id" value="2">Без документов</ui-ef-radio>
+            <ui-ef-radio class="ui-ef-radio_white"
+                         name="document_id"
+                         value="1"
+                         :checked="document_id==1">С документами</ui-ef-radio>
+            <ui-ef-radio class="ui-ef-radio_white"
+                         name="document_id"
+                         value="2"
+                         :checked="document_id==2">Без документов</ui-ef-radio>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Состояние</div>
-            <ui-ef-checkbox class="ui-ef-checkbox_white" value="1">Не требует вложений (ОТС)</ui-ef-checkbox>
-            <ui-ef-checkbox
-              class="ui-ef-checkbox_white"
-              value="2"
-            >Требует незначительных вложений (ХТС)</ui-ef-checkbox>
-            <ui-ef-checkbox class="ui-ef-checkbox_white" value="3">Требует значительных вложений</ui-ef-checkbox>
+            <ui-ef-checkbox class="ui-ef-checkbox_white"
+                            name="state_id[]"
+                            value="1"
+                            :checked="state_id.indexOf('1') != -1?true:false">Не требует вложений (ОТС)</ui-ef-checkbox>
+            <ui-ef-checkbox class="ui-ef-checkbox_white"
+                            name="state_id[]"
+                            value="2"
+                            :checked="state_id.indexOf('2') != -1?true:false">Требует незначительных вложений (ХТС)</ui-ef-checkbox>
+            <ui-ef-checkbox class="ui-ef-checkbox_white"
+                            name="state_id[]"
+                            value="3"
+                            :checked="state_id.indexOf('3') != -1?true:false">Требует значительных вложений</ui-ef-checkbox>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Обмен</div>
-            <ui-ef-radio class="ui-ef-radio_white" name="exchange_id" value="1">Готов к обмену</ui-ef-radio>
-            <ui-ef-radio class="ui-ef-radio_white" name="exchange_id" value="2">Не готов к обмену</ui-ef-radio>
+            <ui-ef-radio class="ui-ef-radio_white"
+                         name="exchange_id"
+                         value="1"
+                         :checked="exchange_id==1">Готов к обмену</ui-ef-radio>
+            <ui-ef-radio class="ui-ef-radio_white"
+                         name="exchange_id"
+                         value="2"
+                         :checked="exchange_id==2">Не готов к обмену</ui-ef-radio>
           </div>
         </div>
       </form>
     </template>
     <template slot="buttons">
-      <input
-        class="ui-button ui-button_float_white"
-        type="button"
-        value="Применить"
-        @click="isShowPosts"
-      >
+      <input class="ui-button ui-button_float_white"
+             type="button"
+             value="Применить"
+             @click="isShowAds">
       <!-- <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide"> -->
     </template>
   </wg-filter>
@@ -150,7 +172,7 @@
 export default {
   data() {
     return {
-      filterPosts: {},
+      filterAds: JSON.parse(this.$cookie.get("filter_ads")),
       countries_id: [],
       subjects_id: [],
       cities_id: [],
@@ -176,7 +198,15 @@ export default {
       dBodyMenu: [],
       dFuelMenu: [],
       dVolumeMenu: [],
-      dVolumeMenu2: []
+      dVolumeMenu2: [],
+      document_id: undefined,
+      wheel_id: undefined,
+      state_id: [],
+      exchange_id: undefined,
+      mileage: undefined,
+      mileage2: undefined,
+      power: undefined,
+      power2: undefined
     };
   },
   props: {
@@ -187,20 +217,27 @@ export default {
   },
   computed: {
     // подключает гетеры из хранилишь
+
     driveMenu() {
-      return this.$store.getters["transports/getMenuDrive"];
+      return this.generateMenu("drive_id[]", "transports/getMenuDrive");
     },
     transmissionMenu() {
-      return this.$store.getters["transports/getMenuTransmission"];
+      return this.generateMenu(
+        "transmission_id[]",
+        "transports/getMenuTransmission"
+      );
     },
     bodyMenu() {
-      return this.$store.getters["transports/getMenuBody"];
+      return this.generateMenu("body_id[]", "transports/getMenuBody");
     },
     fuelMenu() {
-      return this.$store.getters["transports/getMenuFuel"];
+      return this.generateMenu("fuel_id[]", "transports/getMenuFuel");
     },
     volumeMenu() {
-      return this.$store.getters["transports/getMenuVolume"];
+      return this.generateMenu("volume", "transports/getMenuVolume");
+    },
+    volumeMenu2() {
+      return this.generateMenu("volume2", "transports/getMenuVolume");
     }
   },
   watch: {
@@ -218,35 +255,61 @@ export default {
     },
     volumeMenu(newQ) {
       this.dVolumeMenu = newQ;
+    },
+    volumeMenu2(newQ) {
       this.dVolumeMenu2 = newQ;
     },
     show(newQ) {
       if (newQ == true) {
         let fUsers = JSON.parse(this.$cookie.get("filter_ads"));
         if (fUsers != null) {
-          this.filterPosts = fUsers;
-          this.countries_id = this.filterPosts["countries_id[]"]
-            ? this.filterPosts["countries_id[]"].split(",")
+          this.filterAds = fUsers;
+          this.power = this.filterAds["power"]
+            ? this.filterAds["power"]
+            : undefined;
+          this.power2 = this.filterAds["power2"]
+            ? this.filterAds["power2"]
+            : undefined;
+          this.mileage2 = this.filterAds["mileage2"]
+            ? this.filterAds["mileage2"]
+            : undefined;
+          this.mileage = this.filterAds["mileage"]
+            ? this.filterAds["mileage"]
+            : undefined;
+          this.exchange_id = this.filterAds["exchange_id"]
+            ? this.filterAds["exchange_id"]
+            : undefined;
+          this.state_id = this.filterAds["state_id[]"]
+            ? this.filterAds["state_id[]"].split(",")
             : [];
-          this.subjects_id = this.filterPosts["subjects_id[]"]
-            ? this.filterPosts["subjects_id[]"].split(",")
+          this.wheel_id = this.filterAds["wheel_id"]
+            ? this.filterAds["wheel_id"]
+            : undefined;
+          this.document_id = this.filterAds["document_id"]
+            ? this.filterAds["document_id"]
+            : undefined;
+          this.countries_id = this.filterAds["countries_id[]"]
+            ? this.filterAds["countries_id[]"].split(",")
             : [];
-          this.cities_id = this.filterPosts["cities_id[]"]
-            ? this.filterPosts["cities_id[]"].split(",")
+          this.subjects_id = this.filterAds["subjects_id[]"]
+            ? this.filterAds["subjects_id[]"].split(",")
             : [];
-          this.types_id = this.filterPosts["types_id[]"]
-            ? this.filterPosts["types_id[]"].split(",")
+          this.cities_id = this.filterAds["cities_id[]"]
+            ? this.filterAds["cities_id[]"].split(",")
             : [];
-          this.brands_id = this.filterPosts["brands_id[]"]
-            ? this.filterPosts["brands_id[]"].split(",")
+          this.types_id = this.filterAds["types_id[]"]
+            ? this.filterAds["types_id[]"].split(",")
             : [];
-          this.models_id = this.filterPosts["models_id[]"]
-            ? this.filterPosts["models_id[]"].split(",")
+          this.brands_id = this.filterAds["brands_id[]"]
+            ? this.filterAds["brands_id[]"].split(",")
             : [];
-          if (this.filterPosts["sort_id"] != undefined) {
+          this.models_id = this.filterAds["models_id[]"]
+            ? this.filterAds["models_id[]"].split(",")
+            : [];
+          if (this.filterAds["sort_id"] != undefined) {
             this.sortMenu = this.sortMenu.map(val => {
               val.selected = false;
-              if (val.value == this.filterPosts["sort_id"]) {
+              if (val.value == this.filterAds["sort_id"]) {
                 val.selected = true;
               }
               return val;
@@ -257,26 +320,42 @@ export default {
     }
   },
   methods: {
+    generateMenu(name, getter) {
+      let ids =
+        this.filterAds != null && this.filterAds[name] != undefined
+          ? this.filterAds[name].split(",")
+          : [];
+      return this.$store.getters[getter].map((val, key) => {
+        if (ids.indexOf(String(val.value)) != -1) {
+          val.selected = true;
+        }
+        return val;
+      });
+    },
     isHide() {
       this.$emit("onHide");
     },
-    isShowPosts() {
-      let form = this.$refs.formFilterPosts;
+    isShowAds() {
+      let form = this.$refs.formFilterAds;
       let body = new FormData(form);
       //добавляем фильтр в куки
-      let cookieFilterPosts = {};
+      let cookieFilterAds = {};
       for (var key of body.keys()) {
-        cookieFilterPosts[key] = body.get(key);
+        if (body.getAll(key).length > 1) {
+          cookieFilterAds[key] = body.getAll(key).join();
+        } else {
+          cookieFilterAds[key] = body.get(key);
+        }
       }
-      // console.dir(cookieFilterPosts);
-      this.$cookie.set("filter_posts", JSON.stringify(cookieFilterPosts));
-      // console.dir(this.$cookie.get("filter_posts"));
+      // console.dir(cookieFilterAds);
+      this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds));
+      // console.dir(this.$cookie.get("filter_ads"));
       //отправляем запрос
-      this.$api("post")
+      this.$api("ads")
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$store.commit("posts/updatePosts", response.body.data.posts);
+            this.$store.commit("ads/updateAds", response.body.data.ads);
           }
         })
         .catch(error => {

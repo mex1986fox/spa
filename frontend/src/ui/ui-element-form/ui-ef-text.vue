@@ -1,48 +1,39 @@
 <template>
-  <div class="ui-ef-text" @click="isClick()">
-    <span
-      class="ui-ef-text__caption"
-      :class="{'ui-ef-text__caption_completed':modCompleted,
+  <div class="ui-ef-text"
+       @click="isClick()">
+    <span class="ui-ef-text__caption"
+          :class="{'ui-ef-text__caption_completed':modCompleted,
             'ui-ef-text__caption_active':modFocus, 
                    
                    'ui-ef-text__caption_disabled':dDisabled}"
-      @click="isClick()"
-    >{{dCaption}}</span>
-    <input
-      :type="dType"
-      class="ui-ef-text__input"
-      :class="{'ui-ef-text__input_active':modFocus,
+          @click="isClick()">{{dCaption}}</span>
+    <input :type="dType"
+           class="ui-ef-text__input"
+           :class="{'ui-ef-text__input_active':modFocus,
                    'ui-ef-text__input_disabled':dDisabled}"
-      ref="input"
-      @focus="isFocus()"
-      @blur="isBlur()"
-      @input="isInputText()"
-      @paste="isInputText()"
-      @change="isInputText()"
-      :name="dName"
-      :value="dValue"
-      :readonly="dReadonly"
-      :disabled="dDisabled"
-      :maxlength="maxlength"
-      :autocomplete="autocomplete"
-    >
-    <hr
-      class="ui-ef-text__border"
-      :class="{'ui-ef-text__border_active':modFocus,
-                  'ui-ef-text__border_disabled':dDisabled}"
-    >
-    <span
-      class="ui-ef-text__help"
-      :class="{'ui-ef-text__help_active':help,
+           ref="input"
+           @focus="isFocus()"
+           @blur="isBlur()"
+           @input="isInputText()"
+           @paste="isInputText()"
+           @change="isInputText()"
+           :name="dName"
+           :value="dValue"
+           :readonly="dReadonly"
+           :disabled="dDisabled"
+           :maxlength="maxlength"
+           :autocomplete="autocomplete">
+    <hr class="ui-ef-text__border"
+        :class="{'ui-ef-text__border_active':modFocus,
+                  'ui-ef-text__border_disabled':dDisabled}">
+    <span class="ui-ef-text__help"
+          :class="{'ui-ef-text__help_active':help,
                     'ui-ef-text__help_disabled':dDisabled}"
-      @click="isClick()"
-    >{{help}}</span>
-    <div
-      name="icon"
-      class="ui-ef-text__icon"
-      :class="{'ui-ef-text__icon_active':modFocus, 
-               'ui-ef-text__icon_disabled':dDisabled}"
-    >
+          @click="isClick()">{{help}}</span>
+    <div name="icon"
+         class="ui-ef-text__icon"
+         :class="{'ui-ef-text__icon_active':modFocus, 
+               'ui-ef-text__icon_disabled':dDisabled}">
       <slot name="icon"></slot>
     </div>
   </div>
@@ -160,6 +151,17 @@ export default {
         newQ = spl.join("");
       }
       return newQ;
+    },
+    applyMasc(newV) {
+      if (this.masc != undefined) {
+        switch (this.masc) {
+          case "mascNumber":
+            this.dValue = this.mascNumber(newV);
+            break;
+          default:
+            this.dValue = this.masc.use(newV);
+        }
+      }
     }
   },
   computed: {
@@ -180,15 +182,7 @@ export default {
       }
     },
     dValue(newV) {
-      if (this.masc != undefined) {
-        switch (this.masc) {
-          case "mascNumber":
-            this.dValue = this.mascNumber(newV);
-            break;
-          default:
-            this.dValue = this.masc.use(newV);
-        }
-      }
+      this.applyMasc(newV);
     },
     caretStart(newQ) {
       this.dCaretStart = newQ;
@@ -206,6 +200,8 @@ export default {
   mounted() {
     if (this.value == undefined) {
       this.dValue = "";
+    } else {
+      this.applyMasc(this.value);
     }
     if (this.focus == true) {
       this.modFocus == true;

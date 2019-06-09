@@ -1,29 +1,26 @@
 <template>
   <div class="wg-likes">
-    <div
-      class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-      @click="isCreateLike(1)"
-    >
+    <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
+         @click="isCreateLike(1)">
       <i class="far fa-thumbs-up"></i>
     </div>
     <div class="wg-likes__counter">{{dLikes!=null?dLikes:0}}</div>
-    <div
-      class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-      @click="isCreateLike(0)"
-    >
+    <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
+         @click="isCreateLike(0)">
       <i class="far fa-thumbs-down"></i>
     </div>
     <div class="wg-likes__counter">{{dDislikes!=null?dDislikes:0}}</div>
 
-    <ui-snackbar :show="showSnackbar" type="err" :time="5000" @onHide="isHideSnackbar">
+    <ui-snackbar :show="showSnackbar"
+                 type="err"
+                 :time="5000"
+                 @onHide="isHideSnackbar">
       <b>{{dExc}}</b>
       <div class="ui-snackbar__buttons">
-        <input
-          type="button"
-          class="ui-button ui-button_float_black ui-button_s1"
-          @click="isHideSnackbar"
-          value="Закрыть"
-        >
+        <input type="button"
+               class="ui-button ui-button_float_black ui-button_s1"
+               @click="isHideSnackbar"
+               value="Закрыть">
       </div>
     </ui-snackbar>
   </div>
