@@ -148,6 +148,19 @@ const transports = {
         return []
       }
     },
+    getMenuVolume2: (state, getters, rootState, rootGetters) => {
+      if (state.volums != undefined) {
+        return state.volums.map(volume => {
+          return {
+            value: volume.value,
+            option: volume.value,
+            selected: false
+          }
+        });
+      } else {
+        return []
+      }
+    },
     getMenuWheel: (state, getters, rootState, rootGetters) => {
       return [
         { value: 1, option: "левый", selected: false },

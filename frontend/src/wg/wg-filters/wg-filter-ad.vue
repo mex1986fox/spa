@@ -1,61 +1,76 @@
 <template>
-  <wg-filter :show="show"
-             @onHide="isHide">
+  <wg-filter :show="show" @onHide="isHide">
     <template slot="header">Фильтр обявлений</template>
     <template slot="content">
       <form ref="formFilterAds">
-        <ui-ef-select class="ui-ef-select_white"
-                      name="sort_id"
-                      caption="Сортировать по"
-                      cleaner
-                      :menu="sortMenu" />
-        <wg-multi-location :countries_id="countries_id"
-                           :subjects_id="subjects_id"
-                           :cities_id="cities_id"
-                           caption="Места продажи"
-                           class="wg-multi-location_white" />
-        <wg-multi-transport :types_id="types_id"
-                            :brands_id="brands_id"
-                            :models_id="models_id"
-                            caption="Марки, модели"
-                            class="wg-multi-location_white" />
+        <ui-ef-select
+          class="ui-ef-select_white"
+          name="sort_id"
+          caption="Сортировать по"
+          cleaner
+          :menu="sortMenu"
+        />
+        <wg-multi-location
+          :countries_id="countries_id"
+          :subjects_id="subjects_id"
+          :cities_id="cities_id"
+          caption="Места продажи"
+          class="wg-multi-location_white"
+        />
+        <wg-multi-transport
+          :types_id="types_id"
+          :brands_id="brands_id"
+          :models_id="models_id"
+          caption="Марки, модели"
+          class="wg-multi-location_white"
+        />
         <div class="wg-filter__section">
           <div class="row">
             <div class="col_9">
               <div class="ui-header ui-header_white ui-header_3">Прочее</div>
-              <ui-ef-select class="ui-ef-select_white"
-                            name="drive_id[]"
-                            :menu="dDriveMenu"
-                            caption="Привод"
-                            multiple />
-              <ui-ef-select class="ui-ef-select_white"
-                            name="transmission_id[]"
-                            caption="Коробка передач"
-                            :menu="dTransmissionMenu"
-                            multiple />
-              <ui-ef-select class="ui-ef-select_white"
-                            name="body_id[]"
-                            caption="Кузов"
-                            :menu="dBodyMenu"
-                            multiple />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="drive_id[]"
+                :menu="dDriveMenu"
+                caption="Привод"
+                multiple
+              />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="transmission_id[]"
+                caption="Коробка передач"
+                :menu="dTransmissionMenu"
+                multiple
+              />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="body_id[]"
+                caption="Кузов"
+                :menu="dBodyMenu"
+                multiple
+              />
             </div>
           </div>
           <div class="row">
             <div class="col_4">
-              <ui-ef-text class="ui-ef-text_white"
-                          name="mileage"
-                          caption="Пробег от"
-                          :maxlength="10"
-                          :value="mileage"
-                          masc="mascNumber" />
+              <ui-ef-text
+                class="ui-ef-text_white"
+                name="mileage"
+                caption="Пробег от"
+                :maxlength="10"
+                :value="mileage"
+                masc="mascNumber"
+              />
             </div>
             <div class="col_4 col_offset-1">
-              <ui-ef-text class="ui-ef-text_white"
-                          name="mileage2"
-                          caption="до"
-                          :maxlength="10"
-                          :value="mileage2"
-                          masc="mascNumber" />
+              <ui-ef-text
+                class="ui-ef-text_white"
+                name="mileage2"
+                caption="до"
+                :maxlength="10"
+                :value="mileage2"
+                masc="mascNumber"
+              />
             </div>
           </div>
         </div>
@@ -67,41 +82,54 @@
           </div>
           <div class="row">
             <div class="col_9">
-              <ui-ef-select class="ui-ef-select_white"
-                            name="fuel_id[]"
-                            caption="Топливо"
-                            :menu="dFuelMenu"
-                            multiple />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="fuel_id[]"
+                caption="Топливо"
+                :menu="dFuelMenu"
+                multiple
+              />
             </div>
           </div>
           <div class="row">
             <div class="col_4">
-              <ui-ef-text class="ui-ef-text_white"
-                          name="power"
-                          caption="Мощьность от"
-                          :value="power"
-                          masc="mascNumber" />
+              <ui-ef-text
+                class="ui-ef-text_white"
+                name="power"
+                caption="Мощьность от"
+                :value="power"
+                masc="mascNumber"
+              />
             </div>
             <div class="col_4 col_offset-1">
-              <ui-ef-text class="ui-ef-text_white"
-                          name="power2"
-                          caption="до"
-                          :value="power2"
-                          masc="mascNumber" />
+              <ui-ef-text
+                class="ui-ef-text_white"
+                name="power2"
+                caption="до"
+                :value="power2"
+                masc="mascNumber"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col_4">
-              <ui-ef-select class="ui-ef-select_white"
-                            name="volume"
-                            caption="Объем от"
-                            :menu="dVolumeMenu" />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="volume"
+                caption="Объем от"
+                :menu="dVolumeMenu"
+                cleaner
+              />
             </div>
+
             <div class="col_4 col_offset-1">
-              <ui-ef-select class="ui-ef-select_white"
-                            name="volume2"
-                            caption="до"
-                            :menu="dVolumeMenu2" />
+              <ui-ef-select
+                class="ui-ef-select_white"
+                name="volume2"
+                caption="до"
+                :menu="dVolumeMenu2"
+                cleaner
+              />
             </div>
           </div>
         </div>
@@ -109,61 +137,81 @@
           <div class="row">
             <div class="col_12">
               <div class="ui-header ui-header_white ui-header_3">Расположение руля</div>
-              <ui-ef-radio class="ui-ef-radio_white"
-                           name="wheel_id"
-                           value="1"
-                           :checked="wheel_id==1">Левый</ui-ef-radio>
-              <ui-ef-radio class="ui-ef-radio_white"
-                           name="wheel_id"
-                           value="2"
-                           :checked="wheel_id==2">Правый</ui-ef-radio>
+              <ui-ef-radio
+                class="ui-ef-radio_white"
+                name="wheel_id"
+                value="1"
+                :checked="wheel_id==1"
+              >Левый</ui-ef-radio>
+              <ui-ef-radio
+                class="ui-ef-radio_white"
+                name="wheel_id"
+                value="2"
+                :checked="wheel_id==2"
+              >Правый</ui-ef-radio>
             </div>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Наличие документов</div>
-            <ui-ef-radio class="ui-ef-radio_white"
-                         name="document_id"
-                         value="1"
-                         :checked="document_id==1">С документами</ui-ef-radio>
-            <ui-ef-radio class="ui-ef-radio_white"
-                         name="document_id"
-                         value="2"
-                         :checked="document_id==2">Без документов</ui-ef-radio>
+            <ui-ef-radio
+              class="ui-ef-radio_white"
+              name="document_id"
+              value="1"
+              :checked="document_id==1"
+            >С документами</ui-ef-radio>
+            <ui-ef-radio
+              class="ui-ef-radio_white"
+              name="document_id"
+              value="2"
+              :checked="document_id==2"
+            >Без документов</ui-ef-radio>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Состояние</div>
-            <ui-ef-checkbox class="ui-ef-checkbox_white"
-                            name="state_id[]"
-                            value="1"
-                            :checked="state_id.indexOf('1') != -1?true:false">Не требует вложений (ОТС)</ui-ef-checkbox>
-            <ui-ef-checkbox class="ui-ef-checkbox_white"
-                            name="state_id[]"
-                            value="2"
-                            :checked="state_id.indexOf('2') != -1?true:false">Требует незначительных вложений (ХТС)</ui-ef-checkbox>
-            <ui-ef-checkbox class="ui-ef-checkbox_white"
-                            name="state_id[]"
-                            value="3"
-                            :checked="state_id.indexOf('3') != -1?true:false">Требует значительных вложений</ui-ef-checkbox>
+            <ui-ef-checkbox
+              class="ui-ef-checkbox_white"
+              name="state_id[]"
+              value="1"
+              :checked="state_id.indexOf('1') != -1?true:false"
+            >Не требует вложений (ОТС)</ui-ef-checkbox>
+            <ui-ef-checkbox
+              class="ui-ef-checkbox_white"
+              name="state_id[]"
+              value="2"
+              :checked="state_id.indexOf('2') != -1?true:false"
+            >Требует незначительных вложений (ХТС)</ui-ef-checkbox>
+            <ui-ef-checkbox
+              class="ui-ef-checkbox_white"
+              name="state_id[]"
+              value="3"
+              :checked="state_id.indexOf('3') != -1?true:false"
+            >Требует значительных вложений</ui-ef-checkbox>
           </div>
           <div class="col_12">
             <div class="ui-header ui-header_white ui-header_3">Обмен</div>
-            <ui-ef-radio class="ui-ef-radio_white"
-                         name="exchange_id"
-                         value="1"
-                         :checked="exchange_id==1">Готов к обмену</ui-ef-radio>
-            <ui-ef-radio class="ui-ef-radio_white"
-                         name="exchange_id"
-                         value="2"
-                         :checked="exchange_id==2">Не готов к обмену</ui-ef-radio>
+            <ui-ef-radio
+              class="ui-ef-radio_white"
+              name="exchange_id"
+              value="1"
+              :checked="exchange_id==1"
+            >Готов к обмену</ui-ef-radio>
+            <ui-ef-radio
+              class="ui-ef-radio_white"
+              name="exchange_id"
+              value="2"
+              :checked="exchange_id==2"
+            >Не готов к обмену</ui-ef-radio>
           </div>
         </div>
       </form>
     </template>
     <template slot="buttons">
-      <input class="ui-button ui-button_float_white"
-             type="button"
-             value="Применить"
-             @click="isShowAds">
+      <input
+        class="ui-button ui-button_float_white"
+        type="button"
+        value="Применить"
+        @click="isShowAds"
+      >
       <!-- <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide"> -->
     </template>
   </wg-filter>
@@ -237,7 +285,7 @@ export default {
       return this.generateMenu("volume", "transports/getMenuVolume");
     },
     volumeMenu2() {
-      return this.generateMenu("volume2", "transports/getMenuVolume");
+      return this.generateMenu("volume2", "transports/getMenuVolume2");
     }
   },
   watch: {
@@ -338,6 +386,12 @@ export default {
     isShowAds() {
       let form = this.$refs.formFilterAds;
       let body = new FormData(form);
+      // удалить пустые значения
+      for (var el of body.entries()) {
+        body.delete(el[0]);
+      }
+      body.delete("mileage2");
+      body.delete("power2");
       //добавляем фильтр в куки
       let cookieFilterAds = {};
       for (var key of body.keys()) {
@@ -347,7 +401,7 @@ export default {
           cookieFilterAds[key] = body.get(key);
         }
       }
-      // console.dir(cookieFilterAds);
+      console.dir(cookieFilterAds);
       this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds));
       // console.dir(this.$cookie.get("filter_ads"));
       //отправляем запрос

@@ -1,8 +1,8 @@
 <template>
   <div class="wg-multi-location">
-    <input type="hidden" name="models_id[]" :value="modelsId">
-    <input type="hidden" name="brands_id[]" :value="brandsId">
-    <input type="hidden" name="types_id[]" :value="typesId">
+    <input v-if="modelsId.length>0" type="hidden" name="models_id[]" :value="modelsId">
+    <input v-if="brandsId.length>0" type="hidden" name="brands_id[]" :value="brandsId">
+    <input v-if="typesId.length>0" type="hidden" name="types_id[]" :value="typesId">
     <ui-ef-container :maxlength="180" :caption="caption" @onClick="isClickText">
       <template v-if="dCheckTypes.length>0 || dCheckBrands.length>0 || dCheckModels.length>0">
         <ui-ef-chips

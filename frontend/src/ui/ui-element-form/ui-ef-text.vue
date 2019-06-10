@@ -7,7 +7,8 @@
                    
                    'ui-ef-text__caption_disabled':dDisabled}"
           @click="isClick()">{{dCaption}}</span>
-    <input :type="dType"
+    <input
+          :type="dType"
            class="ui-ef-text__input"
            :class="{'ui-ef-text__input_active':modFocus,
                    'ui-ef-text__input_disabled':dDisabled}"
