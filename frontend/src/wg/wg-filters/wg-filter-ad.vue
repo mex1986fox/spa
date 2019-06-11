@@ -386,12 +386,6 @@ export default {
     isShowAds() {
       let form = this.$refs.formFilterAds;
       let body = new FormData(form);
-      // удалить пустые значения
-      for (var el of body.entries()) {
-        body.delete(el[0]);
-      }
-      body.delete("mileage2");
-      body.delete("power2");
       //добавляем фильтр в куки
       let cookieFilterAds = {};
       for (var key of body.keys()) {
