@@ -60,6 +60,8 @@
                 :maxlength="10"
                 :value="mileage"
                 masc="mascNumber"
+                @onBlur="onBlurMileage"
+                @onInput="mileage=$event"
               />
             </div>
             <div class="col_4 col_offset-1">
@@ -70,6 +72,8 @@
                 :maxlength="10"
                 :value="mileage2"
                 masc="mascNumber"
+                @onBlur="onBlurMileage"
+                @onInput="mileage2=$event"
               />
             </div>
           </div>
@@ -99,6 +103,8 @@
                 caption="Мощьность от"
                 :value="power"
                 masc="mascNumber"
+                @onBlur="onBlurPower"
+                @onInput="power=$event"
               />
             </div>
             <div class="col_4 col_offset-1">
@@ -108,6 +114,8 @@
                 caption="до"
                 :value="power2"
                 masc="mascNumber"
+                @onBlur="onBlurPower"
+                @onInput="power2=$event"
               />
             </div>
           </div>
@@ -119,6 +127,8 @@
                 caption="Объем от"
                 :menu="dVolumeMenu"
                 cleaner
+                @onSelect="dChekVolume=$event[0].value"
+                @onClianer="dChekVolume=null"
               />
             </div>
 
@@ -129,6 +139,8 @@
                 caption="до"
                 :menu="dVolumeMenu2"
                 cleaner
+                @onSelect="dChekVolume2=$event[0].value"
+                @onClianer="dChekVolume2=null"
               />
             </div>
           </div>
@@ -221,6 +233,7 @@ export default {
   data() {
     return {
       filterAds: JSON.parse(this.$cookie.get("filter_ads")),
+      exc: [],
       countries_id: [],
       subjects_id: [],
       cities_id: [],
@@ -247,6 +260,8 @@ export default {
       dFuelMenu: [],
       dVolumeMenu: [],
       dVolumeMenu2: [],
+      dChekVolume: undefined,
+      dChekVolume2: undefined,
       document_id: undefined,
       wheel_id: undefined,
       state_id: [],
@@ -282,10 +297,41 @@ export default {
       return this.generateMenu("fuel_id[]", "transports/getMenuFuel");
     },
     volumeMenu() {
-      return this.generateMenu("volume", "transports/getMenuVolume");
+      if (this.dChekVolume2 != undefined) {
+        this.filterAds.volume2 = this.dChekVolume2;
+      }
+      if (this.dChekVolume2 == null) {
+        delete this.filterAds.volume2;
+        this.dChekVolume2 = undefined;
+      }
+      if (
+        this.dChekVolume2 == undefined &&
+        this.filterAds.volume2 != undefined
+      ) {
+        this.dChekVolume2 = this.filterAds.volume2;
+      }
+      return this.generateMenuVolume(
+        "volume",
+        "transports/getMenuVolume",
+        this.dChekVolume2
+      );
     },
     volumeMenu2() {
-      return this.generateMenu("volume2", "transports/getMenuVolume2");
+      if (this.dChekVolume != undefined) {
+        this.filterAds.volume = this.dChekVolume;
+      }
+      if (this.dChekVolume == null) {
+        delete this.filterAds.volume;
+        this.dChekVolume = undefined;
+      }
+      if (this.dChekVolume == undefined && this.filterAds.volume != undefined) {
+        this.dChekVolume = this.filterAds.volume;
+      }
+      return this.generateMenuVolume2(
+        "volume2",
+        "transports/getMenuVolume2",
+        this.dChekVolume
+      );
     }
   },
   watch: {
@@ -368,6 +414,37 @@ export default {
     }
   },
   methods: {
+    onBlurPower() {
+      let epow;
+
+      if (
+        this.power != "" &&
+        this.power != undefined &&
+        this.power2 != undefined &&
+        this.power2 != "" &&
+        Number(this.power.replace(/\s/g, "")) >
+          Number(this.power2.replace(/\s/g, ""))
+      ) {
+        epow = this.power;
+        this.power = this.power2;
+        this.power2 = epow;
+      }
+    },
+    onBlurMileage() {
+      let epow;
+      if (
+        this.mileage != "" &&
+        this.mileage != undefined &&
+        this.mileage2 != undefined &&
+        this.mileage2 != "" &&
+        Number(this.mileage.replace(/\s/g, "")) >
+          Number(this.mileage2.replace(/\s/g, ""))
+      ) {
+        epow = this.mileage;
+        this.mileage = this.mileage2;
+        this.mileage2 = epow;
+      }
+    },
     generateMenu(name, getter) {
       let ids =
         this.filterAds != null && this.filterAds[name] != undefined
@@ -379,6 +456,45 @@ export default {
         }
         return val;
       });
+    },
+    generateMenuVolume(name, getter, chekVolume2) {
+      // console.dir(chekVolume2);
+      return this.$store.getters[getter]
+        .filter((val, key) => {
+          if (chekVolume2 != undefined && val.value >= chekVolume2) {
+            return false;
+          }
+          return true;
+        })
+        .map((val, key) => {
+          val.selected = false;
+          if (
+            this.filterAds["volume"] != undefined &&
+            this.filterAds["volume"] == val.value
+          ) {
+            val.selected = true;
+          }
+          return val;
+        });
+    },
+    generateMenuVolume2(name, getter, chekVolume1) {
+      return this.$store.getters[getter]
+        .filter((val, key) => {
+          if (chekVolume1 != undefined && val.value <= chekVolume1) {
+            return false;
+          }
+          return true;
+        })
+        .map((val, key) => {
+          val.selected = false;
+          if (
+            this.filterAds["volume2"] != undefined &&
+            this.filterAds["volume2"] == val.value
+          ) {
+            val.selected = true;
+          }
+          return val;
+        });
     },
     isHide() {
       this.$emit("onHide");
@@ -395,7 +511,6 @@ export default {
           cookieFilterAds[key] = body.get(key);
         }
       }
-      console.dir(cookieFilterAds);
       this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds));
       // console.dir(this.$cookie.get("filter_ads"));
       //отправляем запрос

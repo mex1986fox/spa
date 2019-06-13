@@ -40,13 +40,13 @@
     <ui-snackbar :show="dShow && token==undefined"
                  type="err"
                  :time="5000"
-                 @onHide="isHide">
+                 @onHide="isHideSnackbar">
       <b>Добавить объявление могут только авторизованные пользователи.</b>
       <p>Авторизуйтесь или зарегистрируйтесь.</p>
       <div class="ui-snackbar__buttons">
         <input type="button"
                class="ui-button ui-button_float_black ui-button_s1"
-               @click="isHide"
+               @click="isHideSnackbar"
                value="Закрыть">
       </div>
     </ui-snackbar>

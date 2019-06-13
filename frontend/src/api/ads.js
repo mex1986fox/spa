@@ -20,18 +20,19 @@ const ads = {
       .catch(error => Promise.reject(error));
   },
   show(body) {
+    let _body = new FormData();
     // удалить пустые значения
     body.forEach((val, key) => {
-      if (typeof val == "string" && val.length == 0) {
-        delete body[key];
+      if (typeof val == "string" && val.length != 0) {
+        _body.append(key, val);
       }
     });
-    // body["mileage2"]!=undefined && body["mileage2"].length == 0 ? body["mileage2"] : body["mileage2"].replace(/\s/g, '');
-    // body["mileage"].length == 0 ? body["mileage"] : body["mileage"].replace(/\s/g, '');
-    // body["power"].length == 0 ? body["power"] : body["power"].replace(/\s/g, '');
-    // body["power2"].length == 0 ? body["power2"] : body["power2"].replace(/\s/g, '');
+    _body.get("mileage") != undefined && _body.set("mileage", _body.get("mileage").replace(/\s/g, ""));
+    _body.get("mileage2") != undefined && _body.set("mileage2", _body.get("mileage2").replace(/\s/g, ""));
+    _body.get("power") != undefined && _body.set("power", _body.get("power").replace(/\s/g, ""));
+    _body.get("power2") != undefined && _body.set("power2", _body.get("power2").replace(/\s/g, ""));
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/ads/api/ads/show", body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/show", _body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },

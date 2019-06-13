@@ -54,6 +54,12 @@ export default {
         }
       }, 200);
     },
+    isHideSnackbar() {
+      this.dShowAnimation = false;
+      setTimeout(() => {
+        this.$emit("onHide");
+      }, 200);
+    },
     isShowCardNotMain(ad) {
       this.dAd = ad;
       this.showCard = false;
