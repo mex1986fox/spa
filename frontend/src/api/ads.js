@@ -27,13 +27,19 @@ const ads = {
         _body.append(key, val);
       }
     });
+    if(body.get("page")==undefined){
+          _body.append("page", Number(Vue.prototype.$store.getters["ads/getPage"])+1);
+    }
     _body.get("mileage") != undefined && _body.set("mileage", _body.get("mileage").replace(/\s/g, ""));
     _body.get("mileage2") != undefined && _body.set("mileage2", _body.get("mileage2").replace(/\s/g, ""));
     _body.get("power") != undefined && _body.set("power", _body.get("power").replace(/\s/g, ""));
     _body.get("power2") != undefined && _body.set("power2", _body.get("power2").replace(/\s/g, ""));
     return Vue.http
       .post(Vue.prototype.$hosts.services + "/ads/api/ads/show", _body)
-      .then(response => Promise.resolve(response))
+      .then(response => {
+        Vue.prototype.$store.commit("ads/updatePage", response.body.data.page);
+        return Promise.resolve(response)
+      })
       .catch(error => Promise.reject(error));
   },
   // лайки

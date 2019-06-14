@@ -3,8 +3,12 @@ const ads = {
     namespaced: true,
     state: {
         ads: undefined,
+        page: 0
     },
     getters: {
+        getPage: (state, getters, rootState, rootGetters) => {
+            return state.page;
+        },
         getAds: (state, getters, rootState, rootGetters) => {
             return state.ads;
         },
@@ -23,6 +27,9 @@ const ads = {
     mutations: {
         updateAds(state, ads) {
             state.ads = ads;
+        },
+        updatePage(state, page) {
+            state.page = page;
         },
         // вставляет объявление в начало
         unshiftAd(state, ad) {

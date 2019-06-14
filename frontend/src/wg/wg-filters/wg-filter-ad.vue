@@ -514,6 +514,7 @@ export default {
       this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds));
       // console.dir(this.$cookie.get("filter_ads"));
       //отправляем запрос
+      body.set("page", 1);
       this.$api("ads")
         .show(body)
         .then(response => {

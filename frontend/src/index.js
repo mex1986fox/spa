@@ -25,7 +25,7 @@ Vue.use(Resourсe);
 //подключаем библиотеку для работы с куками
 var VueCookie = require("vue-cookie");
 Vue.use(VueCookie);
-
+Vue.prototype.$store = store;
 const vue = new Vue({
   router,
   store,
