@@ -24,6 +24,7 @@ Vue.use(Resourсe);
 
 //подключаем библиотеку для работы с куками
 var VueCookie = require("vue-cookie");
+// хранить куки 1 сутки
 Vue.use(VueCookie);
 Vue.prototype.$store = store;
 const vue = new Vue({
@@ -32,6 +33,7 @@ const vue = new Vue({
   mounted() {
     this.$store.dispatch("locations/loadLocations");
     this.$store.dispatch("transports/loadTransports");
+    this.$store.dispatch("tokens/extensionAuthorization");
     // this.$store.dispatch("user/authentication");
   }
 }).$mount("#app");

@@ -1,44 +1,38 @@
 <template>
-  <wg-filter :show="show" @onHide="isHide">
+  <wg-filter :show="show"
+             @onHide="isHide">
     <template slot="header">Фильтр пользователей</template>
     <template slot="content">
       <form ref="formFilterUsers">
-        <ui-ef-select
-          class="ui-ef-select_white"
-          name="sort_id"
-          caption="Сортировать по"
-          cleaner
-          :menu="sortMenu"
-        />
-        <ui-ef-text
-          :value="filterUsers.login"
-          name="login"
-          caption="Логин"
-          class="ui-ef-text_white"
-        ></ui-ef-text>
-        <ui-ef-text :value="filterUsers.name" name="name" caption="Имя" class="ui-ef-text_white"></ui-ef-text>
-        <ui-ef-text
-          :value="filterUsers.surname"
-          name="surname"
-          caption="Фамилия"
-          class="ui-ef-text_white"
-        ></ui-ef-text>
-        <wg-multi-location
-          :countries_id="countries_id"
-          :subjects_id="subjects_id"
-          :cities_id="cities_id"
-          caption="Места проживания"
-          class="wg-multi-location_white"
-        />
+        <ui-ef-select class="ui-ef-select_white"
+                      name="sort_id"
+                      caption="Сортировать по"
+                      cleaner
+                      :menu="sortMenu" />
+        <ui-ef-text :value="filterUsers.login"
+                    name="login"
+                    caption="Логин"
+                    class="ui-ef-text_white"></ui-ef-text>
+        <ui-ef-text :value="filterUsers.name"
+                    name="name"
+                    caption="Имя"
+                    class="ui-ef-text_white"></ui-ef-text>
+        <ui-ef-text :value="filterUsers.surname"
+                    name="surname"
+                    caption="Фамилия"
+                    class="ui-ef-text_white"></ui-ef-text>
+        <wg-multi-location :countries_id="countries_id"
+                           :subjects_id="subjects_id"
+                           :cities_id="cities_id"
+                           caption="Места проживания"
+                           class="wg-multi-location_white" />
       </form>
     </template>
     <template slot="buttons">
-      <input
-        class="ui-button ui-button_float_white"
-        type="button"
-        value="Применить"
-        @click="isShowUsers"
-      >
+      <input class="ui-button ui-button_float_white"
+             type="button"
+             value="Применить"
+             @click="isShowUsers">
       <!-- <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide"> -->
     </template>
   </wg-filter>
@@ -105,14 +99,17 @@ export default {
         cookieFilterUsers[key] = body.get(key);
       }
       // console.dir(cookieFilterUsers);
-      this.$cookie.set("filter_users", JSON.stringify(cookieFilterUsers));
+      this.$cookie.set("filter_users", JSON.stringify(cookieFilterUsers),{
+        expires: "1D"
+      });
       // console.dir(this.$cookie.get("filter_users"));
       //отправляем запрос
+      body.set("page", 1);
       this.$api("user")
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$store.commit("users/updateUsers", response.body.data);
+            this.$store.commit("users/updateUsers", response.body.data.users);
           }
         })
         .catch(error => {

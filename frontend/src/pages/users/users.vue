@@ -6,27 +6,26 @@
         <div class="lt-main-menu__header">Люди</div>
         <div class="lt-main-menu__buttons">
           <ui-badge>
-            <div v-if="countFilterUsers>0" class="ui-badge__icon">{{countFilterUsers}}</div>
-            <div
-              class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-              @click="isShowFilter"
-            >
+            <div v-if="countFilterUsers>0"
+                 class="ui-badge__icon">{{countFilterUsers}}</div>
+            <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
+                 @click="isShowFilter">
               <i class="fas fa-sliders-h"></i>
             </div>
           </ui-badge>
         </div>
       </lt-main-menu>
-      <wg-card-user
-        v-for="(user, key) in users"
-        :key="key"
-        :user="user"
-        @onUpdateProfile="isShowUsers"
-      />
+      <wg-card-user v-for="(user, key) in users"
+                    :key="key"
+                    :user="user"
+                    @onUpdateProfile="isShowUsers" />
       <div style="width: 100%; display: flex; justify-content: center;">
-        <div class="ui-button ui-button_white ui-button_s2" @click="isAddUsers">Показать еще ...</div>
+        <div class="ui-button ui-button_white ui-button_s2"
+             @click="isAddUsers">Показать еще ...</div>
       </div>
 
-      <wg-filter-users :show="showFilter" @onHide="showFilter=false"/>
+      <wg-filter-users :show="showFilter"
+                       @onHide="showFilter=false" />
     </div>
   </lt-main>
 </template>
@@ -64,11 +63,12 @@ export default {
       for (const key in filterUsers) {
         body.set(key, filterUsers[key]);
       }
+      body.set("page", 1);
       this.$api("user")
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$store.commit("users/updateUsers", response.body.data);
+            this.$store.commit("users/updateUsers", response.body.data.users);
           }
         })
         .catch(error => {
@@ -91,7 +91,7 @@ export default {
           if (response.body.status == "ok") {
             this.$store.commit("users/updateUsers", [
               ...this.users,
-              ...response.body.data
+              ...response.body.data.users
             ]);
           }
         })

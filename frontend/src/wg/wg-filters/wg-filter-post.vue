@@ -1,44 +1,35 @@
 <template>
-  <wg-filter :show="show" @onHide="isHide">
+  <wg-filter :show="show"
+             @onHide="isHide">
     <template slot="header">Фильтр постов</template>
     <template slot="content">
       <form ref="formFilterPosts">
-        <ui-ef-select
-          class="ui-ef-select_white"
-          name="sort_id"
-          caption="Сортировать по"
-          cleaner
-          :menu="sortMenu"
-        />
-        <ui-ef-text
-          :value="filterPosts.title"
-          name="title"
-          caption="Заголовок"
-          class="ui-ef-text_white"
-        ></ui-ef-text>
-        <wg-multi-location
-          :countries_id="countries_id"
-          :subjects_id="subjects_id"
-          :cities_id="cities_id"
-          caption="Места проживания"
-          class="wg-multi-location_white"
-        />
-        <wg-multi-transport
-          :types_id="types_id"
-          :brands_id="brands_id"
-          :models_id="models_id"
-          caption="Марки, модели"
-          class="wg-multi-location_white"
-        />
+        <ui-ef-select class="ui-ef-select_white"
+                      name="sort_id"
+                      caption="Сортировать по"
+                      cleaner
+                      :menu="sortMenu" />
+        <ui-ef-text :value="filterPosts.title"
+                    name="title"
+                    caption="Заголовок"
+                    class="ui-ef-text_white"></ui-ef-text>
+        <wg-multi-location :countries_id="countries_id"
+                           :subjects_id="subjects_id"
+                           :cities_id="cities_id"
+                           caption="Места проживания"
+                           class="wg-multi-location_white" />
+        <wg-multi-transport :types_id="types_id"
+                            :brands_id="brands_id"
+                            :models_id="models_id"
+                            caption="Марки, модели"
+                            class="wg-multi-location_white" />
       </form>
     </template>
     <template slot="buttons">
-      <input
-        class="ui-button ui-button_float_white"
-        type="button"
-        value="Применить"
-        @click="isShowPosts"
-      >
+      <input class="ui-button ui-button_float_white"
+             type="button"
+             value="Применить"
+             @click="isShowPosts">
       <!-- <input class="ui-button ui-button_float_white" type="button" value="Отмена" @click="isHide"> -->
     </template>
   </wg-filter>
@@ -120,9 +111,12 @@ export default {
         cookieFilterPosts[key] = body.get(key);
       }
       // console.dir(cookieFilterPosts);
-      this.$cookie.set("filter_posts", JSON.stringify(cookieFilterPosts));
+      this.$cookie.set("filter_posts", JSON.stringify(cookieFilterPosts),{
+        expires: "1D"
+      });
       // console.dir(this.$cookie.get("filter_posts"));
       //отправляем запрос
+      body.set("page", 1);
       this.$api("post")
         .show(body)
         .then(response => {

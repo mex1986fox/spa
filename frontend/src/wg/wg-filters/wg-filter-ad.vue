@@ -511,7 +511,9 @@ export default {
           cookieFilterAds[key] = body.get(key);
         }
       }
-      this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds));
+      this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds),{
+        expires: "1D"
+      });
       // console.dir(this.$cookie.get("filter_ads"));
       //отправляем запрос
       body.set("page", 1);

@@ -2269,7 +2269,7 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(to top left, #6e203a 20%, #303f92 50%, #520c72 80%); }
+  background-color: #434e62; }
 
 .lt-main__menu {
   height: 100%;

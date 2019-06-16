@@ -21,7 +21,6 @@ const tokens = {
         return JSON.parse(tokenPayload);
       }
       return undefined;
-
     },
     getRefreshTokenPayload(state, getters, rootState, rootGetters) {
       if (state.refresh_token != undefined) {
@@ -38,11 +37,13 @@ const tokens = {
       state.access_token = access_token;
     },
     updateRefreshToken(state, refresh_token) {
+      Vue.prototype.$cookie.set("refresh_token", refresh_token, {
+        expires: "1D"
+      });
       state.refresh_token = refresh_token;
     },
     updateTimerUpdate(state, timer) {
       state.timer_update = timer;
-
     },
     deleteTimerUpdate(state, timer) {
       clearInterval(state.timer_update);
@@ -50,69 +51,89 @@ const tokens = {
     }
   },
   actions: {
+    //продлевает авторизацию если в cooke етьь токены
+    extensionAuthorization(context, body) {
+      let refresh_token = Vue.prototype.$cookie.get("refresh_token");
+      if (refresh_token != undefined) {
+        context.commit("updateRefreshToken", refresh_token);
+        context.dispatch("updateTokens");
+      }
+    },
     creteTokens(context, body) {
       let mbody = {
-        "login": body.login,
-        "password": body.password
-      }
-      Vue.prototype.$api("token").create(mbody)
-        .then(
-          response => {
-            if (response.body.data.access_token != undefined) {
-              context.commit("updateAccessToken", response.body.data.access_token);
-              context.commit("updateRefreshToken", response.body.data.refresh_token);
-              // запускаем обновление токинов
-              // за минуту до его смерти
-              let pload = context.getters.getAccessTokenPayload;
-              let uptime = (pload.exp - pload.iat - 60) * 1000;
+        login: body.login,
+        password: body.password
+      };
+      Vue.prototype
+        .$api("token")
+        .create(mbody)
+        .then(response => {
+          if (response.body.data.access_token != undefined) {
+            context.commit(
+              "updateAccessToken",
+              response.body.data.access_token
+            );
+            context.commit(
+              "updateRefreshToken",
+              response.body.data.refresh_token
+            );
+            // запускаем обновление токинов
+            // за минуту до его смерти
+            let pload = context.getters.getAccessTokenPayload;
+            let uptime = (pload.exp - pload.iat - 60) * 1000;
 
-              if (context.state.timer_update == undefined) {
-                context.commit("updateTimerUpdate", setInterval(() => {
+            if (context.state.timer_update == undefined) {
+              context.commit(
+                "updateTimerUpdate",
+                setInterval(() => {
                   context.dispatch("updateTokens");
-                }, uptime));
-              }
+                }, uptime)
+              );
             }
-          })
-        .catch(
-          error => {
-            console.log(error)
           }
-        );
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     deleteTokens(context) {
-      let body = { "access_token": context.getters.getAccessToken }
-      Vue.prototype.$api("token").delete(body)
-        .then(
-          response => {
-            if (response.body.status == "ok") {
-              context.commit("updateAccessToken", undefined);
-              context.commit("updateRefreshToken", undefined);
-              context.commit("deleteTimerUpdate");
-            }
-          })
-        .catch(
-          error => {
-            console.log(error)
+      let body = { access_token: context.getters.getAccessToken };
+      Vue.prototype
+        .$api("token")
+        .delete(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            context.commit("updateAccessToken", undefined);
+            context.commit("updateRefreshToken", undefined);
+            context.commit("deleteTimerUpdate");
           }
-        );
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     updateTokens(context, tokens = undefined) {
       if (tokens == undefined) {
-        let body = { "refresh_token": context.getters.getRefreshToken }
-        Vue.prototype.$api("token").update(body)
-          .then(
-            response => {
-              if (response.body.data.access_token != undefined) {
-                context.commit("updateAccessToken", response.body.data.access_token);
-                context.commit("updateRefreshToken", response.body.data.refresh_token);
-                // console.dir(response.body.data);
-              }
-            })
-          .catch(
-            error => {
-              console.log(error)
+        let body = { refresh_token: context.getters.getRefreshToken };
+        Vue.prototype
+          .$api("token")
+          .update(body)
+          .then(response => {
+            if (response.body.data.access_token != undefined) {
+              context.commit(
+                "updateAccessToken",
+                response.body.data.access_token
+              );
+              context.commit(
+                "updateRefreshToken",
+                response.body.data.refresh_token
+              );
+              // console.dir(response.body.data);
             }
-          );
+          })
+          .catch(error => {
+            console.log(error);
+          });
       } else {
         context.commit("updateAccessToken", tokens.access_token);
         context.commit("updateRefreshToken", tokens.refresh_token);
@@ -122,12 +143,15 @@ const tokens = {
         let uptime = (pload.exp - pload.iat - 60) * 1000;
 
         if (context.state.timer_update == undefined) {
-          context.commit("updateTimerUpdate", setInterval(() => {
-            context.dispatch("updateTokens");
-          }, uptime));
+          context.commit(
+            "updateTimerUpdate",
+            setInterval(() => {
+              context.dispatch("updateTokens");
+            }, uptime)
+          );
         }
       }
-    },
+    }
   }
 };
 export default tokens;
