@@ -130,22 +130,22 @@ export default {
       token: "tokens/getAccessToken"
     }),
     driveMenu() {
-      return this.$store.getters["transports/getMenuDrive"];
+      return this.$store.getters["transports/getMenuDrive"]();
     },
     transmissionMenu() {
-      return this.$store.getters["transports/getMenuTransmission"];
+      return this.$store.getters["transports/getMenuTransmission"]();
     },
     bodyMenu() {
-      return this.$store.getters["transports/getMenuBody"];
+      return this.$store.getters["transports/getMenuBody"]();
     },
     fuelMenu() {
-      return this.$store.getters["transports/getMenuFuel"];
+      return this.$store.getters["transports/getMenuFuel"]();
     },
     volumeMenu() {
-      return this.$store.getters["transports/getMenuVolume"];
+      return this.$store.getters["transports/getMenuVolume"]();
     },
     wheelMenu() {
-      return this.$store.getters["transports/getMenuWheel"];
+      return this.$store.getters["transports/getMenuWheel"]();
     }
   },
   methods: {
@@ -174,12 +174,6 @@ export default {
 
       body.set("access_token", this.token);
       body.set("ad_id", this.ad.ad_id);
-      if (body.get("mileage") != undefined) {
-        body.set("mileage", body.get("mileage").replace(/\s/g, ""));
-      }
-      if (body.get("power") != undefined) {
-        body.set("power", body.get("power").replace(/\s/g, ""));
-      }
       let flExc = false;
       let description = body.get("description");
 

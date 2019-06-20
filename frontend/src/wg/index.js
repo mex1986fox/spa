@@ -12,7 +12,8 @@ import WgFormUpdatePost from "./wg-forms/updatePost/wg-form-update-post.vue";
 Vue.component("wg-form-update-post", WgFormUpdatePost);
 import WgFormCreatAd from "./wg-forms/creatAd/wg-form-creat-ad.vue";
 Vue.component("wg-form-creat-ad", WgFormCreatAd);
-
+import WgFormUpdateAd from "./wg-forms/updateAd/wg-form-update-ad.vue";
+Vue.component("wg-form-update-ad", WgFormUpdateAd);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);

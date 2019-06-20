@@ -101,15 +101,15 @@
         <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
-    <!-- <wg-form-update-post :show="showUpdatePost" @onHide="isHideUpdatePost" :post="post"/> -->
+    <wg-form-update-ad :show="showUpdateAd" @onHide="isHideUpdateAd" :ad="ad"/>
     <ui-menu :show="showMenu" @onHide="isHideMenu">
       <ul class="ui-menu__ul">
         <li
           class="ui-menu__li"
           v-if="profileUserID==ad.user_id"
-          @click="isShowUpdatePost"
+          @click="isShowUpdateAd"
         >Редактировать</li>
-        <li class="ui-menu__li" v-if="profileUserID==ad.user_id" @click="isDeletePost">Удалить</li>
+        <li class="ui-menu__li" v-if="profileUserID==ad.user_id" @click="isDeleteAd">Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
@@ -125,7 +125,7 @@ export default {
       slides: [],
       showSlides: false,
       showMenu: false,
-      showUpdatePost: false
+      showUpdateAd: false
     };
   },
   props: {
@@ -144,12 +144,12 @@ export default {
     isHideMenu() {
       this.showMenu = false;
     },
-    isShowUpdatePost() {
+    isShowUpdateAd() {
       this.showMenu = false;
-      this.showUpdatePost = true;
+      this.showUpdateAd = true;
     },
-    isHideUpdatePost() {
-      this.showUpdatePost = false;
+    isHideUpdateAd() {
+      this.showUpdateAd = false;
       this.$emit("onUpdatePost");
     },
     isShowDescription() {
@@ -189,12 +189,12 @@ export default {
           });
       }
     },
-    isDeletePost() {
+    isDeleteAd() {
       this.showMenu = false;
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("ad_id", this.ad.d_id);
+      body.set("ad_id", this.ad.ad_id);
       //отправляем запрос
       this.$api("ads")
         .delete(body)

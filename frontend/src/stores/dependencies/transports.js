@@ -83,88 +83,88 @@ const transports = {
         return [];
       }
     },
-    getMenuDrive: (state, getters, rootState, rootGetters) => {
-      if (state.drives != undefined) {
+    getMenuDrive: (state, getters, rootState, rootGetters) => (ids = []) => {
+        if (state.drives != undefined) {
         return state.drives.map(drive => {
           return {
             value: drive.drive_id,
             option: drive.name,
-            selected: false
+            selected: ids.indexOf(drive.drive_id) != -1 ? true : false
           }
         });
       } else {
         return [];
       }
     },
-    getMenuTransmission: (state, getters, rootState, rootGetters) => {
+    getMenuTransmission: (state, getters, rootState, rootGetters) => (ids = []) => {
       if (state.transmissions != undefined) {
         return state.transmissions.map(transmission => {
           return {
             value: transmission.transmission_id,
             option: transmission.name,
-            selected: false
+            selected: ids.indexOf(transmission.transmission_id) != -1 ? true : false
           }
         });
       } else {
         return [];
       }
     },
-    getMenuBody: (state, getters, rootState, rootGetters) => {
+    getMenuBody: (state, getters, rootState, rootGetters) => (ids = []) => {
       if (state.bodies != undefined) {
         return state.bodies.map(body => {
           return {
             value: body.body_id,
             option: body.name,
-            selected: false
+            selected: ids.indexOf(body.body_id) != -1 ? true : false
           }
         });
       } else {
         return [];
       }
     },
-    getMenuFuel: (state, getters, rootState, rootGetters) => {
+    getMenuFuel: (state, getters, rootState, rootGetters) => (ids = []) => {
       if (state.fuels != undefined) {
         return state.fuels.map(fuel => {
           return {
             value: fuel.fuel_id,
             option: fuel.name,
-            selected: false
+            selected: ids.indexOf(fuel.fuel_id) != -1 ? true : false
           }
         });
       } else {
         return []
       }
     },
-    getMenuVolume: (state, getters, rootState, rootGetters) => {
+    getMenuVolume: (state, getters, rootState, rootGetters) => (ids = []) => {
       if (state.volums != undefined) {
         return state.volums.map(volume => {
           return {
             value: volume.value,
             option: volume.value,
-            selected: false
+            selected: ids.indexOf(volume.value) != -1 ? true : false
           }
         });
       } else {
         return []
       }
     },
-    getMenuVolume2: (state, getters, rootState, rootGetters) => {
+    getMenuVolume2: (state, getters, rootState, rootGetters) => (ids = []) => {
       if (state.volums != undefined) {
         return state.volums.map(volume => {
           return {
             value: volume.value,
             option: volume.value,
-            selected: false
+            selected: ids.indexOf(volume.value) != -1 ? true : false
           }
         });
       } else {
         return []
       }
     },
-    getMenuWheel: (state, getters, rootState, rootGetters) => {
+    getMenuWheel: (state, getters, rootState, rootGetters) => (ids = []) => {
       return [
-        { value: 1, option: "левый", selected: false },
-        { value: 2, option: "правый", selected: false }
+        { value: 1, option: "левый", selected: ids.indexOf(1) != -1 ? true : false },
+        { value: 2, option: "правый", selected: ids.indexOf(2) != -1 ? true : false }
       ]
     }
   },

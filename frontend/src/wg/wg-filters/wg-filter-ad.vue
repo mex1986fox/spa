@@ -232,7 +232,10 @@
 export default {
   data() {
     return {
-      filterAds: JSON.parse(this.$cookie.get("filter_ads")),
+      filterAds:
+        this.$cookie.get("filter_ads") == null
+          ? {}
+          : JSON.parse(this.$cookie.get("filter_ads")),
       exc: [],
       countries_id: [],
       subjects_id: [],
@@ -450,7 +453,7 @@ export default {
         this.filterAds != null && this.filterAds[name] != undefined
           ? this.filterAds[name].split(",")
           : [];
-      return this.$store.getters[getter].map((val, key) => {
+      return this.$store.getters[getter]().map((val, key) => {
         if (ids.indexOf(String(val.value)) != -1) {
           val.selected = true;
         }
@@ -458,8 +461,7 @@ export default {
       });
     },
     generateMenuVolume(name, getter, chekVolume2) {
-      // console.dir(chekVolume2);
-      return this.$store.getters[getter]
+      return this.$store.getters[getter]()
         .filter((val, key) => {
           if (chekVolume2 != undefined && val.value >= chekVolume2) {
             return false;
@@ -478,7 +480,7 @@ export default {
         });
     },
     generateMenuVolume2(name, getter, chekVolume1) {
-      return this.$store.getters[getter]
+      return this.$store.getters[getter]()
         .filter((val, key) => {
           if (chekVolume1 != undefined && val.value <= chekVolume1) {
             return false;
@@ -511,7 +513,7 @@ export default {
           cookieFilterAds[key] = body.get(key);
         }
       }
-      this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds),{
+      this.$cookie.set("filter_ads", JSON.stringify(cookieFilterAds), {
         expires: "1D"
       });
       // console.dir(this.$cookie.get("filter_ads"));
