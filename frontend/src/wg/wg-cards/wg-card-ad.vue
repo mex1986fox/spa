@@ -9,89 +9,89 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div class="wg-card-post__info-date">{{ad.date_create}}</div>
-      <div class="wg-card-post__info-text">{{ad.city +" ("+ad.subject+")"}}</div>
-      <div class="wg-card-post__info-text">{{ad.brand +" "+ad.model}}</div>
+      <div class="wg-card-post__info-date">{{dAd.date_create}}</div>
+      <div class="wg-card-post__info-text">{{dAd.city +" ("+dAd.subject+")"}}</div>
+      <div class="wg-card-post__info-text">{{dAd.brand +" "+dAd.model}}</div>
     </div>
     <div class="wg-card-post__photo" @click="isLoadImgLincks">
       <ui-img
         class="wg-card-post__img"
-        :src="ad.main_photo"
+        :src="dAd.main_photo"
         :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
     <span
       class="wg-card-post__title"
-    >{{ad.brand+" "+ad.model+" "+ad.year+" г.в. "+String(ad.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" руб."}}</span>
+    >{{dAd.brand+" "+dAd.model+" "+dAd.year+" г.в. "+String(dAd.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" руб."}}</span>
     <span ref="descr" class="wg-card-post__description wg-card-post__description_ellips">
       <div class="wg-card-ad__params">
-        <span v-if="ad.document_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.document_id!=null" class="wg-card-ad__param">
           {{"Документы: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.document_id==1?"с документавми":"без документов"}}</span>
+          >{{dAd.document_id==1?"с документавми":"без документов"}}</span>
         </span>
-        <span v-if="ad.state_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.state_id!=null" class="wg-card-ad__param">
           {{"Состояние: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.state_id==1?"не требует вложений (ОТС)":ad.state_id==2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
+          >{{dAd.state_id==1?"не требует вложений (ОТС)":dAd.state_id==2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
         </span>
-        <span v-if="ad.exchange_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.exchange_id!=null" class="wg-card-ad__param">
           {{"Обмен: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{ad.exchange_id==1?"готов к обмену":"не готов к обмену"}}</span>
+          >{{dAd.exchange_id==1?"готов к обмену":"не готов к обмену"}}</span>
         </span>
-        <span v-if="ad.mileage!=null" class="wg-card-ad__param">
+        <span v-if="dAd.mileage!=null" class="wg-card-ad__param">
           {{"Пробег: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{String(ad.mileage).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" км."}}</span>
+          >{{String(dAd.mileage).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" км."}}</span>
         </span>
-        <span v-if="ad.transmission!=null" class="wg-card-ad__param">
+        <span v-if="dAd.transmission!=null" class="wg-card-ad__param">
           {{"Коробка передач: "}}
-          <span class="wg-card-ad__param-info">{{ad.transmission}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.transmission}}</span>
         </span>
-        <span v-if="ad.wheel_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.wheel_id!=null" class="wg-card-ad__param">
           {{"Руль: "}}
-          <span class="wg-card-ad__param-info">{{ad.wheel_id==1?"левый":"правый"}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.wheel_id==1?"левый":"правый"}}</span>
         </span>
-        <span v-if="ad.fuel!=null" class="wg-card-ad__param">
+        <span v-if="dAd.fuel!=null" class="wg-card-ad__param">
           {{"Топливо: "}}
-          <span class="wg-card-ad__param-info">{{ad.fuel}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.fuel}}</span>
         </span>
-        <span v-if="ad.power!=null" class="wg-card-ad__param">
+        <span v-if="dAd.power!=null" class="wg-card-ad__param">
           {{"Мощность: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{String(ad.power).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л.с."}}</span>
+          >{{String(dAd.power).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л.с."}}</span>
         </span>
-        <span v-if="ad.volume!=null" class="wg-card-ad__param">
+        <span v-if="dAd.volume!=null" class="wg-card-ad__param">
           {{"Объем: "}}
           <span
             class="wg-card-ad__param-info"
-          >{{String(ad.volume).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л."}}</span>
+          >{{String(dAd.volume).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л."}}</span>
         </span>
-        <span v-if="ad.drive!=null" class="wg-card-ad__param">
+        <span v-if="dAd.drive!=null" class="wg-card-ad__param">
           {{"Привод: "}}
-          <span class="wg-card-ad__param-info">{{ad.drive}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.drive}}</span>
         </span>
 
-        <span v-if="ad.body!=null" class="wg-card-ad__param">
+        <span v-if="dAd.body!=null" class="wg-card-ad__param">
           {{"Кузов: "}}
-          <span class="wg-card-ad__param-info">{{ad.body}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.body}}</span>
         </span>
       </div>
-      {{ad.description!=null?ad.description:''}}
+      {{dAd.description!=null?dAd.description:''}}
     </span>
     <div class="wg-card-post__button-menu-bot">
       <wg-likes-ad
-        :likes="ad.likes"
-        :dislikes="ad.dislikes"
-        :userID="ad.user_id"
-        :adID="ad.ad_id"
+        :likes="dAd.likes"
+        :dislikes="dAd.dislikes"
+        :userID="dAd.user_id"
+        :adID="dAd.ad_id"
       />
       <div
         class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
@@ -101,15 +101,24 @@
         <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
-    <wg-form-update-ad :show="showUpdateAd" @onHide="isHideUpdateAd" :ad="ad"/>
+    <wg-form-update-ad
+      :show="showUpdateAd"
+      @onHide="isHideUpdateAd"
+      @onUpdateAd="isUpdateAd"
+      :ad="ad"
+    />
     <ui-menu :show="showMenu" @onHide="isHideMenu">
       <ul class="ui-menu__ul">
         <li
           class="ui-menu__li"
-          v-if="profileUserID==ad.user_id"
+          v-if="profileUserID==dAd.user_id"
           @click="isShowUpdateAd"
         >Редактировать</li>
-        <li class="ui-menu__li" v-if="profileUserID==ad.user_id" @click="isDeleteAd">Удалить</li>
+        <li
+          class="ui-menu__li"
+          v-if="profileUserID==dAd.user_id"
+          @click="isDeleteAlbumAndAd"
+        >Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
@@ -125,13 +134,19 @@ export default {
       slides: [],
       showSlides: false,
       showMenu: false,
-      showUpdateAd: false
+      showUpdateAd: false,
+      dAd: this.ad
     };
   },
   props: {
     ad: {
       type: Object,
       default: {}
+    }
+  },
+  watch: {
+    ad(newQ) {
+      this.dAd = newQ;
     }
   },
   computed: {
@@ -150,7 +165,10 @@ export default {
     },
     isHideUpdateAd() {
       this.showUpdateAd = false;
-      this.$emit("onUpdatePost");
+    },
+    isUpdateAd(ad) {
+      this.dAd = ad;
+      this.$emit("onUpdateAd");
     },
     isShowDescription() {
       let height = this.$refs.descr.style.height;
@@ -168,8 +186,8 @@ export default {
       } else {
         let body = new FormData();
         //добавляем фильтр в куки
-        body.set("users_id[]", this.ad.user_id);
-        body.set("ads_id[]", this.ad.ad_id);
+        body.set("users_id[]", this.dAd.user_id);
+        body.set("ads_id[]", this.dAd.ad_id);
         //отправляем запрос
         this.$api("adsphoto")
           .show(body)
@@ -189,18 +207,35 @@ export default {
           });
       }
     },
+    isDeleteAlbumAndAd() {
+      let body = new FormData();
+      //добавляем фильтр в куки
+      body.set("access_token", this.token);
+      body.set("ad_id", this.dAd.ad_id);
+      //отправляем запрос
+      this.$api("adsphoto")
+        .deleteAlbum(body)
+        .then(response => {
+          this.isDeleteAd();
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        });
+    },
     isDeleteAd() {
       this.showMenu = false;
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("ad_id", this.ad.ad_id);
+      body.set("ad_id", this.dAd.ad_id);
       //отправляем запрос
       this.$api("ads")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.isDeleteAlbum();
+            this.$emit("onDeleteAd", this.dAd);
           }
         })
         .catch(error => {
@@ -213,16 +248,14 @@ export default {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("ad_id", this.ad.ad_id);
+      body.set("ad_id", this.dAd.ad_id);
       //отправляем запрос
-      this.$api("postphoto")
+      this.$api("adsphoto")
         .deleteAlbum(body)
         .then(response => {
-          if (response.body.status == "ok") {
-            this.$emit("onUpdatePost");
-          }
+          this.$emit("onDeleteAlbum", dAd);
         })
-        .cacth(error => {
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }

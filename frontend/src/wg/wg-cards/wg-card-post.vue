@@ -9,29 +9,29 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div class="wg-card-post__info-date">{{post.date_create}}</div>
-      <div class="wg-card-post__info-text">{{post.city +" ("+post.subject+")"}}</div>
-      <div class="wg-card-post__info-text">{{post.brand +" "+post.model}}</div>
+      <div class="wg-card-post__info-date">{{dPost.date_create}}</div>
+      <div class="wg-card-post__info-text">{{dPost.city +" ("+dPost.subject+")"}}</div>
+      <div class="wg-card-post__info-text">{{dPost.brand +" "+dPost.model}}</div>
     </div>
     <div class="wg-card-post__photo" @click="isLoadImgLincks">
       <ui-img
         class="wg-card-post__img"
-        :src="post.main_photo"
+        :src="dPost.main_photo"
         :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
-    <span class="wg-card-post__title">{{post.title!=null?post.title:""}}</span>
+    <span class="wg-card-post__title">{{dPost.title!=null?dPost.title:""}}</span>
     <span
       ref="descr"
       class="wg-card-post__description wg-card-post__description_ellips"
-    >{{post.description!=null?post.description:''}}</span>
+    >{{dPost.description!=null?dPost.description:''}}</span>
     <div class="wg-card-post__button-menu-bot">
       <wg-likes-post
-        :likes="post.likes"
-        :dislikes="post.dislikes"
-        :userID="post.user_id"
-        :postID="post.post_id"
+        :likes="dPost.likes"
+        :dislikes="dPost.dislikes"
+        :userID="dPost.user_id"
+        :postID="dPost.post_id"
       />
       <div
         class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
@@ -41,15 +41,24 @@
         <i v-if="showDescription==true" class="fas fa-angle-up"></i>
       </div>
     </div>
-    <wg-form-update-post :show="showUpdatePost" @onHide="isHideUpdatePost" :post="post"/>
+    <wg-form-update-post
+      :show="showUpdatePost"
+      @onHide="isHideUpdatePost"
+      @onUpdatePost="isUpdatePost"
+      :post="post"
+    />
     <ui-menu :show="showMenu" @onHide="isHideMenu">
       <ul class="ui-menu__ul">
         <li
           class="ui-menu__li"
-          v-if="profileUserID==post.user_id"
+          v-if="profileUserID==dPost.user_id"
           @click="isShowUpdatePost"
         >Редактировать</li>
-        <li class="ui-menu__li" v-if="profileUserID==post.user_id" @click="isDeletePost">Удалить</li>
+        <li
+          class="ui-menu__li"
+          v-if="profileUserID==dPost.user_id"
+          @click="isDeletePostAlbumAndPost"
+        >Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
@@ -65,13 +74,19 @@ export default {
       slides: [],
       showSlides: false,
       showMenu: false,
-      showUpdatePost: false
+      showUpdatePost: false,
+      dPost: this.post
     };
   },
   props: {
     post: {
       type: Object,
       default: {}
+    }
+  },
+  watch: {
+    post(newQ) {
+      this.dPost = newQ;
     }
   },
   computed: {
@@ -90,7 +105,10 @@ export default {
     },
     isHideUpdatePost() {
       this.showUpdatePost = false;
-      this.$emit("onUpdatePost");
+    },
+    isUpdatePost(post) {
+      this.dPost = post;
+      this.$emit("onUpdatePost", post);
     },
     isShowDescription() {
       let height = this.$refs.descr.style.height;
@@ -108,8 +126,8 @@ export default {
       } else {
         let body = new FormData();
         //добавляем фильтр в куки
-        body.set("users_id[]", this.post.user_id);
-        body.set("posts_id[]", this.post.post_id);
+        body.set("users_id[]", this.dPost.user_id);
+        body.set("posts_id[]", this.dPost.post_id);
         //отправляем запрос
         this.$api("postphoto")
           .show(body)
@@ -129,18 +147,37 @@ export default {
           });
       }
     },
+    isDeletePostAlbumAndPost() {
+      let body = new FormData();
+      //добавляем фильтр в куки
+      body.set("access_token", this.token);
+      body.set("post_id", this.dPost.post_id);
+      //отправляем запрос
+      this.$api("postphoto")
+        .deleteAlbum(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.isDeletePost();
+          }
+        })
+        .cacth(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
+          }
+        });
+    },
     isDeletePost() {
       this.showMenu = false;
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.post.post_id);
+      body.set("post_id", this.dPost.post_id);
       //отправляем запрос
       this.$api("post")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.isDeleteAlbum();
+            this.$emit("onDeletePost", this.post);
           }
         })
         .catch(error => {
@@ -149,17 +186,17 @@ export default {
           }
         });
     },
-    isDeleteAlbum() {
+    isDeletePostAlbum() {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.post.post_id);
+      body.set("post_id", this.dPost.post_id);
       //отправляем запрос
       this.$api("postphoto")
         .deleteAlbum(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$emit("onUpdatePost");
+            // this.isDeletePost();
           }
         })
         .cacth(error => {

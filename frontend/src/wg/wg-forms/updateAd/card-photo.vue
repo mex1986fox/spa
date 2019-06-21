@@ -82,7 +82,7 @@ export default {
       userPhotoHost: this.$hosts.userPhoto,
       showMenuKey: undefined,
       imgSpinner: false,
-      adPhotoHost: this.$hosts.adPhoto
+      adPhotoHost: this.$hosts.adsPhoto
     };
   },
   computed: {
@@ -130,7 +130,10 @@ export default {
       this.$api("adsphoto")
         .show(body)
         .then(response => {
-          if (response.body.status == "ok") {
+          if (
+            response.body.status == "ok" &&
+            response.body.data[0] != undefined
+          ) {
             this.lincksPhoto = response.body.data[0].files.mini;
           }
         })
@@ -152,6 +155,7 @@ export default {
       this.dAd = ad;
       let lPhoto = this.lincksPhoto;
       this.lincksPhoto = undefined;
+      this.$emit("onUpdateAd", ad);
       setTimeout(() => {
         this.lincksPhoto = lPhoto;
       }, 100);

@@ -27,7 +27,23 @@ const posts = {
     },
     updatePage(state, page) {
       state.page = page;
-    }
+    },
+    updatePost(state, post) {
+      state.posts = state.posts.map(post_map => {
+        if (post_map.post_id != post.post_id) {
+          return post_map;
+        } else {
+          return post;
+        }
+      });
+    },
+    deletePost(state, post) {
+      state.posts = state.posts.filter(post_map => {
+        if (post_map.post_id != post.post_id) {
+          return true;
+        }
+      });
+    },
   },
   actions: {
     updatePost(context, post) {

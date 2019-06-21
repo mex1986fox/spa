@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       showMenu: false,
-      adPhotoHost: this.$hosts.adPhoto,
+      adPhotoHost: this.$hosts.adsPhoto,
       showSpinner: false
     };
   },
@@ -98,17 +98,16 @@ export default {
     },
     isCheckMain(url) {
       (this.showMenu = false), (this.showSpinner = true);
-      let body = {
-        main_photo: url,
-        ad_id: this.ad.ad_id,
-        access_token: this.token
-      };
+      let body = new FormData();
+      body.set("main_photo", url);
+      body.set("ad_id", this.ad.ad_id);
+      body.set("access_token", this.token);
       this.$api("ads")
         .update(body)
         .then(response => {
           if (response.body.status == "ok") {
             // обновляем профайл пользователя
-            this.$emit("onUpdatePost", response.body.data.ad);
+            this.$emit("onUpdateAd", response.body.data.ad);
           }
           setTimeout(() => {
             this.showSpinner = false;

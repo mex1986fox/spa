@@ -17,7 +17,7 @@
             :help="exc['mileage']"
             name="mileage"
             caption="Пробег км."
-            :masc="{use:mascNumber}"
+            masc="mascNumber"
             :maxlength="10"
           />
         </div>
@@ -35,7 +35,7 @@
             :help="exc['power']"
             name="power"
             caption="Мощьность л.с."
-            :masc="{use:mascNumber}"
+            masc="mascNumber"
             :maxlength="4"
           />
           <ui-ef-select
@@ -204,23 +204,6 @@ export default {
             }
           }
         });
-    },
-    mascNumber(val) {
-      let newQ = val.replace(/[^0-9]/gim, "");
-      if (newQ[0] == 0) {
-        newQ = newQ.substr(1);
-      }
-      if (newQ.length > 3) {
-        let spl = newQ.split("");
-        spl.splice(-3, 0, " ");
-        newQ = spl.join("");
-      }
-      if (newQ.length > 6) {
-        let spl = newQ.split("");
-        spl.splice(-7, 0, " ");
-        newQ = spl.join("");
-      }
-      return newQ;
     }
   }
 };

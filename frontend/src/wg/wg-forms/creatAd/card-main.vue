@@ -4,56 +4,51 @@
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город продажи *"
-                              name="city_id"
-                              :help="excCity" />
+          <wg-select-location caption="Город продажи *" name="city_id" :help="excCity"/>
         </div>
       </div>
       <div class="row">
         <div class="col_7">
-          <wg-select-transport caption="Модель автомобиля *"
-                               name="model_id"
-                               :help="excModel" />
+          <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
         </div>
       </div>
       <div class="row">
         <div class="col_3">
-          <ui-ef-select name="year"
-                        :menu="yearMenu"
-                        caption="Год выпуска *"
-                        :help="excYear" />
+          <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска *" :help="excYear"/>
         </div>
       </div>
       <div class="row">
         <div class="col_3">
-          <ui-ef-text :help="excPrice"
-                      name="price"
-                      caption="Цена руб. *"
-                      :masc="{use:mascNumber}"
-                      :maxlength="11" />
+          <ui-ef-text
+            :help="excPrice"
+            name="price"
+            caption="Цена руб. *"
+            masc="mascPrice"
+            :maxlength="11"
+          />
         </div>
       </div>
     </div>
 
     <div class="wg-form-registration__card-buttons">
-      <input type="button"
-             class="ui-button ui-button_float_black"
-             @click="isCreateAd"
-             :disabled="dSpinn"
-             value="Создать">
-      <ui-spinner v-if="dSpinn==true"
-                  class="ui-spinner_s1" />
+      <input
+        type="button"
+        class="ui-button ui-button_float_black"
+        @click="isCreateAd"
+        :disabled="dSpinn"
+        value="Создать"
+      >
+      <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
     </div>
-    <ui-snackbar :show="showSnackbar"
-                 model="err"
-                 :time="5000"
-                 @onHide="showSnackbar=false">
+    <ui-snackbar :show="showSnackbar" model="err" :time="5000" @onHide="showSnackbar=false">
       <div>{{masSnackbar}}</div>
       <div class="ui-snackbar__buttons">
-        <input model="button"
-               class="ui-button ui-button_float_black ui-button_s1"
-               @click="showSnackbar=false"
-               value="Закрыть">
+        <input
+          model="button"
+          class="ui-button ui-button_float_black ui-button_s1"
+          @click="showSnackbar=false"
+          value="Закрыть"
+        >
       </div>
     </ui-snackbar>
   </form>
@@ -112,7 +107,6 @@ export default {
       let year = body.get("year");
       let city_id = body.get("city_id");
       let model_id = body.get("model_id");
-
       let fExc = false;
       if (price == undefined || price == "") {
         this.excPrice = "Заполните цену.";
@@ -151,28 +145,6 @@ export default {
           this.excCity = exc["city_id"] ? exc["city_id"] : "";
           this.excModel = exc["model_id"] ? exc["model_id"] : "";
         });
-    },
-    mascNumber(val) {
-      let newQ = val.replace(/[^0-9]/gim, "");
-      if (newQ[0] == 0) {
-        newQ = newQ.substr(1);
-      }
-      if (newQ.length > 4) {
-        let spl = newQ.split("");
-        spl.splice(-3, 0, " ");
-        newQ = spl.join("");
-      }
-      if (newQ.length > 7) {
-        let spl = newQ.split("");
-        spl.splice(-7, 0, " ");
-        newQ = spl.join("");
-      }
-      if (newQ.length > 11) {
-        let spl = newQ.split("");
-        spl.splice(-11, 0, " ");
-        newQ = spl.join("");
-      }
-      return newQ;
     }
   }
 };

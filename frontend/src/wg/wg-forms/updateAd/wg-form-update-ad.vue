@@ -18,11 +18,7 @@
           </ui-animation-display>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <!-- <wg-form-update-ad-card-photo
-                :ad="ad"
-                @onHide="isHide"
-                @onUpdateAd="isUpdateAd"
-              /> -->
+              <wg-form-update-ad-card-photo :ad="ad" @onHide="isHide" @onUpdateAd="isUpdateAd"/>
             </div>
           </ui-animation-display>
         </div>
@@ -92,6 +88,7 @@ export default {
     isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
+        this.$store.commit("ads/updateAd", this.dAd);
         this.$emit("onHide");
       }, 200);
     },

@@ -2,22 +2,7 @@ import Vue from "vue/dist/vue.js";
 
 const ads = {
   create(body) {
-    return Vue.http
-      .post(Vue.prototype.$hosts.services + "/ads/api/ads/create", body)
-      .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
-  },
-  update(body) {
-    let _body = new FormData();
-    //задаем нулевые параметры
-    ["drive_id", "transmission_id", "body_id", "mileage", "fuel_id", "power", "volume",
-      "wheel_id", "document_id", "state_id", "exchange_id"
-    ].forEach(elem => {
-      _body.set(elem, 0);
-    });
-    _body.set("description", "");
-
-    //редактируем поля
+    // редактируем поля
     if (body.get("mileage") != undefined) {
       body.set("mileage", body.get("mileage").replace(/\s/g, ""));
     }
@@ -27,13 +12,24 @@ const ads = {
     if (body.get("power") != undefined) {
       body.set("power", body.get("power").replace(/\s/g, ""));
     }
-    //сливаем поля
-    for (var key of body.keys()) {
-      _body.set(key, body.get(key));
-    }
-
     return Vue.http
-      .post(Vue.prototype.$hosts.services + "/ads/api/ads/update", _body)
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/create", body)
+      .then(response => Promise.resolve(response))
+      .catch(error => Promise.reject(error));
+  },
+  update(body) {
+    // редактируем поля
+    if (body.get("mileage") != undefined) {
+      body.set("mileage", body.get("mileage").replace(/\s/g, ""));
+    }
+    if (body.get("price") != undefined) {
+      body.set("price", body.get("price").replace(/\s/g, ""));
+    }
+    if (body.get("power") != undefined) {
+      body.set("power", body.get("power").replace(/\s/g, ""));
+    }
+    return Vue.http
+      .post(Vue.prototype.$hosts.services + "/ads/api/ads/update", body)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },

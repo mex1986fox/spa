@@ -92,6 +92,7 @@ export default {
     isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
+        this.$store.commit("posts/updatePost", this.dPost);
         this.$emit("onHide");
       }, 200);
     },

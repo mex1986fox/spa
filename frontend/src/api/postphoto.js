@@ -21,7 +21,7 @@ const postphoto = {
   },
 
   // альбом
-  delete(body) {
+  deleteAlbum(body) {
     return Vue.http
       .post(Vue.prototype.$hosts.services + "/postphoto/api/album/delete", body)
       .then(response => Promise.resolve(response))

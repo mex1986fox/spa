@@ -14,14 +14,14 @@
             :help="exc['price']"
             name="price"
             caption="Цена руб. *"
-            masc="mascNumber"
+            masc="mascPrice"
             :maxlength="11"
           />
         </div>
       </div>
 
       <div class="row">
-        <div class="col_4">
+        <div class="col_5">
           <div class="ui-header ui-header_3">Прочее</div>
           <ui-ef-select name="drive_id" :menu="driveMenu" caption="Привод" :help="exc['drive_id']"/>
           <ui-ef-select
@@ -40,7 +40,7 @@
             :maxlength="10"
           />
         </div>
-        <div class="col_4 col_offset-2">
+        <div class="col_5 col_offset-2">
           <div class="ui-header ui-header_3">Двигатель</div>
           <ui-ef-select
             @onSelect="isSelectFuel"
@@ -251,6 +251,7 @@ export default {
       this.exc = [];
       let form = this.$refs.formUpdatePost;
       let body = new FormData(form);
+      //редактируем поля
       body.set("access_token", this.token);
       let price = body.get("price");
       let year = body.get("year");
@@ -271,8 +272,32 @@ export default {
         return;
       }
 
+      //задаем нулевые параметры
+      let _body = new FormData();
+      [
+        "drive_id",
+        "transmission_id",
+        "body_id",
+        "mileage",
+        "fuel_id",
+        "power",
+        "volume",
+        "wheel_id",
+        "document_id",
+        "state_id",
+        "exchange_id"
+      ].forEach(elem => {
+        _body.set(elem, 0);
+      });
+      _body.set("description", "");
+      //сливаем поля
+      for (var key of body.keys()) {
+        if (body.get(key) != "") {
+          _body.set(key, body.get(key));
+        }
+      }
       this.$api("ads")
-        .update(body)
+        .update(_body)
         .then(response => {
           this.dSpinn = false;
           this.dAd = response.body.data.ad;
