@@ -17,7 +17,8 @@
       <ui-img
         class="wg-card-post__img"
         :src="dAd.main_photo"
-        :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
+        :alt="'/public/img/drovito.png'"
+        :nofon="dAd.main_photo!=null?false:true"
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
@@ -84,7 +85,8 @@
           <span class="wg-card-ad__param-info">{{dAd.body}}</span>
         </span>
       </div>
-      {{dAd.description!=null?dAd.description:''}}
+      <span v-if="dAd.description!=null" class="wg-card-ad__param">{{"Описание: "}}</span>
+      <span v-if="dAd.description!=null" class="wg-card-ad__param-info-desc">{{dAd.description}}</span>
     </span>
     <div class="wg-card-post__button-menu-bot">
       <wg-likes-ad

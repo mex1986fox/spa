@@ -12,6 +12,16 @@
         &-info {
             color: rgba($color-white, 0.8);
             float: right;
+
+            &-desc {
+                color: rgba($color-white, 0.8);
+                float: left;
+                padding-top: 7px;
+                width: 100%;
+            }
         }
+
     }
+
+
 }

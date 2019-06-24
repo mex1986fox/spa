@@ -17,7 +17,8 @@
       <ui-img
         class="wg-card-post__img"
         :src="dPost.main_photo"
-        :alt="'https://humor.fm/uploads/posts/2015-08/15/7_prodolzhenie-vy-najdete-na-nashem-sajte-yaustalcom-42.png'"
+        :alt="'/public/img/drovito.png'"
+        :nofon="dPost.main_photo!=null?false:true"
       />
     </div>
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>

@@ -1,6 +1,6 @@
 <template>
   <div class="ui-img">
-    <img ref="fon" class="ui-img__fon" :src="dSrc">
+    <img ref="fon" class="ui-img__fon" :src="dSrc" v-if="nofon!=true">
     <img ref="pict" class="ui-img__pict" :src="dSrc">
   </div>
 </template>
@@ -18,6 +18,10 @@ export default {
     alt: {
       default: "",
       type: String
+    },
+    nofon: {
+      default: false,
+      type: Boolean
     }
   },
   watch: {

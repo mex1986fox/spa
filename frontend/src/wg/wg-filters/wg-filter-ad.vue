@@ -1,6 +1,6 @@
 <template>
   <wg-filter :show="show" @onHide="isHide">
-    <template slot="header">Фильтр обявлений</template>
+    <template slot="header">Фильтр объявлений</template>
     <template slot="content">
       <form ref="formFilterAds">
         <ui-ef-select

@@ -2561,6 +2561,11 @@ body {
   .wg-card-ad__param-info {
     color: rgba(255, 255, 255, 0.8);
     float: right; }
+    .wg-card-ad__param-info-desc {
+      color: rgba(255, 255, 255, 0.8);
+      float: left;
+      padding-top: 7px;
+      width: 100%; }
 
 .wg-select-location__blinde {
   background-color: rgba(17, 17, 17, 0);
