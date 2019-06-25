@@ -2999,7 +2999,12 @@ body {
     width: 300%;
     float: left;
     position: relative;
-    opacity: 1; }
+    opacity: 1;
+    -webkit-transition: transform 0.9s;
+    -moz-transition: transform 0.9s;
+    -ms-transition: transform 0.9s;
+    -o-transition: transform 0.9s;
+    transition: transform 0.9s; }
   .wg-slider__menu {
     background-color: rgba(255, 255, 255, 0.4);
     color: #ffffff;
