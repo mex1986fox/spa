@@ -53,6 +53,17 @@ const profile = {
       state.surname = profile.surname;
       state.user_id = profile.user_id;
     },
+    deleteProfile(state) {
+      state.avatar = undefined;
+      state.birthdate = undefined;
+      state.city_id = undefined;
+      state.email = undefined;
+      state.login = undefined;
+      state.name = undefined;
+      state.phone = undefined;
+      state.surname = undefined;
+      state.user_id = undefined;
+    },
   },
   actions: {
     updateProfile(context, access_token) {

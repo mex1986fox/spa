@@ -2,6 +2,12 @@
   <div class="lt-main">
     <div class="lt-main__menu">
       <lt-main-profile @onShowRegistration="isShowRegistration" @onShowLogin="isShowLogin"></lt-main-profile>
+      <ul v-if="profileUserID!=undefined" class="lt-main__menu-list">
+        <router-link to="/my_profile" class="lt-main__menu-item">Мой профиль</router-link>
+        <router-link to="/my_posts" class="lt-main__menu-item">Мои посты</router-link>
+        <router-link to="/my_ads" class="lt-main__menu-item">Мои объявления</router-link>
+        <router-link to="/my_wcase" class="lt-main__menu-item">Мои витрины</router-link>
+      </ul>
       <ul class="lt-main__menu-list">
         <router-link to="/users" class="lt-main__menu-item">Люди</router-link>
         <router-link to="/posts" class="lt-main__menu-item">Посты</router-link>
@@ -17,10 +23,15 @@
       :show="showRegistration"
       @onHide="showRegistration = false"
     />
-    <wg-form-login :key="keyRegistration()" :show="showLogin" @onHide="showLogin = false"/>
+    <wg-form-login
+      :key="keyRegistration()"
+      :show="showLogin"
+      @onHide="isHideFormLogin"
+    />
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "lt-main",
   data() {
@@ -29,9 +40,17 @@ export default {
       showLogin: false
     };
   },
+  computed: {
+    ...mapGetters({
+      profileUserID: "profile/getID"
+    })
+  },
   methods: {
     isShowRegistration() {
       this.showRegistration = true;
+    },
+    isHideFormLogin() {
+      this.showLogin = false;
     },
     isShowLogin() {
       this.showLogin = true;

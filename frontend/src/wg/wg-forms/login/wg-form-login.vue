@@ -58,9 +58,7 @@ export default {
   methods: {
     isHide() {
       this.dShowAnimation = false;
-      setTimeout(() => {
-        this.$emit("onHide");
-      }, 200);
+      this.$emit("onHide");
     }
   },
   mounted() {

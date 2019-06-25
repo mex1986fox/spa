@@ -43,10 +43,7 @@ export default {
   watch: {
     token(newQ, oldQ) {
       if (oldQ == undefined && newQ != undefined) {
-        this.$store.dispatch(
-          "profile/updateProfile",
-          this.token
-        );
+        this.$store.dispatch("profile/updateProfile", this.token);
       }
     }
   },
@@ -59,6 +56,7 @@ export default {
     },
     isDeleteToken() {
       this.$store.dispatch("tokens/deleteTokens");
+      this.$store.commit("profile/deleteProfile");
     }
   }
 };
