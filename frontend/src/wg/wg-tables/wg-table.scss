@@ -1,0 +1,31 @@
+.wg-table {
+    &__tr_auto {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    &__td_auto {
+        height: 100%;
+        margin: 1px 0 0 0;
+        padding: 0px 10px 10px 10px;
+        overflow: hidden;
+    }
+
+    &__td_left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+    }
+
+    &__td_right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: right;
+    }
+
+    &__td_opac-5 {
+        color: rgba($color-white, 0.5);
+    }
+}

@@ -16,6 +16,18 @@ import UiSnackbar from "./ui-snackbar/ui-snackbar.vue";
 Vue.component("ui-snackbar", UiSnackbar);
 import UiImg from "./ui-img/ui-img.vue";
 Vue.component("ui-img", UiImg);
+import UiTable from "./ui-table/ui-table.vue";
+Vue.component("ui-table", UiTable);
+import UiTableBody from "./ui-table/ui-table-body.vue";
+Vue.component("ui-table-body", UiTableBody);
+import UiTableHeader from "./ui-table/ui-table-header.vue";
+Vue.component("ui-table-header", UiTableHeader);
+import UiTableTd from "./ui-table/ui-table-td.vue";
+Vue.component("ui-table-td", UiTableTd);
+import UiTableTh from "./ui-table/ui-table-th.vue";
+Vue.component("ui-table-th", UiTableTh);
+import UiTableTr from "./ui-table/ui-table-tr.vue";
+Vue.component("ui-table-tr", UiTableTr);
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";

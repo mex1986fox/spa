@@ -5,22 +5,16 @@
       <lt-main-menu>
         <div class="lt-main-menu__header">Мои посты</div>
         <div class="lt-main-menu__buttons">
-          <div
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-            @click="isShowFormExcel"
-          >
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="far fa-file-excel"></i>
           </div>
-          <div
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-            @click="isShowFormCreatPost"
-          >
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="fas fa-plus"></i>
           </div>
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-card-mypost/>
+      <wg-table-mypost/>
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">

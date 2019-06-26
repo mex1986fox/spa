@@ -1,0 +1,52 @@
+.ui-table {
+    width: 100%;
+    border-spacing: 0 0;
+    padding: 16px;
+
+    &__header {
+        color: rgba($color-white, 0.5);
+        display: table-header-group;
+        vertical-align: text-bottom;
+    }
+
+    &__body {
+        color: $color-white;
+        font-size: 13px;
+        display: table-header-group;
+        vertical-align: middle;
+    }
+
+    &__tr {
+        text-align: center;
+
+        &>td {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        &>th {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    &__th {
+        font-weight: 400;
+        height: 24px;
+        border-bottom: 0px solid rgba($color-black, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__td {
+        height: 54px;
+        background-color: $color-black-opacity;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
