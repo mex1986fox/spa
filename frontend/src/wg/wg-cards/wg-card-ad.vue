@@ -2,10 +2,8 @@
   <div class="wg-card-post">
     <div class="wg-card-post__info">
       <div class="wg-card-post__button-menu">
-        <div
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s2"
-          @click="showMenu=true"
-        >
+        <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s2"
+             @click="showMenu=true">
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
@@ -13,114 +11,108 @@
       <div class="wg-card-post__info-text">{{dAd.city +" ("+dAd.subject+")"}}</div>
       <div class="wg-card-post__info-text">{{dAd.brand +" "+dAd.model}}</div>
     </div>
-    <div class="wg-card-post__photo" @click="isLoadImgLincks">
-      <ui-img
-        class="wg-card-post__img"
-        :src="dAd.main_photo"
-        :alt="'/public/img/drovito.png'"
-        :nofon="dAd.main_photo!=null?false:true"
-      />
+    <div class="wg-card-post__photo"
+         @click="isLoadImgLincks">
+      <ui-img class="wg-card-post__img"
+              :src="dAd.main_photo"
+              :alt="'/public/img/drovito.png'"
+              :nofon="dAd.main_photo!=null?false:true" />
     </div>
-    <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
-    <span
-      class="wg-card-post__title"
-    >{{dAd.brand+" "+dAd.model+" "+dAd.year+" г.в. "}}{{dAd.price|filter_price}}{{" руб."}}</span>
-    <span ref="descr" class="wg-card-post__description wg-card-post__description_ellips">
+    <wg-slider-zoom :slides="slides"
+                    :show="showSlides"
+                    @onHide="showSlides=false"></wg-slider-zoom>
+    <span class="wg-card-post__title">{{dAd.brand+" "+dAd.model+" "+dAd.year+" г.в. "}}{{dAd.price|filter_price}}{{" руб."}}</span>
+    <span ref="descr"
+          class="wg-card-post__description wg-card-post__description_ellips">
       <div class="wg-card-ad__params">
-        <span v-if="dAd.document_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.document_id!=null"
+              class="wg-card-ad__param">
           {{"Документы: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{dAd.document_id==1?"с документавми":"без документов"}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.document_id|filter_document_id}}</span>
         </span>
-        <span v-if="dAd.state_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.state_id!=null"
+              class="wg-card-ad__param">
           {{"Состояние: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{dAd.state_id==1?"не требует вложений (ОТС)":dAd.state_id==2?"требует незначительных вложений (ХТС)":"требует значительных вложений"}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.state_id|filter_state_id}}</span>
         </span>
-        <span v-if="dAd.exchange_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.exchange_id!=null"
+              class="wg-card-ad__param">
           {{"Обмен: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{dAd.exchange_id==1?"готов к обмену":"не готов к обмену"}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.exchange_id|filter_exchange_id}}</span>
         </span>
-        <span v-if="dAd.mileage!=null" class="wg-card-ad__param">
+        <span v-if="dAd.mileage!=null"
+              class="wg-card-ad__param">
           {{"Пробег: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{String(dAd.mileage).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" км."}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.mileage|filter_price}}{{" км."}}</span>
         </span>
-        <span v-if="dAd.transmission!=null" class="wg-card-ad__param">
+        <span v-if="dAd.transmission!=null"
+              class="wg-card-ad__param">
           {{"Коробка передач: "}}
           <span class="wg-card-ad__param-info">{{dAd.transmission}}</span>
         </span>
-        <span v-if="dAd.wheel_id!=null" class="wg-card-ad__param">
+        <span v-if="dAd.wheel_id!=null"
+              class="wg-card-ad__param">
           {{"Руль: "}}
-          <span class="wg-card-ad__param-info">{{dAd.wheel_id==1?"левый":"правый"}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.wheel_id|filter_wheel_id}}</span>
         </span>
-        <span v-if="dAd.fuel!=null" class="wg-card-ad__param">
+        <span v-if="dAd.fuel!=null"
+              class="wg-card-ad__param">
           {{"Топливо: "}}
           <span class="wg-card-ad__param-info">{{dAd.fuel}}</span>
         </span>
-        <span v-if="dAd.power!=null" class="wg-card-ad__param">
+        <span v-if="dAd.power!=null"
+              class="wg-card-ad__param">
           {{"Мощность: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{String(dAd.power).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л.с."}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.power|filter_price}}{{" л.с."}}</span>
         </span>
-        <span v-if="dAd.volume!=null" class="wg-card-ad__param">
+        <span v-if="dAd.volume!=null"
+              class="wg-card-ad__param">
           {{"Объем: "}}
-          <span
-            class="wg-card-ad__param-info"
-          >{{String(dAd.volume).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" л."}}</span>
+          <span class="wg-card-ad__param-info">{{dAd.volume|filter_price}}{{" л."}}</span>
         </span>
-        <span v-if="dAd.drive!=null" class="wg-card-ad__param">
+        <span v-if="dAd.drive!=null"
+              class="wg-card-ad__param">
           {{"Привод: "}}
           <span class="wg-card-ad__param-info">{{dAd.drive}}</span>
         </span>
 
-        <span v-if="dAd.body!=null" class="wg-card-ad__param">
+        <span v-if="dAd.body!=null"
+              class="wg-card-ad__param">
           {{"Кузов: "}}
           <span class="wg-card-ad__param-info">{{dAd.body}}</span>
         </span>
       </div>
-      <span v-if="dAd.description!=null" class="wg-card-ad__param">{{"Описание: "}}</span>
-      <span v-if="dAd.description!=null" class="wg-card-ad__param-info-desc">{{dAd.description}}</span>
+      <span v-if="dAd.description!=null"
+            class="wg-card-ad__param">{{"Описание: "}}</span>
+      <span v-if="dAd.description!=null"
+            class="wg-card-ad__param-info-desc">{{dAd.description}}</span>
     </span>
     <div class="wg-card-post__button-menu-bot">
-      <wg-likes-ad
-        :likes="dAd.likes"
-        :dislikes="dAd.dislikes"
-        :userID="dAd.user_id"
-        :adID="dAd.ad_id"
-      />
-      <div
-        class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
-        @click="isShowDescription"
-      >
-        <i v-if="showDescription==false" class="fas fa-angle-down"></i>
-        <i v-if="showDescription==true" class="fas fa-angle-up"></i>
+      <wg-likes-ad :likes="dAd.likes"
+                   :dislikes="dAd.dislikes"
+                   :userID="dAd.user_id"
+                   :adID="dAd.ad_id" />
+      <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 wg-card-post__button-showdesc"
+           @click="isShowDescription">
+        <i v-if="showDescription==false"
+           class="fas fa-angle-down"></i>
+        <i v-if="showDescription==true"
+           class="fas fa-angle-up"></i>
       </div>
     </div>
-    <wg-form-update-ad
-      :show="showUpdateAd"
-      @onHide="isHideUpdateAd"
-      @onUpdateAd="isUpdateAd"
-      :ad="ad"
-    />
-    <ui-menu :show="showMenu" @onHide="isHideMenu">
+    <wg-form-update-ad :show="showUpdateAd"
+                       @onHide="isHideUpdateAd"
+                       @onUpdateAd="isUpdateAd"
+                       :ad="ad" />
+    <ui-menu :show="showMenu"
+             @onHide="isHideMenu">
       <ul class="ui-menu__ul">
-        <li
-          class="ui-menu__li"
-          v-if="profileUserID==dAd.user_id"
-          @click="isShowUpdateAd"
-        >Редактировать</li>
-        <li
-          class="ui-menu__li"
-          v-if="profileUserID==dAd.user_id"
-          @click="isDeleteAlbumAndAd"
-        >Удалить</li>
+        <li class="ui-menu__li"
+            v-if="profileUserID==dAd.user_id"
+            @click="isShowUpdateAd">Редактировать</li>
+        <li class="ui-menu__li"
+            v-if="profileUserID==dAd.user_id"
+            @click="isDeleteAlbumAndAd">Удалить</li>
         <li class="ui-menu__li">Пожаловаться</li>
       </ul>
     </ui-menu>
