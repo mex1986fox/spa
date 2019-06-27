@@ -7,6 +7,7 @@ import Tokens from "./tokens/tokens.js";
 import Profile from "./profile/profile.js";
 import Users from "./users/users.js";
 import Posts from "./posts/posts.js";
+import MyPosts from "./myposts/myposts.js";
 import Ads from "./ads/ads.js";
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
     transports: Transports,
     users: Users,
     posts: Posts,
+    myposts: MyPosts,
     ads: Ads
   },
   state: {},

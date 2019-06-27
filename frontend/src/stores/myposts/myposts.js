@@ -38,7 +38,6 @@ const posts = {
           }
         });
       }
-
     },
     deletePost(state, post) {
       if (state.posts != undefined) {

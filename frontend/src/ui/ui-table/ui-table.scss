@@ -18,35 +18,29 @@
 
     &__tr {
         text-align: center;
-
-        &>td {
-            border: 0;
-            padding: 0;
-            margin: 0;
-        }
-
-        &>th {
-            border: 0;
-            padding: 0;
-            margin: 0;
-        }
     }
 
     &__th {
         font-weight: 400;
-        height: 24px;
         border-bottom: 0px solid rgba($color-black, 0);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 10px;
     }
 
     &__td {
-        height: 54px;
         background-color: $color-black-opacity;
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 10px;
+    }
+
+    &__span {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 770px) {
+    .ui-table {
+        padding: 2px;
     }
 }

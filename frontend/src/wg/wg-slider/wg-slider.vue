@@ -1,39 +1,42 @@
 <template>
-  <transition name="wg-slider" appear>
-    <div class="wg-slider" @mouseover="buttonsShow=true" @mouseout="buttonsShow=false">
-      <div class="wg-slider__buttons" :style="marginButtons" v-show="buttonsShow">
+  <transition name="wg-slider"
+              appear>
+    <div class="wg-slider"
+         @mouseover="buttonsShow=true"
+         @mouseout="buttonsShow=false">
+      <div class="wg-slider__buttons"
+           :style="marginButtons"
+           v-show="buttonsShow">
         <div class="wg-slider__left-button">
-          <button
-            @click="clickLeft()"
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-          >
-            <i aria-hidden="true" class="fa fa-angle-left"></i>
+          <button @click="clickLeft()"
+                  class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
+            <i aria-hidden="true"
+               class="fa fa-angle-left"></i>
           </button>
         </div>
         <div class="wg-slider__right-button">
-          <button
-            @click="clickRight()"
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-          >
-            <i aria-hidden="true" class="fa fa-angle-right"></i>
+          <button @click="clickRight()"
+                  class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
+            <i aria-hidden="true"
+               class="fa fa-angle-right"></i>
           </button>
         </div>
       </div>
-      <div class="wg-slider__menu" v-show="buttonsShow">
+      <div class="wg-slider__menu"
+           v-show="buttonsShow">
         <div class="wg-slider__numeric">{{positionIndex+1}}/{{dSlides.length}}</div>
       </div>
-      <div ref="container" class="wg-slider__container">
+      <div ref="container"
+           class="wg-slider__container">
         <!-- <div class="wg-slider__frame" v-for="(val, key) in dSlides" :key="key" @click="isZoom()">
           <img class="wg-slider__fon" :src="val.src">
           <img class="wg-slider__img" :src="val.src">
         </div>-->
-        <ui-img
-          :src="val.src"
-          class="wg-slider__frame"
-          v-for="(val, key) in dSlides"
-          :key="key"
-          @click="isZoom()"
-        />
+        <ui-img :src="val.src"
+                class="wg-slider__frame"
+                v-for="(val, key) in dSlides"
+                :key="key"
+                @click="isZoom()" />
       </div>
     </div>
   </transition>
@@ -94,12 +97,14 @@ export default {
         }
         return { src: slide.src, select: false };
       });
+      let tr = this.positionIndex * this.sliderWidth;
       this.$refs.container.style.cssText =
-        "width: " +
-        this.containerWidth +
-        "%; transform: translateX(-" +
-        this.positionIndex * this.sliderWidth +
-        "%); transition: transform 0.3s;";
+        ` width: ${this.containerWidth}%; ` +
+        ` -webkit-transform: translateX(-${tr}%); ` +
+        ` -moz-transform: translateX(-${tr}%); ` +
+        ` -ms-transform: translateX(-${tr}%); ` +
+        ` -o-transform: translateX(-${tr}%); ` +
+        ` transform: translateX(-${tr}%); `;
       // "width: " +
       // this.containerWidth +
       // "%; margin-left: -" +

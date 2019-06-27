@@ -1,20 +1,12 @@
 <template>
-  <td>
-    <div class="ui-table__td" :class="dclass">
-      <slot></slot>
-    </div>
+  <td class="ui-table__td">
+    <slot></slot>
   </td>
 </template>
 <script>
 export default {
   data() {
     return {};
-  },
-  props: {
-    dclass: {
-      type: String,
-      default: ""
-    }
   }
 };
 </script>

@@ -28,6 +28,8 @@ import UiTableTh from "./ui-table/ui-table-th.vue";
 Vue.component("ui-table-th", UiTableTh);
 import UiTableTr from "./ui-table/ui-table-tr.vue";
 Vue.component("ui-table-tr", UiTableTr);
+import UiTableSpan from "./ui-table/ui-table-span.vue";
+Vue.component("ui-table-span", UiTableSpan);
 
 //элементы формы
 import UiEfText from "./ui-element-form/ui-ef-text.vue";

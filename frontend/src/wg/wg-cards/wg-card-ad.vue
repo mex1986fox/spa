@@ -9,7 +9,7 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div class="wg-card-post__info-date">{{dAd.date_create}}</div>
+      <div class="wg-card-post__info-date">{{dAd.date_create|filter_date}}</div>
       <div class="wg-card-post__info-text">{{dAd.city +" ("+dAd.subject+")"}}</div>
       <div class="wg-card-post__info-text">{{dAd.brand +" "+dAd.model}}</div>
     </div>
@@ -24,7 +24,7 @@
     <wg-slider-zoom :slides="slides" :show="showSlides" @onHide="showSlides=false"></wg-slider-zoom>
     <span
       class="wg-card-post__title"
-    >{{dAd.brand+" "+dAd.model+" "+dAd.year+" г.в. "+String(dAd.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+" руб."}}</span>
+    >{{dAd.brand+" "+dAd.model+" "+dAd.year+" г.в. "}}{{dAd.price|filter_price}}{{" руб."}}</span>
     <span ref="descr" class="wg-card-post__description wg-card-post__description_ellips">
       <div class="wg-card-ad__params">
         <span v-if="dAd.document_id!=null" class="wg-card-ad__param">

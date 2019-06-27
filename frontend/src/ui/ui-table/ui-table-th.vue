@@ -1,8 +1,6 @@
 <template>
-  <th>
-    <div class="ui-table__th">
-      <slot></slot>
-    </div>
+  <th class="ui-table__th">
+    <slot></slot>
   </th>
 </template>
 <script>

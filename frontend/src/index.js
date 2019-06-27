@@ -6,12 +6,18 @@ import Vue from "vue/dist/vue.js";
 import router from "./router/index.js";
 import store from "./stores/index.js";
 
+//фильтры 
+import Filters from "./plugins/filters.js";
+Vue.use(Filters);
 //имена хостов которые будем использовать в проекте
 import Hosts from "./plugins/hosts.js";
 Vue.use(Hosts);
 //api запросы к серверам
 import Api from "./api/api.js";
 Vue.use(Api);
+//подключаем использование фрагментов
+import { Plugin } from 'vue-fragment'
+Vue.use(Plugin)
 
 // подключаем библиотеки
 import "./ui/index.js";

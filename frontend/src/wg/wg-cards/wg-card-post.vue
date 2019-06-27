@@ -9,7 +9,7 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div class="wg-card-post__info-date">{{dPost.date_create}}</div>
+      <div class="wg-card-post__info-date">{{dPost.date_create|filter_date}}</div>
       <div class="wg-card-post__info-text">{{dPost.city +" ("+dPost.subject+")"}}</div>
       <div class="wg-card-post__info-text">{{dPost.brand +" "+dPost.model}}</div>
     </div>

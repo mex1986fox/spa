@@ -964,28 +964,22 @@ body {
     vertical-align: middle; }
   .ui-table__tr {
     text-align: center; }
-    .ui-table__tr > td {
-      border: 0;
-      padding: 0;
-      margin: 0; }
-    .ui-table__tr > th {
-      border: 0;
-      padding: 0;
-      margin: 0; }
   .ui-table__th {
     font-weight: 400;
-    height: 24px;
     border-bottom: 0px solid rgba(17, 17, 17, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center; }
+    padding: 10px; }
   .ui-table__td {
-    height: 54px;
     background-color: rgba(255, 255, 255, 0.1);
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
+    padding: 10px; }
+  .ui-table__span {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0; }
+
+@media (max-width: 770px) {
+  .ui-table {
+    padding: 2px; } }
 
 .ui-ef-text {
   width: 100%;
@@ -2774,7 +2768,8 @@ body {
 
 .wg-form-registration {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  text-align: left; }
   .wg-form-registration__container {
     height: auto;
     display: block;
@@ -2886,9 +2881,11 @@ body {
     right: 0;
     margin-top: -35px; }
 
-.wg-form-create-post__card-ef {
-  margin: 35px 45px;
-  overflow: hidden; }
+.wg-form-create-post {
+  text-align: left; }
+  .wg-form-create-post__card-ef {
+    margin: 35px 45px;
+    overflow: hidden; }
 
 .wg-filter {
   width: auto;
@@ -3041,7 +3038,12 @@ body {
     width: 300%;
     float: left;
     position: relative;
-    opacity: 1; }
+    opacity: 1;
+    -webkit-transition: transform 0.9s;
+    -moz-transition: transform 0.9s;
+    -ms-transition: transform 0.9s;
+    -o-transition: transform 0.9s;
+    transition: transform 0.9s; }
   .wg-slider__menu {
     background-color: rgba(255, 255, 255, 0.4);
     color: #ffffff;
@@ -3158,30 +3160,25 @@ body {
   line-height: 44px;
   font-size: 14px; }
 
-.wg-table__tr_auto {
-  height: 100%;
-  overflow: hidden; }
+.wg-table__td_dete {
+  font-size: 10px; }
 
-.wg-table__td_auto {
-  height: 100%;
-  margin: 1px 0 0 0;
-  padding: 0px 10px 10px 10px;
-  overflow: hidden; }
+.wg-table__td_name {
+  color: rgba(255, 255, 255, 0.5); }
 
 .wg-table__td_left {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   text-align: left; }
 
-.wg-table__td_right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  text-align: right; }
+.wg-table__td_desc {
+  text-align: left; }
 
-.wg-table__td_opac-5 {
-  color: rgba(255, 255, 255, 0.5); }
+.wg-table__buttons {
+  float: right;
+  height: 42px;
+  min-width: 86px; }
+
+.wg-table-mypost {
+  width: 100%; }
 
 
 /*# sourceMappingURL=main.css.map*/

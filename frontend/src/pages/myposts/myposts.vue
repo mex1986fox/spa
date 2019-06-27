@@ -14,7 +14,7 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-table-mypost/>
+      <wg-table-mypost v-if="showTableMypost"/>
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
@@ -31,13 +31,26 @@ export default {
   data() {
     return {
       showFormExcel: false,
-      showNewPost: false
+      showNewPost: false,
+      showTableMypost: false
     };
   },
+  watch: {
+    profileID(newQ) {
+      if (newQ != undefined) {
+        this.showTableMypost = true;
+      }
+    }
+  },
   computed: {
-    // ...mapGetters({
-    //   myposts: "myposts/getPosts"
-    // })
+    ...mapGetters({
+      profileID: "profile/getID"
+    })
+  },
+  mounted() {
+    if (this.profileID != undefined) {
+      this.showTableMypost = true;
+    }
   }
 };
 </script>
