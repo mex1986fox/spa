@@ -958,7 +958,7 @@ body {
     display: table-header-group;
     vertical-align: text-bottom; }
   .ui-table__body {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 13px;
     display: table-header-group;
     vertical-align: middle; }
@@ -1767,8 +1767,9 @@ body {
     float: left;
     width: 52px;
     text-align: center;
-    color: rgba(17, 17, 17, 0.4) .ui-ef-search__icon _active;
-      color-color: #111111; }
+    color: rgba(17, 17, 17, 0.4); }
+    .ui-ef-search__icon_active {
+      color: #111111; }
   .ui-ef-search__input {
     height: 42px;
     padding: 0;
@@ -2598,7 +2599,8 @@ body {
   padding: 3px 0; }
   .wg-card-ad__param-info {
     color: rgba(255, 255, 255, 0.8);
-    float: right; }
+    float: right;
+    word-wrap: anywhere; }
     .wg-card-ad__param-info-desc {
       color: rgba(255, 255, 255, 0.8);
       float: left;
@@ -3168,6 +3170,14 @@ body {
 
 .wg-table__td_left {
   text-align: left; }
+
+.wg-table__exces_info {
+  float: left; }
+
+.wg-table__exces_param {
+  float: left;
+  color: rgba(255, 255, 255, 0.5);
+  padding-right: 10px; }
 
 .wg-table__td_desc {
   text-align: left; }

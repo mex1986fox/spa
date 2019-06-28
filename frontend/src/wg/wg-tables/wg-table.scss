@@ -11,6 +11,17 @@
         text-align: left;
     }
 
+    &__exces_info {
+        float: left;
+
+    }
+
+    &__exces_param {
+        float: left;
+        color: rgba($color-white, 0.5);
+        padding-right: 10px;
+    }
+
     &__td_desc {
         text-align: left;
     }

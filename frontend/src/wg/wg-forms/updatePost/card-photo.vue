@@ -154,6 +154,7 @@ export default {
       this.lincksPhoto = undefined;
       setTimeout(() => {
         this.lincksPhoto = lPhoto;
+        this.$emit("onUpdatePost", this.dPost);
       }, 100);
     },
     isHide() {

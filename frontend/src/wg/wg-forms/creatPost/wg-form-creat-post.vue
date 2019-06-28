@@ -13,7 +13,11 @@
           </div>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-photo :post="dPost" @onHide="isHide"/>
+              <wg-form-creat-post-card-photo
+                @onUpdatePost="isUpdatePost"
+                :post="dPost"
+                @onHide="isHide"
+              />
             </div>
           </ui-animation-display>
           <ui-animation-display v-if="showCard==true" :animate="'right'">
@@ -84,8 +88,13 @@ export default {
     isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
+        this.$store.commit("posts/unshiftPost", this.dPost);
+        this.$store.commit("myposts/unshiftPost", this.dPost);
         this.$emit("onHide");
       }, 200);
+    },
+    isUpdatePost(post) {
+      this.dPost = post;
     },
     isShowCardPhoto(post) {
       this.dPost = post;

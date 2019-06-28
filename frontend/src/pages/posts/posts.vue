@@ -94,6 +94,7 @@ export default {
     },
     isDeletePost(post) {
       this.$store.commit("posts/deletePost", post);
+      this.$store.commit("myposts/deletePost", post);
     },
     isAddPosts() {
       let filterPosts = JSON.parse(this.$cookie.get("filter_posts"));

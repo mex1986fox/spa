@@ -109,7 +109,7 @@ export default {
     },
     isUpdatePost(post) {
       this.dPost = post;
-      this.$emit("onUpdatePost", post);
+      //this.$emit("onUpdatePost", post);
     },
     isShowDescription() {
       let height = this.$refs.descr.style.height;
@@ -161,7 +161,7 @@ export default {
             this.isDeletePost();
           }
         })
-        .cacth(error => {
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
@@ -200,7 +200,7 @@ export default {
             // this.isDeletePost();
           }
         })
-        .cacth(error => {
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }

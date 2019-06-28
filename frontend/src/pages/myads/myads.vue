@@ -3,7 +3,7 @@
     <div class="lt-main__content">
       <div class="lt-main-menu__margin"></div>
       <lt-main-menu>
-        <div class="lt-main-menu__header">Мои посты</div>
+        <div class="lt-main-menu__header">Мои объявления</div>
         <div class="lt-main-menu__buttons">
           <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="far fa-file-excel"></i>
@@ -17,7 +17,7 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-table-mypost v-if="showTableMypost"/>
+      <wg-table-myads v-if="showTableMyads"/>
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
@@ -36,13 +36,13 @@ export default {
     return {
       showFormExcel: false,
       showFormCreatPost: false,
-      showTableMypost: false
+      showTableMyads: false
     };
   },
   watch: {
     profileID(newQ) {
       if (newQ != undefined) {
-        this.showTableMypost = true;
+        this.showTableMyads = true;
       }
     }
   },
@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     if (this.profileID != undefined) {
-      this.showTableMypost = true;
+      this.showTableMyads = true;
     }
   },
   methods: {

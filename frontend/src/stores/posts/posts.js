@@ -49,6 +49,12 @@ const posts = {
         });
       }
     },
+    unshiftPost(state, post) {
+      if(state.posts==undefined){
+        state.posts=[];
+      }
+      state.posts.unshift(post);
+    }
   },
   actions: {
     updatePost(context, post) {

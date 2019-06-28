@@ -82,7 +82,9 @@ export default {
       setTimeout(() => {
         this.setPositionImg(this.$el, this.$refs.pict);
         this.$refs.pict.style.opacity = "1";
-        this.$refs.fon.style.opacity = "0.2";
+        if (this.$refs.fon != undefined) {
+          this.$refs.fon.style.opacity = "0.2";
+        }
       }, 200);
     });
   }

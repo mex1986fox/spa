@@ -18,7 +18,9 @@
         width: 52px;
         text-align: center;
 
-        color: rgba($color-black, 0.4) &_active {
+        color: rgba($color-black, 0.4);
+
+        &_active {
             color: $color-black;
         }
     }
