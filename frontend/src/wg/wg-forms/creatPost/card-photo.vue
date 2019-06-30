@@ -152,6 +152,7 @@ export default {
     },
     isUpdatePost(post) {
       this.dPost = post;
+      this.$emit("onUpdatePost", this.dPost);
       let lPhoto = this.lincksPhoto;
       this.lincksPhoto = undefined;
       setTimeout(() => {

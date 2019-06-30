@@ -35,7 +35,8 @@ Vue.component("wg-card-ad", WgCardAd);
 
 import WgTableMyPost from "./wg-tables/wg-table-mypost.vue";
 Vue.component("wg-table-mypost", WgTableMyPost);
-
+import WgTableMyAds from "./wg-tables/wg-table-myads.vue";
+Vue.component("wg-table-myads", WgTableMyAds);
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);

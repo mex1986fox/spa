@@ -5,13 +5,13 @@
         class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
         colspan="2"
       >
-        <div class="wg-table__td_dete">{{post.date_create|filter_date}}</div>
-        <div>{{post.title}}</div>
+        <div class="wg-table__td_dete">{{dPost.date_create|filter_date}}</div>
+        <div>{{dPost.title}}</div>
       </ui-table-td>
-      <ui-table-td class="wg-table__td_dete col-phone_clean">{{post.date_create|filter_date}}</ui-table-td>
-      <ui-table-td class="col-phone_clean">{{post.brand+" "+post.model}}</ui-table-td>
-      <ui-table-td class="col-phone_clean">{{post.subject+" "+post.city}}</ui-table-td>
-      <ui-table-td class="col-phone_clean">{{post.title}}</ui-table-td>
+      <ui-table-td class="wg-table__td_dete wg-table__td_left col-phone_clean">{{dPost.date_create|filter_date}}</ui-table-td>
+      <ui-table-td class="col-phone_clean">{{dPost.brand+" "+dPost.model}}</ui-table-td>
+      <ui-table-td class="col-phone_clean">{{dPost.subject+" "+dPost.city}}</ui-table-td>
+      <ui-table-td class="col-phone_clean">{{dPost.title}}</ui-table-td>
       <ui-table-td>
         <div class="wg-table__buttons">
           <div
@@ -32,7 +32,7 @@
           :show="showUpdatePost"
           @onHide="isHideUpdatePost"
           @onUpdatePost="isUpdatePost"
-          :post="post"
+          :post="dPost"
         />
         <ui-menu :show="showMenu" @onHide="isHideMenu">
           <ul class="ui-menu__ul">
@@ -45,20 +45,20 @@
     <template v-if="showExcess">
       <ui-table-span class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"/>
       <ui-table-tr class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
-        <ui-table-td class="wg-table__td_name">Марка, модель</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{post.brand+" "+post.model}}</ui-table-td>
+        <ui-table-td class="wg-table__td_name wg-table__td_left">Марка, модель</ui-table-td>
+        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.brand+" "+dPost.model}}</ui-table-td>
       </ui-table-tr>
 
       <ui-table-span class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"/>
       <ui-table-tr class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
-        <ui-table-td class="wg-table__td_name">Город</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{post.subject+" "+post.city}}</ui-table-td>
+        <ui-table-td class="wg-table__td_name wg-table__td_left">Город</ui-table-td>
+        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.subject+" "+dPost.city}}</ui-table-td>
       </ui-table-tr>
 
       <ui-table-span/>
       <ui-table-tr>
-        <ui-table-td class="wg-table__td_name">Описание</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{post.description}}</ui-table-td>
+        <ui-table-td class="wg-table__td_name wg-table__td_left">Описание</ui-table-td>
+        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.description}}</ui-table-td>
       </ui-table-tr>
     </template>
   </fragment>
@@ -71,12 +71,23 @@ export default {
     return {
       showExcess: false,
       showMenu: false,
-      showUpdatePost: false
+      showUpdatePost: false,
+      dPost: this.post
     };
+  },
+  computed: {
+    ...mapGetters({
+      token: "tokens/getAccessToken"
+    })
   },
   props: {
     post: {
       default: undefined
+    }
+  },
+  watch: {
+    post(newQ) {
+      this.dPost = newQ;
     }
   },
   methods: {
@@ -110,7 +121,7 @@ export default {
             this.isDeletePost();
           }
         })
-        .cacth(error => {
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }
@@ -127,7 +138,9 @@ export default {
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$emit("onDeletePost", this.post);
+            // this.$emit("onDeletePost", this.post);
+            this.$store.commit("myposts/deletePost", this.dPost);
+            this.$store.commit("posts/deletePost", this.dPost);
           }
         })
         .catch(error => {
@@ -149,7 +162,7 @@ export default {
             // this.isDeletePost();
           }
         })
-        .cacth(error => {
+        .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
           }

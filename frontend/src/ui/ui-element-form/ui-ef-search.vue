@@ -10,14 +10,14 @@
       @input="isInput"
     >
     <div v-if="!dActive && !dShowMenu" class="ui-ef-search__icon">
-      <i class="fa fa-search" aria-hidden="true"></i>
+      <i class="fas fa-search"></i>
     </div>
     <div
       v-if="dActive || dShowMenu"
       @click="isClean"
       class="ui-ef-search__icon ui-ef-search__icon_active"
     >
-      <i aria-hidden="true" class="fa fa-times"></i>
+      <i class="fas fa-times"></i>
     </div>
     <div ref="menu" v-show="dShowMenu" class="ui-ef-search__menu">
       <slot></slot>

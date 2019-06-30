@@ -27,58 +27,58 @@
       <div class="wg-card-ad__params">
         <span v-if="dAd.document_id!=null"
               class="wg-card-ad__param">
-          {{"Документы: "}}
+          Документы:
           <span class="wg-card-ad__param-info">{{dAd.document_id|filter_document_id}}</span>
         </span>
         <span v-if="dAd.state_id!=null"
               class="wg-card-ad__param">
-          {{"Состояние: "}}
+          Состояние:
           <span class="wg-card-ad__param-info">{{dAd.state_id|filter_state_id}}</span>
         </span>
         <span v-if="dAd.exchange_id!=null"
               class="wg-card-ad__param">
-          {{"Обмен: "}}
+          Обмен:
           <span class="wg-card-ad__param-info">{{dAd.exchange_id|filter_exchange_id}}</span>
         </span>
         <span v-if="dAd.mileage!=null"
               class="wg-card-ad__param">
-          {{"Пробег: "}}
+          Пробег:
           <span class="wg-card-ad__param-info">{{dAd.mileage|filter_price}}{{" км."}}</span>
         </span>
         <span v-if="dAd.transmission!=null"
               class="wg-card-ad__param">
-          {{"Коробка передач: "}}
+          Коробка передач:
           <span class="wg-card-ad__param-info">{{dAd.transmission}}</span>
         </span>
         <span v-if="dAd.wheel_id!=null"
               class="wg-card-ad__param">
-          {{"Руль: "}}
+          Руль:
           <span class="wg-card-ad__param-info">{{dAd.wheel_id|filter_wheel_id}}</span>
         </span>
         <span v-if="dAd.fuel!=null"
               class="wg-card-ad__param">
-          {{"Топливо: "}}
+          Топливо:
           <span class="wg-card-ad__param-info">{{dAd.fuel}}</span>
         </span>
         <span v-if="dAd.power!=null"
               class="wg-card-ad__param">
-          {{"Мощность: "}}
+          Мощность:
           <span class="wg-card-ad__param-info">{{dAd.power|filter_price}}{{" л.с."}}</span>
         </span>
         <span v-if="dAd.volume!=null"
               class="wg-card-ad__param">
-          {{"Объем: "}}
+          Объем:
           <span class="wg-card-ad__param-info">{{dAd.volume|filter_price}}{{" л."}}</span>
         </span>
         <span v-if="dAd.drive!=null"
               class="wg-card-ad__param">
-          {{"Привод: "}}
+          Привод:
           <span class="wg-card-ad__param-info">{{dAd.drive}}</span>
         </span>
 
         <span v-if="dAd.body!=null"
               class="wg-card-ad__param">
-          {{"Кузов: "}}
+          Кузов:
           <span class="wg-card-ad__param-info">{{dAd.body}}</span>
         </span>
       </div>

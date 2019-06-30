@@ -10,7 +10,7 @@
     }
 
     &__body {
-        color: $color-white;
+        color: rgba($color-white, 0.8);
         font-size: 13px;
         display: table-header-group;
         vertical-align: middle;

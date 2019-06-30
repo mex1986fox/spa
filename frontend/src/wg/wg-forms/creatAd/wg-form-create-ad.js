@@ -50,7 +50,7 @@ export default {
       setTimeout(() => {
         this.$emit("onHide");
         if (ad != undefined) {
-          this.$store.commit("ads/unshiftAd", ad);
+            this.$store.commit("ads/unshiftAd", ad);
         }
       }, 200);
     },
