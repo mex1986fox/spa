@@ -9,6 +9,14 @@
         <div>{{dPost.title}}</div>
       </ui-table-td>
       <ui-table-td class="wg-table__td_dete wg-table__td_left col-phone_clean">{{dPost.date_create|filter_date}}</ui-table-td>
+      <ui-table-td class=" wg-table-mypost__td_img col-phone_clean">
+        <ui-img
+          class="wg-table-mypost__img"
+          :src="dPost.main_photo"
+          :alt="'/public/img/drovito.png'"
+          :nofon="dPost.main_photo!=null?false:true"
+        />
+      </ui-table-td>
       <ui-table-td class="col-phone_clean">{{dPost.brand+" "+dPost.model}}</ui-table-td>
       <ui-table-td class="col-phone_clean">{{dPost.subject+" "+dPost.city}}</ui-table-td>
       <ui-table-td class="col-phone_clean">{{dPost.title}}</ui-table-td>

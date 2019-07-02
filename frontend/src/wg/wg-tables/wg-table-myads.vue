@@ -4,6 +4,7 @@
       <ui-table-header>
         <ui-table-tr>
           <ui-table-th class="wg-table__td_left col-phone_clean">Дата</ui-table-th>
+          <ui-table-th class="col-phone_clean"></ui-table-th>
           <ui-table-th class="col-phone_clean">Область, город</ui-table-th>
           <ui-table-th class="col-phone_clean">Марка, модель</ui-table-th>
           <ui-table-th class="col-phone_clean">Год выпуска</ui-table-th>

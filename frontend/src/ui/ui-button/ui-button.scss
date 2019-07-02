@@ -1,153 +1,172 @@
 .ui-button {
-  width: auto;
-  // height: 30px;
-  padding: 0px 28px;
-  margin: 6px;
-  line-height: 30px;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  color: $color-black;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  background-color: $color-white;
-  border: 1px solid $color-white;
-  box-shadow: $shadow-1;
-  border-radius: 4px;
-  overflow: hidden;
-  float: left;
-  display: block;
-  text-decoration: none;
-  text-align: center;
-
-  &:hover {
-    cursor: pointer;
+    width: auto;
+    // height: 30px;
+    padding: 0px 28px;
+    margin: 6px;
+    line-height: 30px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: $color-black;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background-color: $color-white;
+    border: 1px solid $color-white;
+    box-shadow: $shadow-1;
+    border-radius: 4px;
+    overflow: hidden;
+    float: left;
+    display: block;
     text-decoration: none;
-  }
+    text-align: center;
 
-  &:active {
-    cursor: pointer;
-    box-shadow: $shadow-2;
-    text-decoration: none;
-  }
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    &:active {
+        cursor: pointer;
+        box-shadow: $shadow-2;
+        text-decoration: none;
+    }
 }
 
 .ui-button_s1 {
-  height: 24px;
-  line-height: 22px;
-  font-size: 11px;
+    height: 24px;
+    line-height: 22px;
+    font-size: 11px;
 }
 
 .ui-button_s2 {
-  height: 30px;
+    height: 30px;
 }
 
 .ui-button_s3 {
-  height: 40px;
-  line-height: 41px;
-  font-size: 16px;
+    height: 40px;
+    line-height: 41px;
+    font-size: 16px;
 }
 
 .ui-button_circle_s1 {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
 }
 
 .ui-button_circle_s2 {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  padding: 0;
-  font-size: 18px;
-  line-height: 41px;
-  border-width: 2px !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 18px;
+    line-height: 41px;
+    border-width: 2px !important;
 }
 
 .ui-button_circle_s3 {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding: 0;
-  font-size: 23px;
-  line-height: 48px;
-  border-width: 2px !important;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 23px;
+    line-height: 48px;
+    border-width: 2px !important;
 }
 
 .ui-button_white {
-  color: $color-black;
-  border: 1px solid $color-white;
-  background-color: $color-white;
-  box-shadow: $shadow-1;
+    color: $color-black;
+    border: 1px solid $color-white;
+    background-color: $color-white;
+    box-shadow: $shadow-1;
 
-  &:hover {
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: $shadow-2;
-  }
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: $shadow-2;
+    }
 
-  &:active {
-    cursor: pointer;
-    box-shadow: $shadow-3;
-    text-decoration: none;
-  }
+    &:active {
+        cursor: pointer;
+        box-shadow: $shadow-3;
+        text-decoration: none;
+    }
 }
 
 .ui-button_black {
-  color: $color-white;
-  border: 1px solid $color-black;
-  background-color: $color-black;
-  box-shadow: $shadow-1;
+    color: $color-white;
+    border: 1px solid $color-black;
+    background-color: $color-black;
+    box-shadow: $shadow-1;
 
-  &:hover {
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: $shadow-2;
-  }
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: $shadow-2;
+    }
 
-  &:active {
-    cursor: pointer;
-    box-shadow: $shadow-3;
-    text-decoration: none;
-  }
+    &:active {
+        cursor: pointer;
+        box-shadow: $shadow-3;
+        text-decoration: none;
+    }
+}
+
+.ui-button_orange {
+    color: $color-white;
+    border: 1px solid $color-orange;
+    background-color: $color-orange;
+    box-shadow: $shadow-1;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: $shadow-2;
+    }
+
+    &:active {
+        cursor: pointer;
+        box-shadow: $shadow-3;
+        text-decoration: none;
+    }
 }
 
 .ui-button_float_white {
-  color: $color-white;
-  border: 1px solid $color-white;
-  background-color: #00000000;
-  box-shadow: none;
-
-  &:hover {
-    background-color: rgba($color-white, 0.2);
+    color: $color-white;
+    border: 1px solid $color-white;
+    background-color: #00000000;
     box-shadow: none;
-  }
 
-  &:active {
-    background-color: rgba($color-white, 0.4);
-    box-shadow: none;
-  }
+    &:hover {
+        background-color: rgba($color-white, 0.2);
+        box-shadow: none;
+    }
+
+    &:active {
+        background-color: rgba($color-white, 0.4);
+        box-shadow: none;
+    }
 }
 
 .ui-button_float_black {
-  color: $color-black;
-  border: 1px solid $color-black;
-  background-color: #00000000;
-  box-shadow: none;
-
-  &:hover {
-    background-color: rgba($color-black, 0.2);
+    color: $color-black;
+    border: 1px solid $color-black;
+    background-color: #00000000;
     box-shadow: none;
-  }
 
-  &:active {
-    background-color: rgba($color-black, 0.4);
-    box-shadow: none;
-  }
+    &:hover {
+        background-color: rgba($color-black, 0.2);
+        box-shadow: none;
+    }
+
+    &:active {
+        background-color: rgba($color-black, 0.4);
+        box-shadow: none;
+    }
 }
 
 .ui-button_noborder {
-  border: none;
+    border: none;
 }

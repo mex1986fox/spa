@@ -88,8 +88,9 @@ export default {
     isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
-        this.$store.commit("ads/updateAd", this.dAd);
         this.$emit("onHide");
+        this.$store.commit("ads/updateAd", this.dAd);
+        this.$store.commit("myads/updateAd", this.dAd);
       }, 200);
     },
     isUpdateAd(ad) {

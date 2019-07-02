@@ -32,20 +32,25 @@ const ads = {
             state.page = page;
         },
         updateAd(state, ad) {
-            state.ads = state.ads.map(ad_map => {
-                if (ad_map.ad_id != ad.ad_id) {
-                    return ad_map;
-                } else {
-                    return ad;
-                }
-            });
+            if (state.ads != undefined) {
+                state.ads = state.ads.map(ad_map => {
+                    if (ad_map.ad_id != ad.ad_id) {
+                        return ad_map;
+                    } else {
+                        return ad;
+                    }
+                });
+            }
+
         },
         deleteAd(state, ad) {
-            state.ads = state.ads.filter(ad_map => {
-                if (ad_map.ad_id != ad.ad_id) {
-                    return true;
-                }
-            });
+            if (state.ads != undefined) {
+                state.ads = state.ads.filter(ad_map => {
+                    if (ad_map.ad_id != ad.ad_id) {
+                        return true;
+                    }
+                });
+            }
         },
         // вставляет объявление в начало
         unshiftAd(state, ad) {

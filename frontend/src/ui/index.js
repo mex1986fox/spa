@@ -56,3 +56,5 @@ import UiEfContainer from "./ui-element-form/ui-ef-container.vue";
 Vue.component("ui-ef-container", UiEfContainer);
 import UiEfRadio from "./ui-element-form/ui-ef-radio.vue";
 Vue.component("ui-ef-radio", UiEfRadio);
+import UiHelper from "./ui-helper/ui-helper.vue";
+Vue.component("ui-helper", UiHelper);

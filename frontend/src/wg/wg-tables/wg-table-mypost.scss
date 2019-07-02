@@ -1,3 +1,18 @@
 .wg-table-mypost {
     width: 100%;
+
+    &__td_img {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        height: 60px;
+        max-width: 70px;
+        overflow: hidden;
+    }
+
+    &__img {
+        height: 100%;
+        width: auto;
+        z-index: 1;
+    }
 }

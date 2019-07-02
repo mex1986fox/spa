@@ -4,6 +4,7 @@
       <ui-table-header>
         <ui-table-tr>
           <ui-table-th>Дата</ui-table-th>
+          <ui-table-th class="col-phone_clean"></ui-table-th>
           <ui-table-th class="col-phone_clean">Марка, модель</ui-table-th>
           <ui-table-th class="col-phone_clean">Город</ui-table-th>
           <ui-table-th>Заголовок</ui-table-th>

@@ -1,0 +1,30 @@
+.ui-helper {
+    position: absolute;
+
+    &__container {
+        position: absolute;
+        z-index: 1;
+        margin-top: 10px;
+        text-transform: none;
+        min-width: 240px;
+    }
+
+    &__triangle {
+        width: 0;
+        height: 0;
+        border-bottom: 15px solid $color-grine;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        position: absolute;
+        margin-top: -10px;
+        margin-left: 5px;
+    }
+
+    &__info {
+        background-color: $color-grine;
+        box-shadow: $shadow-1;
+        color: $color-white;
+        padding: 18px;
+        line-height: 16px;
+    }
+}

@@ -1,0 +1,12 @@
+.wg-select-catalog {
+    &>.ui-ef-select {
+        width: calc(100% - 60px);
+    }
+
+    &__button {
+        margin-top: 22px;
+        border: 0;
+        margin-bottom: 0;
+        margin-left: 16px;
+    }
+}

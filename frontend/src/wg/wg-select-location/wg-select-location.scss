@@ -1,4 +1,5 @@
 .wg-select-location {
+    overflow: hidden;
     &__blinde {
         background-color: rgba($color-black, 0);
         display: flex;

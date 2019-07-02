@@ -14,6 +14,8 @@ import WgFormCreatAd from "./wg-forms/creatAd/wg-form-creat-ad.vue";
 Vue.component("wg-form-creat-ad", WgFormCreatAd);
 import WgFormUpdateAd from "./wg-forms/updateAd/wg-form-update-ad.vue";
 Vue.component("wg-form-update-ad", WgFormUpdateAd);
+import WgFormList from "./wg-forms/wg-form-list.vue";
+Vue.component("wg-form-list", WgFormList);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);
@@ -25,6 +27,8 @@ import WgSelectTransport from "./wg-select-transport/wg-select-transport.vue";
 Vue.component("wg-select-transport", WgSelectTransport);
 import WgMultiTransport from "./wg-multi-transport/wg-multi-transport.vue";
 Vue.component("wg-multi-transport", WgMultiTransport);
+import WgSelectCatalog from "./wg-select-catalog/wg-select-catalog.vue";
+Vue.component("wg-select-catalog", WgSelectCatalog);
 
 import WgCardUser from "./wg-cards/wg-card-user.vue";
 Vue.component("wg-card-user", WgCardUser);
