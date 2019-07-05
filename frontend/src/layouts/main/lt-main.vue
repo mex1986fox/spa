@@ -6,13 +6,13 @@
         <router-link to="/my_profile" class="lt-main__menu-item">Мой профиль</router-link>
         <router-link to="/my_posts" class="lt-main__menu-item">Мои посты</router-link>
         <router-link to="/my_ads" class="lt-main__menu-item">Мои объявления</router-link>
-        <router-link to="/my_wcase" class="lt-main__menu-item">Мои витрины</router-link>
+        <router-link to="/my_shops" class="lt-main__menu-item">Мои магазины</router-link>
       </ul>
       <ul class="lt-main__menu-list">
         <router-link to="/users" class="lt-main__menu-item">Люди</router-link>
         <router-link to="/posts" class="lt-main__menu-item">Посты</router-link>
         <router-link to="/ads" class="lt-main__menu-item">Объявления</router-link>
-        <router-link to="/wcase" class="lt-main__menu-item">Витрины</router-link>
+        <router-link to="/shops" class="lt-main__menu-item">Магазины</router-link>
         <!-- <li class="lt-main__menu-item">События</li>
         <li class="lt-main__menu-item">Фотографии</li>-->
       </ul>
@@ -23,11 +23,7 @@
       :show="showRegistration"
       @onHide="showRegistration = false"
     />
-    <wg-form-login
-      :key="keyRegistration()"
-      :show="showLogin"
-      @onHide="isHideFormLogin"
-    />
+    <wg-form-login :key="keyRegistration()" :show="showLogin" @onHide="isHideFormLogin"/>
   </div>
 </template>
 <script>

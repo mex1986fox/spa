@@ -188,18 +188,7 @@ export default {
       token: "tokens/getAccessToken"
     }),
     yearMenu() {
-      let minDate = 1935;
-      let maxDate = 2019;
-      let menu = [];
-      while (minDate != maxDate) {
-        menu.push({
-          value: maxDate,
-          option: maxDate,
-          selected: this.dAd.year == maxDate ? true : false
-        });
-        maxDate--;
-      }
-      return menu;
+      return this.$store.getters["transports/getMenuYear"]([this.dAd.year]);
     },
     driveMenu() {
       return this.$store.getters["transports/getMenuDrive"]([

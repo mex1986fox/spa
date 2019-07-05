@@ -1,31 +1,25 @@
 <template>
-  <form ref="formCreatePost">
+  <form ref="formCreateShop">
     <div class="wg-form-registration__card-header">Укажите основные данные</div>
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город продажи *" name="city_id" :help="excCity"/>
+          <wg-select-location caption="Город расположения *" name="city_id" :help="exc['city']"/>
         </div>
       </div>
       <div class="row">
-        <div class="col_7">
-          <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
+        <div class="col_8">
+          <ui-ef-text name="title" caption="Заголовок *" :help="exc['title']"></ui-ef-text>
         </div>
       </div>
       <div class="row">
-        <div class="col_3">
-          <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска *" :help="excYear"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col_3">
-          <ui-ef-text
-            :help="excPrice"
-            name="price"
-            caption="Цена руб. *"
-            masc="mascPrice"
-            :maxlength="11"
-          />
+        <div class="col_10">
+          <ui-ef-textarea
+            name="description"
+            caption="Описание *"
+            :help="exc['description']"
+            :autoresize="200"
+          ></ui-ef-textarea>
         </div>
       </div>
     </div>
@@ -34,7 +28,7 @@
       <input
         type="button"
         class="ui-button ui-button_float_black"
-        @click="isCreateAd"
+        @click="isCreateShop"
         :disabled="dSpinn"
         value="Создать"
       >
@@ -58,10 +52,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      excModel: "",
-      excCity: "",
-      excYear: "",
-      excPrice: "",
+      exc: [],
       showSnackbar: false,
       masSnackbar: "",
       dSpinn: false
@@ -70,10 +61,7 @@ export default {
   computed: {
     ...mapGetters({
       token: "tokens/getAccessToken"
-    }),
-    yearMenu() {
-      return this.$store.getters["transports/getMenuYear"]([this.dAd.year]);
-    }
+    })
   },
   watch: {
     token(newQ) {
@@ -83,34 +71,26 @@ export default {
     }
   },
   methods: {
-    isCreateAd() {
+    isCreateShop() {
       this.dSpinn = true;
-      this.excYear = "";
-      this.excPrice = "";
-      this.excCity = "";
-      this.excModel = "";
-      let form = this.$refs.formCreatePost;
+      this.exc = [];
+      let form = this.$refs.formCreateShop;
       let body = new FormData(form);
       body.set("access_token", this.token);
-      let price = body.get("price");
-      let year = body.get("year");
+      let title = body.get("title");
+      let description = body.get("description");
       let city_id = body.get("city_id");
-      let model_id = body.get("model_id");
       let fExc = false;
-      if (price == undefined || price == "") {
-        this.excPrice = "Заполните цену.";
+      if (title == undefined || title == "") {
+        this.exc["title"] = "Заполните название.";
         fExc = true;
       }
-      if (year == undefined || year == "") {
-        this.excYear = "Заполните год.";
+      if (description == undefined || description == "") {
+        this.exc["description"] = "Заполните описание.";
         fExc = true;
       }
       if (city_id == undefined || city_id == "") {
-        this.excCity = "Выберите город.";
-        fExc = true;
-      }
-      if (model_id == undefined || model_id == "") {
-        this.excModel = "Выберите модель автомобиля.";
+        this.exc["city"] = "Выберите город.";
         fExc = true;
       }
       if (fExc == true) {
@@ -118,21 +98,22 @@ export default {
         return;
       }
 
-      this.$api("ads")
+      this.$api("shops")
         .create(body)
         .then(response => {
           this.dSpinn = false;
-          this.$emit("onCreatedAd", response.body.data);
+          this.$emit("onCreatedShop", response.body.data);
         })
         .catch(error => {
           this.dSpinn = false;
           this.showSnackbar = true;
           let exc = error.body.data;
           this.masSnackbar = exc.massege;
-          this.excPrice = exc["price"] ? exc["price"] : "";
-          this.excYear = exc["year"] ? exc["year"] : "";
-          this.excCity = exc["city_id"] ? exc["city_id"] : "";
-          this.excModel = exc["model_id"] ? exc["model_id"] : "";
+          this.exc["title"] = exc["title"] ? exc["title"] : "";
+          this.exc["description"] = exc["description"]
+            ? exc["description"]
+            : "";
+          this.exc["city"] = exc["city_id"] ? exc["city_id"] : "";
         });
     }
   }

@@ -5,7 +5,8 @@ const Hosts = {
       services: "http://services.ru",
       userPhoto: "http://userphoto.ru:8085",
       postPhoto: "http://postphoto.ru:8088",
-      adsPhoto: "http://adsphoto.ru:8090"
+      adsPhoto: "http://adsphoto.ru:8090",
+      shopsPhoto: "http://shopsphoto.ru:8092"
     };
   }
 };

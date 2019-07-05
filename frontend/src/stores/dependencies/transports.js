@@ -84,7 +84,7 @@ const transports = {
       }
     },
     getMenuDrive: (state, getters, rootState, rootGetters) => (ids = []) => {
-        if (state.drives != undefined) {
+      if (state.drives != undefined) {
         return state.drives.map(drive => {
           return {
             value: drive.drive_id,
@@ -166,6 +166,20 @@ const transports = {
         { value: 1, option: "левый", selected: ids.indexOf(1) != -1 ? true : false },
         { value: 2, option: "правый", selected: ids.indexOf(2) != -1 ? true : false }
       ]
+    },
+    getMenuYear: (state, getters, rootState, rootGetters) => (date = []) => {
+      let minDate = 1935;
+      let maxDate = new Date().getFullYear();
+      let menu = [];
+      while (minDate != maxDate) {
+        menu.push({
+          value: maxDate,
+          option: maxDate,
+          selected: date.indexOf(maxDate) != -1 ? true : false 
+        });
+        maxDate--;
+      }
+      return menu;
     }
   },
   mutations: {
