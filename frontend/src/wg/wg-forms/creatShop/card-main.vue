@@ -4,45 +4,47 @@
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город расположения *" name="city_id" :help="exc['city']"/>
+          <wg-select-location caption="Город расположения *"
+                              name="city_id"
+                              :help="exc['city']" />
         </div>
       </div>
       <div class="row">
         <div class="col_8">
-          <ui-ef-text name="title" caption="Заголовок *" :help="exc['title']"></ui-ef-text>
+          <ui-ef-text name="title"
+                      caption="Заголовок *"
+                      :help="exc['title']"></ui-ef-text>
         </div>
       </div>
       <div class="row">
         <div class="col_10">
-          <ui-ef-textarea
-            name="description"
-            caption="Описание *"
-            :help="exc['description']"
-            :autoresize="200"
-          ></ui-ef-textarea>
+          <ui-ef-textarea name="description"
+                          caption="Описание *"
+                          :help="exc['description']"
+                          :autoresize="200"></ui-ef-textarea>
         </div>
       </div>
     </div>
 
     <div class="wg-form-registration__card-buttons">
-      <input
-        type="button"
-        class="ui-button ui-button_float_black"
-        @click="isCreateShop"
-        :disabled="dSpinn"
-        value="Создать"
-      >
-      <ui-spinner v-if="dSpinn==true" class="ui-spinner_s1"/>
+      <input type="button"
+             class="ui-button ui-button_float_black"
+             @click="isCreateShop"
+             :disabled="dSpinn"
+             value="Создать">
+      <ui-spinner v-if="dSpinn==true"
+                  class="ui-spinner_s1" />
     </div>
-    <ui-snackbar :show="showSnackbar" model="err" :time="5000" @onHide="showSnackbar=false">
+    <ui-snackbar :show="showSnackbar"
+                 model="err"
+                 :time="5000"
+                 @onHide="showSnackbar=false">
       <div>{{masSnackbar}}</div>
       <div class="ui-snackbar__buttons">
-        <input
-          model="button"
-          class="ui-button ui-button_float_black ui-button_s1"
-          @click="showSnackbar=false"
-          value="Закрыть"
-        >
+        <input model="button"
+               class="ui-button ui-button_float_black ui-button_s1"
+               @click="showSnackbar=false"
+               value="Закрыть">
       </div>
     </ui-snackbar>
   </form>
@@ -102,7 +104,7 @@ export default {
         .create(body)
         .then(response => {
           this.dSpinn = false;
-          this.$emit("onCreatedShop", response.body.data);
+          this.$emit("onCreatedShop", response.body.data.shop);
         })
         .catch(error => {
           this.dSpinn = false;

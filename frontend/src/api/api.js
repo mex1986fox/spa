@@ -9,8 +9,7 @@ import postphoto from "./postphoto";
 import ads from "./ads";
 import adsphoto from "./adsphoto";
 import shops from "./shops";
-import products from "./products";
-import catalogs from "./catalogs";
+import shopsphoto from "./shopsphoto";
 const api = Array();
 
 api["token"] = token;
@@ -23,11 +22,11 @@ api["post"] = post;
 api["postphoto"] = postphoto;
 api["ads"] = ads;
 api["adsphoto"] = adsphoto;
-api["shops"]=shops;
-api["catalogs"]=catalogs;
+api["shops"] = shops;
+api["shopsphoto"] = shopsphoto;
 const Api = {
   install(Vue, options) {
-    Vue.prototype.$api = function (nameApi) {
+    Vue.prototype.$api = function(nameApi) {
       return api[nameApi];
     };
   }

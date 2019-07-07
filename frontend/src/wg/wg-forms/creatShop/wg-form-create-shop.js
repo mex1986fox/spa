@@ -1,12 +1,10 @@
 import WgFormCreatShopCardMain from "./card-main.vue";
-import WgFormCreatShopCardPhoto from "./card-photo.vue";
 
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-create-shop",
   components: {
-    WgFormCreatShopCardMain,
-    WgFormCreatShopCardPhoto
+    WgFormCreatShopCardMain
   },
   data() {
     return {

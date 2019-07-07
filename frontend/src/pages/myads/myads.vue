@@ -8,22 +8,21 @@
           <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="far fa-file-excel"></i>
           </div>
-          <div
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-            @click="isShowFormCreatPost"
-          >
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
+               @click="isShowFormCreatAd">
             <i class="fas fa-plus"></i>
           </div>
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-table-myads v-if="showTableMyads"/>
+      <wg-table-myads v-if="showTableMyads" />
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
-        <div class="ui-button ui-button_white ui-button_s2" @click="isAddPosts">Показать еще ...</div>
+        <div class="ui-button ui-button_white ui-button_s2" @click="isAddAds">Показать еще ...</div>
       </div>-->
-      <wg-form-creat-post :show="showFormCreatPost" @onHide="showFormCreatPost=false"/>
+      <wg-form-creat-ad :show="showFormCreatAd"
+                        @onHide="showFormCreatAd=false" />
     </div>
   </lt-main>
 </template>
@@ -35,7 +34,7 @@ export default {
   data() {
     return {
       showFormExcel: false,
-      showFormCreatPost: false,
+      showFormCreatAd: false,
       showTableMyads: false
     };
   },
@@ -57,8 +56,8 @@ export default {
     }
   },
   methods: {
-    isShowFormCreatPost() {
-      this.showFormCreatPost = true;
+    isShowFormCreatAd() {
+      this.showFormCreatAd = true;
     }
   }
 };
