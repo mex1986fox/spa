@@ -1,12 +1,10 @@
 import WgFormCreatAdCardMain from "./card-main.vue";
-import WgFormCreatAdCardPhoto from "./card-photo.vue";
 import WgFormCreatAdCardNotmain from "./card-notmain.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-create-ad",
   components: {
     WgFormCreatAdCardMain,
-    WgFormCreatAdCardPhoto,
     WgFormCreatAdCardNotmain
   },
   data() {
@@ -45,12 +43,12 @@ export default {
     }
   },
   methods: {
-    isHide(ad) {
+    isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
         this.$emit("onHide");
-        if (ad != undefined) {
-            this.$store.commit("ads/unshiftAd", ad);
+        if (this.dAd != undefined) {
+          this.$store.commit("ads/unshiftAd", this.dAd);
         }
       }, 200);
     },
@@ -74,6 +72,9 @@ export default {
       setTimeout(() => {
         this.showCardPhoto = true;
       }, 200);
+    },
+    isUpdateAd(data) {
+      this.dAd = data.ad;
     }
   },
   mounted() {

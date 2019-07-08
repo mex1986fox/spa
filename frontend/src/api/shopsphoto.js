@@ -23,7 +23,6 @@ const shopsphoto = {
     return Vue.http
       .post(Vue.prototype.$hosts.services + "/shopsphoto/api/photo/show", body)
       .then(response => {
-        console.dir(response);
         response.body.data.albums = response.body.data.albums.map(album => {
           let orig = {};
           for (const key in album.origin) {
@@ -37,12 +36,20 @@ const shopsphoto = {
           album.origin = orig;
           return album;
         });
-        console.dir(response);
         return Promise.resolve(response);
       })
       .catch(error => Promise.reject(error));
   },
-
+  //отметка главного фото
+  checkMain(body) {
+    return Vue.http
+      .post(
+        Vue.prototype.$hosts.services + "/shopsphoto/api/photo/checkMain",
+        body
+      )
+      .then(response => Promise.resolve(response))
+      .catch(error => Promise.reject(error));
+  },
   // альбом
   deleteAlbum(body) {
     return Vue.http

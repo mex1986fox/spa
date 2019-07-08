@@ -18,7 +18,15 @@
           </ui-animation-display>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-update-ad-card-photo :ad="ad" @onHide="isHide" @onUpdateAd="isUpdateAd"/>
+              <!-- <wg-form-update-ad-card-photo :ad="ad" @onHide="isHide" @onUpdateAd="isUpdateAd"/> -->
+              <wg-form-update-photos-entity
+                apiPhotoServer="adsphoto"
+                apiEntityServer="ads"
+                entityID="ad_id"
+                :entity="dAd"
+                @onHide="isHide"
+                @onUpdateEntity="isUpdateAd"
+              />
             </div>
           </ui-animation-display>
         </div>
@@ -41,11 +49,10 @@
 
 <script>
 import WgFormUpdateAdCardMain from "./card-main.vue";
-import WgFormUpdateAdCardPhoto from "./card-photo.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-update-ad",
-  components: { WgFormUpdateAdCardMain, WgFormUpdateAdCardPhoto },
+  components: { WgFormUpdateAdCardMain },
   data() {
     return {
       dHeader: "Редактировать объявление",
@@ -93,8 +100,8 @@ export default {
         this.$store.commit("myads/updateAd", this.dAd);
       }, 200);
     },
-    isUpdateAd(ad) {
-      this.dAd = ad;
+    isUpdateAd(data) {
+      this.dAd = data.ad;
     }
   },
   mounted() {

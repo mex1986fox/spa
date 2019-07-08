@@ -2,62 +2,66 @@
   <div>
     <form ref="formUploadPhoto">
       <div class="wg-form-registration__card-header">Выберите и загрузите фотографии</div>
-      <div class="wg-form-registration__card-files-header"
-           v-if="changeFiles.length>0">
+      <div class="wg-form-registration__card-files-header" v-if="changeFiles.length>0">
         <div class="ui-header ui-header_3">Выбранные фотографии:</div>
       </div>
       <div class="wg-form-registration__card-files">
-        <div class="wg-form-registration__card-file"
-             v-for="(file, key) in changeFiles"
-             :key="key">
+        <div class="wg-form-registration__card-file" v-for="(file, key) in changeFiles" :key="key">
           <i class="far fa-file-image wg-form-registration__card-file-icon"></i>
           {{file.name}}
         </div>
       </div>
 
       <div class="wg-form-registration__card-buttons">
-        <input type="button"
-               v-if="changeFiles.length!=0"
-               class="ui-button ui-button_float_black"
-               @click="isUploadPhotos"
-               :disabled="dLoading"
-               value="Загрузить">
-        <input type="button"
-               v-if="changeFiles.length!=0"
-               @click="clearFiles=true"
-               class="ui-button ui-button_float_black"
-               :disabled="dLoading"
-               value="Очистить">
-        <ui-spinner v-if="dLoading==true"
-                    class="ui-spinner_s1" />
-        <ui-button-file v-show="changeFiles.length==0"
-                        class="ui-button_circle_s3 ui-button_float_black"
-                        @onChange="isChangeFiles"
-                        :clear="clearFiles"
-                        @onClear="clearFiles=false"></ui-button-file>
+        <input
+          type="button"
+          v-if="changeFiles.length!=0"
+          class="ui-button ui-button_float_black"
+          @click="isUploadPhotos"
+          :disabled="dLoading"
+          value="Загрузить"
+        >
+        <input
+          type="button"
+          v-if="changeFiles.length!=0"
+          @click="clearFiles=true"
+          class="ui-button ui-button_float_black"
+          :disabled="dLoading"
+          value="Очистить"
+        >
+        <ui-spinner v-if="dLoading==true" class="ui-spinner_s1"/>
+        <ui-button-file
+          v-show="changeFiles.length==0"
+          class="ui-button_circle_s3 ui-button_float_black"
+          @onChange="isChangeFiles"
+          :clear="clearFiles"
+          @onClear="clearFiles=false"
+        ></ui-button-file>
       </div>
     </form>
-    <div class="wg-form-registration__card-files-header"
-         v-if="lincksPhoto!=undefined">
+    <div class="wg-form-registration__card-files-header" v-if="lincksPhoto!=undefined">
       <div class="ui-header ui-header_3">Выберите из фотографий главное фото:</div>
     </div>
-    <div class="wg-form-registration__card-imgs"
-         v-if="lincksPhoto!=undefined">
-      <wg-form-update-photos-entity-img v-for="(val, key) in lincksPhoto"
-                                        :key="key"
-                                        :keyPhoto="key"
-                                        :linck="val"
-                                        :entity="dEntity"
-                                        :checkMain="dEntity.main_photo==dHost+'/'+val?true:false"
-                                        @onDeletePhoto="isDeletePhoto"
-                                        @onUpdateAd="isUpdateAd" />
+    <div class="wg-form-registration__card-imgs" v-if="lincksPhoto!=undefined">
+      <wg-form-update-photos-entity-img
+        v-for="(val, key) in lincksPhoto"
+        :key="key"
+        :keyPhoto="key"
+        :linck="val"
+        :entity="dEntity"
+        :checkMain="key==dMainPhoto?true:false"
+        @onDeletePhoto="isDeletePhoto"
+        @onCheckMain="isChackMain"
+      />
     </div>
     <div class="wg-form-registration__card-buttons">
-      <input type="button"
-             v-if="lincksPhoto!=undefined"
-             class="ui-button ui-button_float_black"
-             @click="isHide"
-             value="Готово">
+      <input
+        type="button"
+        v-if="lincksPhoto!=undefined"
+        class="ui-button ui-button_float_black"
+        @click="isHide"
+        value="Готово"
+      >
     </div>
   </div>
 </template>
@@ -74,6 +78,7 @@ export default {
       dApiEntityServer: this.apiEntityServer, //имя апи для работы с сервером сущности
       dEntityID: this.entityID,
       dEntity: this.entity,
+      dMainPhoto: undefined,
       changeFiles: [],
       clearFiles: false,
       dLoading: false,
@@ -103,11 +108,16 @@ export default {
       default: undefined
     },
     entity: {
-      type: Number,
+      type: Object,
       default: undefined
-    }
+    },
   },
   watch: {
+    dMainPhoto(newQ) {
+      if (newQ != undefined) {
+        this.isChackMainEntity(newQ);
+      }
+    },
     apiPhotoServer(newQ) {
       this.dApiPhotoServer = newQ;
     },
@@ -154,7 +164,8 @@ export default {
         .show(body)
         .then(
           response => {
-            if (response.body.status == "ok") {
+            if (response.body.status == "ok" && response.body.data.albums[0]!=undefined) {
+              this.dMainPhoto = response.body.data.albums[0].main;
               this.lincksPhoto = response.body.data.albums[0].mini;
             }
           },
@@ -165,6 +176,7 @@ export default {
           }
         );
     },
+
     isDeletePhoto(keyPhoto) {
       let body = new FormData();
       body.set("entity_id", this.dEntity[this.dEntityID]);
@@ -177,47 +189,58 @@ export default {
             delete this.lincksPhoto[keyPhoto];
             let lPhoto = this.lincksPhoto;
             this.lincksPhoto = undefined;
-            setTimeout(() => {
-              this.lincksPhoto = lPhoto;
-            }, 100);
+            this.lincksPhoto = lPhoto;
           }
-          this.showSpinner = false;
         })
         .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
-            this.showSpinner = false;
           }
         });
     },
-    isChackMain(ad) {
+    isChackMain(keyPhoto) {
       let body = new FormData();
-      body.set("users_id[]", this.tokenPayload.userID);
-      body.set("entities_id[]", this.dEntity[this.dEntityID]);
-      body.set("access_token", this.dEntity[this.dEntityID]);
+      body.set("entity_id", this.dEntity[this.dEntityID]);
+      body.set("access_token", this.token);
+      body.set("name_file", keyPhoto);
       this.$api(this.dApiPhotoServer)
         .checkMain(body)
         .then(response => {
           if (response.body.status == "ok") {
-            delete this.lincksPhoto[keyPhoto];
-            let lPhoto = this.lincksPhoto;
-            this.lincksPhoto = undefined;
-            setTimeout(() => {
-              this.lincksPhoto = lPhoto;
-            }, 100);
+            this.dMainPhoto = keyPhoto;
           }
-          this.showSpinner = false;
         })
         .catch(error => {
           if (error.body.status == "except") {
             console.dir(error);
-            this.showSpinner = false;
+          }
+        });
+    },
+    isChackMainEntity(keyPhoto) {
+      let body = new FormData();
+      body.set("main_photo", this.lincksPhoto[keyPhoto]);
+      body.set(this.dEntityID, this.dEntity[this.dEntityID]);
+      body.set("access_token", this.token);
+      this.$api(this.dApiEntityServer)
+        .update(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            // обновляем профайл пользователя
+            this.$emit("onUpdateEntity", response.body.data);
+          }
+        })
+        .catch(error => {
+          if (error.body.status == "except") {
+            console.dir(error);
           }
         });
     },
     isHide() {
       this.$emit("onHide", this.dEntity);
     }
+  },
+  mounted() {
+    this.isShowLincksPhoto();
   }
 };
 </script>
