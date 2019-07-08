@@ -1,67 +1,30 @@
 <template>
   <div>
-    <form ref="formUploadPhoto">
-      <div class="wg-form-registration__card-header">Выберите и загрузите фотографии</div>
-      <div class="wg-form-registration__card-files-header" v-if="changeFiles.length>0">
-        <div class="ui-header ui-header_3">Выбранные фотографии:</div>
-      </div>
-      <div class="wg-form-registration__card-files">
-        <div class="wg-form-registration__card-file" v-for="(file, key) in changeFiles" :key="key">
-          <i class="far fa-file-image wg-form-registration__card-file-icon"></i>
-          {{file.name}}
-        </div>
-      </div>
+    <div class="wg-form-registration__card-header">Фотографии</div>
 
-      <div class="wg-form-registration__card-buttons">
-        <input
-          type="button"
-          v-if="changeFiles.length!=0"
-          class="ui-button ui-button_float_black"
-          @click="isUploadPhotos"
-          :disabled="dLoading"
-          value="Загрузить"
-        >
-        <input
-          type="button"
-          v-if="changeFiles.length!=0"
-          @click="clearFiles=true"
-          class="ui-button ui-button_float_black"
-          :disabled="dLoading"
-          value="Очистить"
-        >
-        <ui-spinner v-if="dLoading==true" class="ui-spinner_s1"/>
-        <ui-button-file
-          v-show="changeFiles.length==0"
-          class="ui-button_circle_s3 ui-button_float_black"
-          @onChange="isChangeFiles"
-          :clear="clearFiles"
-          @onClear="clearFiles=false"
-        ></ui-button-file>
-      </div>
-    </form>
-    <div class="wg-form-registration__card-files-header" v-if="lincksPhoto!=undefined">
-      <div class="ui-header ui-header_3">Выберите из фотографий главное фото:</div>
-    </div>
-    <div class="wg-form-registration__card-imgs" v-if="lincksPhoto!=undefined">
-      <wg-form-update-photos-entity-img
-        v-for="(val, key) in lincksPhoto"
-        :key="key"
-        :keyPhoto="key"
-        :linck="val"
-        :entity="dEntity"
-        :checkMain="key==dMainPhoto?true:false"
-        @onDeletePhoto="isDeletePhoto"
-        @onCheckMain="isChackMain"
-      />
+    <div class="wg-form-registration__card-imgs">
+      <form ref="formUploadPhoto">
+        <ui-button-file v-show="changeFiles.length==0"
+                        class="ui-button_float_black"
+                        @onChange="isChangeFiles"
+                        :clear="clearFiles"
+                        @onClear="clearFiles=false"></ui-button-file>
+      </form>
+      <wg-form-update-photos-entity-img v-for="(val, key) in lincksPhoto"
+                                        :key="key"
+                                        :keyPhoto="key"
+                                        :linck="val"
+                                        :entity="dEntity"
+                                        :checkMain="key==dMainPhoto?true:false"
+                                        @onDeletePhoto="isDeletePhoto"
+                                        @onCheckMain="isChackMain" />
     </div>
     <div class="wg-form-registration__card-buttons">
-      <input
-        type="button"
-        v-if="lincksPhoto!=undefined"
-        class="ui-button ui-button_float_black"
-        @click="isHide"
-        value="Готово"
-      >
+      <input type="button"
+             v-if="lincksPhoto!=undefined"
+             class="ui-button ui-button_float_black"
+             @click="isHide"
+             value="Готово">
     </div>
   </div>
 </template>
@@ -110,7 +73,7 @@ export default {
     entity: {
       type: Object,
       default: undefined
-    },
+    }
   },
   watch: {
     dMainPhoto(newQ) {
@@ -134,6 +97,7 @@ export default {
   methods: {
     isChangeFiles(files) {
       this.changeFiles = files;
+      this.isUploadPhotos();
     },
     isUploadPhotos() {
       let form = this.$refs.formUploadPhoto;
@@ -164,7 +128,10 @@ export default {
         .show(body)
         .then(
           response => {
-            if (response.body.status == "ok" && response.body.data.albums[0]!=undefined) {
+            if (
+              response.body.status == "ok" &&
+              response.body.data.albums[0] != undefined
+            ) {
               this.dMainPhoto = response.body.data.albums[0].main;
               this.lincksPhoto = response.body.data.albums[0].mini;
             }

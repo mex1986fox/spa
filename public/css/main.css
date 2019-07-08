@@ -175,18 +175,26 @@ body {
 .ui-button_noborder {
   border: none; }
 
-.ui-button-file__input {
-  position: absolute;
-  width: 0;
-  height: 0;
-  margin: 0;
+.ui-button-file {
+  height: 133px;
+  width: 190px;
   padding: 0;
-  opacity: 0;
-  -ms-appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  border: none; }
+  font-size: 54px;
+  line-height: 124px;
+  border-style: dashed;
+  margin: 10px; }
+  .ui-button-file__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none; }
 
 .ui-spinner {
   position: relative;
