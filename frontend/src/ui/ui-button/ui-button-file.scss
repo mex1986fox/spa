@@ -1,22 +1,31 @@
 .ui-button-file {
-  height: 133px;
-  width: 190px;
-  padding: 0;
-  font-size: 54px;
-  line-height: 124px;
-  border-style: dashed;
-  margin: 10px;
-  &__input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    margin: 0;
+    height: 133px;
+    width: 190px;
     padding: 0;
-    opacity: 0;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-  }
+    font-size: 54px;
+    line-height: 124px;
+    border-style: dashed;
+    margin: 10px;
+
+    &__input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        -ms-appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+    }
+
+    &__spinner {
+      display: inline-block;
+      float: none !important;
+      height: 36px !important;
+      width: 36px !important;
+      margin: 41px !important;
+    }
 }

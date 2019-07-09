@@ -1,13 +1,16 @@
 <template>
-  <div @click="isClickAddFile()"
-       class="ui-button ui-button-file">
-    <input ref="file"
-           class="ui-button-file__input"
-           type="file"
-           name="files[]"
-           :accept="accept"
-           multiple>
-    <i class="fas fa-folder-plus"></i>
+  <div @click="isClickAddFile()" class="ui-button ui-button-file">
+    <input
+      ref="file"
+      class="ui-button-file__input"
+      type="file"
+      name="files[]"
+      :accept="accept"
+      multiple
+      :disabled="disabled"
+    >
+    <i v-if="disabled==false" class="fas fa-folder-plus"></i>
+    <ui-spinner v-if="disabled!=false" class="ui-button-file__spinner"/>
   </div>
 </template>
 
@@ -28,6 +31,10 @@ export default {
     accept: {
       type: String,
       default: "image/jpeg"
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

@@ -128,15 +128,15 @@ export default {
         let body = new FormData();
         //добавляем фильтр в куки
         body.set("users_id[]", this.dPost.user_id);
-        body.set("posts_id[]", this.dPost.post_id);
+        body.set("entities_id[]", this.dPost.post_id);
         //отправляем запрос
         this.$api("postphoto")
           .show(body)
           .then(response => {
             if (response.body.status == "ok") {
-              let imgs = response.body.data[0].files.origin;
+              let imgs = response.body.data.albums[0].origin;
               for (let key in imgs) {
-                this.slides.push({ src: this.$hosts.postPhoto + imgs[key] });
+                this.slides.push({ src: imgs[key] });
               }
               this.showSlides = true;
             }

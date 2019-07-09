@@ -23,7 +23,11 @@
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddPosts">Показать еще ...</div>
       </div>-->
-      <wg-form-creat-post :show="showFormCreatPost" @onHide="showFormCreatPost=false"/>
+      <wg-form-creat-post
+        :key="keyRand()"
+        :show="showFormCreatPost"
+        @onHide="showFormCreatPost=false"
+      />
     </div>
   </lt-main>
 </template>
@@ -57,6 +61,9 @@ export default {
     }
   },
   methods: {
+    keyRand() {
+      return Math.floor(Math.random() * (1 - 999999)) + 1;
+    },
     isShowFormCreatPost() {
       this.showFormCreatPost = true;
     }

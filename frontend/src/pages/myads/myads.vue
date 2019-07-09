@@ -21,7 +21,8 @@
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddAds">Показать еще ...</div>
       </div>-->
-      <wg-form-creat-ad :show="showFormCreatAd"
+      <wg-form-creat-ad :key="keyRand()"
+      :show="showFormCreatAd"
                         @onHide="showFormCreatAd=false" />
     </div>
   </lt-main>
@@ -56,6 +57,9 @@ export default {
     }
   },
   methods: {
+     keyRand() {
+      return Math.floor(Math.random() * (1 - 999999)) + 1;
+    },
     isShowFormCreatAd() {
       this.showFormCreatAd = true;
     }

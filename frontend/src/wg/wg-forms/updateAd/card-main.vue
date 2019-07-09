@@ -1,28 +1,32 @@
 <template>
   <form ref="formUpdatePost">
-    <div class="wg-form-registration__card-header">Основные данные</div>
+    <div class="wg-form-registration__card-header">Данные</div>
     <div class="wg-form-create-post__card-ef">
       <div class="row">
-        <div class="col_3">
-          <ui-ef-select name="year" :menu="yearMenu" caption="Год выпуска *" :help="exc['year']"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col_3">
-          <ui-ef-text
-            :value="dAd.price"
-            :help="exc['price']"
-            name="price"
-            caption="Цена руб. *"
-            masc="mascPrice"
-            :maxlength="11"
-          />
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col_5">
-          <div class="ui-header ui-header_3">Прочее</div>
+          <div class="ui-header ui-header_3">Основное</div>
+
+          <div class="row">
+            <div class="col_5">
+              <ui-ef-select
+                name="year"
+                :menu="yearMenu"
+                caption="Год выпуска *"
+                :help="exc['year']"
+              />
+            </div>
+            <div class="col_6 col_offset-1">
+              <ui-ef-text
+                :value="dAd.price"
+                :help="exc['price']"
+                name="price"
+                caption="Цена руб. *"
+                masc="mascPrice"
+                :maxlength="11"
+              />
+            </div>
+          </div>
+
           <ui-ef-select name="drive_id" :menu="driveMenu" caption="Привод" :help="exc['drive_id']"/>
           <ui-ef-select
             name="transmission_id"

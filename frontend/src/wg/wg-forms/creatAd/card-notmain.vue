@@ -186,8 +186,32 @@ export default {
         this.dSpinn = false;
         return;
       }
+      //задаем нулевые параметры
+      let _body = new FormData();
+      [
+        "drive_id",
+        "transmission_id",
+        "body_id",
+        "mileage",
+        "fuel_id",
+        "power",
+        "volume",
+        "wheel_id",
+        "document_id",
+        "state_id",
+        "exchange_id"
+      ].forEach(elem => {
+        _body.set(elem, 0);
+      });
+      _body.set("description", "");
+      //сливаем поля
+      for (var key of body.keys()) {
+        if (body.get(key) != "") {
+          _body.set(key, body.get(key));
+        }
+      }
       this.$api("ads")
-        .update(body)
+        .update(_body)
         .then(response => {
           if (response.body.status == "ok") {
             this.$emit("onAdUpdated", response.body.data.ad);

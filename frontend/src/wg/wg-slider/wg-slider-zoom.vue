@@ -35,7 +35,7 @@ export default {
   },
   watch: {
     show(newQ) {
-      console.dir(newQ);
+      // console.dir(newQ);
     }
   }
 };

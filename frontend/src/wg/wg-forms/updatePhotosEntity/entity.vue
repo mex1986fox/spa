@@ -4,28 +4,35 @@
 
     <div class="wg-form-registration__card-imgs">
       <form ref="formUploadPhoto">
-        <ui-button-file v-show="changeFiles.length==0"
-                        class="ui-button_float_black"
-                        @onChange="isChangeFiles"
-                        :clear="clearFiles"
-                        @onClear="clearFiles=false"></ui-button-file>
+        <ui-button-file
+          class="ui-button_float_black"
+          @onChange="isChangeFiles"
+          :clear="clearFiles"
+          @onClear="clearFiles=false"
+          :disabled="bfileDisabled"
+        ></ui-button-file>
       </form>
-      <wg-form-update-photos-entity-img v-for="(val, key) in lincksPhoto"
-                                        :key="key"
-                                        :keyPhoto="key"
-                                        :linck="val"
-                                        :entity="dEntity"
-                                        :checkMain="key==dMainPhoto?true:false"
-                                        @onDeletePhoto="isDeletePhoto"
-                                        @onCheckMain="isChackMain" />
+      <wg-form-update-photos-entity-img
+        v-for="(val, key) in lincksPhoto"
+        :key="key"
+        :keyPhoto="key"
+        :linck="val"
+        :entity="dEntity"
+        :checkMain="key==dMainPhoto?true:false"
+        @onDeletePhoto="isDeletePhoto"
+        @onCheckMain="isChackMain"
+      />
     </div>
     <div class="wg-form-registration__card-buttons">
-      <input type="button"
-             v-if="lincksPhoto!=undefined"
-             class="ui-button ui-button_float_black"
-             @click="isHide"
-             value="Готово">
+      <input
+        type="button"
+        v-if="lincksPhoto!=undefined"
+        class="ui-button ui-button_float_black"
+        @click="isHide"
+        value="Готово"
+      >
     </div>
+   
   </div>
 </template>
 <script>
@@ -47,7 +54,8 @@ export default {
       dLoading: false,
       lincksPhoto: undefined,
       showMenuKey: undefined,
-      imgSpinner: false
+      imgSpinner: false,
+      bfileDisabled: false,
     };
   },
   computed: {
@@ -100,6 +108,7 @@ export default {
       this.isUploadPhotos();
     },
     isUploadPhotos() {
+      this.bfileDisabled = true;
       let form = this.$refs.formUploadPhoto;
       let body = new FormData(form);
       body.set("access_token", this.token);
@@ -111,11 +120,13 @@ export default {
           if (response.body.status == "ok") {
             this.changeFiles = [];
             this.dLoading = false;
+            this.bfileDisabled = false;
             this.isShowLincksPhoto();
           }
         })
         .catch(error => {
           if (error.body.status == "except") {
+            this.bfileDisabled = false;
             console.dir(error);
           }
         });

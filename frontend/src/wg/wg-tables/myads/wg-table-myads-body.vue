@@ -92,7 +92,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import WgTableExces from "./wg-table-exces.vue";
+import WgTableExces from "../wg-table-exces.vue";
 export default {
   name: "wg-table-myads",
   components: { WgTableExces },

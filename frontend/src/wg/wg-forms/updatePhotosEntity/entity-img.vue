@@ -31,8 +31,24 @@
       </ui-menu>
     </div>
     <div v-if="showSpinner==true" class="wg-form-registration__card-img-spinner">
-      <ui-spinner class="ui-spinner_s1 ui-spinner_white"/>
+      <ui-spinner class="ui-spinner_s1 ui-button-file__spinner ui-spinner_white"/>
     </div>
+    <ui-snackbar
+      :show="mesSnackbar!=undefined"
+      type="err"
+      :time="5000"
+      @onHide="mesSnackbar=undefined"
+    >
+      <p>{{mesSnackbar}}</p>
+      <div class="ui-snackbar__buttons">
+        <input
+          type="button"
+          class="ui-button ui-button_float_black ui-button_s1"
+          @click="mesSnackbar=undefined"
+          value="Закрыть"
+        >
+      </div>
+    </ui-snackbar>
   </div>
 </template>
 <script>
@@ -41,8 +57,8 @@ export default {
   data() {
     return {
       showMenu: false,
-      adsPhotoHost: this.$hosts.adsPhoto,
-      showSpinner: false
+      showSpinner: false,
+      mesSnackbar: undefined
     };
   },
   props: {
@@ -57,9 +73,11 @@ export default {
     checkMain: {
       default: false,
       type: Boolean
-    },
-    ad: {
-      default: undefined
+    }
+  },
+  watch: {
+    checkMain(newQ) {
+      this.showSpinner = false;
     }
   },
   computed: {
@@ -72,13 +90,21 @@ export default {
   methods: {
     isDeletePhoto(key) {
       this.showMenu = false;
-      this.showSpinner = true;
-      this.$emit("onDeletePhoto", key);
+      if (this.checkMain != true) {
+        this.showSpinner = true;
+        this.$emit("onDeletePhoto", key);
+      } else {
+        this.mesSnackbar = "Главное фото нельзя удалить.";
+      }
     },
     isCheckMain(key) {
       this.showMenu = false;
-      this.showSpinner = true;
-      this.$emit("onCheckMain", key);
+      if (this.checkMain != true) {
+        this.showSpinner = true;
+        this.$emit("onCheckMain", key);
+      } else {
+        this.mesSnackbar = "Это фото уже отмечено главным.";
+      }
     }
   }
 };

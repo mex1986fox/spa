@@ -17,13 +17,17 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <!-- <wg-table-myshops v-if="showTableMyshops"/> -->
+      <wg-table-myshop v-if="showTableMyshops"/>
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddShops">Показать еще ...</div>
       </div>-->
-      <wg-form-creat-shop :show="showFormCreatShop" @onHide="showFormCreatShop=false"/>
+      <wg-form-creat-shop
+        :key="keyRand()"
+        :show="showFormCreatShop"
+        @onHide="showFormCreatShop=false"
+      />
     </div>
   </lt-main>
 </template>
@@ -57,6 +61,9 @@ export default {
     }
   },
   methods: {
+    keyRand() {
+      return Math.floor(Math.random() * (1 - 999999)) + 1;
+    },
     isShowFormCreatShop() {
       this.showFormCreatShop = true;
     }

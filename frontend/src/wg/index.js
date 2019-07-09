@@ -41,10 +41,12 @@ Vue.component("wg-card-post", WgCardPost);
 import WgCardAd from "./wg-cards/wg-card-ad.vue";
 Vue.component("wg-card-ad", WgCardAd);
 
-import WgTableMyPost from "./wg-tables/wg-table-mypost.vue";
+import WgTableMyPost from "./wg-tables/mypost/wg-table-mypost.vue";
 Vue.component("wg-table-mypost", WgTableMyPost);
-import WgTableMyAds from "./wg-tables/wg-table-myads.vue";
+import WgTableMyAds from "./wg-tables/myads/wg-table-myads.vue";
 Vue.component("wg-table-myads", WgTableMyAds);
+import WgTableMyShop from "./wg-tables/myshop/wg-table-myshop.vue";
+Vue.component("wg-table-myshop", WgTableMyShop);
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);

@@ -18,10 +18,13 @@
           </ui-animation-display>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <wg-form-creat-post-card-photo
-                :post="post"
+              <wg-form-update-photos-entity
+                apiPhotoServer="postphoto"
+                apiEntityServer="post"
+                entityID="post_id"
+                :entity="dPost"
                 @onHide="isHide"
-                @onUpdatePost="isUpdatePost"
+                @onUpdateEntity="isUpdatePostInPhoto"
               />
             </div>
           </ui-animation-display>
@@ -45,11 +48,10 @@
 
 <script>
 import WgFormCreatPostCardMain from "./card-main.vue";
-import WgFormCreatPostCardPhoto from "./card-photo.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "wg-form-update-post",
-  components: { WgFormCreatPostCardMain, WgFormCreatPostCardPhoto },
+  components: { WgFormCreatPostCardMain },
   data() {
     return {
       dHeader: "Редактировать пост",
@@ -99,6 +101,9 @@ export default {
     },
     isUpdatePost(post) {
       this.dPost = post;
+    },
+    isUpdatePostInPhoto(data) {
+      this.dPost = data.post;
     }
   },
   mounted() {

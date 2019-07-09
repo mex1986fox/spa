@@ -62,7 +62,10 @@ export default {
       setTimeout(() => {
         this.showCardPhoto = true;
       }, 200);
-    }
+    },
+    isUpdatePost(data) {
+      this.dShop = data.shop;
+    },
   },
   mounted() {
     if (this.dShow == true) {

@@ -13,15 +13,13 @@
           </div>
           <ui-animation-display v-if="showCardPhoto==true" :animate="'right'">
             <div class="wg-form-registration__card">
-              <!-- <wg-form-creat-ad-card-photo :ad="dAd"
-              @onHide="isHide" />-->
               <wg-form-update-photos-entity
                 apiPhotoServer="adsphoto"
                 apiEntityServer="ads"
                 entityID="ad_id"
                 :entity="dAd"
                 @onHide="isHide"
-                 @onUpdateEntity="isUpdateAd"
+                @onUpdateEntity="isUpdateAd"
               />
             </div>
           </ui-animation-display>

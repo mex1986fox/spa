@@ -49,6 +49,7 @@ export default {
         this.$emit("onHide");
         if (this.dAd != undefined) {
           this.$store.commit("ads/unshiftAd", this.dAd);
+          this.$store.commit("myads/unshiftAd", this.dAd);
         }
       }, 200);
     },
