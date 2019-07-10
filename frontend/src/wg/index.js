@@ -49,6 +49,8 @@ import WgTableMyAds from "./wg-tables/myads/wg-table-myads.vue";
 Vue.component("wg-table-myads", WgTableMyAds);
 import WgTableMyShop from "./wg-tables/myshop/wg-table-myshop.vue";
 Vue.component("wg-table-myshop", WgTableMyShop);
+import WgTableExces from "./wg-tables/wg-table-exces.vue";
+Vue.component("wg-table-exces", WgTableExces);
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);

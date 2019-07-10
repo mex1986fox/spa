@@ -1,36 +1,42 @@
 .wg-table {
-    &__td_date {
-        font-size: 10px;
-        max-width: 0px;
-    }
+  &__td_date {
+    font-size: 10px;
+    max-width: 0px;
+  }
 
-    &__td_name {
-        color: rgba($color-white, 0.5);
-    }
+  &__td_name {
+    color: rgba($color-white, 0.5);
+  }
 
-    &__td_left {
-        text-align: left;
-    }
+  &__td_left {
+    text-align: left;
+  }
 
-    &__exces_info {
-        float: left;
+  &__td_opacity {
+    background-color: rgba($color-white, 0);
+    padding: 0;
+  }
+  &__td_margin-top {
+    margin-top: 1px;
+    overflow: hidden;
+  }
+  &__exces_info {
+    float: left;
+  }
 
-    }
+  &__exces_param {
+    float: left;
+    color: rgba($color-white, 0.5);
+    padding-right: 10px;
+  }
 
-    &__exces_param {
-        float: left;
-        color: rgba($color-white, 0.5);
-        padding-right: 10px;
-    }
+  &__td_desc {
+    text-align: left;
+  }
 
-    &__td_desc {
-        text-align: left;
-    }
-
-    &__buttons {
-        float: right;
-        height: 42px;
-        min-width: 86px;
-    }
-
+  &__buttons {
+    float: right;
+    height: 42px;
+    min-width: 86px;
+  }
 }

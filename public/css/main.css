@@ -3160,6 +3160,14 @@ body {
 .wg-table__td_left {
   text-align: left; }
 
+.wg-table__td_opacity {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0; }
+
+.wg-table__td_margin-top {
+  margin-top: 1px;
+  overflow: hidden; }
+
 .wg-table__exces_info {
   float: left; }
 

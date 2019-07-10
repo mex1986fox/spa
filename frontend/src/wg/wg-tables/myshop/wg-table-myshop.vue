@@ -12,9 +12,15 @@
       </ui-table-header>
       <ui-table-body>
         <template v-for="(shop, key) in shops">
-          <ui-table-span :height="15" v-if="key>0" :key="'span'+shop.shop_id"/>
-          <wg-table-myshop-body :shop="shop" :key="'body'+shop.shop_id"/>
-          <wg-table-myshop-desc :shop="shop" :key="'desc'+shop.shop_id"/>
+          <ui-table-span :height="15"
+                         v-if="key>0"
+                         :key="'span'+shop.shop_id" />
+          <wg-table-myshop-body :shop="shop"
+                                :key="'body'+shop.shop_id"
+                                @onClickExcess="isShowExcess(shop.shop_id)" />
+          <wg-table-myshop-desc v-if="showExcess[shop.shop_id]!=undefined && showExcess[shop.shop_id]==true"
+                                :shop="shop"
+                                :key="'desc'+shop.shop_id" />
         </template>
       </ui-table-body>
     </ui-table>
@@ -29,7 +35,7 @@ export default {
   components: { WgTableMyshopBody, WgTableMyshopDesc },
   data() {
     return {
-      showExcess: false
+      showExcess: []
     };
   },
   computed: {
@@ -48,8 +54,11 @@ export default {
     }
   },
   methods: {
-    isShowExcess() {
-      this.showExcess = this.showExcess == true ? false : true;
+    isShowExcess(key) {
+      let sExc = this.showExcess;
+      this.showExcess = undefined;
+      sExc[key] = sExc[key] != undefined ? !sExc[key] : true;
+      this.showExcess = sExc;
     },
     isShowShops() {
       let body = new FormData();

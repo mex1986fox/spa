@@ -1,9 +1,8 @@
 <template>
-  <ui-table-body>
-    <ui-table-span/>
-    <ui-table-td class="wg-table__td_name wg-table__td_left">Описание</ui-table-td>
-    <ui-table-td class="wg-table__td_desc" colspan="100%">{{dShop.description}}</ui-table-td>
-  </ui-table-body>
+  <ui-table-tr>
+    <wg-table-exces name="Описание"
+                    :value="dShop.description" />
+  </ui-table-tr>
 </template>
 <script>
 import { mapGetters } from "vuex";

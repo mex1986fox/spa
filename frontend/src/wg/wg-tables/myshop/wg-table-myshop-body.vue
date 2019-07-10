@@ -1,9 +1,7 @@
 <template>
   <ui-table-tr>
-    <ui-table-td
-      class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
-      colspan="2"
-    >
+    <ui-table-td class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
+                 colspan="2">
       <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
       <div>{{dShop.subject+" "+dShop.city}}</div>
       <div>{{dShop.title}}</div>
@@ -12,52 +10,42 @@
       <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
     </ui-table-td>
     <ui-table-td class="wg-table-mypost__td_img col-phone_clean">
-      <ui-img
-        class="wg-table-mypost__img"
-        :src="dShop.main_photo"
-        :alt="'/public/img/drovito.png'"
-        :nofon="dShop.main_photo!=null?false:true"
-      />
+      <ui-img class="wg-table-mypost__img"
+              :src="dShop.main_photo"
+              :alt="'/public/img/drovito.png'"
+              :nofon="dShop.main_photo!=null?false:true" />
     </ui-table-td>
     <ui-table-td class="col-phone_clean">{{dShop.subject+" "+dShop.city}}</ui-table-td>
     <ui-table-td class="col-phone_clean">{{dShop.title}}</ui-table-td>
     <ui-table-td>
       <div class="wg-table__buttons">
-        <div
-          @click="isShowExcess"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-        >
-          <i v-if="showExcess==false" class="fas fa-angle-down"></i>
-          <i v-if="showExcess==true" class="fas fa-angle-up"></i>
+        <div @click="isShowExcess"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1">
+          <i v-if="showExcess==false"
+             class="fas fa-angle-down"></i>
+          <i v-if="showExcess==true"
+             class="fas fa-angle-up"></i>
         </div>
-        <div
-          @click="showMenu=true"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-        >
+        <div @click="showMenu=true"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1">
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <wg-form-update-shop
-        :show="showUpdateShop"
-        @onHide="isHideUpdateShop"
-        @onUpdateShop="isUpdateShop"
-        :shop="dShop"
-      />
-      <ui-menu :show="showMenu" @onHide="isHideMenu">
+      <wg-form-update-shop :show="showUpdateShop"
+                           @onHide="isHideUpdateShop"
+                           @onUpdateShop="isUpdateShop"
+                           :shop="dShop" />
+      <ui-menu :show="showMenu"
+               @onHide="isHideMenu">
         <ul class="ui-menu__ul">
-          <li class="ui-menu__li" @click="isShowUpdateShop">Редактировать</li>
-          <li class="ui-menu__li" @click="isDeleteShopAlbumAndShop">Удалить</li>
+          <li class="ui-menu__li"
+              @click="isShowUpdateShop">Редактировать</li>
+          <li class="ui-menu__li"
+              @click="isDeleteShopAlbumAndShop">Удалить</li>
         </ul>
       </ui-menu>
     </ui-table-td>
   </ui-table-tr>
-  <!-- <template v-show="showExcess">
-      <ui-table-span />
-      <ui-table-tr>
-        <ui-table-td class="wg-table__td_name wg-table__td_left">Описание</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dShop.description}}</ui-table-td>
-      </ui-table-tr>
-  </template>-->
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -89,6 +77,7 @@ export default {
   methods: {
     isShowExcess() {
       this.showExcess = this.showExcess == true ? false : true;
+      this.$emit("onClickExcess");
     },
     isHideMenu() {
       this.showMenu = false;
