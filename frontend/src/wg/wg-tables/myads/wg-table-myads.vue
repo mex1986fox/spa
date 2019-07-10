@@ -14,8 +14,8 @@
       </ui-table-header>
       <ui-table-body>
         <template v-for="(ad, key) in ads">
-          <ui-table-span :height="15" v-if="key>0" :key="'span'+key"/>
-          <wg-table-myads-body :ad="ad" :key="key"/>
+          <ui-table-span :height="15" v-if="key>0" :key="'span'+ad.ad_id"/>
+          <wg-table-myads-body :ad="ad" :key="ad.ad_id"/>
         </template>
       </ui-table-body>
     </ui-table>

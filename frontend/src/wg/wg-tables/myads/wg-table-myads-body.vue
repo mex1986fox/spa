@@ -5,14 +5,14 @@
         class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
         colspan="3"
       >
-        <div class="wg-table__td_dete">{{dAd.date_create|filter_date}}</div>
+        <div class="wg-table__td_date">{{dAd.date_create|filter_date}}</div>
         <div>{{dAd.subject+" "+dAd.city}}</div>
         <div>{{dAd.brand+" "+dAd.model}}</div>
         <div>{{dAd.year+" г.в."}}</div>
         <div>{{dAd.price|filter_price}}{{" руб."}}</div>
       </ui-table-td>
       <ui-table-td
-        class="wg-table__td_dete wg-table__td_left col-phone_clean"
+        class="wg-table__td_date wg-table__td_left col-phone_clean"
       >{{dAd.date_create|filter_date}}</ui-table-td>
       <ui-table-td class=" wg-table-mypost__td_img col-phone_clean">
         <ui-img

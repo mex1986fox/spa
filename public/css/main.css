@@ -2509,7 +2509,9 @@ body {
       width: 100%; }
 
 .wg-select-location {
-  overflow: hidden; }
+  overflow: hidden;
+  float: left;
+  width: 100%; }
   .wg-select-location__blinde {
     background-color: rgba(17, 17, 17, 0);
     display: flex;
@@ -3148,8 +3150,9 @@ body {
   line-height: 44px;
   font-size: 14px; }
 
-.wg-table__td_dete {
-  font-size: 10px; }
+.wg-table__td_date {
+  font-size: 10px;
+  max-width: 0px; }
 
 .wg-table__td_name {
   color: rgba(255, 255, 255, 0.5); }
@@ -3174,7 +3177,8 @@ body {
   min-width: 86px; }
 
 .wg-table-mypost {
-  width: 100%; }
+  width: 100%;
+  max-width: 1400px; }
   .wg-table-mypost__td_img {
     padding: 0;
     margin: 0;
@@ -3185,7 +3189,12 @@ body {
   .wg-table-mypost__img {
     height: 100%;
     width: auto;
-    z-index: 1; }
+    z-index: 1;
+    max-width: 110px; }
+
+.wg-table-myshop {
+  width: 100%;
+  max-width: 1400px; }
 
 .wg-select-catalog > .ui-ef-select {
   width: calc(100% - 60px); }

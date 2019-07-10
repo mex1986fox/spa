@@ -11,6 +11,7 @@ import MyPosts from "./myposts/myposts.js";
 import Ads from "./ads/ads.js";
 import MyAds from "./myads/myads.js";
 import MyShops from "./myshops/myshops.js";
+import Shops from "./shops/shops.js";
 Vue.use(Vuex);
 
 //импорт хранилищь vuex
@@ -29,7 +30,8 @@ const store = new Vuex.Store({
     myposts: MyPosts,
     ads: Ads,
     myads: MyAds,
-    myshops: MyShops
+    myshops: MyShops,
+    shops: Shops
   },
   state: {},
   getters: {},

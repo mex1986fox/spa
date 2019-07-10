@@ -20,6 +20,8 @@ import WgFormCreatShop from "./wg-forms/creatShop/wg-form-creat-shop.vue";
 Vue.component("wg-form-creat-shop", WgFormCreatShop);
 import WgFormUpdatePhotosEntity from "./wg-forms/updatePhotosEntity/entity.vue";
 Vue.component("wg-form-update-photos-entity", WgFormUpdatePhotosEntity);
+import WgFormUpdateShop from "./wg-forms/updateShop/wg-form-update-shop.vue";
+Vue.component("wg-form-update-shop", WgFormUpdateShop);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);

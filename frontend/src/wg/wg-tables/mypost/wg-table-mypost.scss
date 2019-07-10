@@ -1,5 +1,6 @@
 .wg-table-mypost {
     width: 100%;
+    max-width: 1400px;
 
     &__td_img {
         padding: 0;
@@ -14,5 +15,6 @@
         height: 100%;
         width: auto;
         z-index: 1;
+        max-width: 110px;
     }
 }

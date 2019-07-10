@@ -97,7 +97,7 @@
       :show="showUpdateAd"
       @onHide="isHideUpdateAd"
       @onUpdateAd="isUpdateAd"
-      :ad="ad"
+      :ad="dAd"
     />
     <ui-menu :show="showMenu" @onHide="isHideMenu">
       <ul class="ui-menu__ul">

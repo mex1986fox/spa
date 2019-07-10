@@ -5,11 +5,13 @@
         class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
         colspan="2"
       >
-        <div class="wg-table__td_dete">{{dPost.date_create|filter_date}}</div>
+        <div class="wg-table__td_date">{{dPost.date_create|filter_date}}</div>
         <div>{{dPost.title}}</div>
       </ui-table-td>
-      <ui-table-td class="wg-table__td_dete wg-table__td_left col-phone_clean">{{dPost.date_create|filter_date}}</ui-table-td>
-      <ui-table-td class=" wg-table-mypost__td_img col-phone_clean">
+      <ui-table-td class="wg-table__td_date wg-table__td_left col-phone_clean">
+        <div class="wg-table__td_date">{{dPost.date_create|filter_date}}</div>
+      </ui-table-td>
+      <ui-table-td class="wg-table-mypost__td_img col-phone_clean">
         <ui-img
           class="wg-table-mypost__img"
           :src="dPost.main_photo"

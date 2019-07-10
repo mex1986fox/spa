@@ -41,13 +41,16 @@ export default {
     }
   },
   methods: {
-    isHide(shop) {
+    isHide() {
       this.dShowAnimation = false;
       setTimeout(() => {
-        this.$emit("onHide");
-        if (shop != undefined) {
-          this.$store.commit("shops/unshiftShop", shop);
+        console.dir("hide");
+        console.dir(this.dShop);
+        if (this.dShop != undefined) {
+          this.$store.commit("myshops/unshiftShop", this.dShop);
+          this.$store.commit("shops/unshiftShop", this.dShop);
         }
+        this.$emit("onHide");
       }, 200);
     },
     isHideSnackbar() {
@@ -63,7 +66,7 @@ export default {
         this.showCardPhoto = true;
       }, 200);
     },
-    isUpdatePost(data) {
+    isUpdateShop(data) {
       this.dShop = data.shop;
     },
   },

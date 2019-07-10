@@ -15,8 +15,8 @@
           </ui-badge>
         </div>
       </lt-main-menu>
-      <wg-card-user v-for="(user, key) in users"
-                    :key="key"
+      <wg-card-user v-for="(user) in users"
+                    :key="user.user_id"
                     :user="user"
                     @onUpdateProfile="isShowUsers" />
       <div style="width: 100%; display: flex; justify-content: center;">

@@ -26,8 +26,8 @@
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
       <wg-card-post
-        v-for="(post, key) in posts"
-        :key="key"
+        v-for="(post) in posts"
+        :key="post.user_id+'-'+post.post_id"
         :post="post"
         @onDeletePost="isDeletePost"
       />

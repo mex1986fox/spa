@@ -1,75 +1,63 @@
 <template>
-  <fragment>
-    <ui-table-tr>
-      <ui-table-td
-        class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
-        colspan="2"
-      >
-        <div class="wg-table__td_dete">{{dPost.date_create|filter_date}}</div>
-        <div>{{dPost.title}}</div>
-      </ui-table-td>
-      <ui-table-td class="wg-table__td_dete wg-table__td_left col-phone_clean">{{dPost.date_create|filter_date}}</ui-table-td>
-      <ui-table-td class=" wg-table-mypost__td_img col-phone_clean">
-        <ui-img
-          class="wg-table-mypost__img"
-          :src="dPost.main_photo"
-          :alt="'/public/img/drovito.png'"
-          :nofon="dPost.main_photo!=null?false:true"
-        />
-      </ui-table-td>
-      <ui-table-td class="col-phone_clean">{{dPost.brand+" "+dPost.model}}</ui-table-td>
-      <ui-table-td class="col-phone_clean">{{dPost.subject+" "+dPost.city}}</ui-table-td>
-      <ui-table-td class="col-phone_clean">{{dPost.title}}</ui-table-td>
-      <ui-table-td>
-        <div class="wg-table__buttons">
-          <div
-            @click="isShowExcess"
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-          >
-            <i v-if="showExcess==false" class="fas fa-angle-down"></i>
-            <i v-if="showExcess==true" class="fas fa-angle-up"></i>
-          </div>
-          <div
-            @click="showMenu=true"
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-          >
-            <i class="fas fa-ellipsis-v"></i>
-          </div>
+  <ui-table-tr>
+    <ui-table-td
+      class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
+      colspan="2"
+    >
+      <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
+      <div>{{dShop.subject+" "+dShop.city}}</div>
+      <div>{{dShop.title}}</div>
+    </ui-table-td>
+    <ui-table-td class="wg-table__td_date wg-table__td_left col-phone_clean">
+      <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
+    </ui-table-td>
+    <ui-table-td class="wg-table-mypost__td_img col-phone_clean">
+      <ui-img
+        class="wg-table-mypost__img"
+        :src="dShop.main_photo"
+        :alt="'/public/img/drovito.png'"
+        :nofon="dShop.main_photo!=null?false:true"
+      />
+    </ui-table-td>
+    <ui-table-td class="col-phone_clean">{{dShop.subject+" "+dShop.city}}</ui-table-td>
+    <ui-table-td class="col-phone_clean">{{dShop.title}}</ui-table-td>
+    <ui-table-td>
+      <div class="wg-table__buttons">
+        <div
+          @click="isShowExcess"
+          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
+        >
+          <i v-if="showExcess==false" class="fas fa-angle-down"></i>
+          <i v-if="showExcess==true" class="fas fa-angle-up"></i>
         </div>
-        <wg-form-update-post
-          :show="showUpdatePost"
-          @onHide="isHideUpdatePost"
-          @onUpdatePost="isUpdatePost"
-          :post="dPost"
-        />
-        <ui-menu :show="showMenu" @onHide="isHideMenu">
-          <ul class="ui-menu__ul">
-            <li class="ui-menu__li" @click="isShowUpdatePost">Редактировать</li>
-            <li class="ui-menu__li" @click="isDeletePostAlbumAndPost">Удалить</li>
-          </ul>
-        </ui-menu>
-      </ui-table-td>
-    </ui-table-tr>
-    <template v-if="showExcess">
-      <ui-table-span class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"/>
-      <ui-table-tr class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
-        <ui-table-td class="wg-table__td_name wg-table__td_left">Марка, модель</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.brand+" "+dPost.model}}</ui-table-td>
-      </ui-table-tr>
-
-      <ui-table-span class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"/>
-      <ui-table-tr class="col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
-        <ui-table-td class="wg-table__td_name wg-table__td_left">Город</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.subject+" "+dPost.city}}</ui-table-td>
-      </ui-table-tr>
-
-      <ui-table-span/>
+        <div
+          @click="showMenu=true"
+          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
+        >
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </div>
+      <wg-form-update-shop
+        :show="showUpdateShop"
+        @onHide="isHideUpdateShop"
+        @onUpdateShop="isUpdateShop"
+        :shop="dShop"
+      />
+      <ui-menu :show="showMenu" @onHide="isHideMenu">
+        <ul class="ui-menu__ul">
+          <li class="ui-menu__li" @click="isShowUpdateShop">Редактировать</li>
+          <li class="ui-menu__li" @click="isDeleteShopAlbumAndShop">Удалить</li>
+        </ul>
+      </ui-menu>
+    </ui-table-td>
+  </ui-table-tr>
+  <!-- <template v-show="showExcess">
+      <ui-table-span />
       <ui-table-tr>
         <ui-table-td class="wg-table__td_name wg-table__td_left">Описание</ui-table-td>
-        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dPost.description}}</ui-table-td>
+        <ui-table-td class="wg-table__td_desc" colspan="100%">{{dShop.description}}</ui-table-td>
       </ui-table-tr>
-    </template>
-  </fragment>
+  </template>-->
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -79,8 +67,8 @@ export default {
     return {
       showExcess: false,
       showMenu: false,
-      showUpdatePost: false,
-      dPost: this.post
+      showUpdateShop: false,
+      dShop: this.shop
     };
   },
   computed: {
@@ -89,13 +77,13 @@ export default {
     })
   },
   props: {
-    post: {
+    shop: {
       default: undefined
     }
   },
   watch: {
-    post(newQ) {
-      this.dPost = newQ;
+    shop(newQ) {
+      this.dShop = newQ;
     }
   },
   methods: {
@@ -105,28 +93,28 @@ export default {
     isHideMenu() {
       this.showMenu = false;
     },
-    isShowUpdatePost() {
+    isShowUpdateShop() {
       this.showMenu = false;
-      this.showUpdatePost = true;
+      this.showUpdateShop = true;
     },
-    isHideUpdatePost() {
-      this.showUpdatePost = false;
+    isHideUpdateShop() {
+      this.showUpdateShop = false;
     },
-    isUpdatePost(post) {
-      this.dPost = post;
-      this.$emit("onUpdatePost", post);
+    isUpdateShop(shop) {
+      this.dShop = shop;
+      this.$emit("onUpdateShop", shop);
     },
-    isDeletePostAlbumAndPost() {
+    isDeleteShopAlbumAndShop() {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.dPost.post_id);
+      body.set("entity_id", this.dShop.shop_id);
       //отправляем запрос
-      this.$api("postphoto")
+      this.$api("shopsphoto")
         .deleteAlbum(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.isDeletePost();
+            this.isDeleteShop();
           }
         })
         .catch(error => {
@@ -135,20 +123,20 @@ export default {
           }
         });
     },
-    isDeletePost() {
+    isDeleteShop() {
       this.showMenu = false;
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.dPost.post_id);
+      body.set("shop_id", this.dShop.shop_id);
       //отправляем запрос
-      this.$api("post")
+      this.$api("shops")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            // this.$emit("onDeletePost", this.post);
-            this.$store.commit("myposts/deletePost", this.dPost);
-            this.$store.commit("posts/deletePost", this.dPost);
+            // this.$emit("onDeleteShop", this.shop);
+            this.$store.commit("myshops/deleteShop", this.dShop);
+            this.$store.commit("shops/deleteShop", this.dShop);
           }
         })
         .catch(error => {
@@ -157,17 +145,17 @@ export default {
           }
         });
     },
-    isDeletePostAlbum() {
+    isDeleteShopAlbum() {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("post_id", this.dPost.post_id);
+      body.set("entity_id", this.dShop.shop_id);
       //отправляем запрос
-      this.$api("postphoto")
+      this.$api("shopsphoto")
         .deleteAlbum(body)
         .then(response => {
           if (response.body.status == "ok") {
-            // this.isDeletePost();
+            // this.isDeleteShop();
           }
         })
         .catch(error => {

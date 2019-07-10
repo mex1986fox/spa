@@ -7,7 +7,7 @@
             <div class="wg-form-registration__menu-header">{{dHeshoper}}</div>
             <div class="wg-form-registration__menu-buttons">
               <div
-                @click="isHide(dShop)"
+                @click="isHide"
                 class="ui-button ui-button_float_white ui-button_circle_s2"
               >
                 <i class="fas fa-times"></i>

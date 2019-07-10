@@ -25,7 +25,7 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-card-ad v-for="(ad, key) in ads" :key="key" :ad="ad" @onDeleteAd="isDeleteAd"/>
+      <wg-card-ad v-for="(ad) in ads" :key="ad.user_id+'-'+ad.ad_id" :ad="ad" @onDeleteAd="isDeleteAd"/>
       <!-- </div> -->
 
       <div style="width: 100%; display: flex; justify-content: center;">

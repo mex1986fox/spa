@@ -3,18 +3,18 @@
     <ui-table v-if="posts!=undefined">
       <ui-table-header>
         <ui-table-tr>
-          <ui-table-th>Дата</ui-table-th>
+          <ui-table-th class="wg-table__td_left col-phone_clean">Дата</ui-table-th>
           <ui-table-th class="col-phone_clean"></ui-table-th>
           <ui-table-th class="col-phone_clean">Марка, модель</ui-table-th>
           <ui-table-th class="col-phone_clean">Город</ui-table-th>
-          <ui-table-th>Заголовок</ui-table-th>
+          <ui-table-th class="col-phone_clean">Заголовок</ui-table-th>
           <ui-table-th></ui-table-th>
         </ui-table-tr>
       </ui-table-header>
       <ui-table-body>
         <template v-for="(post, key) in posts">
-          <ui-table-span :height="15" v-if="key>0" :key="'span'+key"/>
-          <wg-table-mypost-body :post="post" :key="key"/>
+          <ui-table-span :height="15" v-if="key>0" :key="'span'+post.post_id"/>
+          <wg-table-mypost-body :post="post" :key="post.post_id"/>
         </template>
       </ui-table-body>
     </ui-table>
