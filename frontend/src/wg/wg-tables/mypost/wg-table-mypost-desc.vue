@@ -1,27 +1,27 @@
 <template>
   <ui-table-tr>
     <ui-table-td class="wg-table__td_opacity" colspan="100%">
-      <wg-table-exces name="Описание">{{dShop.description}}</wg-table-exces>
+      <wg-table-exces name="Описание">{{dPost.description}}</wg-table-exces>
     </ui-table-td>
   </ui-table-tr>
 </template>
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "wg-table-myshop-desc",
+  name: "wg-table-mypost-desc",
   data() {
     return {
-      dShop: this.shop
+      dPost: this.post
     };
   },
   props: {
-    shop: {
+    post: {
       default: undefined
     }
   },
   watch: {
-    shop(newQ) {
-      this.dShop = newQ;
+    post(newQ) {
+      this.dPost = newQ;
     }
   }
 };

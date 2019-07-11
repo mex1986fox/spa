@@ -346,6 +346,10 @@ body {
     justify-content: flex-end; }
   .ui-blind_content-left {
     justify-content: flex-start; }
+  .ui-blind_content-top {
+    align-content: flex-start; }
+  .ui-blind_content-bottom {
+    align-content: flex-end; }
 
 .ui-header {
   display: block;
@@ -2283,6 +2287,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: start;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -2803,7 +2808,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: center; }
+    align-content: flex-start; }
   .wg-form-list__container {
     height: auto;
     display: block;
@@ -2823,11 +2828,14 @@ body {
       color: #ffffff;
       font-size: 30px;
       font-weight: 400;
-      margin: 14px 0px 0px 0px; }
+      margin: 14px 0px 0px 0px;
+      line-height: 36px;
+      white-space: break-spaces;
+      padding-right: 50px; }
     .wg-form-list__menu-buttons {
       position: absolute;
       right: -13px;
-      margin-top: -35px; }
+      top: -6px; }
   .wg-form-list__card {
     position: relative;
     max-width: 900px;
@@ -3150,39 +3158,43 @@ body {
   line-height: 44px;
   font-size: 14px; }
 
-.wg-table__td_date {
-  font-size: 10px;
-  max-width: 0px; }
+.wg-table {
+  height: 100%; }
+  .wg-table__td_date {
+    font-size: 10px;
+    max-width: 100px;
+    min-width: 50px; }
+  .wg-table__td_name {
+    color: rgba(255, 255, 255, 0.5); }
+  .wg-table__td_left {
+    text-align: left; }
+  .wg-table__td_opacity {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0; }
+  .wg-table__td_margin-top {
+    margin-top: 1px;
+    overflow: hidden; }
+  .wg-table__td_phone {
+    font-size: 11px; }
+  .wg-table__exces_info {
+    float: left; }
+  .wg-table__exces_param {
+    float: left;
+    color: rgba(255, 255, 255, 0.5);
+    padding-right: 10px; }
+  .wg-table__td_desc {
+    text-align: left; }
+  .wg-table__buttons {
+    float: right;
+    height: 42px;
+    min-width: 86px; }
 
-.wg-table__td_name {
-  color: rgba(255, 255, 255, 0.5); }
-
-.wg-table__td_left {
-  text-align: left; }
-
-.wg-table__td_opacity {
-  background-color: rgba(255, 255, 255, 0);
-  padding: 0; }
-
-.wg-table__td_margin-top {
-  margin-top: 1px;
-  overflow: hidden; }
-
-.wg-table__exces_info {
-  float: left; }
-
-.wg-table__exces_param {
-  float: left;
-  color: rgba(255, 255, 255, 0.5);
-  padding-right: 10px; }
-
-.wg-table__td_desc {
-  text-align: left; }
-
-.wg-table__buttons {
-  float: right;
-  height: 42px;
-  min-width: 86px; }
+@media (max-width: 770px) {
+  .wg-table__buttons {
+    width: 44px;
+    min-width: auto;
+    height: auto;
+    overflow: hidden; } }
 
 .wg-table-mypost {
   width: 100%;

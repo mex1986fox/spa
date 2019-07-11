@@ -14,7 +14,16 @@
       <ui-table-body>
         <template v-for="(post, key) in posts">
           <ui-table-span :height="15" v-if="key>0" :key="'span'+post.post_id"/>
-          <wg-table-mypost-body :post="post" :key="post.post_id"/>
+          <wg-table-mypost-body
+            :post="post"
+            :key="'body'+post.post_id"
+            @onClickExcess="isShowExcess(post.post_id)"
+          />
+          <wg-table-mypost-desc
+            v-if="showExcess[post.post_id]!=undefined && showExcess[post.post_id]==true"
+            :post="post"
+            :key="'desc'+post.post_id"
+          />
         </template>
       </ui-table-body>
     </ui-table>
@@ -23,12 +32,13 @@
 <script>
 import { mapGetters } from "vuex";
 import WgTableMypostBody from "./wg-table-mypost-body.vue";
+import WgTableMypostDesc from "./wg-table-mypost-desc.vue";
 export default {
   name: "wg-table-myposts",
-  components: { WgTableMypostBody },
+  components: { WgTableMypostBody, WgTableMypostDesc },
   data() {
     return {
-      showExcess: false
+      showExcess: []
     };
   },
   computed: {
@@ -37,9 +47,21 @@ export default {
       userID: "profile/getID"
     })
   },
+  watch: {
+    userID(newQ) {
+      if (newQ == undefined) {
+        this.$store.commit("myposts/updatePosts", undefined);
+      } else {
+        this.isShowPosts();
+      }
+    }
+  },
   methods: {
-    isShowExcess() {
-      this.showExcess = this.showExcess == true ? false : true;
+    isShowExcess(key) {
+      let sExc = this.showExcess;
+      this.showExcess = undefined;
+      sExc[key] = sExc[key] != undefined ? !sExc[key] : true;
+      this.showExcess = sExc;
     },
     isShowPosts() {
       let body = new FormData();

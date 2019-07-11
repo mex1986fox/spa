@@ -15,7 +15,16 @@
       <ui-table-body>
         <template v-for="(ad, key) in ads">
           <ui-table-span :height="15" v-if="key>0" :key="'span'+ad.ad_id"/>
-          <wg-table-myads-body :ad="ad" :key="ad.ad_id"/>
+          <wg-table-myads-body
+            :ad="ad"
+            :key="'body'+ad.ad_id"
+            @onClickExcess="isShowExcess(ad.ad_id)"
+          />
+          <wg-table-myads-desc
+            v-if="showExcess[ad.ad_id]!=undefined && showExcess[ad.ad_id]==true"
+            :ad="ad"
+            :key="'desc'+ad.ad_id"
+          />
         </template>
       </ui-table-body>
     </ui-table>
@@ -24,12 +33,13 @@
 <script>
 import { mapGetters } from "vuex";
 import WgTableMyadsBody from "./wg-table-myads-body.vue";
+import WgTableMyadsDesc from "./wg-table-myads-desc.vue";
 export default {
   name: "wg-table-myads",
-  components: { WgTableMyadsBody },
+  components: { WgTableMyadsBody, WgTableMyadsDesc },
   data() {
     return {
-      showExcess: false
+      showExcess: []
     };
   },
   computed: {
@@ -38,9 +48,21 @@ export default {
       userID: "profile/getID"
     })
   },
+  watch: {
+    userID(newQ) {
+      if (newQ == undefined) {
+        this.$store.commit("myads/updateAds", undefined);
+      } else {
+        this.isShowAds();
+      }
+    }
+  },
   methods: {
-    isShowExcess() {
-      this.showExcess = this.showExcess == true ? false : true;
+    isShowExcess(key) {
+      let sExc = this.showExcess;
+      this.showExcess = undefined;
+      sExc[key] = sExc[key] != undefined ? !sExc[key] : true;
+      this.showExcess = sExc;
     },
     isShowAds() {
       let body = new FormData();

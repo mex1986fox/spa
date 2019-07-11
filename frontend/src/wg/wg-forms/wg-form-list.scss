@@ -3,12 +3,13 @@
     height: auto;
     text-align: left;
 
+
     &__blinde {
         background-color: rgba($color-black, 0);
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        align-content: center;
+        align-content: flex-start;
     }
 
     &__container {
@@ -34,12 +35,15 @@
             font-size: 30px;
             font-weight: 400;
             margin: 14px 0px 0px 0px;
+            line-height: 36px;
+            white-space: break-spaces;
+            padding-right: 50px;
         }
 
         &-buttons {
             position: absolute;
             right: -13px;
-            margin-top: -35px;
+            top: -6px;
         }
     }
 

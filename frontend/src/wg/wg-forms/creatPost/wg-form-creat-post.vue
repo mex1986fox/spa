@@ -20,6 +20,7 @@
                 :entity="dPost"
                 @onHide="isHide"
                 @onUpdateEntity="isUpdatePost"
+                statusForm="create"
               />
             </div>
           </ui-animation-display>

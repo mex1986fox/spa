@@ -22,4 +22,12 @@
     &_content-left {
         justify-content: flex-start;
     }
+
+    &_content-top {
+        align-content: flex-start;
+    }
+
+    &_content-bottom {
+        align-content: flex-end;
+    }
 }

@@ -29,6 +29,10 @@ const Filters = {
       if (!value) return "";
       return value == 1 ? "левый" : "правый";
     });
+    Vue.filter('reverse', function(value) {
+      // slice to make a copy of array, then reverse the copy
+      return value.slice().reverse();
+    });
   }
 };
 export default Filters;

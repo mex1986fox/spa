@@ -32,7 +32,6 @@
         value="Готово"
       >
     </div>
-   
   </div>
 </template>
 <script>
@@ -56,6 +55,7 @@ export default {
       showMenuKey: undefined,
       imgSpinner: false,
       bfileDisabled: false,
+      initUpload: false
     };
   },
   computed: {
@@ -81,11 +81,15 @@ export default {
     entity: {
       type: Object,
       default: undefined
+    },
+    statusForm: {
+      type: String,
+      default: "update"
     }
   },
   watch: {
     dMainPhoto(newQ) {
-      if (newQ != undefined) {
+      if (newQ != undefined && this.initUpload == true) {
         this.isChackMainEntity(newQ);
       }
     },
@@ -177,6 +181,7 @@ export default {
         });
     },
     isChackMain(keyPhoto) {
+      this.initUpload = true;
       let body = new FormData();
       body.set("entity_id", this.dEntity[this.dEntityID]);
       body.set("access_token", this.token);
@@ -219,6 +224,9 @@ export default {
   },
   mounted() {
     this.isShowLincksPhoto();
+    if (this.statusForm == "create") {
+      this.initUpload = true;
+    }
   }
 };
 </script>

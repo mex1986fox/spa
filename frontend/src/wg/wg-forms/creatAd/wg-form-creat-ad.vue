@@ -20,6 +20,7 @@
                 :entity="dAd"
                 @onHide="isHide"
                 @onUpdateEntity="isUpdateAd"
+                statusForm="create"
               />
             </div>
           </ui-animation-display>
