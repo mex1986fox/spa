@@ -17,7 +17,7 @@
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-table-myshop v-if="showTableMyshops"/>
+      <wg-table-myshops v-if="showTableMyshops"/>
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">

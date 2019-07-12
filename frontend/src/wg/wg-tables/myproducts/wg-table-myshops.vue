@@ -28,8 +28,8 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import WgTableMyshopBody from "./wg-table-myshop-body.vue";
-import WgTableMyshopDesc from "./wg-table-myshop-desc.vue";
+import WgTableMyshopBody from "./wg-table-myshops-body.vue";
+import WgTableMyshopDesc from "./wg-table-myshops-desc.vue";
 export default {
   name: "wg-table-myshops",
   components: { WgTableMyshopBody, WgTableMyshopDesc },

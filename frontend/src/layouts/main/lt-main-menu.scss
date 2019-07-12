@@ -25,5 +25,15 @@
         right: 58px;
         margin-top: -35px;
     }
-}
 
+    &__buttons_left {
+        position: relative;
+        right: auto;
+        margin-left: 42px;
+        margin-top: 5px;
+        overflow: hidden;
+        float: left;
+        height: 100%;
+        padding-right: 30px;
+    }
+}

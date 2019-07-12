@@ -16,6 +16,13 @@ import UiSnackbar from "./ui-snackbar/ui-snackbar.vue";
 Vue.component("ui-snackbar", UiSnackbar);
 import UiImg from "./ui-img/ui-img.vue";
 Vue.component("ui-img", UiImg);
+import UiTabs from "./ui-tabs/ui-tabs.vue";
+Vue.component("ui-tabs", UiTabs);
+import UiTabsTab from "./ui-tabs/ui-tabs-tab.vue";
+Vue.component("ui-tabs-tab", UiTabsTab);
+import UiClickFeedback from "./ui-click-feedback/ui-click-feedback.vue";
+Vue.component("ui-click-feedback", UiClickFeedback);
+
 import UiTable from "./ui-table/ui-table.vue";
 Vue.component("ui-table", UiTable);
 import UiTableBody from "./ui-table/ui-table-body.vue";

@@ -1,0 +1,24 @@
+.wg-tabs-catalog {
+    &__img {
+        height: 60px;
+        float: left;
+    }
+
+    &__title {
+        float: left;
+        padding: 0px 30px;
+        line-height: 60px;
+    }
+
+    &>.ui-tabs__line>.ui-tabs__tab {
+        padding: 0px 0px;
+        margin: 0px 29px 5px 0px;
+        background-color: rgba($color-white, 0.1);
+
+    }
+
+    &>.ui-tabs__line>.ui-tabs__tab_active::after {
+        z-index: 2;
+
+    }
+}

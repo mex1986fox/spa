@@ -1,0 +1,39 @@
+.ui-click-feedback {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    float: left;
+    top: 0;
+    left: 0;
+
+    &__after {
+        content: "";
+        border-radius: 50%;
+        border: 6px solid $color-white;
+        background-color: rgba($color-white, 0.5);
+        height: 50px;
+        width: 50px;
+        position: fixed;
+        opacity: 0;
+
+        &_forwards {
+            animation: ui-click-feedback_effect 0.2s forwards;
+        }
+    }
+}
+
+@keyframes ui-click-feedback_effect {
+    0% {
+        transform: scale3d(0.6, 0.6, 1);
+    }
+
+    25%,
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale3d(1, 1, 1);
+    }
+}

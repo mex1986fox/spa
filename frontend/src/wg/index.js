@@ -49,8 +49,8 @@ import WgTableMyPost from "./wg-tables/mypost/wg-table-mypost.vue";
 Vue.component("wg-table-mypost", WgTableMyPost);
 import WgTableMyAds from "./wg-tables/myads/wg-table-myads.vue";
 Vue.component("wg-table-myads", WgTableMyAds);
-import WgTableMyShop from "./wg-tables/myshop/wg-table-myshop.vue";
-Vue.component("wg-table-myshop", WgTableMyShop);
+import WgTableMyShops from "./wg-tables/myshops/wg-table-myshops.vue";
+Vue.component("wg-table-myshops", WgTableMyShops);
 import WgTableExces from "./wg-tables/wg-table-exces.vue";
 Vue.component("wg-table-exces", WgTableExces);
 
@@ -73,3 +73,6 @@ import WgLikesPost from "./wg-likes/wg-likes-post.vue";
 Vue.component("wg-likes-post", WgLikesPost);
 import WgLikesAd from "./wg-likes/wg-likes-ad.vue";
 Vue.component("wg-likes-ad", WgLikesAd);
+
+import WgTabsCatalog from "./wg-tabs/catalog/wg-tabs-catalog.vue";
+Vue.component("wg-tabs-catalog", WgTabsCatalog);

@@ -31,7 +31,7 @@
           <i v-if="showExcess==true" class="fas fa-angle-up"></i>
         </div>
         <div
-          @click="isShowUpdateProduct"
+          @click="isShowMyShop(dShop.shop_id)"
           class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean"
         >
           <i class="far fa-edit"></i>
@@ -44,7 +44,7 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
         <div
-          @click="isShowUpdateProduct"
+          @click="isShowMyShop(dShop.shop_id)"
           class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
         >
           <i class="far fa-edit"></i>
@@ -87,7 +87,6 @@ export default {
       showExcess: false,
       showMenu: false,
       showUpdateShop: false,
-      showUpdateProduct: false,
       dShop: this.shop
     };
   },
@@ -107,8 +106,8 @@ export default {
     }
   },
   methods: {
-    isShowUpdateProduct() {
-      this.showUpdateProduct = true;
+    isShowMyShop(shopId) {
+      this.$router.push({ path: `/my_shop/${shopId}` })
     },
     isShowExcess() {
       this.showExcess = this.showExcess == true ? false : true;
