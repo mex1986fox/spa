@@ -1,6 +1,7 @@
 require("./ui/index.scss");
 require("./layouts/index.scss");
 require("./wg/index.scss");
+require("./pages/index.scss");
 
 import Vue from "vue/dist/vue.js";
 import router from "./router/index.js";

@@ -7,16 +7,15 @@
 
     &__container {
         width: 100%;
-        width: 100%;
-        height: calc(100% + 20px);
-        overflow-x: scroll;
+        height: 100%;
 
     }
 
     &__line {
-        width: 2000px;
+        width: 100%;
         height: 100%;
         overflow: hidden;
+        transition: margin-left 0.5s;
     }
 
     &__icone {
@@ -39,6 +38,7 @@
         cursor: pointer;
         position: relative;
         transition: margin-left 0.5s ease;
+        height: 100%;
 
         &:hover {
             background-color: rgba($color-white, 0.2);

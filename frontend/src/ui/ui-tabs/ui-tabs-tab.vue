@@ -15,8 +15,7 @@ export default {
   name: "ui-tabs-tab",
   data() {
     return {
-      dChecked: this.checked,
-      dId: this.id
+      dChecked: this.checked
     };
   },
   props: {
@@ -24,44 +23,32 @@ export default {
       type: Boolean,
       default: false
     },
-    id: {
-      type: [String, Number],
-      default: ""
-    },
     disabled: {
       stype: Boolean,
       default: false
     }
   },
-  watch:{
-    checked(newQ){
-      this.dChecked=newQ;
+  watch: {
+    checked(newQ) {
+      this.dChecked = newQ;
     }
   },
   methods: {
+
     isClick() {
       if (this.disabled != true) {
-        let checked = this.dChecked;
         let brath = this.$parent.$children;
-        for (let br in brath) {
-          if (brath[br].dName == this.dName) {
-            brath[br].dChecked = false;
-            this.$emit("onBlur", this.dId);
-          }
+        for (let key in brath) {
+          brath[key].dChecked = false;
+          this.$emit("onBlur");
         }
         this.dChecked = true;
-        this.$emit("onFocus", this.dId);
+        this.$emit("onFocus");
       }
     }
   },
   mounted() {
-    if (this.dChecked == true) {
-      let brath = this.$parent.$children;
-      for (let br in brath) {
-        if (brath[br].dName == this.dName) brath[br].dChecked = false;
-      }
-      this.dChecked = true;
-    }
+
   }
 };
 </script>

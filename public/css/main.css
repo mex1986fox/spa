@@ -535,13 +535,12 @@ body {
   overflow: hidden; }
   .ui-tabs__container {
     width: 100%;
-    width: 100%;
-    height: calc(100% + 20px);
-    overflow-x: scroll; }
+    height: 100%; }
   .ui-tabs__line {
-    width: 2000px;
+    width: 100%;
     height: 100%;
-    overflow: hidden; }
+    overflow: hidden;
+    transition: margin-left 0.5s; }
   .ui-tabs__icone {
     position: relative;
     width: 100%;
@@ -558,7 +557,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     position: relative;
-    transition: margin-left 0.5s ease; }
+    transition: margin-left 0.5s ease;
+    height: 100%; }
     .ui-tabs__tab:hover {
       background-color: rgba(255, 255, 255, 0.2); }
     .ui-tabs__tab:active {
@@ -3328,22 +3328,36 @@ body {
   margin-bottom: 0;
   margin-left: 16px; }
 
-.wg-tabs-catalog__img {
-  height: 60px;
-  float: left; }
+.wg-tabs-catalog {
+  height: 73px; }
+  .wg-tabs-catalog__tab {
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden; }
+  .wg-tabs-catalog__img {
+    height: 60px;
+    float: left; }
+  .wg-tabs-catalog__title {
+    float: left;
+    padding: 0px 30px;
+    line-height: 60px; }
+  .wg-tabs-catalog .ui-tabs__tab {
+    padding: 0px 0px;
+    margin: 0px 29px 5px 0px; }
+  .wg-tabs-catalog .ui-tabs__tab:hover {
+    background-color: rgba(255, 255, 255, 0); }
+    .wg-tabs-catalog .ui-tabs__tab:hover .wg-tabs-catalog__tab {
+      background-color: rgba(255, 255, 255, 0.2); }
+  .wg-tabs-catalog .ui-tabs__tab:active {
+    background-color: rgba(255, 255, 255, 0); }
+    .wg-tabs-catalog .ui-tabs__tab:active .wg-tabs-catalog__tab {
+      background-color: rgba(255, 255, 255, 0.4); }
+  .wg-tabs-catalog .ui-tabs__tab_active::after {
+    z-index: 2; }
 
-.wg-tabs-catalog__title {
-  float: left;
-  padding: 0px 30px;
-  line-height: 60px; }
-
-.wg-tabs-catalog > .ui-tabs__line > .ui-tabs__tab {
-  padding: 0px 0px;
-  margin: 0px 29px 5px 0px;
-  background-color: rgba(255, 255, 255, 0.1); }
-
-.wg-tabs-catalog > .ui-tabs__line > .ui-tabs__tab_active::after {
-  z-index: 2; }
+.pg-myshop__content {
+  padding: 0 65px 0 65px;
+  width: 100%;
+  overflow: hidden; }
 
 
 /*# sourceMappingURL=main.css.map*/

@@ -13,11 +13,12 @@
         </div>
         <div class="lt-main-menu__header">{{dShop!=undefined?dShop.title:''}}</div>
       </lt-main-menu>
-      <h2 class="ui-header ui-header_2 ui-header_white">Каталог</h2>
-      <!-- <div class="lt-main__cards"> -->
-      <wg-table-myshop v-if="showTableMyshops"/>
-      <!-- </div> -->
-      <wg-tabs-catalog :catalog="dCatalog"/>
+
+      <div class="pg-myshop__content">
+        <h2 class="ui-header ui-header_2 ui-header_white">Каталог</h2>
+        <wg-tabs-catalog :catalog="dCatalog"/>
+      </div>
+
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddShops">Показать еще ...</div>
       </div>-->
@@ -73,10 +74,26 @@ export default {
           main_photo:
             "http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"
         },
-           {title:"Двигатели", main_photo:"http://postphoto.ru:8088/public/photos/1/53/mini/5d2597bb4831c.jpg"},
-        {title:"Кресла", main_photo:"http://postphoto.ru:8088/public/photos/1/49/mini/5d244a1a1f6c4.jpg"},
-        {title:"Фотомодели", main_photo:"http://postphoto.ru:8088/public/photos/1/48/mini/5d24453928d67.jpg"},
-        {title:"Экипировка", main_photo:"http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"}
+        {
+          title: "Двигатели",
+          main_photo:
+            "http://postphoto.ru:8088/public/photos/1/53/mini/5d2597bb4831c.jpg"
+        },
+        {
+          title: "Кресла",
+          main_photo:
+            "http://postphoto.ru:8088/public/photos/1/49/mini/5d244a1a1f6c4.jpg"
+        },
+        {
+          title: "Фотомодели",
+          main_photo:
+            "http://postphoto.ru:8088/public/photos/1/48/mini/5d24453928d67.jpg"
+        },
+        {
+          title: "Экипировка",
+          main_photo:
+            "http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"
+        }
       ]
     };
   },

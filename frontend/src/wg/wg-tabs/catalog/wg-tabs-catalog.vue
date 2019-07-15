@@ -1,11 +1,12 @@
 <template>
   <ui-tabs class="wg-tabs-catalog">
-    <ui-tabs-tab v-for="(elem, key) in catalog" :key="key">
-      <div class="wg-tabs-catalog__img">
-        <ui-img :src="elem.main_photo" :alt="'/public/img/drovito.png'" :nofon="true"/>
+    <ui-tabs-tab v-for="(elem, key) in catalog" :key="key" :checked="key==8?true:false">
+      <div class="wg-tabs-catalog__tab">
+        <div class="wg-tabs-catalog__img">
+          <ui-img :src="elem.main_photo" :alt="'/public/img/drovito.png'" :nofon="true"/>
+        </div>
+        <div class="wg-tabs-catalog__title">{{elem.title}}</div>
       </div>
-
-      <div class="wg-tabs-catalog__title">{{elem.title}}</div>
     </ui-tabs-tab>
   </ui-tabs>
 </template>
@@ -17,7 +18,7 @@ export default {
   props: {
     catalog: {
       default: undefined,
-      type: Object
+      type: Array
     }
   }
 };
