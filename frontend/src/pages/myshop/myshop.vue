@@ -4,10 +4,8 @@
       <div class="lt-main-menu__margin"></div>
       <lt-main-menu>
         <div class="lt-main-menu__buttons_left">
-          <div
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-            @click="isRedirMyShops"
-          >
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
+               @click="isRedirMyShops">
             <i class="fas fa-angle-left"></i>
           </div>
         </div>
@@ -16,7 +14,7 @@
 
       <div class="pg-myshop__content">
         <h2 class="ui-header ui-header_2 ui-header_white">Каталог</h2>
-        <wg-tabs-catalog :catalog="dCatalog"/>
+        <wg-tabs-catalog :catalog="dCatalog" />
       </div>
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
@@ -37,12 +35,12 @@ export default {
         {
           title: "Двигатели",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/53/mini/5d2597bb4831c.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         },
         {
           title: "Кресла",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/49/mini/5d244a1a1f6c4.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         },
         {
           title: "Фотомодели",
@@ -52,17 +50,17 @@ export default {
         {
           title: "Экипировка",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         },
         {
           title: "Двигатели",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/53/mini/5d2597bb4831c.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         },
         {
           title: "Кресла",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/49/mini/5d244a1a1f6c4.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         },
         {
           title: "Фотомодели",
@@ -72,27 +70,7 @@ export default {
         {
           title: "Экипировка",
           main_photo:
-            "http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"
-        },
-        {
-          title: "Двигатели",
-          main_photo:
-            "http://postphoto.ru:8088/public/photos/1/53/mini/5d2597bb4831c.jpg"
-        },
-        {
-          title: "Кресла",
-          main_photo:
-            "http://postphoto.ru:8088/public/photos/1/49/mini/5d244a1a1f6c4.jpg"
-        },
-        {
-          title: "Фотомодели",
-          main_photo:
-            "http://postphoto.ru:8088/public/photos/1/48/mini/5d24453928d67.jpg"
-        },
-        {
-          title: "Экипировка",
-          main_photo:
-            "http://postphoto.ru:8088/public/photos/1/50/mini/5d259671eb137.jpg"
+            "http://adsphoto.ru:8090/public/photos/4/8/mini/5d234fed941ba.jpg"
         }
       ]
     };

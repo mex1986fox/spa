@@ -539,8 +539,7 @@ body {
   .ui-tabs__line {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    transition: margin-left 0.5s; }
+    overflow: hidden; }
   .ui-tabs__icone {
     position: relative;
     width: 100%;

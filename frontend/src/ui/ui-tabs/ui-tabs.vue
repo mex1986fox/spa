@@ -1,7 +1,9 @@
 <template>
   <nav class="ui-tabs">
-    <div ref="container" class="ui-tabs__container">
-      <div ref="line" class="ui-tabs__line">
+    <div ref="container"
+         class="ui-tabs__container">
+      <div ref="line"
+           class="ui-tabs__line">
         <slot></slot>
       </div>
     </div>
@@ -15,7 +17,9 @@ export default {
       dShowBut: false,
       scroll: 0,
       widthLine: 0,
-      widthContainer: 0
+      widthContainer: 0,
+      down: false,
+      pageX: undefined
     };
   },
   watch: {
@@ -24,9 +28,38 @@ export default {
     },
     widthLine(newQ) {
       this.$refs.line.style.width = newQ + "px";
+    },
+    down(newQ) {
+      if (newQ == true) {
+        this.pageX;
+        this.$refs.container.addEventListener("mousemove", this.setMoveScroll);
+      } else {
+        this.$refs.container.removeEventListener(
+          "mousemove",
+          this.setMoveScroll
+        );
+      }
+    },
+    pageX(oldQ, newQ) {
+      // if (this.widthContainer < this.widthLine && oldQ != undefined) {
+      //   let delta = oldQ - newQ;
+      //   let scroll = this.scroll + delta;
+      //   console.dir(scroll);
+      //   if (scroll >= 0) {
+      //     scroll = 0;
+      //   }
+      //   if (this.widthLine - this.widthContainer - scroll * -1 <= 0) {
+      //     this.scroll = this.widthLine - this.widthContainer - scroll * -1;
+      //   } else {
+      //     this.scroll = scroll;
+      //   }
+      // }
     }
   },
   methods: {
+    setMoveScroll(e) {
+      this.pageX = e.pageX;
+    },
     setWidthLine() {
       setTimeout(() => {
         let elChilds = this.$refs.line.children;
@@ -49,7 +82,6 @@ export default {
     setOffset() {
       if (this.widthContainer < this.widthLine) {
         let scroll = 0;
-
         for (const child of this.$children) {
           if (child.dChecked == true) {
             if (this.widthLine - scroll > 0) {
@@ -80,10 +112,22 @@ export default {
         if (scroll >= 0) {
           scroll = 0;
         }
-
         if (this.widthLine - this.widthContainer + scroll >= 0 || delta <= 0) {
           this.scroll = scroll;
         }
+      }
+    });
+    this.$refs.container.addEventListener("mousedown", e => {
+      this.down = true;
+    });
+    this.$refs.container.addEventListener("mouseup", e => {
+      this.down = false;
+      this.pageX = undefined;
+    });
+    this.$refs.container.addEventListener("mouseout", e => {
+      if (e.target == this.$refs.container.$el) {
+        this.down = false;
+        this.pageX = undefined;
       }
     });
   }
