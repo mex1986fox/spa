@@ -8,26 +8,46 @@
           <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3">
             <i class="far fa-file-excel"></i>
           </div>
-          <div
-            class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
-            @click="isShowFormCreatShop"
-          >
+          <div class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
+               @click="isShowFormCreatShop">
             <i class="fas fa-plus"></i>
           </div>
         </div>
       </lt-main-menu>
       <!-- <div class="lt-main__cards"> -->
-      <wg-table-myshops v-if="showTableMyshops"/>
+      <wg-table-myshops v-if="showTableMyshops" />
       <!-- </div> -->
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddShops">Показать еще ...</div>
       </div>-->
-      <wg-form-creat-shop
-        :key="keyRand()"
-        :show="showFormCreatShop"
-        @onHide="showFormCreatShop=false"
-      />
+      <wg-form-creat-shop :key="keyRand()"
+                          :show="showFormCreatShop"
+                          @onHide="showFormCreatShop=false" />
+      <ui-window :show="showWindow"
+                 header="Заголовище окна"
+                 @onHide="showWindow=false"
+                 position="fixed">
+        <ui-window-card v-for="key in 3"
+                        :key="key">
+          <div class="ui-window-card__header">Заголовок карточки</div>
+          <div class="ui-window-card__ef">
+            <p>Элементы формы карточки</p>
+            <p>
+              quia, sequi debitis voluptatibus inventore, officia, vero sapiente ab ducimus! Et itaque officiis quas, iusto a minus iste, error dicta obcaecati vitae, quos ea?
+              Amet, non. Facilis sunt delectus modi incidunt atque ipsam numquam repudiandae reiciendis magni, ratione, adipisci accusamus neque voluptatibus quidem maxime, deleniti praesentium voluptate impedit? Quibusdam aspernatur iusto voluptatem quis excepturi!
+            </p>
+          </div>
+          <div class="ui-window-card__buttons">
+            <input type="button"
+                   class="ui-button ui-button_float_black"
+                   value="Готово">
+            <input type="button"
+                   class="ui-button ui-button_float_black"
+                   value="Cancel">
+          </div>
+        </ui-window-card>
+      </ui-window>
     </div>
   </lt-main>
 </template>
@@ -40,7 +60,8 @@ export default {
     return {
       showFormExcel: false,
       showFormCreatShop: false,
-      showTableMyshops: false
+      showTableMyshops: false,
+      showWindow: false
     };
   },
   watch: {
@@ -56,6 +77,9 @@ export default {
     })
   },
   mounted() {
+    setTimeout(() => {
+      this.showWindow = true;
+    }, 1000);
     if (this.profileID != undefined) {
       this.showTableMyshops = true;
     }

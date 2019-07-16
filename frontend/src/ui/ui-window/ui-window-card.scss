@@ -1,0 +1,57 @@
+.ui-window-card {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: $color-white;
+  box-shadow: $shadow-3;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  padding: 9px 0px 25px 0;
+  &__header {
+    color: $color-black;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 35px 45px;
+  }
+
+  &__ef {
+    margin: 35px 45px;
+    overflow: hidden;
+  }
+
+  &__buttons {
+    color: $color-black;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 10px 40px;
+    overflow: hidden;
+  }
+  &__margin {
+    margin: 25px 0;
+    overflow: hidden;
+  }
+}
+@media (max-width: 770px) {
+  .ui-window-card {
+    padding: 10px 0px;
+    &__header {
+      font-size: 18px;
+      font-weight: 400;
+      margin: 10px 10px;
+    }
+
+    &__ef {
+      margin: 10px 10px;
+    }
+
+    &__buttons {
+      margin: 10px 4px;
+    }
+    &__margin {
+      margin: 10px 10px;
+      overflow: hidden;
+    }
+  }
+}

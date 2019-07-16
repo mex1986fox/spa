@@ -1,33 +1,33 @@
 .ui-blind {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    overflow-y: auto;
-    background-color: rgba($color-black, 0.3);
-    z-index: 100;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: rgba($color-black, 0.3);
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
-    &_flat {
-        background-color: rgba($color-black, 0)
-    }
+  &_flat {
+    background-color: rgba($color-black, 0);
+  }
 
-    &_content-right {
-        justify-content: flex-end;
-    }
+  &_content-right {
+    justify-content: flex-end;
+  }
 
-    &_content-left {
-        justify-content: flex-start;
-    }
+  &_content-left {
+    justify-content: flex-start;
+  }
 
-    &_content-top {
-        align-content: flex-start;
-    }
+  &_content-top {
+    align-items: start;
+  }
 
-    &_content-bottom {
-        align-content: flex-end;
-    }
+  &_content-bottom {
+    align-items: end;
+  }
 }

@@ -2,6 +2,10 @@ import Vue from "vue/dist/vue.js";
 
 import UiAnimateDisplay from "./ui-animations/ui-animation-display.vue";
 Vue.component("ui-animation-display", UiAnimateDisplay);
+import UiWindow from "./ui-window/ui-window.vue";
+Vue.component("ui-window", UiWindow);
+import UiWindowCard from "./ui-window/ui-window-card.vue";
+Vue.component("ui-window-card", UiWindowCard);
 import UiBlind from "./ui-blind/ui-blind.vue";
 Vue.component("ui-blind", UiBlind);
 import UiButtonFile from "./ui-button/ui-button-file.vue";
