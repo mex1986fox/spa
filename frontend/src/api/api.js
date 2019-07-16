@@ -10,6 +10,7 @@ import ads from "./ads";
 import adsphoto from "./adsphoto";
 import shops from "./shops";
 import shopsphoto from "./shopsphoto";
+import catalogs from "./catalogs";
 const api = Array();
 
 api["token"] = token;
@@ -24,6 +25,7 @@ api["ads"] = ads;
 api["adsphoto"] = adsphoto;
 api["shops"] = shops;
 api["shopsphoto"] = shopsphoto;
+api["catalogs"] = catalogs;
 const Api = {
   install(Vue, options) {
     Vue.prototype.$api = function(nameApi) {

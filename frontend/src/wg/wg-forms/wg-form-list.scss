@@ -48,6 +48,12 @@
     }
 
     &__card {
+        &_create {
+            max-width: 500px;
+            min-width: 400px;
+
+        }
+
         position: relative;
         max-width: 900px;
         min-width: 500px;
@@ -62,8 +68,8 @@
         overflow: hidden;
         margin-top: 50px;
 
-        &-form {
-            padding: 15px 35px 35px 35px;
+        &-header {
+            padding: 15px 35px 15px 35px;
             overflow: hidden;
             background-color: $color-filter;
             box-shadow: $shadow-2;
@@ -86,13 +92,13 @@
         }
 
         &-button {
-            margin-top: -29px;
-            width: 56px;
+            width: 73px;
             float: right;
-            padding-right: 21px;
+            padding-right: 12px;
             position: absolute;
             right: 0;
             z-index: 2;
+            bottom: 28px;
         }
 
         &-content {
@@ -103,12 +109,21 @@
             position: relative;
             // width: 100%;
             width: calc(100% + 17px);
+            margin-bottom: 25px;
 
             &_bord {
                 padding: 35px;
                 overflow: hidden;
             }
         }
+
+        &-form {
+            padding: 15px 35px 15px 35px;
+            overflow: hidden;
+            background-color: $color-white;
+            position: relative;
+        }
     }
+
 
 }

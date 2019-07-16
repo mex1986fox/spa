@@ -24,6 +24,8 @@ import WgFormUpdateShop from "./wg-forms/updateShop/wg-form-update-shop.vue";
 Vue.component("wg-form-update-shop", WgFormUpdateShop);
 import WgFormUpdateProduct from "./wg-forms/updateProduct/wg-form-update-product.vue";
 Vue.component("wg-form-update-product", WgFormUpdateProduct);
+import WgFormUpdateCatalogs from "./wg-forms/updateCatalogs/wg-form-update-catalogs.vue";
+Vue.component("wg-form-update-catalogs", WgFormUpdateCatalogs);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);
