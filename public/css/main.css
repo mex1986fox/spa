@@ -175,6 +175,9 @@ body {
 .ui-button_noborder {
   border: none; }
 
+.ui-button_right {
+  float: right; }
+
 .ui-button-file {
   height: 133px;
   width: 190px;
@@ -2991,6 +2994,54 @@ body {
   .wg-form-create-post__card-ef {
     margin: 35px 45px;
     overflow: hidden; }
+
+.wg-form-update-catalogs .ui-window__container {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  max-width: none; }
+
+.wg-form-update-catalogs .ui-window-card__margin {
+  overflow: hidden;
+  height: 100%; }
+
+.wg-form-update-catalogs .ui-window-card {
+  height: calc(100% - 138px);
+  overflow: hidden; }
+
+.wg-form-update-catalogs .ui-window-card__ef {
+  overflow: hidden;
+  height: calc(100% - 155px);
+  overflow-y: auto;
+  margin: 0;
+  width: calc(100% + 20px);
+  margin: 0 0 23px 0; }
+
+.wg-form-update-catalogs__content {
+  overflow: hidden;
+  padding: 0 46px; }
+
+.wg-form-update-catalogs__coll {
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 5px 5px 5px 0; }
+
+.wg-form-update-catalogs__buttons {
+  float: right; }
+
+@media (max-width: 770px) {
+  .wg-form-update-catalogs .ui-window-card {
+    height: calc(100% - 100px); }
+  .wg-form-update-catalogs .ui-window-card__ef {
+    height: calc(100% - 119px);
+    width: 100%;
+    margin: 19px 0; }
+  .wg-form-update-catalogs__content {
+    overflow: hidden;
+    padding: 0 10px; } }
 
 .wg-form-list {
   width: 100%;

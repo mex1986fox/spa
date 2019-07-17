@@ -1,124 +1,84 @@
 <template>
-  <wg-form-list
-    v-if="dShop!=undefined"
-    :show="dShow"
+  <ui-window
+    class="wg-form-update-catalogs"
+    :show="show"
+    header="Магазин запчастей"
     @onHide="isHide"
-    :header="'Каталоги &quot;'+dShop.title+'&quot;'"
     position="fixed"
-    :fon="dShop.main_photo"
+    :delayHide="0"
   >
-    <template slot="content">
-      <div v-for="(catalog) in dCatalogs" :key="catalog.catalog_id" class="row">
-        <div class="col_2">{{catalog.date_create|filter_date}}</div>
-        <div class="col_4">
-          <div class="wg-table-mypost__td_img">
-            <ui-img
-              class="wg-table-mypost__img"
-              :src="catalog.main_photo"
-              alt="/public/img/drovito.png"
-            />
+    <ui-window-card animate="opacity" :show="show" :delayShow="0">
+      <div class="ui-window-card__header">Каталоги</div>
+      <div class="ui-window-card__ef">
+        <div class="wg-form-update-catalogs__content">
+          <div class="row" v-for="key in 20" :key="key">
+            <div class="col_1">
+              <div class="wg-form-update-catalogs__coll">25/10/1999 21:15</div>
+            </div>
+            <div class="col_2">
+              <div class="wg-form-update-catalogs__coll">
+                <ui-img
+                  class="wg-card-post__img"
+                  src="http://userphoto.ru:8085//public/photos/12/mini/5d105aca4d50e.jpg"
+                  :alt="'/public/img/drovito.png'"
+                  :nofon="false"
+                />
+              </div>
+            </div>
+            <div class="col_5">
+              <div class="wg-form-update-catalogs__coll">
+                Mazda Capella Sentafara
+                Анжеро-Судженск (Кемеровская область)
+              </div>
+            </div>
+            <div class="col_2">
+              <div class="wg-form-update-catalogs__coll">2 222 222 руб.</div>
+            </div>
+            <div class="col_2">
+              <div class="wg-form-update-catalogs__coll">
+                <div class="wg-form-update-catalogs__buttons">
+                  <div
+                    class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
+                  >
+                    <i class="fas fa-ellipsis-v"></i>
+                  </div>
+                  <div
+                    class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
+                  >
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div
+                    class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
+                  >
+                    <i class="far fa-trash-alt"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col_4">{{catalog.title}}</div>
       </div>
-    </template>
-    <template slot="forms">
-      <wg-form-update-catalogs-create :show="dShowCreateCatalog"/>
-    </template>
-    <template slot="button">
-      <div class="ui-button ui-button_orange ui-button_circle_s2" @click="dShowCreateCatalog=true">
-        <i class="fas fa-plus"></i>
+      <div class="ui-window-card__buttons">
+        <input type="button" class="ui-button ui-button_float_black" value="Создать каталог">
       </div>
-    </template>
-  </wg-form-list>
+    </ui-window-card>
+  </ui-window>
 </template>
 <script>
-import WgFormUpdateCatalogsCreate from "./wg-form-update-catalogs-create.vue";
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return {
-      dShow: this.show,
-      dShop: this.shop,
-      dCatalogs: this.catalogs,
-      dSpinn: false,
-      exc: [],
-      masSnackbar: undefined,
-      dShowCreateCatalog: false
-    };
-  },
-  components: { WgFormUpdateCatalogsCreate },
-  computed: {
-    ...mapGetters({
-      token: "tokens/getAccessToken"
-    })
-  },
-  methods: {
-    isHide() {
-      this.$emit("onHide");
-    },
-    isCreateCatalog() {
-      this.dSpinn = true;
-      this.exc = [];
-      let body = new FormData(this.$refs.formCreateCatalog);
-      body.set("access_token", this.token);
-      body.set("shop_id", this.dShop.shop_id);
-      let title = body.get("title");
-      let description = body.get("description");
-      let fExc = false;
-      if (title == undefined || title == "") {
-        this.exc["title"] = "Заполните название.";
-        fExc = true;
-      }
-      if (description == undefined || description == "") {
-        this.exc["description"] = "Заполните описание.";
-        fExc = true;
-      }
-      if (fExc == true) {
-        this.dSpinn = false;
-        return;
-      }
-
-      this.$api("catalogs")
-        .create(body)
-        .then(response => {
-          this.dSpinn = false;
-          console.dir(response);
-        })
-        .catch(error => {
-          this.dSpinn = false;
-          let exc = error.body.data;
-          this.masSnackbar = exc.massege;
-          this.exc["title"] = exc["title"] ? exc["title"] : "";
-          this.exc["description"] = exc["description"]
-            ? exc["description"]
-            : "";
-        });
-    }
+    return {};
   },
   props: {
     show: {
       default: false,
       type: Boolean
-    },
-    shop: {
-      default: undefined,
-      type: Object
-    },
-    catalogs: {
-      default: undefined,
-      type: Array
     }
   },
-  watch: {
-    show(newQ) {
-      this.dShow = newQ;
-    },
-    shop(newQ) {
-      this.dShop = newQ;
-    },
-    catalogs(newQ) {
-      this.dCatalogs = newQ;
+  methods: {
+    isHide() {
+      this.$emit("onHide");
     }
   }
 };
