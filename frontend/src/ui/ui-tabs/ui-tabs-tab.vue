@@ -34,8 +34,9 @@ export default {
     }
   },
   methods: {
-
     isClick() {
+      // this.$parent.setWidthLine();
+      // this.$parent.setWidthContainer();
       if (this.disabled != true) {
         let brath = this.$parent.$children;
         for (let key in brath) {
@@ -47,9 +48,7 @@ export default {
       }
     }
   },
-  mounted() {
-
-  }
+  mounted() {}
 };
 </script>
         

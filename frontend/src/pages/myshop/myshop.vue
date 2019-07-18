@@ -29,6 +29,24 @@
             </div>
           </div>
         </h2>
+        <div class="row" v-if="loadingCatalogs==false && dCatalogs.length<=0">
+          <div class="col_4 col-phone_6">
+            <p
+              class="ui-header ui-header_white ui_header_h3"
+            >Каталоги не созданы. Создайте каталоги!</p>
+            <input
+              type="button"
+              class="ui-button ui-button_float_white"
+              value="Создать"
+              @click="showUpdateCatalogs=true"
+            >
+          </div>
+        </div>
+        <ui-spinner
+          v-if="loadingCatalogs==true"
+          title="Загрузка каталогов"
+          class="ui-spinner_s3 ui-spinner_white"
+        />
 
         <wg-tabs-catalog :catalog="dCatalogs" @onFocus="isFocusProduct"/>
         <h2 v-if="dCheckCatalog!=undefined" class="ui-header ui-header_2 ui-header_white">
@@ -47,7 +65,7 @@
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
         <div class="ui-button ui-button_white ui-button_s2" @click="isAddShops">Показать еще ...</div>
       </div>-->
-      <wg-form-update-catalogs
+      <wg-form-catalogs
         :shop="dShop"
         :catalogs="dCatalogs"
         :show="showUpdateCatalogs"
@@ -71,6 +89,7 @@ export default {
       dShop: undefined,
       dCatalogs: [],
       dCheckCatalog: undefined,
+      loadingCatalogs: false,
       showUpdateCatalogs: false,
       showUpdateProducts: false
     };
@@ -114,6 +133,7 @@ export default {
         });
     },
     isShowCatalogs() {
+      this.loadingCatalogs = true;
       let body = new FormData();
       body.set("page", 1);
       body.set("shop_id", this.$route.params.id);
@@ -122,14 +142,20 @@ export default {
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.dCatalogs = response.body.data.catalogs.map(mapCatalog => {
-              mapCatalog["checked"] = false;
-              return mapCatalog;
-            });
+            if (response.body.data.catalogs.length > 0) {
+              this.dCatalogs = response.body.data.catalogs.map(mapCatalog => {
+                mapCatalog["checked"] = false;
+                return mapCatalog;
+              });
+              this.dCatalogs[0]["checked"] = true;
+              this.dCheckCatalog = this.dCatalogs[0];
+            }
+            this.loadingCatalogs = false;
           }
         })
         .catch(error => {
           if (error.body.status == "except") {
+            this.loadingCatalogs = false;
             console.dir(error);
           }
         });

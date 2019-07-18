@@ -50,6 +50,9 @@ export default {
       } else {
         this.isHideAnimate();
       }
+    },
+    header(newQ) {
+      this.dHeader = newQ;
     }
   },
   methods: {

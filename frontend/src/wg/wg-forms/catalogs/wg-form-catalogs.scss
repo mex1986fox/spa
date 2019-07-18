@@ -1,0 +1,103 @@
+.wg-form-catalogs {
+
+    &>.ui-window__container {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        max-width: auto;
+        min-width: 940px;
+
+        &>.ui-window-card__margin {
+            overflow: hidden;
+            height: 100%;
+
+            &>.ui-window-card {
+                height: calc(100% - 138px);
+                overflow: hidden;
+
+                &>.ui-window-card__ef {
+                    overflow: hidden;
+                    height: calc(100% - 155px);
+                    overflow-y: auto;
+                    margin: 0;
+                    width: calc(100% + 20px);
+                    margin: 0 0 23px 0;
+                }
+            }
+        }
+
+    }
+
+    &__content {
+        overflow: hidden;
+        padding: 0 46px;
+    }
+
+    &__coll {
+        height: 66px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        margin: 5px 5px 5px 0;
+    }
+
+
+    &__buttons {
+        float: right;
+    }
+
+    &__img {
+        filter: invert(100%);
+    }
+
+    &__date {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+}
+
+@media (max-width: 770px) {
+    .wg-form-catalogs {
+        &>.ui-window__container {
+            max-width: auto;
+            min-width: auto;
+            width: 100%;
+
+            &>.ui-window-card__margin {
+                &>.ui-window-card {
+                    height: calc(100% - 100px);
+
+                    &>.ui-window-card__ef {
+                        height: calc(100% - 119px);
+                        width: 100%;
+                        margin: 19px 0;
+                    }
+                }
+            }
+
+        }
+
+        &__content {
+            overflow: hidden;
+            padding: 0 10px;
+        }
+
+    }
+}
+
+.wg-form-catalogs-create {
+    &>.ui-window__container {
+        min-width: 560px;
+    }
+}
+
+@media (max-width: 770px) {
+    .wg-form-catalogs-create {
+        &>.ui-window__container {
+            min-width: auto;
+            width: 100%;
+        }
+    }
+}

@@ -1,9 +1,7 @@
 <template>
   <nav class="ui-tabs">
-    <div ref="container"
-         class="ui-tabs__container">
-      <div ref="line"
-           class="ui-tabs__line">
+    <div ref="container" class="ui-tabs__container">
+      <div ref="line" class="ui-tabs__line">
         <slot></slot>
       </div>
     </div>
@@ -109,12 +107,14 @@ export default {
         if (delta == 100) delta = 3;
         if (delta == -100) delta = -3;
         let scroll = this.scroll + delta * -1 * 40;
-        if (scroll >= 0) {
+        if (scroll > 0) {
           scroll = 0;
+        } else {
+          if (this.widthLine - this.widthContainer <= scroll * -1) {
+            scroll = this.widthContainer - this.widthLine;
+          }
         }
-        if (this.widthLine - this.widthContainer + scroll >= 0 || delta <= 0) {
-          this.scroll = scroll;
-        }
+        this.scroll = scroll;
       }
     });
     this.$refs.container.addEventListener("mousedown", e => {

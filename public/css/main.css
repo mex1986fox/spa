@@ -205,7 +205,7 @@ body {
     width: 36px !important;
     margin: 41px !important; }
 
-.ui-spinner {
+.ui-spinner__circle {
   border-radius: 50%;
   width: 38px;
   height: 38px;
@@ -223,23 +223,50 @@ body {
   transform: translateZ(0);
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear; }
-  .ui-spinner:after {
+  .ui-spinner__circle:after {
     border-radius: 50%;
     width: 38px;
     height: 38px; }
-  .ui-spinner_s1 {
+
+.ui-spinner__title {
+  color: rgba(17, 17, 17, 0.7);
+  font-size: 13px;
+  line-height: 44px; }
+
+.ui-spinner_s1 > .ui-spinner__circle {
+  width: 20px;
+  height: 20px;
+  margin: 8px; }
+  .ui-spinner_s1 > .ui-spinner__circle:after {
+    border-radius: 50%;
     width: 20px;
-    height: 20px;
-    margin: 8px; }
-    .ui-spinner_s1:after {
-      border-radius: 50%;
-      width: 20px;
-      height: 20px; }
-  .ui-spinner_white {
-    border-top: 4px solid rgba(255, 255, 255, 0.1);
-    border-right: 4px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 4px solid rgba(255, 255, 255, 0.15);
-    border-left: 4px solid rgba(255, 255, 255, 0.7); }
+    height: 20px; }
+
+.ui-spinner_s1 > .ui-spinner__title {
+  font-size: 13px;
+  line-height: 44px; }
+
+.ui-spinner_s3 > .ui-spinner__circle {
+  width: 60px;
+  height: 60px;
+  margin: 8px; }
+  .ui-spinner_s3 > .ui-spinner__circle:after {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px; }
+
+.ui-spinner_s3 > .ui-spinner__title {
+  font-size: 22px;
+  line-height: 78px; }
+
+.ui-spinner_white > .ui-spinner__circle {
+  border-top: 4px solid rgba(255, 255, 255, 0.1);
+  border-right: 4px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 4px solid rgba(255, 255, 255, 0.15);
+  border-left: 4px solid rgba(255, 255, 255, 0.7); }
+
+.ui-spinner_white > .ui-spinner__title {
+  color: rgba(255, 255, 255, 0.7); }
 
 @-webkit-keyframes load8 {
   0% {
@@ -2995,33 +3022,31 @@ body {
     margin: 35px 45px;
     overflow: hidden; }
 
-.wg-form-update-catalogs .ui-window__container {
+.wg-form-catalogs > .ui-window__container {
   height: 100%;
   overflow: hidden;
   position: relative;
-  max-width: none; }
+  max-width: auto;
+  min-width: 940px; }
+  .wg-form-catalogs > .ui-window__container > .ui-window-card__margin {
+    overflow: hidden;
+    height: 100%; }
+    .wg-form-catalogs > .ui-window__container > .ui-window-card__margin > .ui-window-card {
+      height: calc(100% - 138px);
+      overflow: hidden; }
+      .wg-form-catalogs > .ui-window__container > .ui-window-card__margin > .ui-window-card > .ui-window-card__ef {
+        overflow: hidden;
+        height: calc(100% - 155px);
+        overflow-y: auto;
+        margin: 0;
+        width: calc(100% + 20px);
+        margin: 0 0 23px 0; }
 
-.wg-form-update-catalogs .ui-window-card__margin {
-  overflow: hidden;
-  height: 100%; }
-
-.wg-form-update-catalogs .ui-window-card {
-  height: calc(100% - 138px);
-  overflow: hidden; }
-
-.wg-form-update-catalogs .ui-window-card__ef {
-  overflow: hidden;
-  height: calc(100% - 155px);
-  overflow-y: auto;
-  margin: 0;
-  width: calc(100% + 20px);
-  margin: 0 0 23px 0; }
-
-.wg-form-update-catalogs__content {
+.wg-form-catalogs__content {
   overflow: hidden;
   padding: 0 46px; }
 
-.wg-form-update-catalogs__coll {
+.wg-form-catalogs__coll {
   height: 66px;
   display: flex;
   justify-content: center;
@@ -3029,19 +3054,38 @@ body {
   overflow: hidden;
   margin: 5px 5px 5px 0; }
 
-.wg-form-update-catalogs__buttons {
+.wg-form-catalogs__buttons {
   float: right; }
 
+.wg-form-catalogs__img {
+  filter: invert(100%); }
+
+.wg-form-catalogs__date {
+  font-size: 11px;
+  line-height: 16px; }
+
 @media (max-width: 770px) {
-  .wg-form-update-catalogs .ui-window-card {
-    height: calc(100% - 100px); }
-  .wg-form-update-catalogs .ui-window-card__ef {
-    height: calc(100% - 119px);
-    width: 100%;
-    margin: 19px 0; }
-  .wg-form-update-catalogs__content {
+  .wg-form-catalogs > .ui-window__container {
+    max-width: auto;
+    min-width: auto;
+    width: 100%; }
+    .wg-form-catalogs > .ui-window__container > .ui-window-card__margin > .ui-window-card {
+      height: calc(100% - 100px); }
+      .wg-form-catalogs > .ui-window__container > .ui-window-card__margin > .ui-window-card > .ui-window-card__ef {
+        height: calc(100% - 119px);
+        width: 100%;
+        margin: 19px 0; }
+  .wg-form-catalogs__content {
     overflow: hidden;
     padding: 0 10px; } }
+
+.wg-form-catalogs-create > .ui-window__container {
+  min-width: 560px; }
+
+@media (max-width: 770px) {
+  .wg-form-catalogs-create > .ui-window__container {
+    min-width: auto;
+    width: 100%; } }
 
 .wg-form-list {
   width: 100%;
