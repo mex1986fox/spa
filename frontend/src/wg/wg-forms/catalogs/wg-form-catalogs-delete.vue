@@ -2,7 +2,7 @@
   <div v-if="show=true">
     <wg-form-confirm-delete
       :show="dCheckedConfirm==false"
-      @onChecked="dCheckedConfirm=true"
+      @onChecked="isChecked"
       @onHide="isHide"
       @onDelete="isDeleteCatalog"
     />
@@ -51,6 +51,9 @@ export default {
     isHide() {
       this.$emit("onHide");
     },
+    isChecked() {
+      this.$emit("onCheckedConfirm");
+    },
     isDeleteCatalog() {
       this.exc = [];
       let body = new FormData();
@@ -60,15 +63,22 @@ export default {
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            if (this.dCheckedConfirm == true) {
-              this.$emit("onCheckedConfirm");
-            }
             this.$emit("onDeleteCatalog", this.catalog);
           }
         })
         .catch(error => {
           this.exc = error.body.data;
         });
+    }
+  },
+  mounted() {
+    if (this.checkedConfirm == true) {
+      this.isDeleteCatalog();
+    }
+  },
+  updated() {
+    if (this.checkedConfirm == true) {
+      this.isDeleteCatalog();
     }
   }
 };

@@ -83,7 +83,7 @@
       :show="showDeleteCatalog"
       @onHide="isHideDeleteCatalog"
       @onUpdateCatalog="isDeleteCatalog"
-      @onCheckedConfirm="checkedConfirm=true"
+      @onCheckedConfirm="isCheckedConfirm"
       :checkedConfirm="checkedConfirm"
     />
   </ui-window>
@@ -138,6 +138,10 @@ export default {
     }
   },
   methods: {
+    isCheckedConfirm() {
+      console.dir("confirm");
+      this.checkedConfirm = true;
+    },
     isDeleteCatalog(catalog) {
       this.dCatalogs = this.dCatalogs.filter(mapCatalog => {
         if (mapCatalog.catalog_id != catalog.catalog_id) {
