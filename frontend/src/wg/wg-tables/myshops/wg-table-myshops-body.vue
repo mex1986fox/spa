@@ -34,7 +34,7 @@
           @click="isShowMyShop(dShop.shop_id)"
           class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean"
         >
-          <i class="far fa-edit"></i>
+          <i class="fas fa-sign-in-alt"></i>
         </div>
 
         <div
@@ -47,7 +47,7 @@
           @click="isShowMyShop(dShop.shop_id)"
           class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
         >
-          <i class="far fa-edit"></i>
+          <i class="fas fa-sign-in-alt"></i>
         </div>
         <div
           @click="isShowExcess"

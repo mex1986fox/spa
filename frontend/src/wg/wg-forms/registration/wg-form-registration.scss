@@ -148,3 +148,11 @@
         margin-top: -35px;
     }
 }
+
+@media (max-width: 770px) {
+    .wg-form-registration {
+        &__card-imgs {
+            margin: 0;
+        }
+    }
+}

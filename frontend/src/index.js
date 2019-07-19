@@ -7,6 +7,9 @@ import Vue from "vue/dist/vue.js";
 import router from "./router/index.js";
 import store from "./stores/index.js";
 
+//глобальные методы
+import gmethods from "./plugins/gmethods.js";
+Vue.use(gmethods);
 //фильтры 
 import Filters from "./plugins/filters.js";
 Vue.use(Filters);

@@ -26,6 +26,8 @@ import WgFormUpdateProduct from "./wg-forms/updateProduct/wg-form-update-product
 Vue.component("wg-form-update-product", WgFormUpdateProduct);
 import WgFormCatalogs from "./wg-forms/catalogs/wg-form-catalogs.vue";
 Vue.component("wg-form-catalogs", WgFormCatalogs);
+import WgFormConfirmDelete from "./wg-forms/confirms/wg-form-confirm-delete.vue";
+Vue.component("wg-form-confirm-delete", WgFormConfirmDelete);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);

@@ -3016,6 +3016,10 @@ body {
     right: 0;
     margin-top: -35px; }
 
+@media (max-width: 770px) {
+  .wg-form-registration__card-imgs {
+    margin: 0; } }
+
 .wg-form-create-post {
   text-align: left; }
   .wg-form-create-post__card-ef {

@@ -35,17 +35,13 @@
                 <div class="wg-form-catalogs__buttons">
                   <div
                     class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
+                    @click="isShowUpdateCatalog(catalog)"
                   >
-                    <i class="fas fa-ellipsis-v"></i>
+                    <i class="far fa-edit"></i>
                   </div>
                   <div
                     class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
-                    @click="isShowPhotoCatalogs(catalog)"
-                  >
-                    <i class="fas fa-camera"></i>
-                  </div>
-                  <div
-                    class="ui-button ui-button_float_black ui-button_noborder ui-button_right ui-button_circle_s1"
+                    @click="isShowDeleteCatalog(catalog)"
                   >
                     <i class="far fa-trash-alt"></i>
                   </div>
@@ -60,40 +56,60 @@
           type="button"
           class="ui-button ui-button_float_black"
           value="Создать каталог"
-          @click="showCreataCatalogs=true"
+          @click="showCreateCatalog=true"
         >
       </div>
     </ui-window-card>
     <wg-form-catalogs-create
+      :key="gmethods.randKey()"
       :shop="dShop"
-      :show="showCreataCatalogs"
-      @onHide="showCreataCatalogs=false"
+      :show="showCreateCatalog"
+      @onHide="showCreateCatalog=false"
+      @onCreatedCatalog="isCreateCatalog"
     />
-    <wg-form-catalogs-photo
-      :catalog="dChecCatalog"
-      :show="showPhotoCatalogs"
-      @onHide="isHidePhotoCatalogs"
-      statusForm="update"
+    <wg-form-catalogs-update
+      v-if="updateCatalog!=undefined"
+      :key="gmethods.randKey()"
+      :shop="dShop"
+      :catalog="updateCatalog"
+      :show="showUpdateCatalog"
+      @onHide="isHideUpdateCatalog"
+      @onUpdateCatalog="isUpdateCatalog"
+    />
+    <wg-form-catalogs-delete
+      v-if="deleteCatalog!=undefined"
+      :shop="dShop"
+      :catalog="deleteCatalog"
+      :show="showDeleteCatalog"
+      @onHide="isHideDeleteCatalog"
+      @onUpdateCatalog="isDeleteCatalog"
+      @onCheckedConfirm="checkedConfirm=true"
+      :checkedConfirm="checkedConfirm"
     />
   </ui-window>
 </template>
 <script>
 import { mapGetters } from "vuex";
 import WgFormCatalogsCreate from "./wg-form-catalogs-create.vue";
-import WgFormCatalogsPhoto from "./wg-form-catalogs-photo.vue";
+import WgFormCatalogsUpdate from "./wg-form-catalogs-update.vue";
+import WgFormCatalogsDelete from "./wg-form-catalogs-delete.vue";
 export default {
   data() {
     return {
-      showCreataCatalogs: false,
-      showPhotoCatalogs: false,
+      showCreateCatalog: false,
+      showUpdateCatalog: false,
+      showDeleteCatalog: false,
       dCatalogs: this.catalogs,
-      dChecCatalog: undefined,
-      dShop: this.shop
+      updateCatalog: undefined,
+      deleteCatalog: undefined,
+      dShop: this.shop,
+      checkedConfirm: false
     };
   },
   components: {
     WgFormCatalogsCreate,
-    WgFormCatalogsPhoto
+    WgFormCatalogsUpdate,
+    WgFormCatalogsDelete
   },
   props: {
     show: {
@@ -122,16 +138,45 @@ export default {
     }
   },
   methods: {
+    isDeleteCatalog(catalog) {
+      this.dCatalogs = this.dCatalogs.filter(mapCatalog => {
+        if (mapCatalog.catalog_id != catalog.catalog_id) {
+          return true;
+        }
+      });
+    },
+    isCreateCatalog(catalog) {
+      this.dCatalogs = this.dCatalogs.push(catalog);
+    },
+    isUpdateCatalog(catalog) {
+      this.dCatalogs = this.dCatalogs.map(mapCatalog => {
+        if (mapCatalog.catalog_id == catalog.catalog_id) {
+          return catalog;
+        }
+        return mapCatalog;
+      });
+    },
     isHide() {
+      if (this.dCatalogs != undefined) {
+        this.$emit("onUpdateCatalogs", this.dCatalogs);
+      }
       this.$emit("onHide");
     },
-    isShowPhotoCatalogs(catalog) {
-      this.dChecCatalog = catalog;
-      this.showPhotoCatalogs = true;
+    isShowUpdateCatalog(catalog) {
+      this.updateCatalog = catalog;
+      this.showUpdateCatalog = true;
     },
-    isHidePhotoCatalogs() {
-      this.showPhotoCatalogs = false;
-      this.dChecCatalog = undefined;
+    isHideUpdateCatalog() {
+      this.showUpdateCatalog = true;
+      this.updateCatalog = undefined;
+    },
+    isShowDeleteCatalog(catalog) {
+      this.deleteCatalog = catalog;
+      this.showDeleteCatalog = true;
+    },
+    isHideDeleteCatalog() {
+      this.showDeleteCatalog = true;
+      this.deleteCatalog = undefined;
     }
   }
 };

@@ -71,7 +71,6 @@ export default {
             parseFloat(style.marginRight);
         }
         this.widthLine = widthChilds + 2;
-        this.setOffset();
       }, 500);
     },
     setWidthContainer() {
@@ -94,9 +93,11 @@ export default {
   },
   mounted() {
     this.setWidthLine();
+    this.setOffset();
     this.setWidthContainer();
     window.onresize = () => {
       this.setWidthLine();
+      this.setOffset();
       this.setWidthContainer();
     };
 
@@ -130,6 +131,9 @@ export default {
         this.pageX = undefined;
       }
     });
+  },
+  updated() {
+    this.setWidthLine();
   }
 };
 </script>

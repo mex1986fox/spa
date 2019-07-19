@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wg-form-registration__card-header">Фотографии</div>
+    <div class="ui-window-card__header">Фотографии</div>
 
     <div class="wg-form-registration__card-imgs">
       <form ref="formUploadPhoto">
@@ -23,7 +23,7 @@
         @onCheckMain="isChackMain"
       />
     </div>
-    <div class="wg-form-registration__card-buttons">
+    <div class="ui-window-card__buttons">
       <input
         type="button"
         v-if="lincksPhoto!=undefined"

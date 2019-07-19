@@ -3,17 +3,17 @@
     <div class="lt-main__content">
       <div class="lt-main-menu__margin"></div>
       <lt-main-menu>
-        <div class="lt-main-menu__buttons_left">
+        <div class="lt-main-menu__header">
+          {{dShop!=undefined?dShop.
+          title:''}}
+        </div>
+        <div class="lt-main-menu__buttons">
           <div
             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s3"
             @click="isRedirMyShops"
           >
-            <i class="fas fa-angle-left"></i>
+            <i class="fas fa-sign-out-alt"></i>
           </div>
-        </div>
-        <div class="lt-main-menu__header">
-          {{dShop!=undefined?dShop.
-          title:''}}
         </div>
       </lt-main-menu>
 
@@ -29,7 +29,7 @@
             </div>
           </div>
         </h2>
-        <div class="row" v-if="loadingCatalogs==false && dCatalogs.length<=0">
+        <div class="row" v-if="loadingCatalogs==false && dCatalogs==undefined">
           <div class="col_4 col-phone_6">
             <p
               class="ui-header ui-header_white ui_header_h3"
@@ -48,7 +48,11 @@
           class="ui-spinner_s3 ui-spinner_white"
         />
 
-        <wg-tabs-catalog :catalog="dCatalogs" @onFocus="isFocusProduct"/>
+        <wg-tabs-catalog
+          v-if="dCatalogs!=undefined"
+          :catalogs="dCatalogs"
+          @onFocus="isFocusProduct"
+        />
         <h2 v-if="dCheckCatalog!=undefined" class="ui-header ui-header_2 ui-header_white">
           {{dCheckCatalog.title}}
           <div class="lt-main-menu__buttons">
@@ -70,6 +74,7 @@
         :catalogs="dCatalogs"
         :show="showUpdateCatalogs"
         @onHide="showUpdateCatalogs=false"
+        @onUpdateCatalogs="isUpdateCatalogs"
       />
       <!-- <wg-form-update-products
         :catalog="dCheckCatalog"
@@ -87,7 +92,7 @@ export default {
   data() {
     return {
       dShop: undefined,
-      dCatalogs: [],
+      dCatalogs: undefined,
       dCheckCatalog: undefined,
       loadingCatalogs: false,
       showUpdateCatalogs: false,
@@ -100,6 +105,9 @@ export default {
     })
   },
   methods: {
+    isUpdateCatalogs(catalogs) {
+      this.dCatalogs = catalogs;
+    },
     isFocusProduct(product) {
       this.dCatalogs = this.dCatalogs.map(mapCatalog => {
         mapCatalog.checked = false;

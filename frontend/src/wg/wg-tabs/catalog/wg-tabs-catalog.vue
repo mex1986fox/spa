@@ -1,7 +1,7 @@
 <template>
   <ui-tabs class="wg-tabs-catalog">
     <ui-tabs-tab
-      v-for="(product, key) in catalog"
+      v-for="(product, key) in catalogs"
       :key="key"
       :checked="product.checked==true"
       @onFocus="isTabFocus(product)"
@@ -21,7 +21,7 @@ export default {
     return {};
   },
   props: {
-    catalog: {
+    catalogs: {
       default: undefined,
       type: Array
     }

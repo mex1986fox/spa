@@ -5,20 +5,30 @@
     @onHide="isHide"
     position="fixed"
     :delayHide="0"
-    header="Создать каталог"
+    header="Редактировать каталог"
   >
-    <ui-window-card animate="opacity" :show="show && dCatalog==undefined" :delayShow="0">
-      <form ref="formCreateCatalog">
+    <ui-window-card animate="opacity" :show="show" :delayShow="300">
+      <form ref="formUpdateCatalog">
         <div class="ui-window-card__header">Основное</div>
         <div class="ui-window-card__ef">
           <div class="row">
             <div class="col_8">
-              <ui-ef-text name="title" caption="Название *" :help="exc['title']"/>
+              <ui-ef-text
+                :value="dCatalog.title"
+                name="title"
+                caption="Название *"
+                :help="exc['title']"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col_12">
-              <ui-ef-text name="description" caption="Описание *" :help="exc['description']"/>
+              <ui-ef-text
+                :value="dCatalog.description"
+                name="description"
+                caption="Описание *"
+                :help="exc['description']"
+              />
             </div>
           </div>
         </div>
@@ -27,18 +37,18 @@
         <input
           type="button"
           class="ui-button ui-button_float_black"
-          value="Создать"
-          @click="isCreateCatalog"
+          value="Редактировать"
+          @click="isUpdateCatalog"
         >
         <input type="button" class="ui-button ui-button_float_black" value="Отмена" @click="isHide">
       </div>
     </ui-window-card>
-    <ui-window-card animate="opacity" :show="show && dCatalog!=undefined" :delayShow="300">
+    <ui-window-card animate="opacity" :show="show" :delayShow="0">
       <wg-form-update-photos-entity
         apiPhotoServer="catalogsphoto"
         apiEntityServer="catalogs"
         entityID="catalog_id"
-        statusForm="create"
+        :statusForm="dCatalog.main_photo==null?'create':'update'"
         :entity="dCatalog"
         @onHide="isHide"
         @onUpdateEntity="isUpdateCatalog"
@@ -52,7 +62,7 @@ export default {
   data() {
     return {
       exc: [],
-      dCatalog: undefined
+      dCatalog: this.catalog
     };
   },
 
@@ -64,6 +74,10 @@ export default {
     shop: {
       default: undefined,
       type: Object
+    },
+    catalog: {
+      default: undefined,
+      type: Object
     }
   },
   computed: {
@@ -71,23 +85,28 @@ export default {
       token: "tokens/getAccessToken"
     })
   },
+  watch: {
+    catalog(newQ) {
+      this.dCatalog = newQ;
+    }
+  },
   methods: {
     isUpdateCatalog(resp) {
       this.dCatalog = resp.catalog;
     },
     isHide() {
       if (this.dCatalog != undefined) {
-        this.$emit("onCreatedCatalog", this.dCatalog);
+        this.$emit("onUpdateCatalog", this.dCatalog);
       }
       this.$emit("onHide");
     },
-    isCreateCatalog() {
+    isUpdateCatalog() {
       this.dSpinn = true;
       this.exc = [];
-      let form = this.$refs.formCreateCatalog;
+      let form = this.$refs.formUpdateCatalog;
       let body = new FormData(form);
       body.set("access_token", this.token);
-      body.set("shop_id", this.shop.shop_id);
+      body.set("catalog_id", this.dCatalog.catalog_id);
       let title = body.get("title");
       let description = body.get("description");
 
@@ -115,7 +134,7 @@ export default {
       }
 
       this.$api("catalogs")
-        .create(body)
+        .update(body)
         .then(response => {
           this.dSpinn = false;
           this.dCatalog = response.body.data.catalog;
