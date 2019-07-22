@@ -11,18 +11,16 @@
         </ui-table-tr>
       </ui-table-header>
       <ui-table-body>
-        <template v-for="(shop, key) in products">
-          <ui-table-span :height="15" v-if="key>0" :key="'span'+shop.shop_id"/>
-          <wg-table-myproduct-body
-            :shop="shop"
-            :key="'body'+shop.shop_id"
-            @onClickExcess="isShowExcess(shop.shop_id)"
-          />
-          <wg-table-myproduct-desc
-            v-if="showExcess[shop.shop_id]!=undefined && showExcess[shop.shop_id]==true"
-            :shop="shop"
-            :key="'desc'+shop.shop_id"
-          />
+        <template v-for="(product, key) in products">
+          <ui-table-span :height="15"
+                         v-if="key>0"
+                         :key="'span'+product.product_id" />
+          <wg-table-myproduct-body :product="product"
+                                   :key="'body'+product.product_id"
+                                   @onClickExcess="isShowExcess(product.product_id)" />
+          <wg-table-myproduct-desc v-if="showExcess[product.product_id]!=undefined && showExcess[product.product_id]==true"
+                                   :product="product"
+                                   :key="'desc'+product.product_id" />
         </template>
       </ui-table-body>
     </ui-table>
@@ -49,9 +47,9 @@ export default {
   watch: {
     userID(newQ) {
       if (newQ == undefined) {
-        this.$store.commit("products/updateShops", undefined);
+        this.$store.commit("products/updateproducts", undefined);
       } else {
-        this.isShowShops();
+        this.isShowproducts();
       }
     }
   },
@@ -62,7 +60,7 @@ export default {
       sExc[key] = sExc[key] != undefined ? !sExc[key] : true;
       this.showExcess = sExc;
     },
-    isShowShops() {
+    isShowproducts() {
       let body = new FormData();
       body.set("user_id", this.userID);
       body.set("page", 1);
@@ -71,7 +69,7 @@ export default {
         .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit(
-              "products/updateShops",
+              "products/updateproducts",
               response.body.data.products
             );
           }
@@ -84,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.isShowShops();
+    this.isShowproducts();
   }
 };
 </script>

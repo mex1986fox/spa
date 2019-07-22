@@ -1,78 +1,67 @@
 <template>
   <ui-table-tr>
-    <ui-table-td
-      class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
-      colspan="2"
-    >
-      <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
-      <div>{{dShop.subject+" "+dShop.city}}</div>
-      <div>{{dShop.title}}</div>
+    <ui-table-td class="wg-table__td_left col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
+                 colspan="2">
+      <div class="wg-table__td_date">{{dProduct.date_create|filter_date}}</div>
+      <div>{{dProduct.subject+" "+dProduct.city}}</div>
+      <div>{{dProduct.title}}</div>
     </ui-table-td>
     <ui-table-td class="wg-table__td_date wg-table__td_left col-phone_clean">
-      <div class="wg-table__td_date">{{dShop.date_create|filter_date}}</div>
+      <div class="wg-table__td_date">{{dProduct.date_create|filter_date}}</div>
     </ui-table-td>
     <ui-table-td class="wg-table-mypost__td_img col-phone_clean">
-      <ui-img
-        class="wg-table-mypost__img"
-        :src="dShop.main_photo"
-        :alt="'/public/img/drovito.png'"
-        :nofon="dShop.main_photo!=null?false:true"
-      />
+      <ui-img class="wg-table-mypost__img"
+              :src="dProduct.main_photo"
+              :alt="'/public/img/drovito.png'"
+              :nofon="dProduct.main_photo!=null?false:true" />
     </ui-table-td>
-    <ui-table-td class="col-phone_clean">{{dShop.subject+" "+dShop.city}}</ui-table-td>
-    <ui-table-td class="col-phone_clean">{{dShop.title}}</ui-table-td>
+    <ui-table-td class="col-phone_clean">{{dProduct.subject+" "+dProduct.city}}</ui-table-td>
+    <ui-table-td class="col-phone_clean">{{dProduct.title}}</ui-table-td>
     <ui-table-td>
       <div class="wg-table__buttons">
-        <div
-          @click="isShowExcess"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean"
-        >
-          <i v-if="showExcess==false" class="fas fa-angle-down"></i>
-          <i v-if="showExcess==true" class="fas fa-angle-up"></i>
+        <div @click="isShowExcess"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean">
+          <i v-if="showExcess==false"
+             class="fas fa-angle-down"></i>
+          <i v-if="showExcess==true"
+             class="fas fa-angle-up"></i>
         </div>
-        <div
-          @click="isShowMyShop(dShop.shop_id)"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean"
-        >
+        <div @click="isShowMyProduct(dProduct.product_id)"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-phone_clean">
           <i class="far fa-edit"></i>
         </div>
 
-        <div
-          @click="showMenu=true"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1"
-        >
+        <div @click="showMenu=true"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1">
           <i class="fas fa-ellipsis-v"></i>
         </div>
-        <div
-          @click="isShowMyShop(dShop.shop_id)"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
-        >
+        <div @click="isShowMyProduct(dProduct.product_id)"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
           <i class="far fa-edit"></i>
         </div>
-        <div
-          @click="isShowExcess"
-          class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean"
-        >
-          <i v-if="showExcess==false" class="fas fa-angle-down"></i>
-          <i v-if="showExcess==true" class="fas fa-angle-up"></i>
+        <div @click="isShowExcess"
+             class="ui-button ui-button_float_white ui-button_noborder ui-button_circle_s1 col-tablet_clean col-nbook_clean col-nbook_clean col-desktop_clean">
+          <i v-if="showExcess==false"
+             class="fas fa-angle-down"></i>
+          <i v-if="showExcess==true"
+             class="fas fa-angle-up"></i>
         </div>
       </div>
-      <wg-form-update-shop
-        :show="showUpdateShop"
-        @onHide="isHideUpdateShop"
-        @onUpdateShop="isUpdateShop"
-        :shop="dShop"
-      />
-      <wg-form-update-product
-        :show="showUpdateProduct"
-        @onHide="showUpdateProduct=false"
-        :shop="dShop"
-      />
+      <!-- <wg-form-update-product :show="showUpdateProduct"
+                              @onHide="isHideUpdateProduct"
+                              @onUpdateProduct="isUpdateProduct"
+                              :product="dProduct" />
+      <wg-form-update-product :show="showUpdateProduct"
+                              @onHide="showUpdateProduct=false"
+                              :product="dProduct" /> -->
 
-      <ui-menu :show="showMenu" @onHide="isHideMenu">
+      <ui-menu :show="showMenu"
+               @onHide="isHideMenu">
         <ul class="ui-menu__ul">
-          <li class="ui-menu__li" @click="isShowUpdateShop">Редактировать</li>
-          <li class="ui-menu__li" @click="isDeleteShopAlbumAndShop">Удалить</li>
+          <li class="ui-menu__li"
+              @click="isShowUpdateProduct">Редактировать</li>
+          <li class="ui-menu__li"
+              @click="isDeleteProductAlbumAndProduct">Удалить</li>
         </ul>
       </ui-menu>
     </ui-table-td>
@@ -86,8 +75,8 @@ export default {
     return {
       showExcess: false,
       showMenu: false,
-      showUpdateShop: false,
-      dShop: this.shop
+      showUpdateProduct: false,
+      dProduct: this.product
     };
   },
   computed: {
@@ -96,18 +85,18 @@ export default {
     })
   },
   props: {
-    shop: {
+    product: {
       default: undefined
     }
   },
   watch: {
-    shop(newQ) {
-      this.dShop = newQ;
+    product(newQ) {
+      this.dProduct = newQ;
     }
   },
   methods: {
-    isShowMyShop(shopId) {
-      this.$router.push({ path: `/my_shop/${shopId}` })
+    isShowMyProduct(productId) {
+      this.$router.push({ path: `/my_product/${productId}` });
     },
     isShowExcess() {
       this.showExcess = this.showExcess == true ? false : true;
@@ -116,28 +105,28 @@ export default {
     isHideMenu() {
       this.showMenu = false;
     },
-    isShowUpdateShop() {
+    isShowUpdateProduct() {
       this.showMenu = false;
-      this.showUpdateShop = true;
+      this.showUpdateProduct = true;
     },
-    isHideUpdateShop() {
-      this.showUpdateShop = false;
+    isHideUpdateProduct() {
+      this.showUpdateProduct = false;
     },
-    isUpdateShop(shop) {
-      this.dShop = shop;
-      this.$emit("onUpdateShop", shop);
+    isUpdateProduct(product) {
+      this.dProduct = product;
+      this.$emit("onUpdateProduct", product);
     },
-    isDeleteShopAlbumAndShop() {
+    isDeleteProductAlbumAndProduct() {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("entity_id", this.dShop.shop_id);
+      body.set("entity_id", this.dProduct.product_id);
       //отправляем запрос
-      this.$api("shopsphoto")
+      this.$api("productsphoto")
         .deleteAlbum(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.isDeleteShop();
+            this.isDeleteProduct();
           }
         })
         .catch(error => {
@@ -146,20 +135,20 @@ export default {
           }
         });
     },
-    isDeleteShop() {
+    isDeleteProduct() {
       this.showMenu = false;
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("shop_id", this.dShop.shop_id);
+      body.set("product_id", this.dProduct.product_id);
       //отправляем запрос
-      this.$api("shops")
+      this.$api("products")
         .delete(body)
         .then(response => {
           if (response.body.status == "ok") {
-            // this.$emit("onDeleteShop", this.shop);
-            this.$store.commit("myshops/deleteShop", this.dShop);
-            this.$store.commit("shops/deleteShop", this.dShop);
+            // this.$emit("onDeleteProduct", this.product);
+            this.$store.commit("myproducts/deleteProduct", this.dProduct);
+            this.$store.commit("products/deleteProduct", this.dProduct);
           }
         })
         .catch(error => {
@@ -168,17 +157,17 @@ export default {
           }
         });
     },
-    isDeleteShopAlbum() {
+    isDeleteProductAlbum() {
       let body = new FormData();
       //добавляем фильтр в куки
       body.set("access_token", this.token);
-      body.set("entity_id", this.dShop.shop_id);
+      body.set("entity_id", this.dProduct.product_id);
       //отправляем запрос
-      this.$api("shopsphoto")
+      this.$api("productsphoto")
         .deleteAlbum(body)
         .then(response => {
           if (response.body.status == "ok") {
-            // this.isDeleteShop();
+            // this.isDeleteProduct();
           }
         })
         .catch(error => {
