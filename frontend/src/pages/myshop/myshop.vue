@@ -64,6 +64,7 @@
             </div>
           </div>
         </h2>
+        <wg-table-myproducts></wg-table-myproducts>
       </div>
 
       <!-- <div style="width: 100%; display: flex; justify-content: center;">
@@ -104,9 +105,16 @@ export default {
       profileID: "profile/getID"
     })
   },
+  watch:{
+    dCatalogs(newQ){
+      if(newQ==undefined){
+        dCheckCatalog=undefined;
+      }
+    }
+  },
   methods: {
     isUpdateCatalogs(catalogs) {
-      this.dCatalogs = catalogs;
+      this.dCatalogs = catalogs.length <= 0 ? undefined : catalogs;
     },
     isFocusProduct(product) {
       this.dCatalogs = this.dCatalogs.map(mapCatalog => {

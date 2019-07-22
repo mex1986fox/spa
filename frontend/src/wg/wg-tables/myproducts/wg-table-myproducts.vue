@@ -1,6 +1,6 @@
 <template>
-  <div class="wg-table-myshop">
-    <ui-table v-if="shops!=undefined">
+  <div class="wg-table-myproducts">
+    <ui-table v-if="products!=undefined">
       <ui-table-header>
         <ui-table-tr>
           <ui-table-th class="wg-table__td_left col-phone_clean">Дата</ui-table-th>
@@ -11,16 +11,18 @@
         </ui-table-tr>
       </ui-table-header>
       <ui-table-body>
-        <template v-for="(shop, key) in shops">
-          <ui-table-span :height="15"
-                         v-if="key>0"
-                         :key="'span'+shop.shop_id" />
-          <wg-table-myshop-body :shop="shop"
-                                :key="'body'+shop.shop_id"
-                                @onClickExcess="isShowExcess(shop.shop_id)" />
-          <wg-table-myshop-desc v-if="showExcess[shop.shop_id]!=undefined && showExcess[shop.shop_id]==true"
-                                :shop="shop"
-                                :key="'desc'+shop.shop_id" />
+        <template v-for="(shop, key) in products">
+          <ui-table-span :height="15" v-if="key>0" :key="'span'+shop.shop_id"/>
+          <wg-table-myproduct-body
+            :shop="shop"
+            :key="'body'+shop.shop_id"
+            @onClickExcess="isShowExcess(shop.shop_id)"
+          />
+          <wg-table-myproduct-desc
+            v-if="showExcess[shop.shop_id]!=undefined && showExcess[shop.shop_id]==true"
+            :shop="shop"
+            :key="'desc'+shop.shop_id"
+          />
         </template>
       </ui-table-body>
     </ui-table>
@@ -28,11 +30,11 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import WgTableMyshopBody from "./wg-table-myshops-body.vue";
-import WgTableMyshopDesc from "./wg-table-myshops-desc.vue";
+import WgTableMyproductBody from "./wg-table-myproducts-body.vue";
+import WgTableMyproductDesc from "./wg-table-myproducts-desc.vue";
 export default {
-  name: "wg-table-myshops",
-  components: { WgTableMyshopBody, WgTableMyshopDesc },
+  name: "wg-table-myproductss",
+  components: { WgTableMyproductBody, WgTableMyproductDesc },
   data() {
     return {
       showExcess: []
@@ -40,14 +42,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      shops: "myshops/getShops",
+      products: "myproducts/getProducts",
       userID: "profile/getID"
     })
   },
   watch: {
     userID(newQ) {
       if (newQ == undefined) {
-        this.$store.commit("myshops/updateShops", undefined);
+        this.$store.commit("products/updateShops", undefined);
       } else {
         this.isShowShops();
       }
@@ -64,11 +66,14 @@ export default {
       let body = new FormData();
       body.set("user_id", this.userID);
       body.set("page", 1);
-      this.$api("shops")
+      this.$api("products")
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
-            this.$store.commit("myshops/updateShops", response.body.data.shops);
+            this.$store.commit(
+              "products/updateShops",
+              response.body.data.products
+            );
           }
         })
         .catch(error => {

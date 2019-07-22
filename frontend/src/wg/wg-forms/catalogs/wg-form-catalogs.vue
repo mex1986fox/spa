@@ -82,7 +82,7 @@
       :catalog="deleteCatalog"
       :show="showDeleteCatalog"
       @onHide="isHideDeleteCatalog"
-      @onUpdateCatalog="isDeleteCatalog"
+      @onDeleteCatalog="isDeleteCatalog"
       @onCheckedConfirm="isCheckedConfirm"
       :checkedConfirm="checkedConfirm"
     />
@@ -139,7 +139,6 @@ export default {
   },
   methods: {
     isCheckedConfirm() {
-      console.dir("confirm");
       this.checkedConfirm = true;
     },
     isDeleteCatalog(catalog) {
@@ -150,7 +149,7 @@ export default {
       });
     },
     isCreateCatalog(catalog) {
-      this.dCatalogs = this.dCatalogs.push(catalog);
+      this.dCatalogs.push(catalog);
     },
     isUpdateCatalog(catalog) {
       this.dCatalogs = this.dCatalogs.map(mapCatalog => {

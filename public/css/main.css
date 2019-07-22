@@ -3517,6 +3517,11 @@ body {
   width: 100%;
   max-width: 1400px; }
 
+.wg-table-myproducts {
+  width: 100%; }
+  .wg-table-myproducts .ui-table {
+    padding: 0; }
+
 .wg-select-catalog > .ui-ef-select {
   width: calc(100% - 60px); }
 
@@ -3533,7 +3538,9 @@ body {
     overflow: hidden; }
   .wg-tabs-catalog__img {
     height: 60px;
-    float: left; }
+    max-width: 100px;
+    float: left;
+    overflow: hidden; }
   .wg-tabs-catalog__title {
     float: left;
     padding: 0px 30px;

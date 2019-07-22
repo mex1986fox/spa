@@ -79,10 +79,12 @@ const tokens = {
             );
             // запускаем обновление токинов
             // за минуту до его смерти
-            let pload = context.getters.getAccessTokenPayload;
-            let uptime = (pload.exp - pload.iat - 60) * 1000;
+
 
             if (context.state.timer_update == undefined) {
+              let pload = context.getters.getAccessTokenPayload;
+              let uptime = (pload.exp - pload.iat - 60) * 1000;
+
               context.commit(
                 "updateTimerUpdate",
                 setInterval(() => {
@@ -128,7 +130,18 @@ const tokens = {
                 "updateRefreshToken",
                 response.body.data.refresh_token
               );
-              // console.dir(response.body.data);
+
+              if (context.state.timer_update == undefined) {
+                let pload = context.getters.getAccessTokenPayload;
+                let uptime = (pload.exp - pload.iat - 60) * 1000;
+
+                context.commit(
+                  "updateTimerUpdate",
+                  setInterval(() => {
+                    context.dispatch("updateTokens");
+                  }, uptime)
+                );
+              }
             }
           })
           .catch(error => {

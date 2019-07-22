@@ -12,6 +12,7 @@ import shops from "./shops";
 import shopsphoto from "./shopsphoto";
 import catalogs from "./catalogs";
 import catalogsphoto from "./catalogsphoto";
+import products from "./products";
 const api = Array();
 
 api["token"] = token;
@@ -28,6 +29,7 @@ api["shops"] = shops;
 api["shopsphoto"] = shopsphoto;
 api["catalogs"] = catalogs;
 api["catalogsphoto"] = catalogsphoto;
+api["products"] = products;
 const Api = {
   install(Vue, options) {
     Vue.prototype.$api = function (nameApi) {

@@ -3,9 +3,20 @@
     <wg-form-confirm-delete
       :show="dCheckedConfirm==false"
       @onChecked="isChecked"
-      @onHide="isHide"
-      @onDelete="isDeleteCatalog"
+      @onCancel="isHide"
+      @onDelete="isDeleteAlbumAndCatalog"
     />
+    <ui-snackbar :show="masSnackbar!=undefined" model="err" :time="5000" @onHide="isHideSnacbar">
+      <div>{{masSnackbar}}</div>
+      <div class="ui-snackbar__buttons">
+        <input
+          type="button"
+          class="ui-button ui-button_float_black ui-button_s1"
+          @click="isHideSnacbar"
+          value="Закрыть"
+        >
+      </div>
+    </ui-snackbar>
   </div>
 </template>
 <script>
@@ -16,7 +27,8 @@ export default {
       exc: [],
       dCatalog: this.catalog,
       dShop: this.shop,
-      dCheckedConfirm: this.checkedConfirm
+      dCheckedConfirm: this.checkedConfirm,
+      masSnackbar: undefined
     };
   },
   props: {
@@ -48,6 +60,13 @@ export default {
     }
   },
   methods: {
+    isHideSnacbar() {
+      this.exc = [];
+      this.masSnackbar = undefined;
+      setTimeout(() => {
+        this.$emit("onHide");
+      }, 150);
+    },
     isHide() {
       this.$emit("onHide");
     },
@@ -64,21 +83,45 @@ export default {
         .then(response => {
           if (response.body.status == "ok") {
             this.$emit("onDeleteCatalog", this.catalog);
+            this.$emit("onHide");
           }
         })
         .catch(error => {
           this.exc = error.body.data;
+          if (this.exc["massege"] != undefined) {
+            this.masSnackbar = this.exc["massege"];
+          }
+        });
+    },
+    isDeleteAlbumAndCatalog() {
+      let body = new FormData();
+      //добавляем фильтр в куки
+      body.set("access_token", this.token);
+      body.set("entity_id", this.dCatalog.catalog_id);
+      //отправляем запрос
+      this.$api("catalogsphoto")
+        .deleteAlbum(body)
+        .then(response => {
+          if (response.body.status == "ok") {
+            this.isDeleteCatalog();
+          }
+        })
+        .catch(error => {
+          this.exc = error.body.data;
+          if (this.exc["massege"] != undefined) {
+            this.masSnackbar = this.exc["massege"];
+          }
         });
     }
   },
   mounted() {
     if (this.checkedConfirm == true) {
-      this.isDeleteCatalog();
+      this.isDeleteAlbumAndCatalog();
     }
   },
   updated() {
     if (this.checkedConfirm == true) {
-      this.isDeleteCatalog();
+      this.isDeleteAlbumAndCatalog();
     }
   }
 };

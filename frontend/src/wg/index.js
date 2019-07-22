@@ -57,6 +57,9 @@ import WgTableMyShops from "./wg-tables/myshops/wg-table-myshops.vue";
 Vue.component("wg-table-myshops", WgTableMyShops);
 import WgTableExces from "./wg-tables/wg-table-exces.vue";
 Vue.component("wg-table-exces", WgTableExces);
+import WgTableMyProducts from "./wg-tables/myproducts/wg-table-myproducts.vue";
+Vue.component("wg-table-myproducts", WgTableMyProducts);
+
 
 import WgFilter from "./wg-filters/wg-filter.vue";
 Vue.component("wg-filter", WgFilter);

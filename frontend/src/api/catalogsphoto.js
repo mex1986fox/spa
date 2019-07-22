@@ -26,11 +26,11 @@ const catalogsphoto = {
         response.body.data.albums = response.body.data.albums.map(album => {
           let orig = {};
           for (const key in album.origin) {
-            orig[key] = Vue.prototype.$hosts.shopsPhoto + album.origin[key];
+            orig[key] = Vue.prototype.$hosts.catalogsPhoto + album.origin[key];
           }
           let min = {};
           for (const key in album.mini) {
-            min[key] = Vue.prototype.$hosts.shopsPhoto + album.mini[key];
+            min[key] = Vue.prototype.$hosts.catalogsPhoto + album.mini[key];
           }
           album.mini = min;
           album.origin = orig;

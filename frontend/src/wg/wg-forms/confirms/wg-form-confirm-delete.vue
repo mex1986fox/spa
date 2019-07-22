@@ -30,14 +30,13 @@ export default {
   },
   methods: {
     isHide() {
-      this.$emit("onHide");
+      this.$emit("onСancel");
     },
     isDelete() {
       if (this.$refs.checkBox.dChecked == true) {
         this.$emit("onChecked");
       }
       this.$emit("onDelete");
-      this.$emit("onHide");
     }
   }
 };

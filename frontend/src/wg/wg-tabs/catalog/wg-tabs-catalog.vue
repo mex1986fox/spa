@@ -8,7 +8,7 @@
     >
       <div class="wg-tabs-catalog__tab">
         <div class="wg-tabs-catalog__img">
-          <ui-img :src="product.main_photo" :nofon="true"/>
+          <ui-img :src="product.main_photo" :nofon="product.main_photo==null?true:false"/>
         </div>
         <div class="wg-tabs-catalog__title">{{product.title}}</div>
       </div>
