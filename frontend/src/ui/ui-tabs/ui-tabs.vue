@@ -117,6 +117,8 @@ export default {
         }
         this.scroll = scroll;
       }
+      e.preventDefault();
+      e.stopPropagation();
     });
     this.$refs.container.addEventListener("mousedown", e => {
       this.down = true;

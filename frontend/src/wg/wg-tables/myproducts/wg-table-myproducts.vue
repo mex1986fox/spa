@@ -5,22 +5,25 @@
         <ui-table-tr>
           <ui-table-th class="wg-table__td_left col-phone_clean">Дата</ui-table-th>
           <ui-table-th class="col-phone_clean"></ui-table-th>
-          <ui-table-th class="col-phone_clean">Город</ui-table-th>
+          <ui-table-th class="col-phone_clean">Для</ui-table-th>
           <ui-table-th class="col-phone_clean">Заголовок</ui-table-th>
+          <ui-table-th class="col-phone_clean">Цена</ui-table-th>
           <ui-table-th></ui-table-th>
         </ui-table-tr>
       </ui-table-header>
       <ui-table-body>
         <template v-for="(product, key) in products">
-          <ui-table-span :height="15"
-                         v-if="key>0"
-                         :key="'span'+product.product_id" />
-          <wg-table-myproduct-body :product="product"
-                                   :key="'body'+product.product_id"
-                                   @onClickExcess="isShowExcess(product.product_id)" />
-          <wg-table-myproduct-desc v-if="showExcess[product.product_id]!=undefined && showExcess[product.product_id]==true"
-                                   :product="product"
-                                   :key="'desc'+product.product_id" />
+          <ui-table-span :height="15" v-if="key>0" :key="'span'+product.product_id"/>
+          <wg-table-myproduct-body
+            :product="product"
+            :key="'body'+product.product_id"
+            @onClickExcess="isShowExcess(product.product_id)"
+          />
+          <wg-table-myproduct-desc
+            v-if="showExcess[product.product_id]!=undefined && showExcess[product.product_id]==true"
+            :product="product"
+            :key="'desc'+product.product_id"
+          />
         </template>
       </ui-table-body>
     </ui-table>
@@ -47,7 +50,7 @@ export default {
   watch: {
     userID(newQ) {
       if (newQ == undefined) {
-        this.$store.commit("products/updateproducts", undefined);
+        this.$store.commit("myproducts/updateProducts", undefined);
       } else {
         this.isShowproducts();
       }
@@ -69,7 +72,7 @@ export default {
         .then(response => {
           if (response.body.status == "ok") {
             this.$store.commit(
-              "products/updateproducts",
+              "myproducts/updateProducts",
               response.body.data.products
             );
           }
