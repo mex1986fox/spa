@@ -4,7 +4,7 @@
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город расположения *"
+          <wg-select-city caption="Город расположения *"
                               name="city_id"
                               :help="exc['city']" />
         </div>

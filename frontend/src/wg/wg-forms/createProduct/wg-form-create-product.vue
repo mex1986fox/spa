@@ -34,8 +34,8 @@
           </div>
           <div class="row">
             <div class="col_8">
-              <wg-multi-transport
-                caption="Модель автомобиля *"
+              <wg-select-transport
+                caption="Тип, марка, модель"
                 name="model_id"
                 :help="exc['model_id']"
               />
@@ -64,6 +64,22 @@
         @onUpdateEntity="isUpdateProduct"
       />
     </ui-window-card>
+    <ui-snackbar
+      :show="masSnackbar!=undefined"
+      model="err"
+      :time="5000"
+      @onHide="masSnackbar=undefined"
+    >
+      <div>{{masSnackbar}}</div>
+      <div class="ui-snackbar__buttons">
+        <input
+          type="button"
+          class="ui-button ui-button_float_black ui-button_s1"
+          @click="masSnackbar=undefined"
+          value="Закрыть"
+        >
+      </div>
+    </ui-snackbar>
   </ui-window>
 </template>
 <script>
@@ -72,6 +88,7 @@ export default {
   data() {
     return {
       exc: [],
+      masSnackbar: undefined,
       dProduct: undefined
     };
   },
@@ -82,6 +99,10 @@ export default {
       type: Boolean
     },
     shop: {
+      default: undefined,
+      type: Object
+    },
+    catalog: {
       default: undefined,
       type: Object
     }
@@ -108,6 +129,7 @@ export default {
       let body = new FormData(form);
       body.set("access_token", this.token);
       body.set("shop_id", this.shop.shop_id);
+      body.set("catalog_id", this.catalog.catalog_id);
       let title = body.get("title");
       let description = body.get("description");
 
@@ -134,7 +156,7 @@ export default {
         return;
       }
 
-      this.$api("catalogs")
+      this.$api("products")
         .create(body)
         .then(response => {
           this.dSpinn = false;
@@ -143,6 +165,7 @@ export default {
         .catch(error => {
           this.dSpinn = false;
           this.exc = error.body.data;
+          this.masSnackbar = this.exc["massege"];
         });
     }
   }

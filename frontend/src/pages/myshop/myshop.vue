@@ -80,6 +80,8 @@
       <wg-form-create-product
         :show="showCreateProduct"
         @onHide="showCreateProduct=false"
+        :shop="dShop"
+        :catalog="dCheckCatalog"
       />
     </div>
   </lt-main>

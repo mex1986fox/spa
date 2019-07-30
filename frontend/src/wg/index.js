@@ -31,12 +31,15 @@ Vue.component("wg-form-confirm-delete", WgFormConfirmDelete);
 
 import WgCaptcha from "./wg-captcha/wg-captcha.vue";
 Vue.component("wg-captcha", WgCaptcha);
-import WgSelectLocation from "./wg-select-location/wg-select-location.vue";
-Vue.component("wg-select-location", WgSelectLocation);
+import WgSelectCity from "./wg-select-city/wg-select-city.vue";
+Vue.component("wg-select-city", WgSelectCity);
 import WgMultiLocation from "./wg-multi-location/wg-multi-location.vue";
 Vue.component("wg-multi-location", WgMultiLocation);
+import WgSelectModel from "./wg-select-model/wg-select-model.vue";
+Vue.component("wg-select-model", WgSelectModel);
 import WgSelectTransport from "./wg-select-transport/wg-select-transport.vue";
 Vue.component("wg-select-transport", WgSelectTransport);
+
 import WgMultiTransport from "./wg-multi-transport/wg-multi-transport.vue";
 Vue.component("wg-multi-transport", WgMultiTransport);
 import WgSelectCatalog from "./wg-select-catalog/wg-select-catalog.vue";

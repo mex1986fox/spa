@@ -58,7 +58,7 @@
 </template>
 <script>
 export default {
-  name: "wg-select-location",
+  name: "wg-select-city",
   data() {
     return {
       dShowMenu: false,

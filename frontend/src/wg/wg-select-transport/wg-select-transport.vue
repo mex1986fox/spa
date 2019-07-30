@@ -13,7 +13,24 @@
       </template>
     </ui-ef-text>
 
-    <input type="hidden" :name="name" :value="dValue">
+    <input
+      type="hidden"
+      name="type_id"
+      :value="dCheckIdType"
+      v-if="dCheckIdType!=undefined && dCheckIdBrand==undefined && dCheckIdModel==undefined"
+    >
+    <input
+      type="hidden"
+      name="brand_id"
+      :value="dCheckIdBrand"
+      v-if="dCheckIdType!=undefined && dCheckIdBrand!=undefined && dCheckIdModel==undefined"
+    >
+    <input
+      type="hidden"
+      name="model_id"
+      :value="dCheckIdModel"
+      v-if="dCheckIdType!=undefined && dCheckIdBrand!=undefined && dCheckIdModel!=undefined"
+    >
     <ui-blind
       :show="dShowMenu"
       class="wg-select-location__blinde"
@@ -27,29 +44,49 @@
             <i class="fas fa-times"></i>
           </div>
         </div>
-
         <div class="wg-select-location__menu-ef">
-          <ui-ef-search placeholder="Введите модель автомобиля" @onInput="isSearch"></ui-ef-search>
+          <div class="row">
+            <div class="col_12">
+              <ui-ef-select
+                caption="Тип транспорта"
+                :menu="typesMenu"
+                @onSelect="isSelectType"
+                @onClianer="isClianerType"
+                :cleaner="true"
+              ></ui-ef-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col_12">
+              <ui-ef-select
+                caption="Марка"
+                :menu="brandsMenu"
+                @onSelect="isSelectBrand"
+                @onClianer="isClianerBrand"
+                :cleaner="true"
+                :disabled="dCheckIdType==undefined"
+              ></ui-ef-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col_12">
+              <ui-ef-select
+                caption="Модель"
+                :menu="modelsMenu"
+                @onSelect="isSelectModel"
+                @onClianer="isClianerModel"
+                :cleaner="true"
+                :disabled="dCheckIdBrand==undefined"
+              ></ui-ef-select>
+            </div>
+          </div>
         </div>
-        <div
-          class="wg-select-location__menu-chipheader"
-          v-if="modelsFilters.length>0"
-        >Нажмите на модель автомобиля</div>
-        <div class="wg-select-location__menu-chipsies">
-          <ui-ef-chips
-            v-for="(model, key) in modelsFilters"
-            :key="key"
-            :value="model.value"
-            :caption="model.option"
-            @onClick="isClickChips"
-          ></ui-ef-chips>
-        </div>
-        <div class="wg-select-location__menu-chipbuttons" v-if="modelsFilters.length>0">
+        <div class="wg-select-location__menu-buttons">
           <input
-            class="ui-button ui-button_float_black"
             type="button"
-            value="Очистить"
-            @click="isClear"
+            value="Готово"
+            class="ui-button ui-button_float_black"
+            @click="isHideMenu"
           >
         </div>
       </div>
@@ -58,14 +95,13 @@
 </template>
 <script>
 export default {
-  name: "wg-select-location",
+  name: "wg-select-transport",
   data() {
     return {
       dShowMenu: false,
-      dModels: undefined,
-      dTextValue: "",
-      dSearth: "",
-      dValue: ""
+      dCheckIdType: undefined,
+      dCheckIdBrand: undefined,
+      dCheckIdModel: undefined
     };
   },
   props: {
@@ -84,103 +120,111 @@ export default {
     help: {
       type: String,
       default: ""
-    },
-    modelID: {
-      type: Number,
-      default: undefined
-    }
-  },
-  watch: {
-    modelID(newQ) {
-      this.isCheckModel(newQ);
-    }
-  },
-  methods: {
-    isClickText() {
-      this.dSearth = this.dTextValue;
-      this.dShowMenu = true;
-      if (this.dModels == undefined) {
-        this.dModels = this.models;
-      }
-    },
-    isClear() {
-      this.dTextValue = "";
-      this.dSearth = "";
-      this.dValue = "";
-      this.isHideMenu();
-    },
-    isHideMenu() {
-      this.dShowMenu = false;
-    },
-    isSearch(strSearch) {
-      this.dSearth = strSearch;
-    },
-    isClickChips(chips) {
-      this.dValue = chips.value;
-      this.dTextValue = chips.caption;
-      this.isHideMenu();
-    },
-    isCheckModel(modelID) {
-      let model = this.$store.getters["transports/getModel"](modelID);
-      this.dValue = model.model_id;
-      this.dTextValue = model.extended_name;
     }
   },
   computed: {
-    models() {
-      let models = JSON.parse(
-        JSON.stringify(this.$store.state.transports.models)
+    dTextValue() {
+      let type = this.$store.getters["transports/getType"](this.dCheckIdType);
+      let brand = this.$store.getters["transports/getBrand"](
+        this.dCheckIdBrand
       );
-      if (models != undefined) {
-        models = models.sort(function(a, b) {
-          if (a.type_id > b.type_id) {
-            return 1;
-          }
-          if (a.type_id < b.type_id) {
-            return -1;
-          }
-          if (a.brand_id > b.brand_id) {
-            return 1;
-          }
-          if (a.brand_id < b.brand_id) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          if (a.name < b.name) {
-            return -1;
-          }
-          return 0;
-        });
-        let menu = models.map(model => {
+      let model = this.$store.getters["transports/getModel"](
+        this.dCheckIdModel
+      );
+
+      return this.$options.filters.filter_for_transport(
+        type == undefined ? null : type.name,
+        brand == undefined ? null : brand.name,
+        model == undefined ? null : model.name
+      );
+    },
+    typesMenu() {
+      let types = this.$store.getters["transports/getTypes"];
+      let checkIdType = this.dCheckIdType;
+      if (types != undefined) {
+        let menu = types.map(type => {
           return {
-            value: model.model_id,
-            option: model.extended_name
+            value: type.type_id,
+            option: type.extended_name,
+            selected: checkIdType == type.type_id ? true : false
           };
         });
         return menu;
       }
       return undefined;
     },
-    modelsFilters() {
-      if (this.dSearth != "" && this.models != undefined) {
-        var invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
-        var repl = this.dSearth.replace(invalid, match => {
-          return "\\" + match;
-        });
-        let regexp = new RegExp(repl, "i");
-        let models = this.models.filter(model => {
-          return -1 != model.option.search(regexp);
-        });
-        return models;
+    brandsMenu() {
+      let checkIdBrand = this.dCheckIdBrand;
+      if (this.dCheckIdType != undefined) {
+        let brands = this.$store.getters["transports/getBrands"](
+          this.dCheckIdType
+        );
+        if (brands != undefined) {
+          let menu = brands.map(brand => {
+            return {
+              value: brand.brand_id,
+              option: brand.extended_name,
+              selected: checkIdBrand == brand.brand_id ? true : false
+            };
+          });
+          return menu;
+        }
       }
-      return [];
+      return undefined;
+    },
+    modelsMenu() {
+      let checkIdModel = this.dCheckIdModel;
+      if (this.dCheckIdBrand != undefined) {
+        let models = this.$store.getters["transports/getModels"](
+          this.dCheckIdBrand
+        );
+        if (models != undefined) {
+          let menu = models.map(model => {
+            return {
+              value: model.model_id,
+              option: model.extended_name,
+              selected: checkIdModel == model.model_id ? true : false
+            };
+          });
+          return menu;
+        }
+      }
+      return undefined;
     }
   },
-  mounted() {
-    if (this.modelID != undefined && this.modelID != "") {
-      this.isCheckModel(this.modelID);
+  watch: {
+    dCheckIdType(newQ) {
+      this.dCheckIdBrand = undefined;
+      this.dCheckIdModel = undefined;
+    },
+    dCheckIdBrand(newQ) {
+      this.dCheckIdModel = undefined;
+    }
+  },
+  methods: {
+    isClickText() {
+      this.dShowMenu = true;
+    },
+    isHideMenu() {
+      this.dShowMenu = false;
+    },
+    isSelectType(types) {
+      this.dCheckIdType = types[0].value;
+    },
+    isSelectBrand(brands) {
+      this.dCheckIdBrand = brands[0].value;
+    },
+    isSelectModel(models) {
+      this.dCheckIdModel = models[0].value;
+    },
+    isClianerType() {
+      this.dCheckIdType = undefined;
+    },
+    isClianerBrand() {
+      this.dCheckIdBrand = undefined;
+    },
+    isClianerModel() {
+      this.dCheckIdModel = undefined;
     }
   }
 };

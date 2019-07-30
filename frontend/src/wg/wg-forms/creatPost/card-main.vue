@@ -4,9 +4,9 @@
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город размещения *" name="city_id" :help="excCity"/>
+          <wg-select-city caption="Город размещения *" name="city_id" :help="excCity"/>
 
-          <wg-select-transport caption="Модель автомобиля *" name="model_id" :help="excModel"/>
+          <wg-select-model caption="Модель автомобиля *" name="model_id" :help="excModel"/>
         </div>
       </div>
       <div class="row">

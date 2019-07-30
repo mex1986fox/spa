@@ -11,7 +11,7 @@
         :maxlength="63"
       />
       <ui-ef-datepicker name="birthdate" :value="birthdate" caption="День рождения"/>
-      <wg-select-location name="city_id" :cityID="cityID"/>
+      <wg-select-city name="city_id" :cityID="cityID"/>
       <ui-ef-phone caption="Номер телефона" :value="phone" name="phone" :help="excPhone"/>
       <ui-ef-text caption="Email" :value="email" name="email" :help="excEmail"/>
     </div>

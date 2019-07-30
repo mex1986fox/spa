@@ -10,13 +10,13 @@
         :help="excDescr"
         :autoresize="200"
       ></ui-ef-textarea>
-      <wg-select-location
+      <wg-select-city
         caption="Город проживания *"
         :cityID="dPost.city_id"
         name="city_id"
         :help="excCity"
       />
-      <wg-select-transport
+      <wg-select-model
         caption="Модель автомобиля *"
         :modelID="dPost.model_id"
         name="model_id"

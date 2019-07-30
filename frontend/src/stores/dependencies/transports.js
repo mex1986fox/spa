@@ -38,10 +38,8 @@ const transports = {
     },
     // city-model
     // subject -brand
-    getModels: (state, getters, rootState, rootGetters) => idBrand => {
-      return state.models.filter(model => {
-        return model.brand_id == idBrand;
-      });
+    getTypes: (state, getters, rootState, rootGetters) => {
+      return state.types;
     },
     getBrands: (state, getters, rootState, rootGetters) => idType => {
 
@@ -49,6 +47,12 @@ const transports = {
         return brand.type_id == idType;
       });
     },
+    getModels: (state, getters, rootState, rootGetters) => idBrand => {
+      return state.models.filter(model => {
+        return model.brand_id == idBrand;
+      });
+    },
+
 
     getFuel: (state, getters, rootState, rootGetters) => id => {
       if (state.fuels != undefined) {
@@ -175,7 +179,7 @@ const transports = {
         menu.push({
           value: maxDate,
           option: maxDate,
-          selected: date.indexOf(maxDate) != -1 ? true : false 
+          selected: date.indexOf(maxDate) != -1 ? true : false
         });
         maxDate--;
       }

@@ -30,6 +30,9 @@ const Filters = {
       return value == 1 ? "левый" : "правый";
     });
     Vue.filter("filter_for_transport", function (type, brand, model) {
+      type = type == undefined ? null : type;
+      brand = brand == undefined ? null : brand;
+      model = model == undefined ? null : model;
       if (type != null && brand == null) {
         return type + ", всех марок и моделей"
       }

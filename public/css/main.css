@@ -2776,13 +2776,17 @@ body {
       margin-top: -55px; }
     .wg-select-location__menu-ef {
       margin: 40px 35px;
-      overflow: hidden;
-      overflow-y: auto; }
+      overflow: hidden; }
     .wg-select-location__menu-chipsies {
       margin: 25px 35px;
       overflow: hidden;
       overflow-y: auto;
       max-height: 152px; }
+    .wg-select-location__menu-buttons {
+      margin: 28px 28px;
+      overflow: hidden;
+      bottom: 0;
+      position: absolute; }
 
 .wg-select-location_white > .ui-ef-text > .ui-ef-text__caption {
   color: rgba(255, 255, 255, 0.9); }

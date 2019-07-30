@@ -2,6 +2,9 @@ import Vue from "vue/dist/vue.js";
 
 const products = {
   create(body) {
+    if (body.get("price") != undefined) {
+      body.set("price", body.get("price").replace(/\s/g, ""));
+    }
     return Vue.http
       .post(Vue.prototype.$hosts.services + "/shops/api/products/create", body)
       .then(response => Promise.resolve(response))

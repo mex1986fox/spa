@@ -5,7 +5,7 @@
       <ui-ef-text caption="Имя" name="name" :help="excName" :maxlength="63"/>
       <ui-ef-text caption="Фамилия" name="surname" :help="excSurname" :maxlength="63"/>
       <ui-ef-datepicker name="birthdate" caption="День рождения" value/>
-      <wg-select-location name="city_id"/>
+      <wg-select-city name="city_id"/>
       <ui-ef-phone caption="Номер телефона" name="phone" :help="excPhone"/>
       <ui-ef-text caption="Email" name="email" :help="excEmail"/>
     </div>

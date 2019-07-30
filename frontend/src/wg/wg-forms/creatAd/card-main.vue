@@ -4,14 +4,14 @@
     <div class="wg-form-create-post__card-ef">
       <div class="row">
         <div class="col_7">
-          <wg-select-location caption="Город продажи *"
+          <wg-select-city caption="Город продажи *"
                               name="city_id"
                               :help="excCity" />
         </div>
       </div>
       <div class="row">
         <div class="col_7">
-          <wg-select-transport caption="Модель автомобиля *"
+          <wg-select-model caption="Модель автомобиля *"
                                name="model_id"
                                :help="excModel" />
         </div>
