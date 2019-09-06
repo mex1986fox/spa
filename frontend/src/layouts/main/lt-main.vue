@@ -7,12 +7,13 @@
         <router-link to="/my_posts" class="lt-main__menu-item">Мои посты</router-link>
         <router-link to="/my_ads" class="lt-main__menu-item">Мои объявления</router-link>
         <router-link to="/my_shops" class="lt-main__menu-item">Мои магазины</router-link>
+        <router-link to="/my_products" class="lt-main__menu-item">Мои товары и услуги</router-link>
       </ul>
       <ul class="lt-main__menu-list">
         <router-link to="/users" class="lt-main__menu-item">Люди</router-link>
         <router-link to="/posts" class="lt-main__menu-item">Посты</router-link>
         <router-link to="/ads" class="lt-main__menu-item">Объявления</router-link>
-        <router-link to="/shops" class="lt-main__menu-item">Магазины</router-link>
+        <router-link to="/shops" class="lt-main__menu-item">Товары и услуги</router-link>
         <!-- <li class="lt-main__menu-item">События</li>
         <li class="lt-main__menu-item">Фотографии</li>-->
       </ul>

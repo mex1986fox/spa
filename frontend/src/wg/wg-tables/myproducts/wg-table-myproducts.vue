@@ -34,7 +34,7 @@ import { mapGetters } from "vuex";
 import WgTableMyproductBody from "./wg-table-myproducts-body.vue";
 import WgTableMyproductDesc from "./wg-table-myproducts-desc.vue";
 export default {
-  name: "wg-table-myproductss",
+  name: "wg-table-myproducts",
   components: { WgTableMyproductBody, WgTableMyproductDesc },
   data() {
     return {

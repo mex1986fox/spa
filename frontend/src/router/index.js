@@ -9,6 +9,7 @@ import MyPosts from "../pages/myposts/myposts.vue";
 import MyAds from "../pages/myads/myads.vue";
 import MyShops from "../pages/myshops/myshops.vue";
 import MyShop from "../pages/myshop/myshop.vue";
+import MyProducts from "../pages/myproducts/myproducts.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -21,7 +22,8 @@ export default new Router({
     { path: "/my_posts", component: MyPosts },
     { path: "/my_ads", component: MyAds },
     { path: "/my_shops", component: MyShops },
-    { path: "/my_shop/:id", component: MyShop }
+    { path: "/my_shop/:id", component: MyShop },
+    { path: "/my_products", component: MyProducts },
   ],
   beforeDestroy: function () {
     this.choicesSelect.destroy()

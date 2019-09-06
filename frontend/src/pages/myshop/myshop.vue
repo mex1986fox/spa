@@ -164,6 +164,7 @@ export default {
         .show(body)
         .then(response => {
           if (response.body.status == "ok") {
+            
             if (response.body.data.catalogs.length > 0) {
               this.dCatalogs = response.body.data.catalogs.map(mapCatalog => {
                 mapCatalog["checked"] = false;
@@ -171,6 +172,8 @@ export default {
               });
               this.dCatalogs[0]["checked"] = true;
               this.dCheckCatalog = this.dCatalogs[0];
+            } else {
+              this.$store.commit("myproducts/updateProducts", undefined);
             }
             this.loadingCatalogs = false;
           }
